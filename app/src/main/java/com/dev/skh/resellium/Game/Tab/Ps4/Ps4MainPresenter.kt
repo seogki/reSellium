@@ -24,7 +24,6 @@ class Ps4MainPresenter(val view: View? = null) {
 
     fun scrollData(id: String?) {
         if (id != null) {
-
             disposable = client.getScrollPs4Data(id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateData(it, disposable, true) }
