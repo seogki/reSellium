@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.dev.skh.resellium.Game.Model.Ps4MainModel"/>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <TextView
+            android:id="@+id/txt_platform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:maxLength="8"
+            android:maxLines="1"
+
+            android:letterSpacing="0.15"
+            android:text="@{model.place}"
+            android:paddingBottom="4dp"
+            android:paddingEnd="8dp"
+            android:ellipsize="end"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:textColor="@color/ps4Color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="PS4"
+            />
+
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:text="@{model.title}"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/black"
+            android:layout_marginEnd="4dp"
+            android:maxLength="8"
+            android:maxLines="1"
+            app:layout_constraintEnd_toStartOf="@+id/txt_money"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txt_platform"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="스파이더맨"
+            />
+
+        <TextView
+            android:id="@+id/txt_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/black"
+            app:moneyCheck="@{model.money}"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txt_sell"
+            app:layout_constraintStart_toEndOf="@+id/txt_title"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="42,000원"
+            />
+
+        <TextView
+            android:id="@+id/txt_sell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
+            android:letterSpacing="0.15"
+            app:sellCheck="@{model.which}"
+            android:paddingBottom="4dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:textColor="@color/Red"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="매입"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

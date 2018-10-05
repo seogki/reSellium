@@ -1,0 +1,96 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.dev.skh.resellium"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    dataBinding {
+        enabled = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dexOptions {
+        preDexLibraries true
+        maxProcessCount 8
+    }
+    aaptOptions {
+        cruncherEnabled true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    kapt 'com.android.databinding:compiler:3.1.4'
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:support-compat:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:multidex:1.0.3'
+
+    //Network
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
+    //RxJAVA
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+
+    //kakao
+    implementation 'com.kakao.sdk:usermgmt:1.11.0'
+    implementation 'com.kakao.sdk:kakaolink:1.11.0'
+    implementation 'com.kakao.sdk:kakaotalk:1.11.0'
+    implementation 'com.kakao.sdk:kakaostory:1.11.0'
+
+    //글라이드
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    implementation 'com.github.bumptech.glide:annotations:4.7.1'
+    //권한 설정용
+    implementation 'gun0912.ted:tedpermission:2.2.0'
+
+    //progressbar
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
+
+    //statusbar 투명
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
+
+    //글라이드 이미지변환
+    implementation 'jp.wasabeef:glide-transformations:2.0.2'
+
+    //google 인증
+    implementation 'com.google.android.gms:play-services-auth:16.0.0'
+    implementation 'com.android.support:exifinterface:27.1.1'
+
+    //snap
+    implementation 'com.github.rubensousa:gravitysnaphelper:1.5'
+}
