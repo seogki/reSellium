@@ -1,6 +1,7 @@
 package com.dev.skh.resellium.Main
 
 import com.dev.skh.resellium.Main.Model.HoriModel
+import com.dev.skh.resellium.Main.Model.PopularModel
 import com.dev.skh.resellium.Network.ApiCilentRx
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -14,6 +15,14 @@ class HomeMainPresenter(val view: HomeMainPresenter.View? = null) {
     private var disposable: Disposable? = null
     private val client by lazy { ApiCilentRx.create() }
 
+
+    fun getPopularData(){
+        disposable = client.getPopularData()
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ view?.getPopularData(it, disposable) }
+                        , { view?.errorUpdateData(disposable, it.message) })
+    }
+
     fun getHoriData(currentPos: String?) {
         if (currentPos != null) {
             disposable = client.getMainData(currentPos)
@@ -25,6 +34,8 @@ class HomeMainPresenter(val view: HomeMainPresenter.View? = null) {
 
 
     interface View {
+        fun getPopularData(it: MutableList<PopularModel>?, disposable: Disposable?)
+
         fun updateData(result: MutableList<HoriModel>?, disposable: Disposable?, currentPos: String)
         fun errorUpdateData(disposable: Disposable?, message: String?)
 

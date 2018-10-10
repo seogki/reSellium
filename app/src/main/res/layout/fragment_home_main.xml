@@ -48,6 +48,18 @@
                     >
 
 
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_recent_ps4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+
                     <android.support.constraint.ConstraintLayout
                         android:id="@+id/const_ps4"
                         android:layout_width="match_parent"
@@ -55,7 +67,7 @@
                         android:layout_margin="8dp"
                         android:background="@color/white"
                         android:elevation="5dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/rv_recent_ps4"
                         >
 
 
@@ -88,12 +100,12 @@
 
                     <android.support.constraint.ConstraintLayout
                         android:id="@+id/const_xbox"
-                        android:layout_margin="8dp"
-                        android:elevation="5dp"
-                        android:background="@color/white"
-                        app:layout_constraintTop_toBottomOf="@+id/const_ps4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:background="@color/white"
+                        android:elevation="5dp"
+                        app:layout_constraintTop_toBottomOf="@+id/const_ps4"
                         >
 
                         <TextView
@@ -130,8 +142,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:elevation="5dp"
                         android:background="@color/white"
+                        android:elevation="5dp"
                         app:layout_constraintTop_toBottomOf="@+id/const_xbox"
                         >
 
@@ -150,7 +162,6 @@
                             />
 
 
-
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rv_switch"
                             android:layout_width="match_parent"
@@ -160,7 +171,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/txt_switch"
                             />
-
 
 
                     </android.support.constraint.ConstraintLayout>

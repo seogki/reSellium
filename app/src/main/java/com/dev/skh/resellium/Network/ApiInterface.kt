@@ -4,6 +4,7 @@ import com.dev.skh.resellium.Game.Model.Ps4MainModel
 import com.dev.skh.resellium.Game.Model.SwitchMainModel
 import com.dev.skh.resellium.Game.Model.XboxMainModel
 import com.dev.skh.resellium.Main.Model.HoriModel
+import com.dev.skh.resellium.Main.Model.PopularModel
 import com.google.gson.JsonObject
 import io.reactivex.Flowable
 import retrofit2.http.POST
@@ -19,6 +20,9 @@ interface ApiInterface {
      */
     @POST("main/getMainData")
     fun getMainData(@Query("Platform") platform: String): Flowable<MutableList<HoriModel>>
+
+    @POST("main/getPopularData")
+    fun getPopularData(): Flowable<MutableList<PopularModel>>
 
     /***
      * 게임

@@ -4,6 +4,8 @@ package com.dev.skh.resellium.Main
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,6 +14,8 @@ import android.view.ViewGroup
 import com.dev.skh.resellium.Base.BaseFragment
 import com.dev.skh.resellium.Game.Tab.Ps4.HomeMainHoriAdapter
 import com.dev.skh.resellium.Main.Model.HoriModel
+import com.dev.skh.resellium.Main.Model.PopularModel
+import com.dev.skh.resellium.Main.Popular.HomeMainPopularGameAdapter
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.FragmentHomeMainBinding
@@ -32,10 +36,13 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View {
     private lateinit var ps4LayoutManager: LinearLayoutManager
     private lateinit var xboxLayoutManager: LinearLayoutManager
     private lateinit var switchLayoutManager: LinearLayoutManager
+    private lateinit var popularLayoutManager: LinearLayoutManager
+    private var homeMainPopularGameAdapter: HomeMainPopularGameAdapter? = null
     private var weakPresenter: WeakReference<HomeMainPresenter>? = null
     private var homeMainPs4HoriAdapter: HomeMainHoriAdapter? = null
     private var homeMainXboxHoriAdapter: HomeMainHoriAdapter? = null
     private var homeMainSwitchHoriAdapter: HomeMainHoriAdapter? = null
+    private var popRv: RecyclerView? = null
     private var ps4Rv: RecyclerView? = null
     private var xboxRv: RecyclerView? = null
     private var switchRv: RecyclerView? = null
@@ -56,9 +63,11 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         Handler().postDelayed({
+            popRv?.adapter = homeMainPopularGameAdapter
             ps4Rv?.adapter = homeMainPs4HoriAdapter
             xboxRv?.adapter = homeMainXboxHoriAdapter
             switchRv?.adapter = homeMainSwitchHoriAdapter
+            weakPresenter?.get()?.getPopularData()
             weakPresenter?.get()?.getHoriData("PS")
             weakPresenter?.get()?.getHoriData("XBOX")
             weakPresenter?.get()?.getHoriData("SWITCH")
@@ -66,6 +75,15 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View {
     }
 
     private fun setRv() {
+        val decor = DividerItemDecoration(activity, DividerItemDecoration.HORIZONTAL)
+        decor.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.survey_hori_divder)!!)
+
+        homeMainPopularGameAdapter = HomeMainPopularGameAdapter(context!!, mutableListOf())
+        popularLayoutManager = LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
+        popRv = setHorizontalRv(binding.rvRecentPs4, popularLayoutManager)
+        popRv?.addItemDecoration(decor)
+
+
         homeMainPs4HoriAdapter = HomeMainHoriAdapter(context!!, mutableListOf())
         ps4LayoutManager = LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
         ps4Rv = setHorizontalRv(binding.rvPs4, ps4LayoutManager)
@@ -78,6 +96,11 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View {
         switchLayoutManager = LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
         switchRv = setHorizontalRv(binding.rvSwitch, switchLayoutManager)
 
+    }
+
+    override fun getPopularData(it: MutableList<PopularModel>?, disposable: Disposable?) {
+        if (it != null)
+            homeMainPopularGameAdapter?.addItems(it)
     }
 
     override fun updateData(result: MutableList<HoriModel>?, disposable: Disposable?, currentPos: String) {

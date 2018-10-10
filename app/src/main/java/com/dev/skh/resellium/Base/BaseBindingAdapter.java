@@ -3,6 +3,7 @@ package com.dev.skh.resellium.Base;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.BindingAdapter;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -16,8 +17,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.dev.skh.resellium.R;
+import com.dev.skh.resellium.Util.Const;
 import com.dev.skh.resellium.Util.KeyboardUtils;
 import com.dev.skh.resellium.Util.UtilMethod;
 
@@ -86,10 +89,9 @@ public class BaseBindingAdapter {
 
     }
 
-
-    @BindingAdapter("platformCheck")
-    public static void platformcheck(final TextView textView, final String result) {
-        Context context = textView.getContext();
+    @BindingAdapter("popularImage")
+    public static void popularImage(final ImageView view, final String result) {
+        Context context = view.getContext();
         if (context == null) {
             return;
         } else if (context instanceof Activity) {
@@ -98,24 +100,30 @@ public class BaseBindingAdapter {
                 return;
             }
         }
+        if (result == null) {
+            Glide.with(context).clear(view);
+            view.setImageDrawable(null);
+        } else {
+            String end = result.replace("/","");
+            String murl = Const.Companion.getServer_url() + end;
+            Uri uri = Uri.parse(murl);
 
-
-        if(result != null) {
-            switch (result) {
-                case "XBOX":
-                    textView.setBackground(ContextCompat.getDrawable(context, R.drawable.text_xbox));
-                    break;
-                case "PS":
-                    textView.setBackground(ContextCompat.getDrawable(context, R.drawable.text_ps4));
-                    break;
-                default:
-                    textView.setBackground(ContextCompat.getDrawable(context, R.drawable.text_switch));
-                    break;
-            }
+            Glide.with(context)
+                    .asBitmap()
+                    .load(uri)
+                    .apply(new RequestOptions()
+                            .centerCrop()
+                            .override(300, 300)
+                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                    .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL) {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            view.setImageBitmap(resource);
+                        }
+                    });
         }
-
-
     }
+
 
     @BindingAdapter("sellCheck")
     public static void sellcheck(final TextView textView, final String result) {

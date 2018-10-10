@@ -1,6 +1,7 @@
 package com.dev.skh.resellium.Network
 
 import com.dev.skh.resellium.BuildConfig
+import com.dev.skh.resellium.Util.Const
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -40,7 +41,7 @@ open class ApiCilentRx() {
 
             val retrofit = Retrofit
                     .Builder()
-                    .baseUrl("http://192.168.1.43:6327/")
+                    .baseUrl(Const.server_url)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)

@@ -5,6 +5,6 @@ package com.dev.skh.resellium.Util
  */
 open class Const{
     companion object {
-        val server_url = "http://172.168.0.76:6327/"
+        val server_url = "http://192.168.1.43:6327/"
     }
 }
