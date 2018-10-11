@@ -20,8 +20,8 @@
         <ImageView
             android:id="@+id/img_pop"
             android:adjustViewBounds="true"
-            android:layout_width="95dp"
-            android:layout_height="95dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             popularImage="@{model.path}"
             tools:src="@drawable/ic_launcher_background"
             />

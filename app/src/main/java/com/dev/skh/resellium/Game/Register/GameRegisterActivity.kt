@@ -15,12 +15,13 @@ import com.dev.skh.resellium.Util.CustomTextWatcher
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.ActivityGameRegisterBinding
 import io.reactivex.disposables.Disposable
+import java.lang.ref.WeakReference
 
 class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegisterPresenter.View {
 
 
     private lateinit var binding: ActivityGameRegisterBinding
-    private lateinit var presenter: GameRegisterPresenter
+    private var weakReference: WeakReference<GameRegisterPresenter>? = null
 
     private var disposable: Disposable? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,11 +30,20 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
         binding.layoutAppbar?.title = "등록"
         binding.onClickListener = this
         binding.layoutAppbar?.onClickListener = this
+        setView()
+        setMVP()
+    }
+
+    private fun setMVP(){
+        weakReference = WeakReference(GameRegisterPresenter(this))
+    }
+
+
+    private fun setView(){
         binding.layoutAppbar?.constPlus?.setBackgroundColor(ContextCompat.getColor(this, R.color.ps4Color))
         binding.layoutAppbar?.layoutAdd?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.layoutAppbar?.layoutUndo?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.editMoney.addTextChangedListener(CustomTextWatcher(binding.editMoney))
-        presenter = GameRegisterPresenter(this)
     }
 
     override fun onClick(v: View?) {
@@ -60,7 +70,7 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
         val money = binding.editMoney.text.toString().replace(",".toRegex(), "").replace("원", "")
         val which = binding.radiogroupNewOld.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim() + binding.radiogroupResell.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim()
         if (platform.isNotEmpty() && place.isNotEmpty() && money.isNotEmpty()) {
-            presenter.sendData(platform, title, place, money, which)
+            weakReference?.get()?.sendData(platform, title, place, money, which)
         } else {
             Toast.makeText(this, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
         }

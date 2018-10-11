@@ -6,6 +6,8 @@ import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.dev.skh.resellium.R
+import com.dev.skh.resellium.Util.DLog
 
 /**
  * Created by Seogki on 2018. 6. 7..
@@ -14,6 +16,7 @@ import android.widget.Toast
 open class BaseActivity : AppCompatActivity() {
 
     private lateinit var toast: Toast
+    private var backKeyPressedTime: Long = 0
 
     fun AppCompatActivity.addFragment(@IdRes frameId: Int, fragment: Fragment, AllowStateloss: Boolean, backstack: Boolean, tag: String) {
         val transaction = supportFragmentManager?.beginTransaction()?.add(frameId, fragment, tag)
@@ -47,19 +50,49 @@ open class BaseActivity : AppCompatActivity() {
 
 
 
-    fun showGuide() {
+    private fun showGuide() {
         toast = Toast.makeText(this,
                 "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT)
         toast.show()
     }
 
-    fun finishToast() {
+    private fun finishToast() {
         toast.cancel()
     }
 
     override fun onResume() {
         super.onResume()
         overridePendingTransition(0, 0)
+    }
+
+    override fun onBackPressed() {
+        DLog.e("onBack Pressed" + isFirstFragment())
+
+        if (isFirstFragment()) {
+
+            if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+                backKeyPressedTime = System.currentTimeMillis()
+                showGuide()
+                return
+            }
+            if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+                this.finishAffinity()
+                finishToast()
+            }
+
+        } else {
+            super.onBackPressed()
+        }
+
+    }
+
+    private fun isFirstFragment(): Boolean {
+        val curFragment = supportFragmentManager.findFragmentById(R.id.frame_layout)
+        DLog.e("current Fragment ${curFragment.tag}")
+        return curFragment.tag == "HomeMainFragment"
+                || curFragment.tag == "GameMainFragment"
+                || curFragment.tag == "BoardMainFragment"
+                || curFragment.tag == "UserMainFragment"
     }
 
 }
