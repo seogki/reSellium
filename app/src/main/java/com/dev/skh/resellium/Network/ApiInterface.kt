@@ -1,5 +1,6 @@
 package com.dev.skh.resellium.Network
 
+import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Game.Model.Ps4MainModel
 import com.dev.skh.resellium.Game.Model.SwitchMainModel
 import com.dev.skh.resellium.Game.Model.XboxMainModel
@@ -23,6 +24,22 @@ interface ApiInterface {
 
     @POST("main/getPopularData")
     fun getPopularData(): Flowable<MutableList<PopularModel>>
+
+    /***
+     *  보드
+     */
+    @POST("board/getBoardData")
+    fun getBoardData(): Flowable<MutableList<BoardMainModel>>
+
+    @POST("board/getScrollBoardData")
+    fun getScrollBoardData(@Query("Id") id: String): Flowable<MutableList<BoardMainModel>>
+
+    @POST("board/getSpinnerBoardData")
+    fun getSpinnerBoardData(@Query("Spinner") spinner: String): Flowable<MutableList<BoardMainModel>>
+
+    @POST("board/getSpinnerScrollBoardData")
+    fun getSpinnerScrollBoardData(@Query("Spinner") spinner: String
+                                  , @Query("Id") id: String): Flowable<MutableList<BoardMainModel>>
 
     /***
      * 게임
@@ -66,12 +83,12 @@ interface ApiInterface {
 
     @POST("game/getSpinnerxboxData")
     fun getSpinnerxboxData(@Query("First") first: String
-                          , @Query("Second") second: String): Flowable<MutableList<XboxMainModel>>
+                           , @Query("Second") second: String): Flowable<MutableList<XboxMainModel>>
 
     @POST("game/getSpinnerScrollxboxData")
     fun getSpinnerScrollxboxData(@Query("First") first: String
-                                , @Query("Second") second: String
-                                , @Query("Id") id: String): Flowable<MutableList<XboxMainModel>>
+                                 , @Query("Second") second: String
+                                 , @Query("Id") id: String): Flowable<MutableList<XboxMainModel>>
 
     @POST("game/getSearchXboxData")
     fun getSearchXboxData(@Query("Search") search: String): Flowable<MutableList<XboxMainModel>>
@@ -94,12 +111,12 @@ interface ApiInterface {
 
     @POST("game/getSpinnerswitchData")
     fun getSpinnerswitchData(@Query("First") first: String
-                           , @Query("Second") second: String): Flowable<MutableList<SwitchMainModel>>
+                             , @Query("Second") second: String): Flowable<MutableList<SwitchMainModel>>
 
     @POST("game/getSpinnerScrollswitchData")
     fun getSpinnerScrollswitchData(@Query("First") first: String
-                                 , @Query("Second") second: String
-                                 , @Query("Id") id: String): Flowable<MutableList<SwitchMainModel>>
+                                   , @Query("Second") second: String
+                                   , @Query("Id") id: String): Flowable<MutableList<SwitchMainModel>>
 
 
     @POST("game/getSearchSwitchData")

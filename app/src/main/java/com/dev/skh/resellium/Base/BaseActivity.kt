@@ -31,16 +31,6 @@ open class BaseActivity : AppCompatActivity() {
             transaction?.commit()
     }
 
-//    fun AppCompatActivity.replaceFragment(@IdRes frameId: Int, fragment: Fragment, AllowStateloss: Boolean) {
-//
-//
-//        if (AllowStateloss)
-//            supportFragmentManager.beginTransaction().replace(frameId, fragment, fragment.tag)?.commitAllowingStateLoss()
-//        else
-//            supportFragmentManager.beginTransaction().replace(frameId, fragment, fragment.tag)?.commit()
-//
-//    }
-
     fun AppCompatActivity.beginActivity(intent: Intent) {
 
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION)

@@ -47,7 +47,7 @@
             android:textColor="@color/darkGrey"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_title"
+            app:layout_constraintTop_toBottomOf="@+id/txt_title"
             tools:text="중고매입"
             />
 
@@ -62,7 +62,7 @@
             android:textColor="@color/darkGrey"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_which"
+            app:layout_constraintTop_toBottomOf="@+id/txt_which"
             app:moneyCheck="@{model.money}"
             tools:text="60,000원"
             />
@@ -81,7 +81,7 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_money"
+            app:layout_constraintTop_toBottomOf="@+id/txt_money"
             tools:text="ㅎㅇㄹ"
             />
 

@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme">
         <activity
-            android:name=".Main.HomeMainActivity" android:theme="@style/CustomHomeAppTheme">
+            android:name=".Main.HomeMainActivity"
+            android:theme="@style/CustomHomeAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -26,9 +27,15 @@
         </activity>
         <activity android:name=".User.UserMainActivity">
         </activity>
-        <activity android:name=".Game.Register.GameRegisterActivity" android:theme="@style/CustomHomeAppTheme">
+        <activity
+            android:name=".Game.Register.GameRegisterActivity"
+            android:theme="@style/CustomHomeAppTheme">
         </activity>
         <activity android:name=".Game.Tab.Search.SearchMainActivity">
+        </activity>
+        <activity android:name=".Board.Register.BoardMainRegisterActivity">
+        </activity>
+        <activity android:name=".Board.Search.BoardMainSearchActivity">
         </activity>
     </application>
 

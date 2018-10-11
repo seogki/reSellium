@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.dev.skh.resellium.Board.Model.BoardMainModel"
+            />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/const_grade"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/text_board"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            >
+
+        <TextView
+            android:id="@+id/txt_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            tools:text="5.0"
+            android:textColor="@color/black"
+            android:text="@{model.grade}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:src="@drawable/icons8_star_24"
+            app:layout_constraintTop_toBottomOf="@+id/txt_grade"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="start"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="@{model.title}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/const_grade"
+            app:layout_constraintTop_toTopOf="@+id/const_grade"
+            tools:text="타이트으르르르을"
+            />
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="8dp"
+            android:gravity="start"
+            android:textSize="12sp"
+            android:text="@{model.date}"
+            android:textColor="@color/darkGrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/const_grade"
+            app:layout_constraintTop_toBottomOf="@+id/txt_title"
+            tools:text="2018-09-19 23:44:45"
+            />
+
+        <TextView
+            android:id="@+id/txt_review"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start|top"
+            android:maxLines="2"
+            android:textSize="14sp"
+            android:ellipsize="end"
+            android:text="@{model.review}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/const_grade"
+            app:layout_constraintTop_toBottomOf="@+id/txt_date"
+            app:layout_constraintBottom_toBottomOf="@+id/const_grade"
+            tools:text="revieeeeeeeeeeeeeeeeeeeeeeeeeeqwrqwrqwrqwrqwrqqwrqwrqwrqwrqwrqwrqwrqwrqwrqwrqwrqwreeewwwwwww"
+
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

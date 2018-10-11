@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Board.Search.BoardMainSearchActivity"
+    >
+
+    <data>
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener"
+            />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <include
+            android:id="@+id/layout_appbar"
+            layout="@layout/layout_appbar_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/nestedScroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+
+
+                    <RadioGroup
+                        android:layout_marginTop="12dp"
+                        android:id="@+id/radiogroup_platform"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        >
+
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/radio_ps4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="PS"
+                            android:textSize="16sp"
+                            android:onClick="@{onClickListener::onClick}"
+                            android:textColor="@color/ps4Color"
+                            app:buttonTint="@color/ps4Color"
+                            />
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/radio_xbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="XBOX"
+                            android:textSize="16sp"
+                            android:onClick="@{onClickListener::onClick}"
+                            android:textColor="@color/xboxColor"
+                            app:buttonTint="@color/xboxColor"
+                            />
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/radio_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SWITCH"
+                            android:textSize="16sp"
+                            android:onClick="@{onClickListener::onClick}"
+                            android:textColor="@color/switchColor"
+                            app:buttonTint="@color/switchColor"
+                            />
+                    </RadioGroup>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/txt_search"
+                        android:layout_marginStart="8dp"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@+id/radiogroup_platform"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:textColor="@color/darkGrey"
+                        android:text="검색어: "
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_ps4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_search"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_xbox"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_search"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_switch"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_search"
+                        />
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:indeterminate="true"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/rv_ps4"
+                        />
+
+
+
+
+
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

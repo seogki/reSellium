@@ -113,8 +113,7 @@ public class BaseBindingAdapter {
                     .asBitmap()
                     .load(uri)
                     .apply(new RequestOptions()
-                            .centerCrop()
-                            .override(300, 300)
+                            .dontTransform()
                             .format(DecodeFormat.PREFER_ARGB_8888)
                             .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                     .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL) {

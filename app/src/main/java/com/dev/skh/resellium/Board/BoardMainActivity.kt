@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.View
 import com.dev.skh.resellium.Base.BaseActivity
+import com.dev.skh.resellium.Board.Register.BoardMainRegisterActivity
 import com.dev.skh.resellium.Game.GameMainActivity
 import com.dev.skh.resellium.Main.HomeMainActivity
 import com.dev.skh.resellium.R
@@ -19,6 +20,7 @@ class BoardMainActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_main)
         binding.layoutBottomTab?.onClickListener = this
+        binding.onClickListener = this
         addFragment(R.id.frame_layout, BoardMainFragment(), false, false, "BoardMainFragment")
         setCurrentTab()
     }
@@ -32,6 +34,9 @@ class BoardMainActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.bottom_layout_btn3 -> {
                 beginActivity(Intent(this, UserMainActivity::class.java))
+            }
+            R.id.fab_btn -> {
+                startActivity(Intent(this, BoardMainRegisterActivity::class.java))
             }
         }
     }
