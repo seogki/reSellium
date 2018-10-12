@@ -1,6 +1,6 @@
 package com.dev.skh.resellium.Game.Register
 
-import com.dev.skh.resellium.Network.ApiCilentRx
+import com.dev.skh.resellium.Base.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -8,10 +8,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Seogki on 2018. 10. 1..
  */
-class GameRegisterPresenter(val view: View? = null){
-
-    private var disposable: Disposable? = null
-    private val client by lazy { ApiCilentRx.create() }
+class GameRegisterPresenter(val view: View? = null) : BasePresenter(){
 
     fun sendData(platform: String, title: String, place: String, money: String, which: String) {
         disposable = client.RegisterData(platform, title, place, money, which)

@@ -49,5 +49,8 @@
     <color name="xboxColor">#107c10</color>
     <color name="switchColor">#e60012</color>
 
+    <color name="gold">#D4AF37</color>
+    <color name="silver">#BCC6CC</color>
+    <color name="bronze">#8C7853</color>
 
 </resources>

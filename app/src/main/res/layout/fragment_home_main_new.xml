@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        tools:context=".Main.tab.New.HomeMainNewFragment"
+    >
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.dev.skh.resellium.Main.Model.RankModels"/>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/const_first"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/const_second"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/img_first"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/icons8_medal_first_place_48"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/layout_first"
+                />
+
+            <TextView
+                android:textColor="@color/OrangeYellow"
+                tools:text="9.5"
+                android:text="@{model.first.grade}"
+                android:textStyle="bold"
+                android:textSize="48sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout_first"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_first"
+                android:textColor="@color/black"
+                tools:text="타이틀1"
+                android:text="@{model.first.title}"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/txt_title1"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/const_second"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toEndOf="@+id/const_first"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/const_third"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/img_second"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/icons8_medal_second_place_48"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/layout_second"
+                />
+
+            <TextView
+                android:textColor="@color/OrangeYellow"
+                tools:text="8.8"
+                android:text="@{model.second.grade}"
+                android:textStyle="bold"
+                android:textSize="48sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout_second"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_second"
+                android:textColor="@color/black"
+                tools:text="타이틀2"
+                android:text="@{model.second.title}"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/txt_title2"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/const_third"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toEndOf="@+id/const_second"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/img_third"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/icons8_medal_third_place_48"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/layout_third"
+                />
+
+            <TextView
+                android:textColor="@color/OrangeYellow"
+                tools:text="8.2"
+                android:text="@{model.third.grade}"
+                android:textStyle="bold"
+                android:textSize="48sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout_third"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_third"
+                android:textColor="@color/black"
+                tools:text="타이틀3"
+                android:text="@{model.third.title}"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/txt_title3"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

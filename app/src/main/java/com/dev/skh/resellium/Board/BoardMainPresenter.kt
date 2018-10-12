@@ -1,7 +1,7 @@
 package com.dev.skh.resellium.Board
 
+import com.dev.skh.resellium.Base.BasePresenter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
-import com.dev.skh.resellium.Network.ApiCilentRx
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -9,10 +9,8 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Seogki on 2018. 10. 11..
  */
-class BoardMainPresenter(val view: View? = null) {
+class BoardMainPresenter(val view: View? = null)  : BasePresenter(){
 
-    private var disposable: Disposable? = null
-    private val client by lazy { ApiCilentRx.create() }
 
     fun getBoardData() {
         disposable = client.getBoardData()

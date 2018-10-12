@@ -1,8 +1,8 @@
 package com.dev.skh.resellium.Main
 
+import com.dev.skh.resellium.Base.BasePresenter
 import com.dev.skh.resellium.Main.Model.HoriModel
 import com.dev.skh.resellium.Main.Model.PopularModel
-import com.dev.skh.resellium.Network.ApiCilentRx
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -10,10 +10,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Seogki on 2018. 10. 1..
  */
-class HomeMainPresenter(val view: HomeMainPresenter.View? = null) {
-
-    private var disposable: Disposable? = null
-    private val client by lazy { ApiCilentRx.create() }
+class HomeMainPresenter(val view: HomeMainPresenter.View? = null)  : BasePresenter(){
 
 
     fun getPopularData(){

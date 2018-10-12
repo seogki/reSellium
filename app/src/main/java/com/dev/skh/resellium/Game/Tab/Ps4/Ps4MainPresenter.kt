@@ -1,7 +1,7 @@
 package com.dev.skh.resellium.Game.Tab.Ps4
 
+import com.dev.skh.resellium.Base.BasePresenter
 import com.dev.skh.resellium.Game.Model.Ps4MainModel
-import com.dev.skh.resellium.Network.ApiCilentRx
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -9,10 +9,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Seogki on 2018. 9. 28..
  */
-class Ps4MainPresenter(val view: View? = null) {
-
-    private var disposable: Disposable? = null
-    private val client by lazy { ApiCilentRx.create() }
+class Ps4MainPresenter(val view: View? = null)  : BasePresenter(){
 
     fun addData() {
 

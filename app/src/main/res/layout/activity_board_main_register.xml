@@ -6,13 +6,185 @@
     tools:context=".Board.Register.BoardMainRegisterActivity"
     >
 
-    <android.support.constraint.ConstraintLayout
+    <data>
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener"
+            />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
 
+        <include
+            android:id="@+id/layout_appbar"
+            layout="@layout/layout_appbar_plus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+
+                >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
 
 
-    </android.support.constraint.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/txt_title"
+                        android:layout_width="90dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/OrangeYellow"
+                        android:gravity="center"
+                        android:text="제목"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_title"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/white"
+                        android:gravity="start|center_vertical"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:hint="게임 제목을 입력해주세요"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/darkGrey"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/txt_title"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_review"
+                        android:layout_width="90dp"
+                        android:layout_height="200dp"
+                        android:background="@color/OrangeYellow"
+                        android:gravity="center"
+                        android:text="리뷰"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_title"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_review"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:background="@color/white"
+                        android:gravity="top|center_vertical"
+                        android:paddingTop="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:hint="리뷰를 입력해주세요"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/darkGrey"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/txt_review"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+                        />
+
+
+
+
+
+                    <TextView
+                        android:id="@+id/txt_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:text="0.0"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_review"
+                        />
+
+                    <SeekBar
+                        android:id="@+id/seekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:max="100"
+                        android:background="@null"
+                        android:shape="oval"
+                        android:splitTrack="false"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/seekbar"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_num"
+                        tools:targetApi="lollipop"
+                        android:secondaryProgress="0"
+                        android:thumbOffset="10dp"
+                        android:thumb="@drawable/seekbar_thumb"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/midGrey"
+                        app:layout_constraintTop_toTopOf="@+id/txt_title"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/midGrey"
+                        app:layout_constraintTop_toTopOf="@+id/txt_review"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/midGrey"
+                        app:layout_constraintTop_toTopOf="@+id/txt_grade"
+                        />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/midGrey"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_grade"
+                        />
+
+
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
 </layout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.dev.skh.resellium.Board.Model.BoardMainModel"/>
+
+    </data>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/const_grade"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/text_board"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        >
+
+        <TextView
+            android:id="@+id/txt_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            tools:text="5.0"
+            android:textColor="@color/black"
+            android:text="@{model.grade}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="12dp"
+            android:src="@drawable/icons8_star_24"
+            app:layout_constraintTop_toBottomOf="@+id/txt_grade"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

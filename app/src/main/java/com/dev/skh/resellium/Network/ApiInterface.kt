@@ -6,6 +6,7 @@ import com.dev.skh.resellium.Game.Model.SwitchMainModel
 import com.dev.skh.resellium.Game.Model.XboxMainModel
 import com.dev.skh.resellium.Main.Model.HoriModel
 import com.dev.skh.resellium.Main.Model.PopularModel
+import com.dev.skh.resellium.Main.Model.RankModels
 import com.google.gson.JsonObject
 import io.reactivex.Flowable
 import retrofit2.http.POST
@@ -25,6 +26,15 @@ interface ApiInterface {
     @POST("main/getPopularData")
     fun getPopularData(): Flowable<MutableList<PopularModel>>
 
+    @POST("main/getBestMainData")
+    fun getBestMainData(): Flowable<RankModels>
+
+    @POST("main/getNewMainData")
+    fun getNewMainData(): Flowable<RankModels>
+
+    @POST("main/getWorstMainData")
+    fun getWorstMainData(): Flowable<RankModels>
+
     /***
      *  보드
      */
@@ -40,6 +50,19 @@ interface ApiInterface {
     @POST("board/getSpinnerScrollBoardData")
     fun getSpinnerScrollBoardData(@Query("Spinner") spinner: String
                                   , @Query("Id") id: String): Flowable<MutableList<BoardMainModel>>
+
+
+    @POST("board/getSearchBoardData")
+    fun getSearchBoardData(@Query("Search") search: String): Flowable<MutableList<BoardMainModel>>
+
+    @POST("board/getSearchScrollBoardData")
+    fun getSearchScrollBoardData(@Query("Search") search: String
+                                 , @Query("Id") id: String): Flowable<MutableList<BoardMainModel>>
+
+    @POST("board/registerBoardData")
+    fun registerBoardData(@Query("Title") title: String
+                             , @Query("Review") review: String
+                             , @Query("Grade") grade: String): Flowable<JsonObject>
 
     /***
      * 게임

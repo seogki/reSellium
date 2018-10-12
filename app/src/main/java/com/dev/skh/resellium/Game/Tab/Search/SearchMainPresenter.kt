@@ -1,9 +1,9 @@
 package com.dev.skh.resellium.Game.Tab.Search
 
+import com.dev.skh.resellium.Base.BasePresenter
 import com.dev.skh.resellium.Game.Model.Ps4MainModel
 import com.dev.skh.resellium.Game.Model.SwitchMainModel
 import com.dev.skh.resellium.Game.Model.XboxMainModel
-import com.dev.skh.resellium.Network.ApiCilentRx
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -11,10 +11,8 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Seogki on 2018. 10. 4..
  */
-class SearchMainPresenter(val view: View? = null) {
+class SearchMainPresenter(val view: View? = null) : BasePresenter() {
 
-    private var disposable: Disposable? = null
-    private val client by lazy { ApiCilentRx.create() }
     fun getData(currentPos: String?, search: String) {
         when (currentPos) {
             "PS" -> setPs4Data(search)

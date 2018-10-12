@@ -93,4 +93,9 @@ open class BaseFragment : Fragment() {
         progressBar?.visibility = View.VISIBLE
     }
 
+
+    fun setHorizontalLinearLayoutManager(): LinearLayoutManager {
+        return LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
+    }
+
 }

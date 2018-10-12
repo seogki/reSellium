@@ -33,7 +33,8 @@
         </activity>
         <activity android:name=".Game.Tab.Search.SearchMainActivity">
         </activity>
-        <activity android:name=".Board.Register.BoardMainRegisterActivity">
+        <activity android:name=".Board.Register.BoardMainRegisterActivity"
+                  android:theme="@style/CustomHomeAppTheme">
         </activity>
         <activity android:name=".Board.Search.BoardMainSearchActivity">
         </activity>
