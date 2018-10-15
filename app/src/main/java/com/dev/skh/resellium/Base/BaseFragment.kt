@@ -40,6 +40,12 @@ open class BaseFragment : Fragment() {
             transaction?.commit()
     }
 
+    fun Fragment.beginActivity(intent: Intent) {
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        startActivity(intent)
+    }
+
 
 //    fun closeKeyboard() {
 //        val inputManager = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

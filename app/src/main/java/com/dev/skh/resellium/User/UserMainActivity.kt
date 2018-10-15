@@ -37,7 +37,7 @@ class UserMainActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun setCurrentTab() {
-        binding.layoutBottomTab?.bottomLayoutBtn3Txt?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_user_24_fill))
+        binding.layoutBottomTab?.bottomLayoutBtn3Txt?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.baseline_settings_black_24))
         binding.layoutBottomTab?.bottomLayoutBtn3Txt?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.btmTabColor), PorterDuff.Mode.SRC_ATOP)
         binding.layoutBottomTab?.bottomLayoutText3?.setTextColor(ContextCompat.getColor(this, R.color.btmTabColor))
     }

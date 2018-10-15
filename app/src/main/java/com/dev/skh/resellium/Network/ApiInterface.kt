@@ -6,7 +6,7 @@ import com.dev.skh.resellium.Game.Model.SwitchMainModel
 import com.dev.skh.resellium.Game.Model.XboxMainModel
 import com.dev.skh.resellium.Main.Model.HoriModel
 import com.dev.skh.resellium.Main.Model.PopularModel
-import com.dev.skh.resellium.Main.Model.RankModels
+import com.dev.skh.resellium.Main.Model.RankModel
 import com.google.gson.JsonObject
 import io.reactivex.Flowable
 import retrofit2.http.POST
@@ -26,14 +26,14 @@ interface ApiInterface {
     @POST("main/getPopularData")
     fun getPopularData(): Flowable<MutableList<PopularModel>>
 
-    @POST("main/getBestMainData")
-    fun getBestMainData(): Flowable<RankModels>
-
     @POST("main/getNewMainData")
-    fun getNewMainData(): Flowable<RankModels>
+    fun getNewMainData(): Flowable<MutableList<RankModel>>
+
+    @POST("main/getBestMainData")
+    fun getBestMainData(): Flowable<MutableList<RankModel>>
 
     @POST("main/getWorstMainData")
-    fun getWorstMainData(): Flowable<RankModels>
+    fun getWorstMainData(): Flowable<MutableList<RankModel>>
 
     /***
      *  보드

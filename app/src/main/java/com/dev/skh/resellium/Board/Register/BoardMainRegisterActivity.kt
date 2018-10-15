@@ -25,9 +25,14 @@ class BoardMainRegisterActivity : AppCompatActivity(), BoardMainRegisterPresente
         DLog.e("error : $message")
     }
 
+    companion object {
+        fun weakRef(view: BoardMainRegisterPresenter.View): WeakReference<BoardMainRegisterPresenter> {
+            return WeakReference(BoardMainRegisterPresenter(view))
+        }
+    }
 
     private lateinit var binding: ActivityBoardMainRegisterBinding
-    private var weakReference: WeakReference<BoardMainRegisterPresenter>? = null
+    private val weakReference by lazy { weakRef(this) }
     private var disposable: Disposable? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +41,6 @@ class BoardMainRegisterActivity : AppCompatActivity(), BoardMainRegisterPresente
         binding.layoutAppbar?.title = "등록"
         binding.layoutAppbar?.onClickListener = this
         binding.seekbar.setOnSeekBarChangeListener(this)
-        setMVP()
         setView()
     }
 
@@ -46,9 +50,6 @@ class BoardMainRegisterActivity : AppCompatActivity(), BoardMainRegisterPresente
         binding.layoutAppbar?.layoutUndo?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
     }
 
-    private fun setMVP() {
-        weakReference = WeakReference(BoardMainRegisterPresenter(this))
-    }
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
         val decimalProgress = progress.toFloat() / 10
@@ -84,7 +85,7 @@ class BoardMainRegisterActivity : AppCompatActivity(), BoardMainRegisterPresente
         if (title.isNotEmpty() && review.isNotEmpty() && grade.isNotEmpty()) {
             if (grade == "10.0")
                 grade = "10"
-            weakReference?.get()?.setData(title, review, grade)
+            weakReference.get()?.setData(title, review, grade)
         } else {
             Toast.makeText(this, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
             binding.layoutAppbar?.layoutAdd?.isEnabled = true

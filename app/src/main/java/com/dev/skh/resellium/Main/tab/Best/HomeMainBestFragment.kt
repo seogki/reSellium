@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dev.skh.resellium.Base.BaseFragment
-import com.dev.skh.resellium.Main.Model.RankModels
+import com.dev.skh.resellium.Main.Model.RankModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.FragmentHomeMainBestBinding
@@ -22,26 +22,30 @@ class HomeMainBestFragment : BaseFragment(), HomeMainBestPresenter.View {
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
     }
+
+    companion object {
+        fun weakRef(view: HomeMainBestPresenter.View): WeakReference<HomeMainBestPresenter> {
+            return WeakReference(HomeMainBestPresenter(view))
+        }
+    }
+
+
     private lateinit var binding: FragmentHomeMainBestBinding
     private var disposable: Disposable? = null
-    private var weakReference: WeakReference<HomeMainBestPresenter>? = null
+    private val weakReference by lazy { weakRef(this) }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_main_best, container, false)
-        setMVP()
         setRankColor()
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        weakReference?.get()?.getData()
+        weakReference.get()?.getData()
     }
 
-    private fun setMVP() {
-        weakReference = WeakReference(HomeMainBestPresenter(this))
-    }
 
     private fun setRankColor() {
         binding.imgFirst.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.gold), PorterDuff.Mode.SRC_ATOP)
@@ -49,10 +53,21 @@ class HomeMainBestFragment : BaseFragment(), HomeMainBestPresenter.View {
         binding.imgThird.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.bronze), PorterDuff.Mode.SRC_ATOP)
     }
 
-    override fun getBestData(best: RankModels?, disposable: Disposable?) {
-        binding.model = best
+    override fun getBestData(best: MutableList<RankModel>?, disposable: Disposable?) {
+        if(best != null) {
+            binding.txtTitle1.text = best[0].title
+            binding.txtTitle2.text = best[1].title
+            binding.txtTitle3.text = best[2].title
+            binding.layoutFirst.text = best[0].grade
+            binding.layoutSecond.text = best[1].grade
+            binding.layoutThird.text = best[2].grade
+
+            binding.txtReview1.text = best[0].review
+            binding.txtReview2.text = best[1].review
+            binding.txtReview3.text = best[2].review
+
+        }
         this.disposable = disposable
-        binding.executePendingBindings()
     }
 
     override fun onDestroy() {

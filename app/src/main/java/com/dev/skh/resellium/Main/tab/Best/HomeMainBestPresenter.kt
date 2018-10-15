@@ -1,7 +1,7 @@
 package com.dev.skh.resellium.Main.tab.Best
 
 import com.dev.skh.resellium.Base.BasePresenter
-import com.dev.skh.resellium.Main.Model.RankModels
+import com.dev.skh.resellium.Main.Model.RankModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -19,7 +19,7 @@ class HomeMainBestPresenter(val view: View? = null) : BasePresenter(){
     }
 
     interface View{
-        fun getBestData(best: RankModels?, disposable: Disposable?)
+        fun getBestData(best: MutableList<RankModel>?, disposable: Disposable?)
         fun errorData(disposable: Disposable?, message: String?)
 
     }

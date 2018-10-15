@@ -2,6 +2,8 @@ package com.dev.skh.resellium.Board
 
 import android.content.Context
 import android.databinding.DataBindingUtil
+import android.graphics.PorterDuff
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -29,11 +31,11 @@ class BoardMainAdapter(context: Context, arraylist: MutableList<BoardMainModel>)
         return BoardMainHolder(binding)
     }
 
-
     inner class BoardMainHolder(val binding: ItemBoardMainBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         fun bind(model: BoardMainModel?) {
             binding.model = model
+            binding.imgStar.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.black), PorterDuff.Mode.SRC_ATOP)
         }
 
         override fun onClick(v: View?) {

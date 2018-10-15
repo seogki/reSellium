@@ -11,6 +11,7 @@ import io.reactivex.schedulers.Schedulers
  */
 class BoardMainSearchPresenter(val view: View? = null) : BasePresenter() {
 
+
     fun getData(search: String?) {
         if (search != null) {
             disposable = client.getSearchBoardData(search)

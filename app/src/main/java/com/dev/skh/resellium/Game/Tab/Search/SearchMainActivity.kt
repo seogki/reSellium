@@ -25,6 +25,7 @@ import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.ActivitySearchMainBinding
 import io.reactivex.disposables.Disposable
+import java.lang.ref.WeakReference
 
 class SearchMainActivity : AppCompatActivity(), View.OnClickListener, SearchMainPresenter.View {
     override fun setError(disposable: Disposable?, message: String?) {
@@ -42,6 +43,12 @@ class SearchMainActivity : AppCompatActivity(), View.OnClickListener, SearchMain
         edit.text.clear()
         val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+
+    companion object {
+        fun weakRef(view: SearchMainPresenter.View): WeakReference<SearchMainPresenter> {
+            return WeakReference(SearchMainPresenter(view))
+        }
     }
 
     override fun onClick(v: View?) {
@@ -62,7 +69,7 @@ class SearchMainActivity : AppCompatActivity(), View.OnClickListener, SearchMain
     private var disposable: Disposable? = null
     private var searchString = ""
     lateinit var binding: ActivitySearchMainBinding
-    private lateinit var presenter: SearchMainPresenter
+    private val presenter by lazy { weakRef(this) }
     private var ps4MainAdapter: Ps4MainAdapter? = null
     private var xboxMainAdapter: XboxMainAdapter? = null
     private var switchMainAdapter: SwitchMainAdapter? = null
@@ -76,7 +83,6 @@ class SearchMainActivity : AppCompatActivity(), View.OnClickListener, SearchMain
         binding.layoutAppbar?.onClickListener = this
         binding.onClickListener = this
         setAdapter()
-        presenter = SearchMainPresenter(this)
         binding.layoutAppbar?.layoutUndo?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
     }
 
@@ -142,7 +148,7 @@ class SearchMainActivity : AppCompatActivity(), View.OnClickListener, SearchMain
             }
             searchString = search
             setProgressbarVisible()
-            presenter.getData(this.currentPos, searchString)
+            presenter.get()?.getData(this.currentPos, searchString)
         } else {
             Toast.makeText(this, "검색어를 입력해주세요", Toast.LENGTH_SHORT).show()
         }
@@ -187,7 +193,7 @@ class SearchMainActivity : AppCompatActivity(), View.OnClickListener, SearchMain
                                     "SWITCH" -> id = switchMainAdapter?.getItem(switchMainAdapter!!.itemCount - 1)?.id
                                 }
 
-                                presenter.getScrollData(id, currentPos, searchString)
+                                presenter.get()?.getScrollData(id, currentPos, searchString)
 
                             }, 500)
 

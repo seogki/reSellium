@@ -26,8 +26,13 @@ import java.lang.ref.WeakReference
 class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemSelectedListener {
 
 
+    companion object {
+        fun weakRef(view: XboxMainPresenter.View): WeakReference<XboxMainPresenter> {
+            return WeakReference(XboxMainPresenter(view))
+        }
+    }
+    private val weakPresenter by lazy { weakRef(this) }
     private lateinit var binding: FragmentXboxMainBinding
-    private var weakPresenter: WeakReference<XboxMainPresenter>? = null
     private var xboxMainAdapter: XboxMainAdapter? = null
     private lateinit var layoutManager: LinearLayoutManager
     private var recyclerView: RecyclerView? = null
@@ -38,15 +43,10 @@ class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLay
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_xbox_main, container, false)
-        setMVP()
 
         setView()
         setBaseProgressBar(binding.progressBar)
         return binding.root
-    }
-
-    private fun setMVP() {
-        weakPresenter = WeakReference(XboxMainPresenter(this))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -60,8 +60,8 @@ class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLay
     }
 
     private fun addItemOnSpinner() {
-        weakPresenter?.get()?.spinnerOne()
-        weakPresenter?.get()?.spinnerTwo()
+        weakPresenter.get()?.spinnerOne()
+        weakPresenter.get()?.spinnerTwo()
     }
 
     private fun setView() {

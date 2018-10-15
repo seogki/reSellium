@@ -26,8 +26,14 @@ import java.lang.ref.WeakReference
 class BoardMainSearchActivity : AppCompatActivity(), BoardMainSearchPresenter.View, View.OnClickListener {
 
 
+    companion object {
+        fun weakRef(view: BoardMainSearchPresenter.View): WeakReference<BoardMainSearchPresenter> {
+            return WeakReference(BoardMainSearchPresenter(view))
+        }
+    }
+
     private lateinit var binding: ActivityBoardMainSearchBinding
-    private var weakReference: WeakReference<BoardMainSearchPresenter>? = null
+    private val weakReference by lazy { weakRef(this) }
     private var boardMainAdapter: BoardMainAdapter? = null
     private var layoutManager: LinearLayoutManager? = null
     private var rv: RecyclerView? = null
@@ -39,7 +45,6 @@ class BoardMainSearchActivity : AppCompatActivity(), BoardMainSearchPresenter.Vi
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_main_search)
         binding.onClickListener = this
-        setMVP()
         setView()
         setBaseProgressBar(binding.progressBar)
     }
@@ -55,10 +60,6 @@ class BoardMainSearchActivity : AppCompatActivity(), BoardMainSearchPresenter.Vi
         rv?.animation = null
         rv?.layoutManager = layoutManager
         rv?.addItemDecoration(decor)
-    }
-
-    private fun setMVP() {
-        weakReference = WeakReference(BoardMainSearchPresenter(this))
     }
 
     override fun onClick(v: View?) {
@@ -84,7 +85,7 @@ class BoardMainSearchActivity : AppCompatActivity(), BoardMainSearchPresenter.Vi
         onRefresh()
         setProgressbarVisible()
         closeKeyboard()
-        weakReference?.get()?.getData(data)
+        weakReference.get()?.getData(data)
     }
 
     override fun registerData(board: MutableList<BoardMainModel>?, disposable: Disposable?, isScroll: Boolean) {

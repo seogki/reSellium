@@ -24,9 +24,13 @@ import java.lang.ref.WeakReference
 
 class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemSelectedListener {
 
-
+    companion object {
+        fun weakRef(view: SwitchMainPresenter.View): WeakReference<SwitchMainPresenter> {
+            return WeakReference(SwitchMainPresenter(view))
+        }
+    }
+    private val weakPresenter by lazy { weakRef(this) }
     private lateinit var binding: FragmentSwitchMainBinding
-    private var weakPresenter: WeakReference<SwitchMainPresenter>? = null
     private var switchMainAdapter: SwitchMainAdapter? = null
     private lateinit var layoutManager: LinearLayoutManager
     private var recyclerView: RecyclerView? = null
@@ -37,15 +41,9 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_switch_main, container, false)
-        setMVP()
-
         setView()
         setBaseProgressBar(binding.progressBar)
         return binding.root
-    }
-
-    private fun setMVP() {
-        weakPresenter = WeakReference(SwitchMainPresenter(this))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -58,8 +56,8 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
     }
 
     private fun addItemOnSpinner() {
-        weakPresenter?.get()?.spinnerOne()
-        weakPresenter?.get()?.spinnerTwo()
+        weakPresenter.get()?.spinnerOne()
+        weakPresenter.get()?.spinnerTwo()
     }
 
     private fun setView() {
@@ -72,7 +70,7 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
     }
 
     override fun updateData(arr: MutableList<SwitchMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if(arr != null) {
+        if (arr != null) {
             if (switchMainAdapter == null) {
                 switchMainAdapter = SwitchMainAdapter(context!!, arr)
                 recyclerView?.adapter = switchMainAdapter
@@ -104,9 +102,9 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
                             Handler().postDelayed({
                                 val id = switchMainAdapter?.getItem(switchMainAdapter!!.itemCount - 1)?.id
                                 if (isSpinner)
-                                    weakPresenter?.get()?.checkSpinnerScrollData(first, second, id)
+                                    weakPresenter.get()?.checkSpinnerScrollData(first, second, id)
                                 else
-                                    weakPresenter?.get()?.scrollData(id)
+                                    weakPresenter.get()?.scrollData(id)
                             }, 500)
 
                         }
@@ -169,7 +167,7 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
 
     private fun callSpinnerData() {
         refreshWithoutData()
-        weakPresenter?.get()?.checkSpinnerData(first, second)
+        weakPresenter.get()?.checkSpinnerData(first, second)
     }
 
 
@@ -191,7 +189,7 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
         recyclerView?.removeOnScrollListener(null)
         binding.spinners?.compareFragSpinnerSpinner1?.setSelection(0, false)
         binding.spinners?.compareFragSpinnerSpinner2?.setSelection(0, false)
-        weakPresenter?.get()?.addData()
+        weakPresenter.get()?.addData()
         isLoading = false
         binding.swipeLayout.isRefreshing = false
     }

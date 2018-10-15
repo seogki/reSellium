@@ -48,51 +48,60 @@
                     >
 
 
-
-
                     <TextView
+                        android:id="@+id/txt_grade"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_marginTop="8dp"
-                        android:paddingStart="8dp"
                         android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:text="평점 랭킹"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:id="@+id/txt_grade"
-                        android:textSize="18sp"
-                        android:gravity="center_vertical"
-                        android:text="평점 랭킹"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
                         />
 
                     <View
+                        android:id="@+id/view_img"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:background="@color/white"
-                        android:id="@+id/view_img"
-                        app:layout_constraintTop_toTopOf="@id/txt_grade"
                         app:layout_constraintStart_toEndOf="@id/txt_grade"
+                        app:layout_constraintTop_toTopOf="@id/txt_grade"
+                        />
+
+                    <ImageView
+                        android:id="@+id/img_next_board"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:onClick="@{onClickListener::onClick}"
+                        android:src="@drawable/ic_action_star_next"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_grade"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/txt_grade"
                         />
 
                     <ImageView
                         android:id="@+id/img_grade"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="8dp"
-                        android:src="@drawable/icons8_star_24"
-                        app:layout_constraintTop_toTopOf="@+id/txt_grade"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_action_star"
                         app:layout_constraintBottom_toBottomOf="@+id/txt_grade"
                         app:layout_constraintStart_toEndOf="@+id/txt_grade"
+                        app:layout_constraintTop_toTopOf="@+id/txt_grade"
                         />
 
 
-
                     <View
+                        android:id="@+id/view_grade"
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="@color/midGrey"
-                        android:id="@+id/view_grade"
                         app:layout_constraintTop_toBottomOf="@+id/txt_grade"
                         />
 
@@ -102,12 +111,12 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:background="@color/white"
+                        app:layout_constraintTop_toBottomOf="@+id/view_grade"
                         app:tabGravity="fill"
                         app:tabIndicatorColor="@color/black"
                         app:tabMode="fixed"
                         app:tabPaddingEnd="0dp"
                         app:tabPaddingStart="0dp"
-                        app:layout_constraintTop_toBottomOf="@+id/view_grade"
                         app:tabSelectedTextColor="@color/black"
                         app:tabTextColor="@color/midGrey"
                         >
@@ -128,142 +137,125 @@
                         app:layout_constraintTop_toBottomOf="@+id/tablayout"
                         />
 
+                    <TextView
+                        android:id="@+id/txt_recent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:text="최근 항목"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewpager"
+                        />
+
                     <android.support.constraint.ConstraintLayout
-                        android:id="@+id/const_ps4"
+                        android:id="@+id/const_all"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/white"
-                        android:elevation="5dp"
-                        app:layout_constraintTop_toBottomOf="@+id/viewpager"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_recent"
                         >
 
 
-                        <TextView
-                            android:id="@+id/txt_ps4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="8dp"
+                        <View
+                            android:id="@+id/view_all"
+                            android:layout_width="5dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="32dp"
                             android:layout_marginTop="8dp"
-                            android:text="최근 PS 항목"
-                            android:textColor="@color/ps4Color"
-                            android:textSize="14sp"
-                            android:gravity="center"
-                            android:textStyle="bold"
+                            android:background="@drawable/text_grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@color/midGrey"
-                            android:id="@+id/view_ps4"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_ps4"
+                        <ImageView
+                            android:id="@+id/txt_ps4"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/circle_ps4"
+                            android:elevation="5dp"
+                            android:padding="8dp"
+                            android:src="@drawable/icons8_playstation_24"
+                            app:layout_constraintBottom_toBottomOf="@+id/rv_ps4"
+                            app:layout_constraintEnd_toEndOf="@+id/view_all"
+                            app:layout_constraintStart_toStartOf="@+id/view_all"
+                            app:layout_constraintTop_toTopOf="@+id/rv_ps4"
                             />
+
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rv_ps4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/view_ps4"
-                            />
-
-                    </android.support.constraint.ConstraintLayout>
-
-                    <android.support.constraint.ConstraintLayout
-                        android:id="@+id/const_xbox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/white"
-                        android:elevation="5dp"
-                        app:layout_constraintTop_toBottomOf="@+id/const_ps4"
-                        >
-
-                        <TextView
-                            android:id="@+id/txt_xbox"
                             android:layout_width="wrap_content"
-                            android:layout_height="30dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:textSize="14sp"
-                            android:gravity="center"
-                            android:text="최근 XBOX 항목"
-                            android:textColor="@color/xboxColor"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintStart_toEndOf="@+id/txt_ps4"
+                            app:layout_constraintTop_toTopOf="@+id/view_all"
                             />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@color/midGrey"
-                            android:id="@+id/view_xbox"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_xbox"
+
+
+                        <ImageView
+                            android:id="@+id/txt_xbox"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/circle_xbox"
+                            android:elevation="5dp"
+                            android:padding="8dp"
+                            android:src="@drawable/icons8_xbox_24"
+                            app:layout_constraintBottom_toBottomOf="@+id/rv_xbox"
+                            app:layout_constraintEnd_toEndOf="@+id/view_all"
+                            app:layout_constraintStart_toStartOf="@+id/view_all"
+                            app:layout_constraintTop_toTopOf="@+id/rv_xbox"
                             />
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rv_xbox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/view_xbox"
-                            />
-
-
-                    </android.support.constraint.ConstraintLayout>
-
-                    <android.support.constraint.ConstraintLayout
-                        android:id="@+id/const_switch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/white"
-                        android:elevation="5dp"
-                        app:layout_constraintTop_toBottomOf="@+id/const_xbox"
-                        >
-
-                        <TextView
-                            android:id="@+id/txt_switch"
                             android:layout_width="wrap_content"
-                            android:layout_height="30dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            android:text="최근 SWITCH 항목"
-                            android:textColor="@color/switchColor"
-                            android:textSize="14sp"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/txt_xbox"
+                            app:layout_constraintTop_toBottomOf="@+id/rv_ps4"
                             />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.5dp"
-                            android:background="@color/midGrey"
-                            android:id="@+id/view_switch"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_switch"
+
+
+                        <ImageView
+                            android:id="@+id/txt_switch"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:elevation="5dp"
+                            android:padding="8dp"
+                            android:src="@drawable/nintendo_switch_logo"
+                            android:background="@drawable/circle_switch"
+                            android:gravity="center"
+                            app:layout_constraintBottom_toBottomOf="@+id/rv_switch"
+                            app:layout_constraintEnd_toEndOf="@+id/view_all"
+                            app:layout_constraintStart_toStartOf="@+id/view_all"
+                            app:layout_constraintTop_toTopOf="@+id/rv_switch"
                             />
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rv_switch"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/view_switch"
+                            app:layout_constraintStart_toEndOf="@id/txt_switch"
+                            app:layout_constraintTop_toBottomOf="@+id/rv_xbox"
                             />
 
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            app:layout_constraintTop_toBottomOf="@+id/rv_switch"
+                            />
                     </android.support.constraint.ConstraintLayout>
-
                 </android.support.constraint.ConstraintLayout>
             </android.support.v4.widget.NestedScrollView>
         </android.support.constraint.ConstraintLayout>

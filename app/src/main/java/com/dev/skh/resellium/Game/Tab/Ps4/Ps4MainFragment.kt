@@ -25,9 +25,15 @@ import java.lang.ref.WeakReference
 class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemSelectedListener {
 
 
+    companion object {
+        fun weakRef(view: Ps4MainPresenter.View): WeakReference<Ps4MainPresenter> {
+            return WeakReference(Ps4MainPresenter(view))
+        }
+    }
+
     private lateinit var binding: FragmentPs4MainBinding
     private var ps4MainAdapter: Ps4MainAdapter? = null
-    private var weakPresenter: WeakReference<Ps4MainPresenter>? = null
+    private val weakPresenter by lazy { weakRef(this) }
     private lateinit var layoutManager: LinearLayoutManager
     private var recyclerView: RecyclerView? = null
     private var first: String = ""
@@ -37,15 +43,9 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_ps4_main, container, false)
-
-        setMVP()
         setView()
         setBaseProgressBar(binding.progressBar)
         return binding.root
-    }
-
-    private fun setMVP() {
-        weakPresenter = WeakReference(Ps4MainPresenter(this))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -117,8 +117,8 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
     }
 
     private fun addItemOnSpinner() {
-        weakPresenter?.get()?.spinnerOne()
-        weakPresenter?.get()?.spinnerTwo()
+        weakPresenter.get()?.spinnerOne()
+        weakPresenter.get()?.spinnerTwo()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -146,7 +146,7 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
 
     private fun callSpinnerData() {
         refreshWithoutData()
-        weakPresenter?.get()?.checkSpinnerData(first, second)
+        weakPresenter.get()?.checkSpinnerData(first, second)
     }
 
     override fun updateSpinnerData(result: MutableList<Ps4MainModel>?, disposable: Disposable?, isScroll: Boolean) {
@@ -200,7 +200,7 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
         recyclerView?.removeOnScrollListener(null)
         binding.spinners?.compareFragSpinnerSpinner1?.setSelection(0, false)
         binding.spinners?.compareFragSpinnerSpinner2?.setSelection(0, false)
-        weakPresenter?.get()?.addData()
+        weakPresenter.get()?.addData()
         isLoading = false
         binding.swipeLayout.isRefreshing = false
     }

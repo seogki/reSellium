@@ -1,7 +1,7 @@
 package com.dev.skh.resellium.Main.tab.New
 
 import com.dev.skh.resellium.Base.BasePresenter
-import com.dev.skh.resellium.Main.Model.RankModels
+import com.dev.skh.resellium.Main.Model.RankModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -20,7 +20,7 @@ class HomeMainNewPresenter(val view: View? = null) : BasePresenter(){
     }
 
     interface View{
-        fun getNewData(new: RankModels?, disposable: Disposable?)
+        fun getNewData(arr: MutableList<RankModel>?, disposable: Disposable?)
         fun errorData(disposable: Disposable?, message: String?)
 
     }

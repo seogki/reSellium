@@ -27,7 +27,6 @@ import java.lang.ref.WeakReference
 class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
 
 
-
     override fun onNothingSelected(parent: AdapterView<*>?) {
 
     }
@@ -38,6 +37,12 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
             spinnerAdapter.setDropDownViewResource(R.layout.item_spinner)
             binding.spinner?.spinner?.adapter = spinnerAdapter
             binding.spinner?.spinner?.onItemSelectedListener = this
+        }
+    }
+
+    companion object {
+        fun weakRef(view: BoardMainPresenter.View): WeakReference<BoardMainPresenter> {
+            return WeakReference(BoardMainPresenter(view))
         }
     }
 
@@ -54,21 +59,22 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
     private var rv: RecyclerView? = null
     private var isLoading: Boolean = false
     private var data: String? = null
-    private var weakReference: WeakReference<BoardMainPresenter>? = null
+    private val weakReference by lazy { weakRef(this) }
+    //    private var weakReference: WeakReference<BoardMainPresenter>? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_board_main, container, false)
         binding.layoutAppbar?.title = "추천추천"
         binding.layoutAppbar?.onClickListener = this
-        setMVP()
+//        setMVP()
         setVIEW()
         setBaseProgressBar(binding.progressBar)
         return binding.root
     }
 
-    private fun setMVP() {
-        weakReference = WeakReference(BoardMainPresenter(this))
-    }
+//    private fun setMVP() {
+//        weakReference = WeakReference(BoardMainPresenter(this))
+//    }
 
     private fun setVIEW() {
 
@@ -89,7 +95,7 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.img_search -> startActivity(Intent(context!!, BoardMainSearchActivity::class.java))
         }
     }
@@ -154,7 +160,7 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
 
     private fun checkId(): String? {
         var id: String? = null
-        when(data){
+        when (data) {
             "" -> id = adapter?.getItem(adapter!!.itemCount - 1)?.id
             "평점" -> id = adapter?.getItem(adapter!!.itemCount - 1)?.grade
             "이름" -> id = adapter?.getItem(adapter!!.itemCount - 1)?.title
@@ -187,6 +193,8 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
     }
 
     private fun refresh() {
+//        if (weakReference == null)
+//            setMVP()
         adapter?.clearItems()
         setProgressbarVisible()
         rv?.removeOnScrollListener(null)

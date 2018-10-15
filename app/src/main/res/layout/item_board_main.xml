@@ -20,40 +20,51 @@
         >
 
         <android.support.constraint.ConstraintLayout
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:id="@+id/const_grade"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/text_board"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            >
-
-        <TextView
-            android:id="@+id/txt_grade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="28sp"
-            tools:text="5.0"
-            android:textColor="@color/black"
-            android:text="@{model.grade}"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/text_board"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:src="@drawable/icons8_star_24"
-            app:layout_constraintTop_toBottomOf="@+id/txt_grade"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            >
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="0.1dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6"
+                />
+
+            <TextView
+                android:id="@+id/txt_grade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{model.grade}"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="5.0"
+                />
+
+
+            <ImageView
+                android:id="@+id/img_star"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_action_star_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guideline"
+                />
         </android.support.constraint.ConstraintLayout>
 
         <TextView
@@ -63,10 +74,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:gravity="start"
-            android:textSize="16sp"
-            android:textStyle="bold"
             android:text="@{model.title}"
             android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/const_grade"
             app:layout_constraintTop_toTopOf="@+id/const_grade"
@@ -78,12 +89,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="2dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
             android:gravity="start"
-            android:textSize="12sp"
             android:text="@{model.date}"
             android:textColor="@color/darkGrey"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/const_grade"
             app:layout_constraintTop_toBottomOf="@+id/txt_title"
@@ -97,16 +108,16 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:ellipsize="end"
             android:gravity="start|top"
             android:maxLines="2"
-            android:textSize="14sp"
-            android:ellipsize="end"
             android:text="@{model.review}"
             android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/const_grade"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/const_grade"
             app:layout_constraintTop_toBottomOf="@+id/txt_date"
-            app:layout_constraintBottom_toBottomOf="@+id/const_grade"
             tools:text="revieeeeeeeeeeeeeeeeeeeeeeeeeeqwrqwrqwrqwrqwrqqwrqwrqwrqwrqwrqwrqwrqwrqwrqwrqwrqwreeewwwwwww"
 
             />

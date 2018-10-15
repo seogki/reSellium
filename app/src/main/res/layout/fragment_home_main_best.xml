@@ -9,7 +9,7 @@
 
         <variable
             name="model"
-            type="com.dev.skh.resellium.Main.Model.RankModels"/>
+            type="com.dev.skh.resellium.Main.Model.RankModel"/>
 
     </data>
 
@@ -35,33 +35,35 @@
                 android:layout_marginTop="8dp"
                 android:src="@drawable/icons8_medal_first_place_48"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/layout_first"
+                app:layout_constraintTop_toTopOf="parent"
                 />
 
             <TextView
                 android:textColor="@color/OrangeYellow"
                 tools:text="9.5"
-                android:text="@{model.first.grade}"
+                android:text="@{model.grade}"
                 android:textStyle="bold"
-                android:textSize="48sp"
+                android:textSize="40sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/layout_first"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_first"
                 />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_first"
                 android:textColor="@color/black"
                 tools:text="타이틀1"
-                android:text="@{model.first.title}"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:text="@{model.title}"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:maxLines="1"
@@ -69,7 +71,37 @@
                 android:id="@+id/txt_title1"
                 />
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_title1"
+                android:textColor="@color/darkGrey"
+                tools:text="타이틀1"
+                android:textSize="12sp"
+                android:text="@{model.review}"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:id="@+id/txt_review1"
+                />
+
         </android.support.constraint.ConstraintLayout>
+
+
+        <View
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/const_first"
+            android:layout_width="1dp"
+            android:background="@color/midGrey"
+            android:layout_marginTop="48dp"
+            android:layout_marginBottom="48dp"
+            android:layout_height="0dp"/>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/const_second"
@@ -88,33 +120,35 @@
                 android:layout_marginTop="8dp"
                 android:src="@drawable/icons8_medal_second_place_48"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/layout_second"
+                app:layout_constraintTop_toTopOf="parent"
                 />
 
             <TextView
                 android:textColor="@color/OrangeYellow"
-                tools:text="8.8"
-                android:text="@{model.second.grade}"
+                tools:text="9.5"
+                android:text="@{model.grade}"
                 android:textStyle="bold"
-                android:textSize="48sp"
+                android:textSize="40sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/layout_second"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_second"
                 />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_second"
                 android:textColor="@color/black"
-                tools:text="타이틀2"
-                android:text="@{model.second.title}"
+                tools:text="타이틀1"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:text="@{model.title}"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:maxLines="1"
@@ -122,7 +156,36 @@
                 android:id="@+id/txt_title2"
                 />
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_title2"
+                android:textColor="@color/darkGrey"
+                tools:text="타이틀1"
+                android:textSize="12sp"
+                android:text="@{model.review}"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:id="@+id/txt_review2"
+                />
+
         </android.support.constraint.ConstraintLayout>
+
+        <View
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/const_second"
+            android:layout_width="1dp"
+            android:background="@color/midGrey"
+            android:layout_marginTop="48dp"
+            android:layout_marginBottom="48dp"
+            android:layout_height="0dp"/>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/const_third"
@@ -141,38 +204,59 @@
                 android:layout_marginTop="8dp"
                 android:src="@drawable/icons8_medal_third_place_48"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/layout_third"
+                app:layout_constraintTop_toTopOf="parent"
                 />
 
             <TextView
                 android:textColor="@color/OrangeYellow"
-                tools:text="8.2"
-                android:text="@{model.third.grade}"
+                tools:text="9.5"
+                android:text="@{model.grade}"
                 android:textStyle="bold"
-                android:textSize="48sp"
+                android:textSize="40sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/layout_third"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_third"
                 />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_third"
                 android:textColor="@color/black"
-                tools:text="타이틀3"
-                android:text="@{model.third.title}"
+                tools:text="타이틀1"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:text="@{model.title}"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:id="@+id/txt_title3"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_title3"
+                android:textColor="@color/darkGrey"
+                tools:text="타이틀1"
+                android:textSize="12sp"
+                android:text="@{model.review}"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:id="@+id/txt_review3"
                 />
 
         </android.support.constraint.ConstraintLayout>

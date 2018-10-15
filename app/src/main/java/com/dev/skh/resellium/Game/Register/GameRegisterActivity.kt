@@ -20,8 +20,14 @@ import java.lang.ref.WeakReference
 class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegisterPresenter.View {
 
 
+    companion object {
+        fun weakRef(view: GameRegisterPresenter.View): WeakReference<GameRegisterPresenter> {
+            return WeakReference(GameRegisterPresenter(view))
+        }
+    }
+
     private lateinit var binding: ActivityGameRegisterBinding
-    private var weakReference: WeakReference<GameRegisterPresenter>? = null
+    private val weakReference by lazy { weakRef(this) }
 
     private var disposable: Disposable? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,15 +37,9 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
         binding.onClickListener = this
         binding.layoutAppbar?.onClickListener = this
         setView()
-        setMVP()
     }
 
-    private fun setMVP(){
-        weakReference = WeakReference(GameRegisterPresenter(this))
-    }
-
-
-    private fun setView(){
+    private fun setView() {
         binding.layoutAppbar?.constPlus?.setBackgroundColor(ContextCompat.getColor(this, R.color.ps4Color))
         binding.layoutAppbar?.layoutAdd?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.layoutAppbar?.layoutUndo?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
@@ -70,7 +70,7 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
         val money = binding.editMoney.text.toString().replace(",".toRegex(), "").replace("원", "")
         val which = binding.radiogroupNewOld.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim() + binding.radiogroupResell.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim()
         if (platform.isNotEmpty() && place.isNotEmpty() && money.isNotEmpty()) {
-            weakReference?.get()?.sendData(platform, title, place, money, which)
+            weakReference.get()?.sendData(platform, title, place, money, which)
         } else {
             Toast.makeText(this, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
         }
