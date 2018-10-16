@@ -79,7 +79,7 @@ open class BaseFragment : Fragment() {
 
     fun setHorizontalRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView? {
         rvGame.layoutManager = layoutManager
-//        rvGame.isNestedScrollingEnabled = false
+        rvGame.isNestedScrollingEnabled = false
         rvGame.animation = null
 
 

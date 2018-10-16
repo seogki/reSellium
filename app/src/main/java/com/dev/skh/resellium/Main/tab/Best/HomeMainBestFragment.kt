@@ -29,7 +29,6 @@ class HomeMainBestFragment : BaseFragment(), HomeMainBestPresenter.View {
         }
     }
 
-
     private lateinit var binding: FragmentHomeMainBestBinding
     private var disposable: Disposable? = null
     private val weakReference by lazy { weakRef(this) }

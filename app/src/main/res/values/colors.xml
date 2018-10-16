@@ -40,10 +40,14 @@
     <color name="brown">#6D4C41</color>
     <color name="darkerGrey">#3F3F3F</color>
 
+    <color name="statusBar">#CC863C</color>
 
-    <color name="accentColor">#3D5AFE</color>
+    <!--<color name="accentColor">#3D5AFE</color>-->
+    <color name="accentColor">#FFA84B</color>
 
-    <color name="btmTabColor">#3D5AFE</color>
+    <color name="darkestColor">#4BA2FF</color>
+
+    <color name="btmTabColor">#FFA84B</color>
 
     <color name="ps4Color">#003791</color>
     <color name="xboxColor">#107c10</color>

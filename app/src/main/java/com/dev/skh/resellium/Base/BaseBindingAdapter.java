@@ -163,6 +163,30 @@ public class BaseBindingAdapter {
         String money = UtilMethod.currencyFormat(result);
         textView.setText(money + "원");
 
+    }
+
+    @BindingAdapter("soldCheck")
+    public static void soldCheck(final TextView textView, final String result) {
+        Context context = textView.getContext();
+        if (context == null) {
+            return;
+        } else if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isFinishing() || activity.isDestroyed()) {
+                return;
+            }
+        }
+        if(result == null)
+            return;
+
+        if(result.contains("매입")){
+            textView.setText(result);
+            textView.setBackground(ContextCompat.getDrawable(context, R.drawable.text_green));
+        } else if(result.contains("매각")){
+            textView.setText(result);
+            textView.setBackground(ContextCompat.getDrawable(context, R.drawable.text_red));
+        }
+
 
     }
 }

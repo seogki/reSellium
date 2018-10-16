@@ -20,9 +20,23 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/darkestColor"
         app:keyboardDetect="@{empty}"
         >
+
+        <android.support.constraint.Guideline
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:id="@+id/guideline1"
+            app:layout_constraintGuide_percent="0.43"
+            android:orientation="vertical"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:id="@+id/guideline2"
+            app:layout_constraintGuide_percent="0.58"
+            android:orientation="vertical"/>
 
         <View
             android:layout_height="0.3dp"
@@ -38,7 +52,7 @@
             android:background="@drawable/btm_layout_ripple"
             android:onClick="@{onClickListener::onClick}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/bottom_layout_btn1"
+            app:layout_constraintEnd_toStartOf="@+id/bottom_layout_btn1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             >
@@ -50,7 +64,7 @@
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/icons8_home_24_empty"
-            app:layout_constraintEnd_toStartOf="@id/bottom_layout_btn1_txt"
+            app:layout_constraintEnd_toStartOf="@+id/bottom_layout_btn1_txt"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,9 +80,9 @@
             android:layout_marginTop="4dp"
             android:text="메인"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/bottom_layout_btn1"
+            app:layout_constraintEnd_toStartOf="@+id/bottom_layout_btn1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bottom_layout_btn0_txt"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_layout_btn0_txt"
             />
 
 
@@ -79,8 +93,8 @@
             android:background="@drawable/btm_layout_ripple"
             android:onClick="@{onClickListener::onClick}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/bottom_layout_btn2"
-            app:layout_constraintStart_toEndOf="@id/bottom_layout_btn0"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintStart_toEndOf="@+id/bottom_layout_btn0"
             app:layout_constraintTop_toTopOf="parent"
             >
         </TextView>
@@ -92,10 +106,10 @@
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/icons8_game_controller_24_empty"
-            app:layout_constraintEnd_toStartOf="@id/bottom_layout_btn2_txt"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@id/bottom_layout_btn0_txt"
+            app:layout_constraintStart_toEndOf="@+id/bottom_layout_btn0_txt"
             app:layout_constraintTop_toTopOf="parent"
             />
 
@@ -108,9 +122,9 @@
             android:layout_marginTop="4dp"
             android:text="게임"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/bottom_layout_btn2"
-            app:layout_constraintStart_toEndOf="@id/bottom_layout_btn0"
-            app:layout_constraintTop_toBottomOf="@id/bottom_layout_btn1_txt"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintStart_toEndOf="@+id/bottom_layout_btn0"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_layout_btn1_txt"
             />
 
         <TextView
@@ -120,8 +134,8 @@
             android:background="@drawable/btm_layout_ripple"
             android:onClick="@{onClickListener::onClick}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/bottom_layout_btn3"
-            app:layout_constraintStart_toEndOf="@id/bottom_layout_btn1"
+            app:layout_constraintEnd_toStartOf="@+id/bottom_layout_btn3"
+            app:layout_constraintStart_toEndOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
             >
         </TextView>
@@ -132,10 +146,10 @@
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:src="@drawable/icons8_clipboard_24_empty"
-            app:layout_constraintEnd_toStartOf="@id/bottom_layout_btn3_txt"
+            app:layout_constraintEnd_toStartOf="@+id/bottom_layout_btn3_txt"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@id/bottom_layout_btn1_txt"
+            app:layout_constraintStart_toEndOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
             />
 
@@ -148,9 +162,9 @@
             android:layout_marginTop="4dp"
             android:text="추천"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/bottom_layout_btn3_txt"
-            app:layout_constraintStart_toEndOf="@id/bottom_layout_btn1_txt"
-            app:layout_constraintTop_toBottomOf="@id/bottom_layout_btn2_txt"
+            app:layout_constraintEnd_toStartOf="@+id/bottom_layout_btn3_txt"
+            app:layout_constraintStart_toEndOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_layout_btn2_txt"
             />
 
         <TextView
@@ -161,7 +175,7 @@
             android:onClick="@{onClickListener::onClick}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/bottom_layout_btn2"
+            app:layout_constraintStart_toEndOf="@+id/bottom_layout_btn2"
             app:layout_constraintTop_toTopOf="parent"
             >
 
@@ -176,7 +190,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@id/bottom_layout_btn2_txt"
+            app:layout_constraintStart_toEndOf="@+id/bottom_layout_btn2_txt"
             app:layout_constraintTop_toTopOf="parent"
             />
 
@@ -190,8 +204,8 @@
             android:text="설정"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/bottom_layout_btn2_txt"
-            app:layout_constraintTop_toBottomOf="@id/bottom_layout_btn3_txt"
+            app:layout_constraintStart_toEndOf="@+id/bottom_layout_btn2_txt"
+            app:layout_constraintTop_toBottomOf="@+id/bottom_layout_btn3_txt"
             />
 
 

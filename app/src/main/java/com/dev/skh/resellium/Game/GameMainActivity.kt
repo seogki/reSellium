@@ -45,7 +45,7 @@ class GameMainActivity : BaseActivity(), View.OnClickListener {
     private fun setCurrentTab() {
         binding.fabBtn.drawable.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.layoutBottomTab?.bottomLayoutBtn1Txt?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_game_controller_24))
-        binding.layoutBottomTab?.bottomLayoutBtn1Txt?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.btmTabColor), PorterDuff.Mode.SRC_ATOP)
-        binding.layoutBottomTab?.bottomLayoutText1?.setTextColor(ContextCompat.getColor(this, R.color.btmTabColor))
+        binding.layoutBottomTab?.bottomLayoutBtn1Txt?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
+        binding.layoutBottomTab?.bottomLayoutText1?.setTextColor(ContextCompat.getColor(this, R.color.white))
     }
 }

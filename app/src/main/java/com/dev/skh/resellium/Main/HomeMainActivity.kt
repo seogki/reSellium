@@ -44,7 +44,7 @@ class HomeMainActivity : BaseActivity(), View.OnClickListener {
 
     private fun setCurrentTab() {
         binding.layoutBottomTab?.bottomLayoutBtn0Txt?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_home_24))
-        binding.layoutBottomTab?.bottomLayoutBtn0Txt?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.btmTabColor), PorterDuff.Mode.SRC_ATOP)
-        binding.layoutBottomTab?.bottomLayoutText0?.setTextColor(ContextCompat.getColor(this, R.color.btmTabColor))
+        binding.layoutBottomTab?.bottomLayoutBtn0Txt?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
+        binding.layoutBottomTab?.bottomLayoutText0?.setTextColor(ContextCompat.getColor(this, R.color.white))
     }
 }

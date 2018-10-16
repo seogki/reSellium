@@ -2,20 +2,20 @@
 
 
 
-    <style name="CustomAppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowBackground">@color/white</item>
-    </style>
+    <!--<style name="CustomAppTheme" parent="Theme.AppCompat.NoActionBar">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="colorPrimary">@color/colorPrimary</item>&ndash;&gt;-->
+        <!--<item name="android:windowLightStatusBar">true</item>-->
+        <!--<item name="android:statusBarColor">@color/white</item>-->
+        <!--<item name="android:windowBackground">@color/white</item>-->
+    <!--</style>-->
 
-    <style name="CustomHomeAppTheme" parent="Theme.AppCompat.NoActionBar">
+    <!--<style name="CustomHomeAppTheme" parent="Theme.AppCompat.NoActionBar">-->
 
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowBackground">@color/grey</item>
+        <!--<item name="android:windowLightStatusBar">true</item>-->
+        <!--<item name="android:statusBarColor">@color/white</item>-->
+        <!--<item name="android:windowBackground">@color/grey</item>-->
 
-    </style>
+    <!--</style>-->
 
 </resources>

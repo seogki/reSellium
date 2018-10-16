@@ -193,12 +193,16 @@ Where Quality ranges from 1–100.
     }
 
     public static String currencyFormat(String amount) {
-        if (amount.isEmpty()) {
+        if(amount != null) {
+            if (amount.isEmpty()) {
+                return "";
+            }
+
+            DecimalFormat formatter = new DecimalFormat("###,###,###");
+            return formatter.format(Double.parseDouble(amount));
+        } else {
             return "";
         }
-
-        DecimalFormat formatter = new DecimalFormat("###,###,###");
-        return formatter.format(Double.parseDouble(amount));
 
 
     }
