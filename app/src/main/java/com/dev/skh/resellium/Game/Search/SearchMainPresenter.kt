@@ -1,4 +1,4 @@
-package com.dev.skh.resellium.Game.Tab.Search
+package com.dev.skh.resellium.Game.Search
 
 import com.dev.skh.resellium.Base.BasePresenter
 import com.dev.skh.resellium.Game.Model.Ps4MainModel

@@ -29,6 +29,7 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
             return WeakReference(SwitchMainPresenter(view))
         }
     }
+
     private val weakPresenter by lazy { weakRef(this) }
     private lateinit var binding: FragmentSwitchMainBinding
     private var switchMainAdapter: SwitchMainAdapter? = null
@@ -49,10 +50,9 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        Handler().postDelayed({
-            addItemOnSpinner()
-            weakPresenter?.get()?.addData()
-        }, 200)
+        addItemOnSpinner()
+        weakPresenter.get()?.addData()
+
     }
 
     private fun addItemOnSpinner() {

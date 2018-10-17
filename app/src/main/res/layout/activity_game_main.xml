@@ -58,7 +58,7 @@
             app:keyboardDetect="@{empty}"
             app:elevation="7dp"
             app:fabSize="auto"
-            app:srcCompat="@drawable/baseline_add_black_24dp"
+            app:srcCompat="@drawable/ic_action_add"
             />
 
     </RelativeLayout>

@@ -32,7 +32,7 @@ class SwitchMainPresenter(val view: View? = null) : BasePresenter(){
 
         disposable = client.getSpinnerswitchData(a1, a2)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ view?.updateSpinnerData(it, disposable, true) }
+                .subscribe({ view?.updateSpinnerData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
     }
 

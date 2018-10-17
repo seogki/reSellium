@@ -2,9 +2,7 @@ package com.dev.skh.resellium.Board
 
 import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.graphics.PorterDuff
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.View
 import com.dev.skh.resellium.Base.BaseActivity
 import com.dev.skh.resellium.Board.Register.BoardMainRegisterActivity
@@ -22,10 +20,11 @@ class BoardMainActivity : BaseActivity(), View.OnClickListener {
         binding.layoutBottomTab?.onClickListener = this
         binding.onClickListener = this
         addFragment(R.id.frame_layout, BoardMainFragment(), false, false, "BoardMainFragment")
-        setCurrentTab()
+        setImageColor(binding.layoutBottomTab?.bottomLayoutBtn2Txt, binding.layoutBottomTab?.bottomLayoutText2, R.drawable.icons8_clipboard_24)
     }
+
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.bottom_layout_btn0 -> {
                 beginActivity(Intent(this, HomeMainActivity::class.java))
             }
@@ -39,12 +38,5 @@ class BoardMainActivity : BaseActivity(), View.OnClickListener {
                 startActivity(Intent(this, BoardMainRegisterActivity::class.java))
             }
         }
-    }
-
-    private fun setCurrentTab() {
-        binding.fabBtn.drawable.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
-        binding.layoutBottomTab?.bottomLayoutBtn2Txt?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_clipboard_24))
-        binding.layoutBottomTab?.bottomLayoutBtn2Txt?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
-        binding.layoutBottomTab?.bottomLayoutText2?.setTextColor(ContextCompat.getColor(this, R.color.white))
     }
 }

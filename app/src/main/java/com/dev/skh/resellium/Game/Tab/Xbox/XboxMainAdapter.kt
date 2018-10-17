@@ -2,10 +2,12 @@ package com.dev.skh.resellium.Game.Tab.Xbox
 
 import android.content.Context
 import android.databinding.DataBindingUtil
+import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Game.Model.XboxMainModel
 import com.dev.skh.resellium.R
@@ -40,11 +42,38 @@ class XboxMainAdapter(context: Context, arraylist: MutableList<XboxMainModel>) :
 
 
         fun bind(model: XboxMainModel?) {
+            binding.onClickListener = this
             binding.model = model
         }
 
         override fun onClick(v: View?) {
+            when (v?.id) {
+                R.id.img_other -> {
+                    popupMenu(v)
+                }
+            }
+        }
 
+        private fun popupMenu(v: View) {
+            val popupMenu = PopupMenu(context!!, v)
+            popupMenu.inflate(R.menu.game_menu)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item?.itemId) {
+                    R.id.menu_report -> {
+                        setReport()
+                        true
+                    }
+                    else -> {
+
+                        false
+                    }
+                }
+            }
+            popupMenu.show()
+        }
+
+        private fun setReport() {
+            Toast.makeText(context!!, "신고버튼", Toast.LENGTH_SHORT).show()
         }
 
 

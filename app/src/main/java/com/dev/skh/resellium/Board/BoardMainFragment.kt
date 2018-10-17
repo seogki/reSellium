@@ -60,21 +60,15 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
     private var isLoading: Boolean = false
     private var data: String? = null
     private val weakReference by lazy { weakRef(this) }
-    //    private var weakReference: WeakReference<BoardMainPresenter>? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_board_main, container, false)
-        binding.layoutAppbar?.title = "추천추천"
+        binding.layoutAppbar?.title = "추천"
         binding.layoutAppbar?.onClickListener = this
-//        setMVP()
         setVIEW()
         setBaseProgressBar(binding.progressBar)
         return binding.root
     }
-
-//    private fun setMVP() {
-//        weakReference = WeakReference(BoardMainPresenter(this))
-//    }
 
     private fun setVIEW() {
 
@@ -89,8 +83,8 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
         super.onActivityCreated(savedInstanceState)
 
         Handler().postDelayed({
-            weakReference?.get()?.addSpinnerData()
-            weakReference?.get()?.getBoardData()
+            weakReference.get()?.addSpinnerData()
+            weakReference.get()?.getBoardData()
         }, 100)
     }
 
@@ -146,9 +140,9 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
                             Handler().postDelayed({
 
                                 if (isSpinner)
-                                    weakReference?.get()?.getSpinnerScrollData(data, id)
+                                    weakReference.get()?.getSpinnerScrollData(data, id)
                                 else
-                                    weakReference?.get()?.getScrollData(id)
+                                    weakReference.get()?.getScrollData(id)
                             }, 500)
 
                         }
@@ -184,7 +178,7 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
 
     private fun callSpinnerData(data: String?) {
         refreshWithoutData()
-        weakReference?.get()?.getSpinnerData(data)
+        weakReference.get()?.getSpinnerData(data)
     }
 
     override fun onDestroy() {
@@ -193,13 +187,11 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
     }
 
     private fun refresh() {
-//        if (weakReference == null)
-//            setMVP()
         adapter?.clearItems()
         setProgressbarVisible()
         rv?.removeOnScrollListener(null)
         binding.spinner?.spinner?.setSelection(0, false)
-        weakReference?.get()?.getBoardData()
+        weakReference.get()?.getBoardData()
         isLoading = false
         data = ""
         binding.swipeLayout.isRefreshing = false

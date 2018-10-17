@@ -39,7 +39,7 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/lightOrange"
+                android:background="@color/accentColor"
                 >
 
                 <TextView
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@{title}"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

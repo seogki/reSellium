@@ -2,9 +2,13 @@ package com.dev.skh.resellium.Base
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
@@ -83,6 +87,14 @@ open class BaseActivity : AppCompatActivity() {
                 || curFragment.tag == "GameMainFragment"
                 || curFragment.tag == "BoardMainFragment"
                 || curFragment.tag == "UserMainFragment"
+    }
+
+
+    fun setImageColor(imageView: ImageView?, textView: TextView?, imageValue: Int) {
+
+        imageView?.setImageDrawable(ContextCompat.getDrawable(this, imageValue))
+        imageView?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.accentColor), PorterDuff.Mode.SRC_ATOP)
+        textView?.setTextColor(ContextCompat.getColor(this, R.color.accentColor))
     }
 
 }

@@ -31,6 +31,7 @@ class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLay
             return WeakReference(XboxMainPresenter(view))
         }
     }
+
     private val weakPresenter by lazy { weakRef(this) }
     private lateinit var binding: FragmentXboxMainBinding
     private var xboxMainAdapter: XboxMainAdapter? = null
@@ -53,10 +54,9 @@ class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLay
         super.onActivityCreated(savedInstanceState)
 
 
-        Handler().postDelayed({
-            addItemOnSpinner()
-            weakPresenter?.get()?.addData()
-        }, 200)
+        addItemOnSpinner()
+        weakPresenter.get()?.addData()
+
     }
 
     private fun addItemOnSpinner() {
@@ -75,7 +75,7 @@ class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLay
     }
 
     override fun updateData(arr: MutableList<XboxMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if(arr != null) {
+        if (arr != null) {
             if (xboxMainAdapter == null) {
                 xboxMainAdapter = XboxMainAdapter(context!!, arr)
                 recyclerView?.adapter = xboxMainAdapter
@@ -198,7 +198,7 @@ class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLay
         recyclerView?.removeOnScrollListener(null)
         binding.spinners?.compareFragSpinnerSpinner1?.setSelection(0, false)
         binding.spinners?.compareFragSpinnerSpinner2?.setSelection(0, false)
-        weakPresenter?.get()?.addData()
+        weakPresenter.get()?.addData()
         isLoading = false
         binding.swipeLayout.isRefreshing = false
     }

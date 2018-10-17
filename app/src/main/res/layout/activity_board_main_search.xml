@@ -47,11 +47,11 @@
 
                     <EditText
 
-                        android:background="@drawable/text_stroke_yellow"
+                        android:background="@drawable/text_stroke_accent"
                         android:id="@+id/edit_search"
                         android:hint="검색어를 입력해주세요"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/darkGrey"
+                        android:textColorHint="@color/middarkGrey"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:paddingStart="11dp"
@@ -63,7 +63,7 @@
 
                     <ImageView
                         android:id="@+id/img_search"
-                        android:src="@drawable/if_shop_search_1469731"
+                        android:src="@drawable/ic_action_searchv2_black"
                         android:layout_width="40dp"
                         android:paddingEnd="4dp"
                         android:paddingStart="4dp"
@@ -77,17 +77,17 @@
 
                     <ImageView
                         android:id="@+id/layout_undo"
-                        android:background="@color/OrangeYellow"
+                        android:background="@color/accentColor"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="0dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         android:padding="8dp"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
                         android:onClick="@{onClickListener::onClick}"
-                        android:src="@drawable/icons8_undo_24"
+                        android:src="@drawable/ic_action_arrow_back"
                         />
 
                     <View
@@ -148,6 +148,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         app:layout_constraintTop_toBottomOf="@+id/txt_search"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        app:layout_constraintTop_toBottomOf="@id/rv_board"
                         />
 
 

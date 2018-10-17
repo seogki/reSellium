@@ -2,9 +2,7 @@ package com.dev.skh.resellium.Game
 
 import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.graphics.PorterDuff
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.View
 import com.dev.skh.resellium.Base.BaseActivity
 import com.dev.skh.resellium.Board.BoardMainActivity
@@ -22,7 +20,7 @@ class GameMainActivity : BaseActivity(), View.OnClickListener {
         binding.layoutBottomTab?.onClickListener = this
         binding.onClickListener = this
         addFragment(R.id.frame_layout, GameMainFragment(), false, false, "GameMainFragment")
-        setCurrentTab()
+        setImageColor(binding.layoutBottomTab?.bottomLayoutBtn1Txt, binding.layoutBottomTab?.bottomLayoutText1, R.drawable.icons8_game_controller_24)
     }
 
     override fun onClick(v: View?) {
@@ -40,12 +38,5 @@ class GameMainActivity : BaseActivity(), View.OnClickListener {
                 startActivity(Intent(this, GameRegisterActivity::class.java))
             }
         }
-    }
-
-    private fun setCurrentTab() {
-        binding.fabBtn.drawable.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
-        binding.layoutBottomTab?.bottomLayoutBtn1Txt?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_game_controller_24))
-        binding.layoutBottomTab?.bottomLayoutBtn1Txt?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
-        binding.layoutBottomTab?.bottomLayoutText1?.setTextColor(ContextCompat.getColor(this, R.color.white))
     }
 }

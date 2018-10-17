@@ -17,7 +17,6 @@ import com.dev.skh.resellium.databinding.ItemRvHorizontalBinding
  */
 class HomeMainHoriAdapter(context: Context, arraylist: MutableList<HoriModel>) : BaseRecyclerViewAdapter<HoriModel, HomeMainHoriAdapter.PlusFreeViewHolder>(context, arraylist) {
 
-    private var arr = arraylist
     override fun onBindView(holder: PlusFreeViewHolder, position: Int) {
         holder.setIsRecyclable(true)
         holder.bind(getItem(holder.adapterPosition))

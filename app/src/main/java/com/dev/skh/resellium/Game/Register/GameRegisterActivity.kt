@@ -40,9 +40,7 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
     }
 
     private fun setView() {
-        binding.layoutAppbar?.constPlus?.setBackgroundColor(ContextCompat.getColor(this, R.color.ps4Color))
         binding.layoutAppbar?.layoutAdd?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
-        binding.layoutAppbar?.layoutUndo?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.editMoney.addTextChangedListener(CustomTextWatcher(binding.editMoney))
     }
 
@@ -55,9 +53,6 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
                 closeKeyboard()
                 finish()
             }
-            R.id.radio_ps4 -> setToolbarColor("PS")
-            R.id.radio_xbox -> setToolbarColor("XBOX")
-            R.id.radio_switch -> setToolbarColor("SWITCH")
         }
     }
 
@@ -92,25 +87,6 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
         val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
-
-    private fun setToolbarColor(text: String) {
-        var color: Int? = null
-        when (text) {
-            "PS" -> color = ContextCompat.getColor(this, R.color.ps4Color)
-            "XBOX" -> color = ContextCompat.getColor(this, R.color.xboxColor)
-            "SWITCH" -> color = ContextCompat.getColor(this, R.color.switchColor)
-        }
-        if (color != null) {
-            binding.layoutAppbar?.constPlus?.setBackgroundColor(color)
-            binding.txtPlatform.setBackgroundColor(color)
-            binding.txtTitle.setBackgroundColor(color)
-            binding.txtMoney.setBackgroundColor(color)
-            binding.txtNewOld.setBackgroundColor(color)
-            binding.txtPlace.setBackgroundColor(color)
-            binding.txtResell.setBackgroundColor(color)
-        }
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

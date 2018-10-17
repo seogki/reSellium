@@ -31,7 +31,7 @@ class XboxMainPresenter(val view: View? = null) : BasePresenter() {
     fun checkSpinnerData(a1: String, a2: String) {
         disposable = client.getSpinnerxboxData(a1, a2)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ view?.updateSpinnerData(it, disposable, true) }
+                .subscribe({ view?.updateSpinnerData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
     }
 

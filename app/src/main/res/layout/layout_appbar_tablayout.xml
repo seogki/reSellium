@@ -41,7 +41,7 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/lightOrange"
+                android:background="@color/accentColor"
                 >
 
                 <TextView
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@{title}"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -61,15 +61,17 @@
 
                 <ImageView
                     android:id="@+id/img_search"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_width="40dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="8dp"
                     android:gravity="center"
+                    android:paddingEnd="4dp"
+                    android:paddingStart="4dp"
                     android:onClick="@{onClickListener::onClick}"
-                    android:src="@drawable/if_shop_search_1469731"
-                    app:layout_constraintBottom_toBottomOf="@+id/chart_frag_txt_titlebar"
+                    android:src="@drawable/ic_action_searchv2_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chart_frag_txt_titlebar"
+                    app:layout_constraintTop_toTopOf="parent"
                     />
 
                 <View
@@ -89,14 +91,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
             android:layout_centerHorizontal="true"
-            android:background="@color/lightOrange"
+            android:background="@color/accentColor"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/black"
+            app:tabIndicatorColor="@color/accentColor"
             app:tabMode="fixed"
             app:tabPaddingEnd="0dp"
             app:tabPaddingStart="0dp"
-            app:tabSelectedTextColor="@color/black"
-            app:tabTextColor="@color/midGrey"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/middarkGrey"
             >
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>

@@ -1,22 +1,19 @@
 package com.dev.skh.resellium.Board.Register
 
-import android.content.Context
 import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.SeekBar
-import android.widget.Toast
+import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.ActivityBoardMainRegisterBinding
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
-class BoardMainRegisterActivity : AppCompatActivity(), BoardMainRegisterPresenter.View, SeekBar.OnSeekBarChangeListener, View.OnClickListener {
+class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresenter.View, SeekBar.OnSeekBarChangeListener, View.OnClickListener {
 
 
     override fun errorData(disposable: Disposable?, message: String?) {
@@ -45,9 +42,7 @@ class BoardMainRegisterActivity : AppCompatActivity(), BoardMainRegisterPresente
     }
 
     private fun setView() {
-        binding.layoutAppbar?.constPlus?.setBackgroundColor(ContextCompat.getColor(this, R.color.OrangeYellow))
         binding.layoutAppbar?.layoutAdd?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
-        binding.layoutAppbar?.layoutUndo?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
     }
 
 
@@ -81,25 +76,17 @@ class BoardMainRegisterActivity : AppCompatActivity(), BoardMainRegisterPresente
         binding.layoutAppbar?.layoutAdd?.isEnabled = false
         val title = binding.editTitle.text.toString()
         val review = binding.editReview.text.toString()
-        var grade = binding.txtNum.text.toString()
+        val grade = binding.txtNum.text.toString()
         if (title.isNotEmpty() && review.isNotEmpty() && grade.isNotEmpty()) {
-            if (grade == "10.0")
-                grade = "10"
             weakReference.get()?.setData(title, review, grade)
         } else {
-            Toast.makeText(this, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
+            shortToast("모두 입력해주세요")
             binding.layoutAppbar?.layoutAdd?.isEnabled = true
         }
     }
 
     override fun successData(disposable: Disposable?) {
         finish()
-    }
-
-
-    private fun closeKeyboard() {
-        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
 
     override fun onDestroy() {

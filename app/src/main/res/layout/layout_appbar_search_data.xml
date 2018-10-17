@@ -39,7 +39,7 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/lightOrange"
+                android:background="@color/accentColor"
                 >
 
                 <TextView
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@{title}"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -59,16 +59,16 @@
 
                 <ImageView
                     android:id="@+id/img_search"
-                    android:src="@drawable/if_shop_search_1469731"
+                    android:src="@drawable/ic_action_searchv2_white"
                     android:layout_width="40dp"
                     android:paddingEnd="4dp"
                     android:paddingStart="4dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_height="0dp"
                     android:onClick="@{onClickListener::onClick}"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/layout_undo"
-                    app:layout_constraintBottom_toBottomOf="@id/layout_undo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     />
 
 

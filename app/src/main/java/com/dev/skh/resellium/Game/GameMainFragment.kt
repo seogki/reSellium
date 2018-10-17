@@ -10,8 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dev.skh.resellium.Base.BaseFragment
+import com.dev.skh.resellium.Game.Search.SearchMainActivity
 import com.dev.skh.resellium.Game.Tab.Ps4.Ps4MainFragment
-import com.dev.skh.resellium.Game.Tab.Search.SearchMainActivity
 import com.dev.skh.resellium.Game.Tab.Switch.SwitchMainFragment
 import com.dev.skh.resellium.Game.Tab.Xbox.XboxMainFragment
 import com.dev.skh.resellium.R

@@ -2,9 +2,7 @@ package com.dev.skh.resellium.User
 
 import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.graphics.PorterDuff
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.View
 import com.dev.skh.resellium.Base.BaseActivity
 import com.dev.skh.resellium.Board.BoardMainActivity
@@ -20,7 +18,7 @@ class UserMainActivity : BaseActivity(), View.OnClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_main)
         binding.layoutBottomTab?.onClickListener = this
         addFragment(R.id.frame_layout, UserMainFragment(), false, false, "UserMainFragment")
-        setCurrentTab()
+        setImageColor(binding.layoutBottomTab?.bottomLayoutBtn3Txt, binding.layoutBottomTab?.bottomLayoutText3, R.drawable.baseline_settings_black_24)
     }
     override fun onClick(v: View?) {
         when(v?.id){
@@ -36,9 +34,4 @@ class UserMainActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    private fun setCurrentTab() {
-        binding.layoutBottomTab?.bottomLayoutBtn3Txt?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.baseline_settings_black_24))
-        binding.layoutBottomTab?.bottomLayoutBtn3Txt?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
-        binding.layoutBottomTab?.bottomLayoutText3?.setTextColor(ContextCompat.getColor(this, R.color.white))
-    }
 }

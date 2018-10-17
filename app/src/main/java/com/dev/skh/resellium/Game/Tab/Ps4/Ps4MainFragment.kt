@@ -51,11 +51,9 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        addItemOnSpinner()
+        weakPresenter.get()?.addData()
 
-        Handler().postDelayed({
-            addItemOnSpinner()
-            weakPresenter?.get()?.addData()
-        }, 200)
     }
 
     private fun setView() {
@@ -103,9 +101,9 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
                             Handler().postDelayed({
                                 val id = ps4MainAdapter?.getItem(ps4MainAdapter!!.itemCount - 1)?.id
                                 if (isSpinner)
-                                    weakPresenter?.get()?.checkSpinnerScrollData(first, second, id)
+                                    weakPresenter.get()?.checkSpinnerScrollData(first, second, id)
                                 else
-                                    weakPresenter?.get()?.scrollData(id)
+                                    weakPresenter.get()?.scrollData(id)
 
                             }, 500)
 

@@ -113,12 +113,12 @@
                         android:background="@color/white"
                         app:layout_constraintTop_toBottomOf="@+id/view_grade"
                         app:tabGravity="fill"
-                        app:tabIndicatorColor="@color/black"
+                        app:tabIndicatorColor="@color/white"
                         app:tabMode="fixed"
                         app:tabPaddingEnd="0dp"
                         app:tabPaddingStart="0dp"
                         app:tabSelectedTextColor="@color/black"
-                        app:tabTextColor="@color/midGrey"
+                        app:tabTextColor="@color/middarkGrey"
                         >
                     </android.support.design.widget.TabLayout>
 

@@ -2,12 +2,12 @@ package com.dev.skh.resellium.Board
 
 import android.content.Context
 import android.databinding.DataBindingUtil
-import android.graphics.PorterDuff
-import android.support.v4.content.ContextCompat
+import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.R
@@ -34,12 +34,38 @@ class BoardMainAdapter(context: Context, arraylist: MutableList<BoardMainModel>)
     inner class BoardMainHolder(val binding: ItemBoardMainBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         fun bind(model: BoardMainModel?) {
+            binding.onClickListener = this
             binding.model = model
-            binding.imgStar.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.black), PorterDuff.Mode.SRC_ATOP)
         }
 
         override fun onClick(v: View?) {
+            when (v?.id) {
+                R.id.img_other -> {
+                    popupMenu(v)
+                }
+            }
+        }
 
+        private fun popupMenu(v: View) {
+            val popupMenu = PopupMenu(context!!, v)
+            popupMenu.inflate(R.menu.game_menu)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item?.itemId) {
+                    R.id.menu_report -> {
+                        setReport()
+                        true
+                    }
+                    else -> {
+
+                        false
+                    }
+                }
+            }
+            popupMenu.show()
+        }
+
+        private fun setReport() {
+            Toast.makeText(context!!, "신고버튼", Toast.LENGTH_SHORT).show()
         }
 
 
