@@ -22,6 +22,8 @@ class HomeMainPresenter(val view: HomeMainPresenter.View? = null)  : BasePresent
     }
 
 
+
+
     interface View {
 
         fun updateData(result: MutableList<HoriModel>?, disposable: Disposable?, currentPos: String)

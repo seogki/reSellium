@@ -7,17 +7,22 @@ import android.os.Handler
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
+import android.view.Menu
 import android.view.View
 import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.Board.BoardMainAdapter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
+import com.dev.skh.resellium.Board.Model.SearchKeyModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.ActivityBoardMainSearchBinding
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
-class BoardMainSearchActivity : InnerBaseActivity(), BoardMainSearchPresenter.View, View.OnClickListener {
+
+class BoardMainSearchActivity : InnerBaseActivity(), BoardMainSearchPresenter.View, View.OnClickListener, SearchView.OnQueryTextListener {
+
 
 
     companion object {
@@ -34,12 +39,36 @@ class BoardMainSearchActivity : InnerBaseActivity(), BoardMainSearchPresenter.Vi
     private var isLoading: Boolean = false
     private var data: String? = null
     private var disposable: Disposable? = null
+    private var searchView: SearchView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_main_search)
         binding.onClickListener = this
         setView()
         setBaseProgressBar(binding.progressBar)
+
+        weakReference.get()?.getKeyWordData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_main_menu, menu)
+        val menuItem = menu?.findItem(R.id.action_search)
+        searchView = menuItem?.actionView as SearchView
+        searchView?.setOnQueryTextListener(this)
+
+        return true
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return true
+    }
+
+    override fun keyData(key: MutableList<SearchKeyModel>?, disposable: Disposable?) {
+
     }
 
     private fun setView() {

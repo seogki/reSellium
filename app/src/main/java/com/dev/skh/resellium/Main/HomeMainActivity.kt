@@ -21,7 +21,7 @@ class HomeMainActivity : BaseActivity(), View.OnClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_main)
         binding.layoutBottomTab?.onClickListener = this
         addFragment(R.id.frame_layout, HomeMainFragment(), false, false, "HomeMainFragment")
-        setImageColor(binding.layoutBottomTab?.bottomLayoutBtn0Txt, binding.layoutBottomTab?.bottomLayoutBtn0, R.drawable.icons8_home_24)
+        setImageColor(binding.layoutBottomTab?.bottomLayoutBtn0Txt, binding.layoutBottomTab?.bottomLayoutText0, R.drawable.icons8_home_24)
     }
 
 

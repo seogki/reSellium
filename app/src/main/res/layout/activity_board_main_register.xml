@@ -47,26 +47,84 @@
                     android:layout_height="match_parent"
                     >
 
-
                     <TextView
-                        android:id="@+id/txt_title"
+                        android:id="@+id/txt_platform"
                         android:layout_width="90dp"
-                        android:layout_height="45dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="8dp"
                         android:background="@color/accentColor"
                         android:gravity="center"
-                        android:text="제목"
+                        android:text="플랫폼"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         />
 
+                    <RadioGroup
+                        android:id="@+id/radiogroup_platform"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/txt_platform"
+                        app:layout_constraintTop_toTopOf="parent"
+                        >
+
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/radio_ps4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:onClick="@{onClickListener::onClick}"
+                            android:text="PS"
+                            android:textColor="@color/ps4Color"
+                            app:buttonTint="@color/ps4Color"
+                            />
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/radio_xbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{onClickListener::onClick}"
+                            android:text="XBOX"
+                            android:textColor="@color/xboxColor"
+                            app:buttonTint="@color/xboxColor"
+                            />
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/radio_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{onClickListener::onClick}"
+                            android:text="SWITCH"
+                            android:textColor="@color/switchColor"
+                            app:buttonTint="@color/switchColor"
+                            />
+                    </RadioGroup>
+
+
+                    <TextView
+                        android:id="@+id/txt_title"
+                        android:layout_width="90dp"
+                        android:layout_height="45dp"
+                        android:background="@color/accentColor"
+                        android:gravity="center"
+                        android:text="제목"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_platform"
+                        />
+
                     <EditText
                         android:id="@+id/edit_title"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
-                        android:layout_marginTop="8dp"
                         android:background="@color/white"
                         android:gravity="start|center_vertical"
                         android:paddingStart="8dp"
@@ -79,7 +137,7 @@
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/txt_title"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txt_platform"
                         />
 
                     <TextView
@@ -166,19 +224,6 @@
                         android:layout_height="0.5dp"
                         android:background="@color/midGrey"
                         app:layout_constraintTop_toTopOf="@+id/txt_review"
-                        />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/midGrey"
-                        app:layout_constraintTop_toTopOf="@+id/txt_grade"
-                        />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/midGrey"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_grade"
                         />
 
 

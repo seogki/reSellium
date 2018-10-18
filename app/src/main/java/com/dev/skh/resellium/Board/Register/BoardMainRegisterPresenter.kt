@@ -11,8 +11,8 @@ import io.reactivex.schedulers.Schedulers
 class BoardMainRegisterPresenter(val view: View? = null)  : BasePresenter(){
 
 
-    fun setData(title: String, review: String, grade: String) {
-        disposable = client.registerBoardData(title, review, grade)
+    fun setData(title: String, review: String, grade: String, platform: String) {
+        disposable = client.registerBoardData(title, review, grade, platform)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

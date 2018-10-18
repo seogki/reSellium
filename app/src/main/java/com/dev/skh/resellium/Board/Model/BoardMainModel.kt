@@ -7,4 +7,5 @@ data class BoardMainModel(val id: String? = null
                           , val title: String? = null
                           , val review: String? = null
                           , val grade: String? = null
-                          , val date: String? = null)
+                          , val date: String? = null
+                          , val platform: String? = null)

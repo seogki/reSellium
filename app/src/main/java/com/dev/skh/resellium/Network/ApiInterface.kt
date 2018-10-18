@@ -1,6 +1,7 @@
 package com.dev.skh.resellium.Network
 
 import com.dev.skh.resellium.Board.Model.BoardMainModel
+import com.dev.skh.resellium.Board.Model.SearchKeyModel
 import com.dev.skh.resellium.Game.Model.Ps4MainModel
 import com.dev.skh.resellium.Game.Model.SwitchMainModel
 import com.dev.skh.resellium.Game.Model.XboxMainModel
@@ -62,7 +63,13 @@ interface ApiInterface {
     @POST("board/registerBoardData")
     fun registerBoardData(@Query("Title") title: String
                              , @Query("Review") review: String
-                             , @Query("Grade") grade: String): Flowable<JsonObject>
+                             , @Query("Grade") grade: String
+                          , @Query("Platform") platform: String): Flowable<JsonObject>
+
+
+
+    @POST("board/getKeywordBoardData")
+    fun getKeywordBoardData(): Flowable<MutableList<SearchKeyModel>>
 
     /***
      * 게임

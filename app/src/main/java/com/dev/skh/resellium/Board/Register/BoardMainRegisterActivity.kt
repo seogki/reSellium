@@ -5,6 +5,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.View
+import android.widget.RadioButton
 import android.widget.SeekBar
 import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.R
@@ -77,8 +78,9 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
         val title = binding.editTitle.text.toString()
         val review = binding.editReview.text.toString()
         val grade = binding.txtNum.text.toString()
+        val platform = binding.radiogroupPlatform.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim()
         if (title.isNotEmpty() && review.isNotEmpty() && grade.isNotEmpty()) {
-            weakReference.get()?.setData(title, review, grade)
+            weakReference.get()?.setData(title, review, grade, platform)
         } else {
             shortToast("모두 입력해주세요")
             binding.layoutAppbar?.layoutAdd?.isEnabled = true

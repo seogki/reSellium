@@ -46,7 +46,6 @@
                     >
 
                     <EditText
-
                         android:background="@drawable/text_stroke_accent"
                         android:id="@+id/edit_search"
                         android:hint="검색어를 입력해주세요"
@@ -88,6 +87,14 @@
                         android:paddingEnd="12dp"
                         android:onClick="@{onClickListener::onClick}"
                         android:src="@drawable/ic_action_arrow_back"
+                        />
+
+                    <android.support.v7.widget.SearchView
+                        app:layout_constraintStart_toEndOf="@+id/layout_undo"
+                        android:layout_width="0dp"
+                        app:defaultQueryHint="검색어를 입력해주세요...."
+                        android:layout_height="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         />
 
                     <View
