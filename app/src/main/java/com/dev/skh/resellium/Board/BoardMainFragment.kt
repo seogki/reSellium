@@ -15,8 +15,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.dev.skh.resellium.Base.BaseFragment
+import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Board.Search.BoardMainSearchActivity
+import com.dev.skh.resellium.Board.Sub.InnerBoardMainActivity
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.FragmentBoardMainBinding
@@ -24,7 +26,18 @@ import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
 
-class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
+class BoardMainFragment : BaseFragment()
+        , BoardMainPresenter.View
+        , SwipeRefreshLayout.OnRefreshListener
+        , AdapterView.OnItemSelectedListener
+        , View.OnClickListener, BaseRecyclerViewAdapter.OnItemClickListener {
+
+    override fun onItemClick(view: View, position: Int) {
+        val data = adapter?.getItem(position)
+        val intent = Intent(view.context, InnerBoardMainActivity::class.java)
+        intent.putExtra("data", data)
+        startActivity(intent)
+    }
 
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -82,10 +95,9 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        Handler().postDelayed({
-            weakReference.get()?.addSpinnerData()
-            weakReference.get()?.getBoardData()
-        }, 100)
+        weakReference.get()?.addSpinnerData()
+        weakReference.get()?.getBoardData()
+
     }
 
     override fun onClick(v: View?) {
@@ -98,6 +110,7 @@ class BoardMainFragment : BaseFragment(), BoardMainPresenter.View, SwipeRefreshL
         if (board != null) {
             if (adapter == null) {
                 adapter = BoardMainAdapter(context!!, board)
+                adapter?.setOnItemClickListener(this)
                 rv?.adapter = adapter
             } else {
                 adapter?.addItems(board)

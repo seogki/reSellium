@@ -76,7 +76,7 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
     private fun setData() {
         binding.layoutAppbar?.layoutAdd?.isEnabled = false
         val title = binding.editTitle.text.toString()
-        val review = binding.editReview.text.toString()
+        val review = binding.editReview.text.toString().trim()
         val grade = binding.txtNum.text.toString()
         val platform = binding.radiogroupPlatform.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim()
         if (title.isNotEmpty() && review.isNotEmpty() && grade.isNotEmpty()) {

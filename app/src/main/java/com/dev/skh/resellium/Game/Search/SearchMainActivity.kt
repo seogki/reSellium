@@ -3,7 +3,9 @@ package com.dev.skh.resellium.Game.Search
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.content.ContextCompat
 import android.support.v4.widget.NestedScrollView
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.Toast
@@ -65,9 +67,14 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
         binding.layoutAppbar?.onClickListener = this
         binding.onClickListener = this
         setAdapter()
+        setBaseProgressBar(binding.progressBar)
     }
 
     private fun setAdapter() {
+
+        val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.survey_divder)!!)
+
 
         ps4LayoutManager = LinearLayoutManager(this)
         binding.rvPs4.layoutManager = ps4LayoutManager
@@ -80,6 +87,12 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
         switchLayoutManager = LinearLayoutManager(this)
         binding.rvSwitch.layoutManager = switchLayoutManager
         binding.rvSwitch.isNestedScrollingEnabled = false
+
+        binding.rvPs4.addItemDecoration(decor)
+
+        binding.rvXbox.addItemDecoration(decor)
+
+        binding.rvSwitch.addItemDecoration(decor)
 
     }
 
@@ -118,7 +131,7 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
 
 
     private fun setRecyclerViewScrollbar() {
-        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
             if (v.getChildAt(v.childCount - 1) != null) {
                 if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
 

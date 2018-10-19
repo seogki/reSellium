@@ -18,13 +18,6 @@ import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.TabPagerAdapter
 import com.dev.skh.resellium.databinding.FragmentGameMainBinding
 
-
-
-
-
-
-
-
 class GameMainFragment : BaseFragment(), View.OnClickListener {
 
 

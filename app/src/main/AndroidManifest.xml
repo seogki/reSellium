@@ -15,8 +15,7 @@
         <activity
             android:name=".Main.HomeMainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/CustomHomeAppTheme"
-            >
+            android:theme="@style/CustomHomeAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -25,8 +24,8 @@
         </activity>
         <activity
             android:name=".Game.GameMainActivity"
-            android:theme="@style/CustomHomeAppTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomHomeAppTheme">
         </activity>
         <activity
             android:name=".Board.BoardMainActivity"
@@ -43,7 +42,7 @@
             android:theme="@style/CustomHomeAppTheme">
         </activity>
         <activity
-            android:name="com.dev.skh.resellium.Game.Search.SearchMainActivity"
+            android:name=".Game.Search.SearchMainActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
@@ -54,6 +53,8 @@
         <activity
             android:name=".Board.Search.BoardMainSearchActivity"
             android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".Board.Sub.InnerBoardMainActivity">
         </activity>
     </application>
 
