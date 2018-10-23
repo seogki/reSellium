@@ -56,6 +56,9 @@
         </activity>
         <activity android:name=".Board.Sub.InnerBoardMainActivity">
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4e2563966386d345bf77783b0c4885d543e55a68" />
     </application>
 
 </manifest>

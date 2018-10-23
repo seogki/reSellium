@@ -60,15 +60,27 @@
                 <ImageView
                     android:id="@+id/img_search"
                     android:src="@drawable/ic_action_searchv2_white"
-                    android:layout_width="40dp"
-                    android:paddingEnd="4dp"
-                    android:paddingStart="4dp"
+                    android:layout_width="wrap_content"
+                    android:padding="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_height="0dp"
+                    android:onClick="@{onClickListener::onClick}"
+                    app:layout_constraintEnd_toStartOf="@+id/img_setting"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_setting"
+                    android:layout_width="wrap_content"
+                    android:padding="4dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
                     android:layout_height="0dp"
                     android:onClick="@{onClickListener::onClick}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/ic_action_setting"
                     />
 
 

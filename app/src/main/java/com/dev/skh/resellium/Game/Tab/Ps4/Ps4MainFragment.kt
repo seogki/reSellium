@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.widget.NestedScrollView
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +34,8 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
     private lateinit var binding: FragmentPs4MainBinding
     private var ps4MainAdapter: Ps4MainAdapter? = null
     private val weakPresenter by lazy { weakRef(this) }
-    private lateinit var layoutManager: LinearLayoutManager
+//    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var layoutManager: GridLayoutManager
     private var recyclerView: RecyclerView? = null
     private var first: String = ""
     private var second: String = ""
@@ -58,9 +59,12 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
 
     private fun setView() {
 
-        layoutManager = LinearLayoutManager(context!!)
+//        layoutManager = LinearLayoutManager(context!!)
+        layoutManager = GridLayoutManager(context, 2)
+        recyclerView = setGridGameRv(binding.rvGame, layoutManager)
 
-        recyclerView = setGameRv(binding.rvGame, layoutManager)
+
+
         binding.swipeLayout.setDistanceToTriggerSync(350)
         binding.swipeLayout.setOnRefreshListener(this)
 

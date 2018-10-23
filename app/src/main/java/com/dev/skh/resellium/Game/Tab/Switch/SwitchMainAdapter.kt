@@ -10,8 +10,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Game.Model.SwitchMainModel
+import com.dev.skh.resellium.Network.ApiCilentRx
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.databinding.ItemSwitchBinding
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by Seogki on 2018. 8. 20..
@@ -66,8 +70,21 @@ class SwitchMainAdapter(context: Context, arraylist: MutableList<SwitchMainModel
             popupMenu.show()
         }
 
+        var disposable: Disposable? = null
+        val client by lazy { ApiCilentRx.create() }
+
         private fun setReport() {
-            Toast.makeText(context!!, "신고버튼", Toast.LENGTH_SHORT).show()
+            val item = getItem(adapterPosition)
+
+            disposable = client.setReport(item?.platform!!, item.id!!, item.title!!,item.date!!)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .unsubscribeOn(Schedulers.io())
+                    .subscribe({
+                        Toast.makeText(context!!, "신고처리가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    }) {
+                        Toast.makeText(context!!, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
+                    }
         }
 
 

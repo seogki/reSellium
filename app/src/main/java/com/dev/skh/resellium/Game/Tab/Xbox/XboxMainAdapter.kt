@@ -10,15 +10,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Game.Model.XboxMainModel
+import com.dev.skh.resellium.Network.ApiCilentRx
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.databinding.ItemXboxBinding
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by Seogki on 2018. 8. 20..
  */
 class XboxMainAdapter(context: Context, arraylist: MutableList<XboxMainModel>) : BaseRecyclerViewAdapter<XboxMainModel, XboxMainAdapter.EstimateRegisterViewHolder>(context, arraylist) {
 
-    private var arr = arraylist
     override fun onBindView(holder: EstimateRegisterViewHolder, position: Int) {
         holder.setIsRecyclable(true)
         holder.bind(getItem(holder.adapterPosition))
@@ -30,12 +33,6 @@ class XboxMainAdapter(context: Context, arraylist: MutableList<XboxMainModel>) :
         val binding: ItemXboxBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_xbox, parent, false)
         return EstimateRegisterViewHolder(binding)
     }
-
-//    override fun getItemId(position: Int): Long {
-//        val id = arr[position]
-//        return id.date!!.hashCode().toLong()
-//    }
-
 
     inner class EstimateRegisterViewHolder(val binding: ItemXboxBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
@@ -72,8 +69,21 @@ class XboxMainAdapter(context: Context, arraylist: MutableList<XboxMainModel>) :
             popupMenu.show()
         }
 
+        var disposable: Disposable? = null
+        val client by lazy { ApiCilentRx.create() }
+
         private fun setReport() {
-            Toast.makeText(context!!, "신고버튼", Toast.LENGTH_SHORT).show()
+            val item = getItem(adapterPosition)
+
+            disposable = client.setReport(item?.platform!!, item.id!!, item.title!!,item.date!!)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .unsubscribeOn(Schedulers.io())
+                    .subscribe({
+                        Toast.makeText(context!!, "신고처리가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    }) {
+                        Toast.makeText(context!!, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
+                    }
         }
 
 

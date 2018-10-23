@@ -24,6 +24,7 @@ import com.dev.skh.resellium.Main.tab.Best.HomeMainBestFragment
 import com.dev.skh.resellium.Main.tab.New.HomeMainNewFragment
 import com.dev.skh.resellium.Main.tab.Worst.HomeMainWorstFragment
 import com.dev.skh.resellium.R
+import com.dev.skh.resellium.User.UserMainActivity
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.Util.TabPagerAdapter
 import com.dev.skh.resellium.Util.UtilMethod
@@ -60,7 +61,9 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_main, container, false)
         binding.layoutAppbar?.title = "메인"
+        binding.layoutAppbar?.onClickListener = this
         invisibleView()
+
         binding.onClickListener = this
         setTabLayout()
         setRv()
@@ -87,6 +90,7 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
             R.id.img_recent_xbox -> {
                 beginActivity(Intent(context!!, GameMainActivity::class.java))
             }
+            R.id.img_setting -> startActivity(Intent(context!!, UserMainActivity::class.java))
         }
     }
 

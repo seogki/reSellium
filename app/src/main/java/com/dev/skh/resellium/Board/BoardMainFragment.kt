@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.widget.NestedScrollView
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +20,7 @@ import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Board.Search.BoardMainSearchActivity
 import com.dev.skh.resellium.Board.Sub.InnerBoardMainActivity
 import com.dev.skh.resellium.R
+import com.dev.skh.resellium.User.UserMainActivity
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.FragmentBoardMainBinding
 import io.reactivex.disposables.Disposable
@@ -67,7 +68,8 @@ class BoardMainFragment : BaseFragment()
 
     private var disposable: Disposable? = null
     private lateinit var binding: FragmentBoardMainBinding
-    private var layoutManager: LinearLayoutManager? = null
+//    private var layoutManager: LinearLayoutManager? = null
+    private var layoutManager: GridLayoutManager? = null
     private var adapter: BoardMainAdapter? = null
     private var rv: RecyclerView? = null
     private var isLoading: Boolean = false
@@ -85,9 +87,11 @@ class BoardMainFragment : BaseFragment()
 
     private fun setVIEW() {
 
-        layoutManager = LinearLayoutManager(context!!)
+//        layoutManager = LinearLayoutManager(context!!)
 
-        rv = setGameRv(binding.rvBoard, layoutManager!!)
+        layoutManager = GridLayoutManager(context!!, 2)
+
+        rv = setGridGameRv(binding.rvBoard, layoutManager!!)
         binding.swipeLayout.setDistanceToTriggerSync(350)
         binding.swipeLayout.setOnRefreshListener(this)
     }
@@ -103,6 +107,7 @@ class BoardMainFragment : BaseFragment()
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.img_search -> startActivity(Intent(context!!, BoardMainSearchActivity::class.java))
+            R.id.img_setting -> startActivity(Intent(context!!,UserMainActivity::class.java))
         }
     }
 

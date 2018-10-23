@@ -52,9 +52,12 @@
                         android:textColor="@color/black"
                         android:textColorHint="@color/middarkGrey"
                         android:layout_width="0dp"
+                        android:imeOptions="actionSearch"
                         android:layout_height="match_parent"
                         android:paddingStart="11dp"
                         android:paddingEnd="38dp"
+                        android:maxLines="1"
+                        android:inputType="text"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/layout_undo"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -89,13 +92,13 @@
                         android:src="@drawable/ic_action_arrow_back"
                         />
 
-                    <android.support.v7.widget.SearchView
-                        app:layout_constraintStart_toEndOf="@+id/layout_undo"
-                        android:layout_width="0dp"
-                        app:defaultQueryHint="검색어를 입력해주세요...."
-                        android:layout_height="match_parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        />
+                    <!--<android.support.v7.widget.SearchView-->
+                        <!--app:layout_constraintStart_toEndOf="@+id/layout_undo"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--app:defaultQueryHint="검색어를 입력해주세요...."-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--app:layout_constraintEnd_toEndOf="parent"-->
+                        <!--/>-->
 
                     <View
                         android:layout_width="match_parent"

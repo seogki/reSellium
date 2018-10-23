@@ -9,7 +9,6 @@ import com.dev.skh.resellium.Board.Register.BoardMainRegisterActivity
 import com.dev.skh.resellium.Game.GameMainActivity
 import com.dev.skh.resellium.Main.HomeMainActivity
 import com.dev.skh.resellium.R
-import com.dev.skh.resellium.User.UserMainActivity
 import com.dev.skh.resellium.databinding.ActivityBoardMainBinding
 
 class BoardMainActivity : BaseActivity(), View.OnClickListener {
@@ -31,9 +30,9 @@ class BoardMainActivity : BaseActivity(), View.OnClickListener {
             R.id.bottom_layout_btn1 -> {
                 beginActivity(Intent(this, GameMainActivity::class.java))
             }
-            R.id.bottom_layout_btn3 -> {
-                beginActivity(Intent(this, UserMainActivity::class.java))
-            }
+//            R.id.bottom_layout_btn3 -> {
+//                beginActivity(Intent(this, UserMainActivity::class.java))
+//            }
             R.id.fab_btn -> {
                 startActivity(Intent(this, BoardMainRegisterActivity::class.java))
             }

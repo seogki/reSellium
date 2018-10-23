@@ -26,6 +26,7 @@ class UserMainFragment : BaseFragment(), UserMainPresenter.View {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_user_main, container, false)
         binding.layoutAppbar?.title = "설정"
+
         return binding.root
     }
 

@@ -2,12 +2,17 @@ package com.dev.skh.resellium.Base
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.dev.skh.resellium.R
 
 /**
  * Created by Seogki on 2018. 10. 17..
@@ -42,5 +47,15 @@ open class InnerBaseActivity : AppCompatActivity() {
 
     fun shortToast(text: String){
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    }
+
+    fun setGameRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
+        val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.survey_divder)!!)
+        rvGame.isNestedScrollingEnabled = false
+        rvGame.layoutManager = layoutManager
+        rvGame.addItemDecoration(decor)
+
+        return rvGame
     }
 }

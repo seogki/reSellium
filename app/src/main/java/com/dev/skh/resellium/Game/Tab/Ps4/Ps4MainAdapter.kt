@@ -10,8 +10,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Game.Model.Ps4MainModel
+import com.dev.skh.resellium.Network.ApiCilentRx
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.databinding.ItemPs4Binding
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by Seogki on 2018. 8. 20..
@@ -32,6 +36,7 @@ class Ps4MainAdapter(context: Context, arraylist: MutableList<Ps4MainModel>) : B
     }
 
     inner class EstimateRegisterViewHolder(val binding: ItemPs4Binding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
 
         fun bind(model: Ps4MainModel?) {
             binding.onClickListener = this
@@ -64,8 +69,21 @@ class Ps4MainAdapter(context: Context, arraylist: MutableList<Ps4MainModel>) : B
             popupMenu.show()
         }
 
+        var disposable: Disposable? = null
+        val client by lazy { ApiCilentRx.create() }
+
         private fun setReport() {
-            Toast.makeText(context!!, "신고버튼", Toast.LENGTH_SHORT).show()
+            val item = getItem(adapterPosition)
+
+            disposable = client.setReport(item?.platform!!, item.id!!, item.title!!,item.date!!)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .unsubscribeOn(Schedulers.io())
+                    .subscribe({
+                        Toast.makeText(context!!, "신고처리가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    }) {
+                        Toast.makeText(context!!, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
+                    }
         }
 
 

@@ -15,6 +15,7 @@ import com.dev.skh.resellium.Game.Tab.Ps4.Ps4MainFragment
 import com.dev.skh.resellium.Game.Tab.Switch.SwitchMainFragment
 import com.dev.skh.resellium.Game.Tab.Xbox.XboxMainFragment
 import com.dev.skh.resellium.R
+import com.dev.skh.resellium.User.UserMainActivity
 import com.dev.skh.resellium.Util.TabPagerAdapter
 import com.dev.skh.resellium.databinding.FragmentGameMainBinding
 
@@ -37,9 +38,9 @@ class GameMainFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.img_search -> {
-                startActivity(Intent(context, SearchMainActivity::class.java))
-            }
+            R.id.img_search ->  startActivity(Intent(context, SearchMainActivity::class.java))
+            R.id.img_setting -> startActivity(Intent(context!!, UserMainActivity::class.java))
+
         }
     }
 

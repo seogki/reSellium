@@ -57,7 +57,7 @@ class BoardMainSearchPresenter(val view: View? = null) : BasePresenter() {
     }
 
     interface View {
-        fun registerData(board: MutableList<BoardMainModel>?, disposable: Disposable?, b: Boolean)
+        fun registerData(board: MutableList<BoardMainModel>?, disposable: Disposable?, isScroll: Boolean)
         fun errorData(disposable: Disposable?, message: String?)
         fun keyData(key: MutableList<SearchKeyModel>?, disposable: Disposable?)
     }

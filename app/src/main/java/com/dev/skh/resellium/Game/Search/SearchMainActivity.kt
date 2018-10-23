@@ -7,7 +7,10 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
 import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.Game.Model.Ps4MainModel
@@ -22,7 +25,9 @@ import com.dev.skh.resellium.databinding.ActivitySearchMainBinding
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
-class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMainPresenter.View {
+class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMainPresenter.View, TextView.OnEditorActionListener {
+
+
     override fun setError(disposable: Disposable?, message: String?) {
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
@@ -74,7 +79,7 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
 
         val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.survey_divder)!!)
-
+        binding.layoutAppbar?.editSearch?.setOnEditorActionListener(this)
 
         ps4LayoutManager = LinearLayoutManager(this)
         binding.rvPs4.layoutManager = ps4LayoutManager
@@ -127,6 +132,15 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
         } else {
             Toast.makeText(this, "검색어를 입력해주세요", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+        var handle = false
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            startGetData(binding.layoutAppbar?.editSearch?.text.toString(), currentPos)
+            handle = true
+        }
+        return handle
     }
 
 

@@ -10,15 +10,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
+import com.dev.skh.resellium.Network.ApiCilentRx
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.databinding.ItemBoardMainBinding
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+
+
 
 /**
  * Created by Seogki on 2018. 10. 11..
  */
 class BoardMainAdapter(context: Context, arraylist: MutableList<BoardMainModel>) : BaseRecyclerViewAdapter<BoardMainModel, BoardMainAdapter.BoardMainHolder>(context, arraylist) {
 
-    private var arr = arraylist
     override fun onBindView(holder: BoardMainHolder, position: Int) {
         holder.setIsRecyclable(true)
         holder.bind(getItem(holder.adapterPosition))
@@ -32,6 +37,9 @@ class BoardMainAdapter(context: Context, arraylist: MutableList<BoardMainModel>)
     }
 
     inner class BoardMainHolder(val binding: ItemBoardMainBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        var disposable: Disposable? = null
+        val client by lazy { ApiCilentRx.create() }
 
         fun bind(model: BoardMainModel?) {
             binding.onClickListener = this
@@ -65,9 +73,18 @@ class BoardMainAdapter(context: Context, arraylist: MutableList<BoardMainModel>)
         }
 
         private fun setReport() {
-            Toast.makeText(context!!, "신고버튼", Toast.LENGTH_SHORT).show()
+            val item = getItem(adapterPosition)
+
+            disposable = client.setReport(item?.platform!!, item.id!!, item.title!!,item.date!!)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .unsubscribeOn(Schedulers.io())
+                    .subscribe({
+                        Toast.makeText(context!!, "신고처리가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    }) {
+                        Toast.makeText(context!!, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
+                    }
         }
-
-
     }
+
 }

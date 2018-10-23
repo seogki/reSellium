@@ -74,6 +74,14 @@ interface ApiInterface {
     /***
      * 게임
      */
+
+
+    @POST("normal/setReport")
+    fun setReport(@Query("Platform") platform: String
+                  , @Query("Curid") id: String
+                  , @Query("Title") title: String
+                  , @Query("Date") date: String): Flowable<JsonObject>
+
     /***PS4
      *
      */

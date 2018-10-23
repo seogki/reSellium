@@ -1,6 +1,7 @@
 package com.dev.skh.resellium.Board.Search
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
@@ -8,12 +9,16 @@ import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
-import android.view.Menu
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.Board.BoardMainAdapter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Board.Model.SearchKeyModel
+import com.dev.skh.resellium.Board.Sub.InnerBoardMainActivity
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.ActivityBoardMainSearchBinding
@@ -21,8 +26,10 @@ import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
 
-class BoardMainSearchActivity : InnerBaseActivity(), BoardMainSearchPresenter.View, View.OnClickListener, SearchView.OnQueryTextListener {
-
+class BoardMainSearchActivity : InnerBaseActivity()
+        , BoardMainSearchPresenter.View
+        , View.OnClickListener
+        , TextView.OnEditorActionListener, BaseRecyclerViewAdapter.OnItemClickListener {
 
 
     companion object {
@@ -47,53 +54,72 @@ class BoardMainSearchActivity : InnerBaseActivity(), BoardMainSearchPresenter.Vi
         setView()
         setBaseProgressBar(binding.progressBar)
 
-        weakReference.get()?.getKeyWordData()
+//        weakReference.get()?.getKeyWordData()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_main_menu, menu)
-        val menuItem = menu?.findItem(R.id.action_search)
-        searchView = menuItem?.actionView as SearchView
-        searchView?.setOnQueryTextListener(this)
-
-        return true
-    }
-
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        return false
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.activity_main_menu, menu)
+//        val menuItem = menu?.findItem(R.id.action_search)
+//        searchView = menuItem?.actionView as SearchView
+//        searchView?.setOnQueryTextListener(this)
+//
+//        return true
+//    }
+//
+//    override fun onQueryTextSubmit(query: String?): Boolean {
+//        return false
+//    }
+//
+//    override fun onQueryTextChange(newText: String?): Boolean {
+//        return true
+//    }
 
     override fun keyData(key: MutableList<SearchKeyModel>?, disposable: Disposable?) {
 
     }
 
     private fun setView() {
-
-        rv = binding.rvBoard
-        rv?.isNestedScrollingEnabled = false
         layoutManager = LinearLayoutManager(this)
-        rv?.layoutManager = layoutManager
+        rv = setGameRv(binding.rvBoard, layoutManager!!)
+        binding.editSearch.setOnEditorActionListener(this)
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.img_search -> {
-                data = binding.editSearch.text.toString()
-                if (binding.editSearch.text.toString().isNotEmpty()) {
-                    setData()
-                } else {
-                    shortToast("검색어를 입력해주세요")
-                }
+                onClickSearch()
             }
             R.id.layout_undo -> {
                 closeKeyboard()
                 finish()
             }
         }
+    }
+
+
+    private fun onClickSearch() {
+        data = binding.editSearch.text.toString()
+        if (binding.editSearch.text.toString().isNotEmpty()) {
+            setData()
+        } else {
+            shortToast("검색어를 입력해주세요")
+        }
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+        val data = boardMainAdapter?.getItem(position)
+        val intent = Intent(view.context, InnerBoardMainActivity::class.java)
+        intent.putExtra("data", data)
+        startActivity(intent)
+    }
+
+    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+        var handle = false
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            onClickSearch()
+            handle = true
+        }
+        return handle
     }
 
     @SuppressLint("SetTextI18n")
@@ -109,6 +135,7 @@ class BoardMainSearchActivity : InnerBaseActivity(), BoardMainSearchPresenter.Vi
         if (board != null) {
             if (boardMainAdapter == null) {
                 boardMainAdapter = BoardMainAdapter(this, board)
+                boardMainAdapter?.setOnItemClickListener(this)
                 rv?.adapter = boardMainAdapter
             } else {
                 boardMainAdapter?.addItems(board)

@@ -1,16 +1,21 @@
 package com.dev.skh.resellium.Base
 
+import android.content.Context
 import android.content.Intent
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ProgressBar
 import com.dev.skh.resellium.R
+import com.dev.skh.resellium.Util.GridSpacingItemDecoration
 
 
 /**
@@ -47,21 +52,21 @@ open class BaseFragment : Fragment() {
     }
 
 
-//    fun closeKeyboard() {
-//        val inputManager = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//        inputManager.hideSoftInputFromWindow(activity!!.currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-//
-//    }
-//    fun clearAndClose(edit: EditText) {
-//        edit.text.clear()
-//        val inputManager = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//        inputManager.hideSoftInputFromWindow(activity!!.currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-//    }
-//
-//    fun openKeyboard() {
-//        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
-//    }
+    fun closeKeyboard() {
+        val inputManager = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(activity!!.currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+
+    }
+    fun clearAndClose(edit: EditText) {
+        edit.text.clear()
+        val inputManager = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(activity!!.currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+
+    fun openKeyboard() {
+        val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
+    }
 
 
 
@@ -69,9 +74,19 @@ open class BaseFragment : Fragment() {
         val decor = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         decor.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.survey_divder)!!)
         rvGame.isNestedScrollingEnabled = false
-//        rvGame.animation = null
         rvGame.layoutManager = layoutManager
         rvGame.addItemDecoration(decor)
+
+        return rvGame
+    }
+
+    fun setGridGameRv(rvGame: RecyclerView, layoutManager: GridLayoutManager) : RecyclerView {
+        rvGame.isNestedScrollingEnabled = false
+        rvGame.layoutManager = layoutManager
+
+        val result = Math.round(8 * resources.displayMetrics.density)
+
+        rvGame.addItemDecoration(GridSpacingItemDecoration(2, result, true, 0))
 
         return rvGame
     }
