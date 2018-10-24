@@ -22,7 +22,6 @@
             android:adjustViewBounds="true"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            popularImage="@{model.path}"
             tools:src="@drawable/ic_launcher_background"
             />
 

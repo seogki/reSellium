@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -47,7 +48,7 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.layout_add -> {
-                setData()
+                setRegisterDialog()
             }
             R.id.layout_undo -> {
                 closeKeyboard()
@@ -71,9 +72,32 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
         }
     }
 
+    private fun setRegisterDialog() {
+        AlertDialog.Builder(this@GameRegisterActivity, R.style.MyDialogTheme)
+                .setTitle("등록")
+                .setMessage("정말로 등록하시겠습니까?")
+                .setPositiveButton("확인") { dialog, _ ->
+                    dialog.dismiss()
+                    setData()
+                }.setNegativeButton("취소") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+    }
+
     override fun registerData(disposable: Disposable?) {
         this.disposable = disposable
-        finish()
+
+        AlertDialog.Builder(this@GameRegisterActivity, R.style.MyDialogTheme)
+                .setTitle("등록")
+                .setMessage("등록되었습니다.")
+                .setPositiveButton("확인") { dialog, _ ->
+                    dialog.dismiss()
+                    finish()
+                }.setNegativeButton(null, null)
+                .show()
+
+
         binding.layoutAppbar?.layoutAdd?.isEnabled = true
     }
 

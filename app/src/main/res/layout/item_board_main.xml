@@ -21,50 +21,31 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/const_all"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
         android:background="@drawable/btn_ripple_colored_grey_whitebg"
         >
 
-        <TextView
-            android:id="@+id/txt_platform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@{model.platform}"
-            android:textColor="@color/statusBar"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="PS"
-            />
 
-        <View
-            android:id="@+id/view_platform"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/midGrey"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_platform"
-            app:layout_constraintStart_toEndOf="@+id/txt_platform"
-            app:layout_constraintTop_toTopOf="@+id/txt_platform"
-            />
+
+
 
         <TextView
             android:id="@+id/txt_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:gravity="start"
             android:text="@{model.title}"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:layout_marginEnd="2dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/view_platform"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@+id/img_other"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="타이트으르르르을"
             />
@@ -87,13 +68,28 @@
             />
 
         <TextView
+            android:id="@+id/txt_platform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:text="@{model.platform}"
+            android:textColor="@color/statusBar"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_date"
+            tools:text="PS"
+            />
+
+        <TextView
             android:id="@+id/txt_review"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="2dp"
             android:gravity="start|top"
             android:maxLines="2"
             android:ellipsize="end"
@@ -103,7 +99,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/txt_grade"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_date"
+            app:layout_constraintTop_toBottomOf="@+id/txt_platform"
             tools:text="revieeeeeeeeeeeeeeeeeeeeeeeeeeqwrqwrqwrqwrqwrqqwrqwrqwrqwrqwrqwrqwrqwrqwrqwrqwrqwreeewwwwwww"
             />
 
@@ -119,15 +115,6 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <!--<View-->
-            <!--android:id="@+id/view_grade"-->
-            <!--android:layout_width="60dp"-->
-            <!--android:layout_height="60dp"-->
-            <!--android:background="@drawable/text_grey_round"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--tools:text="9.6"/>-->
-
         <TextView
             android:id="@+id/txt_grade"
             android:layout_width="wrap_content"
@@ -137,7 +124,7 @@
             android:background="@drawable/text_yellow_round"
             android:text="@{model.grade}"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

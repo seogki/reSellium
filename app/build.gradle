@@ -21,6 +21,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     dataBinding {
@@ -88,31 +89,33 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     //kakao
-    implementation 'com.kakao.sdk:usermgmt:1.11.0'
-    implementation 'com.kakao.sdk:kakaolink:1.11.0'
-    implementation 'com.kakao.sdk:kakaotalk:1.11.0'
-    implementation 'com.kakao.sdk:kakaostory:1.11.0'
+//    implementation 'com.kakao.sdk:usermgmt:1.11.0'
+//    implementation 'com.kakao.sdk:kakaolink:1.11.0'
+//    implementation 'com.kakao.sdk:kakaotalk:1.11.0'
+//    implementation 'com.kakao.sdk:kakaostory:1.11.0'
 
     //글라이드
-    implementation 'com.github.bumptech.glide:glide:4.7.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
-    implementation 'com.github.bumptech.glide:annotations:4.7.1'
+//    implementation 'com.github.bumptech.glide:glide:4.7.1'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+//    implementation 'com.github.bumptech.glide:annotations:4.7.1'
     //권한 설정용
-    implementation 'gun0912.ted:tedpermission:2.2.0'
+//    implementation 'gun0912.ted:tedpermission:2.2.0'
 
-    //progressbar
-    implementation 'com.github.d-max:spots-dialog:1.1@aar'
 
     //statusbar 투명
-    implementation 'com.jaeger.statusbarutil:library:1.5.1'
+//    implementation 'com.jaeger.statusbarutil:library:1.5.1'
 
     //글라이드 이미지변환
-    implementation 'jp.wasabeef:glide-transformations:2.0.2'
+//    implementation 'jp.wasabeef:glide-transformations:2.0.2'
 
     //google 인증
-    implementation 'com.google.android.gms:play-services-auth:16.0.0'
-    implementation 'com.android.support:exifinterface:27.1.1'
+//    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+//    implementation 'com.android.support:exifinterface:27.1.1'
 
     //snap
-    implementation 'com.github.rubensousa:gravitysnaphelper:1.5'
+//    implementation 'com.github.rubensousa:gravitysnaphelper:1.5'
+
+    //광고
+    implementation 'com.google.android.gms:play-services-ads:17.0.0'
+
 }

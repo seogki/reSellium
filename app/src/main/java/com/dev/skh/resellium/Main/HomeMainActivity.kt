@@ -18,6 +18,7 @@ class HomeMainActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_main)
+        setAdView(binding.adView)
         binding.layoutBottomTab?.onClickListener = this
         addFragment(R.id.frame_layout, HomeMainFragment(), false, false, "HomeMainFragment")
         setImageColor(binding.layoutBottomTab?.bottomLayoutBtn0Txt, binding.layoutBottomTab?.bottomLayoutText0, R.drawable.icons8_home_24)
@@ -32,9 +33,6 @@ class HomeMainActivity : BaseActivity(), View.OnClickListener {
             R.id.bottom_layout_btn2 -> {
                 beginActivity(Intent(this, BoardMainActivity::class.java))
             }
-//            R.id.bottom_layout_btn3 -> {
-//                beginActivity(Intent(this, UserMainActivity::class.java))
-//            }
         }
     }
 }

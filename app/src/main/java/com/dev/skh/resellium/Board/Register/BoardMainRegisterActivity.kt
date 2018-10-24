@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.RadioButton
 import android.widget.SeekBar
@@ -68,7 +69,7 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
                 finish()
             }
             R.id.layout_add -> {
-                setData()
+                setRegisterDialog()
             }
         }
     }
@@ -86,9 +87,31 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
             binding.layoutAppbar?.layoutAdd?.isEnabled = true
         }
     }
+    private fun setRegisterDialog() {
+        AlertDialog.Builder(this@BoardMainRegisterActivity, R.style.MyDialogTheme)
+                .setTitle("등록")
+                .setMessage("정말로 등록하시겠습니까?")
+                .setPositiveButton("확인") { dialog, _ ->
+                    dialog.dismiss()
+                    setData()
+                }.setNegativeButton("취소") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+    }
 
     override fun successData(disposable: Disposable?) {
-        finish()
+        this.disposable = disposable
+        AlertDialog.Builder(this@BoardMainRegisterActivity, R.style.MyDialogTheme)
+                .setTitle("등록")
+                .setMessage("등록되었습니다.")
+                .setPositiveButton("확인") { dialog, _ ->
+                    dialog.dismiss()
+                    finish()
+                }.setNegativeButton(null, null)
+                .show()
+
+        binding.layoutAppbar?.layoutAdd?.isEnabled = true
     }
 
     override fun onDestroy() {

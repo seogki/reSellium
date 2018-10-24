@@ -6,6 +6,7 @@
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle">
             <solid android:color="@color/midGrey"/>
+            <corners android:topLeftRadius="5dp"/>
         </shape>
     </item>
 
@@ -14,6 +15,7 @@
         <shape>
 
             <solid android:color="@color/white"/>
+            <corners android:topLeftRadius="5dp"/>
 
         </shape>
 

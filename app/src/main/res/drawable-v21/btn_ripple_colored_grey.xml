@@ -9,13 +9,13 @@
         </shape>
     </item>
 
-    <!--<item>-->
+    <item>
 
-        <!--<shape>-->
+        <shape>
 
-            <!--<solid android:color="@color/white"/>-->
+            <solid android:color="@color/white"/>
 
-        <!--</shape>-->
+        </shape>
 
-    <!--</item>-->
+    </item>
 </ripple>

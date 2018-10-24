@@ -92,14 +92,6 @@
                         android:src="@drawable/ic_action_arrow_back"
                         />
 
-                    <!--<android.support.v7.widget.SearchView-->
-                        <!--app:layout_constraintStart_toEndOf="@+id/layout_undo"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--app:defaultQueryHint="검색어를 입력해주세요...."-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--/>-->
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.3dp"
@@ -136,7 +128,17 @@
 
 
 
+                    <TextView
+                        android:id="@+id/txt_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="타이틀 및 리뷰만 검색이 가능합니다"
+                        android:gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/middarkGrey"
+                        app:layout_constraintTop_toTopOf="parent"
 
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -146,9 +148,9 @@
                         android:layout_marginStart="8dp"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_result"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:textColor="@color/darkGrey"
+                        android:textColor="@color/lightBlack"
                         android:text="검색어: "
                         />
 

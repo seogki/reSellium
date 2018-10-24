@@ -5,6 +5,7 @@ import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -13,6 +14,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.dev.skh.resellium.R
+import com.dev.skh.resellium.Util.GridSpacingItemDecoration
 
 /**
  * Created by Seogki on 2018. 10. 17..
@@ -55,6 +57,15 @@ open class InnerBaseActivity : AppCompatActivity() {
         rvGame.isNestedScrollingEnabled = false
         rvGame.layoutManager = layoutManager
         rvGame.addItemDecoration(decor)
+
+        return rvGame
+    }
+
+    fun setGridGameRv(rvGame: RecyclerView, layoutManager: GridLayoutManager) : RecyclerView {
+        rvGame.isNestedScrollingEnabled = false
+        rvGame.layoutManager = layoutManager
+        val result = Math.round(8 * resources.displayMetrics.density)
+        rvGame.addItemDecoration(GridSpacingItemDecoration(2, result, true, 0))
 
         return rvGame
     }

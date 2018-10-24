@@ -29,9 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
 
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
+            android:layout_above="@id/adView"
             />
 
         <FrameLayout
@@ -43,14 +41,26 @@
 
         </FrameLayout>
 
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-2973552036061869/5335423367">
+        </com.google.android.gms.ads.AdView>
+
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/layout_bottom_tab"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:clipToPadding="false"
             android:onClick="@{onClickListener::onClick}"
             app:backgroundTint="@color/accentColor"

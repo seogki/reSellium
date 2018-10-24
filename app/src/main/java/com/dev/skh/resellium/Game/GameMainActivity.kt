@@ -16,8 +16,10 @@ class GameMainActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game_main)
+        setAdView(binding.adView)
         binding.layoutBottomTab?.onClickListener = this
         binding.onClickListener = this
+
         addFragment(R.id.frame_layout, GameMainFragment(), false, false, "GameMainFragment")
         setImageColor(binding.layoutBottomTab?.bottomLayoutBtn1Txt, binding.layoutBottomTab?.bottomLayoutText1, R.drawable.icons8_game_controller_24)
     }
@@ -30,9 +32,6 @@ class GameMainActivity : BaseActivity(), View.OnClickListener {
             R.id.bottom_layout_btn2 -> {
                 beginActivity(Intent(this, BoardMainActivity::class.java))
             }
-//            R.id.bottom_layout_btn3 -> {
-//                beginActivity(Intent(this, UserMainActivity::class.java))
-//            }
             R.id.fab_btn -> {
                 startActivity(Intent(this, GameRegisterActivity::class.java))
             }

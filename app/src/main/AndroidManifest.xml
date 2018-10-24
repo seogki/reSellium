@@ -56,9 +56,17 @@
         </activity>
         <activity android:name=".Board.Sub.InnerBoardMainActivity">
         </activity>
+
+        <!--fabric-->
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="4e2563966386d345bf77783b0c4885d543e55a68" />
+
+        <!--admobs-->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2973552036061869~1827299488"/>
+
     </application>
 
 </manifest>

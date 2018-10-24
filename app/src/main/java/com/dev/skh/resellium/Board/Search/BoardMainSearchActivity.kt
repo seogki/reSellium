@@ -6,7 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.widget.NestedScrollView
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.KeyEvent
@@ -41,7 +41,7 @@ class BoardMainSearchActivity : InnerBaseActivity()
     private lateinit var binding: ActivityBoardMainSearchBinding
     private val weakReference by lazy { weakRef(this) }
     private var boardMainAdapter: BoardMainAdapter? = null
-    private var layoutManager: LinearLayoutManager? = null
+    private var layoutManager: GridLayoutManager? = null
     private var rv: RecyclerView? = null
     private var isLoading: Boolean = false
     private var data: String? = null
@@ -54,33 +54,15 @@ class BoardMainSearchActivity : InnerBaseActivity()
         setView()
         setBaseProgressBar(binding.progressBar)
 
-//        weakReference.get()?.getKeyWordData()
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.activity_main_menu, menu)
-//        val menuItem = menu?.findItem(R.id.action_search)
-//        searchView = menuItem?.actionView as SearchView
-//        searchView?.setOnQueryTextListener(this)
-//
-//        return true
-//    }
-//
-//    override fun onQueryTextSubmit(query: String?): Boolean {
-//        return false
-//    }
-//
-//    override fun onQueryTextChange(newText: String?): Boolean {
-//        return true
-//    }
 
     override fun keyData(key: MutableList<SearchKeyModel>?, disposable: Disposable?) {
 
     }
 
     private fun setView() {
-        layoutManager = LinearLayoutManager(this)
-        rv = setGameRv(binding.rvBoard, layoutManager!!)
+        layoutManager = GridLayoutManager(this, 2)
+        rv = setGridGameRv(binding.rvBoard, layoutManager!!)
         binding.editSearch.setOnEditorActionListener(this)
     }
 

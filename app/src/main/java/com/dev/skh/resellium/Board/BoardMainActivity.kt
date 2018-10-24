@@ -16,8 +16,10 @@ class BoardMainActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_main)
+        setAdView(binding.adView)
         binding.layoutBottomTab?.onClickListener = this
         binding.onClickListener = this
+
         addFragment(R.id.frame_layout, BoardMainFragment(), false, false, "BoardMainFragment")
         setImageColor(binding.layoutBottomTab?.bottomLayoutBtn2Txt, binding.layoutBottomTab?.bottomLayoutText2, R.drawable.icons8_clipboard_24)
     }

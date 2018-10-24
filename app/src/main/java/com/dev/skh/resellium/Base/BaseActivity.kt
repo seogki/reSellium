@@ -12,6 +12,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 
 /**
  * Created by Seogki on 2018. 6. 7..
@@ -20,6 +22,7 @@ import com.dev.skh.resellium.Util.DLog
 open class BaseActivity : AppCompatActivity() {
 
     private lateinit var toast: Toast
+    private var adview: AdView? = null
     private var backKeyPressedTime: Long = 0
 
     fun AppCompatActivity.addFragment(@IdRes frameId: Int, fragment: Fragment, AllowStateloss: Boolean, backstack: Boolean, tag: String) {
@@ -42,8 +45,6 @@ open class BaseActivity : AppCompatActivity() {
     }
 
 
-
-
     private fun showGuide() {
         toast = Toast.makeText(this,
                 "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT)
@@ -56,6 +57,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        adview?.resume()
         overridePendingTransition(0, 0)
     }
 
@@ -95,6 +97,24 @@ open class BaseActivity : AppCompatActivity() {
         imageView?.setImageDrawable(ContextCompat.getDrawable(this, imageValue))
         imageView?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.accentColor), PorterDuff.Mode.SRC_ATOP)
         textView?.setTextColor(ContextCompat.getColor(this, R.color.accentColor))
+    }
+
+    fun setAdView(adview: AdView) {
+        this.adview = adview
+//        val size = AdSize(320, 50)
+//        this.adview?.adSize = size
+        val adRequest = AdRequest.Builder().build()
+        this.adview?.loadAd(adRequest)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        adview?.destroy()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        adview?.pause()
     }
 
 }

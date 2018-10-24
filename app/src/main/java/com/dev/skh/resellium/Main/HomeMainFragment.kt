@@ -1,6 +1,7 @@
 package com.dev.skh.resellium.Main
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
@@ -80,7 +81,7 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.img_next_board -> {
+            R.id.view_img -> {
                 beginActivity(Intent(context!!, BoardMainActivity::class.java))
             }
             R.id.img_refresh -> {
@@ -199,6 +200,7 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
         binding.viewEnd.visibility = View.VISIBLE
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setRecentData(layout: LayoutRecentBinding?, horiModel: MutableList<HoriModel>) {
         layout?.txtMoney1?.text = UtilMethod.currencyFormat(horiModel[0].money) + "원"
         layout?.txtMoney2?.text = UtilMethod.currencyFormat(horiModel[1].money) + "원"
@@ -220,10 +222,8 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     private fun setBg(result: String?, textView: TextView) {
         if (result!!.contains("매입")) {
             textView.text = result
-//            textView.background = ContextCompat.getDrawable(context!!, R.drawable.text_green)
         } else if (result.contains("매각")) {
             textView.text = result
-//            textView.background = ContextCompat.getDrawable(context!!, R.drawable.text_red)
         }
     }
 

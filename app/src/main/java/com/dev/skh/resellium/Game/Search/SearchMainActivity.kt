@@ -3,10 +3,8 @@ package com.dev.skh.resellium.Game.Search
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.content.ContextCompat
 import android.support.v4.widget.NestedScrollView
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -21,6 +19,7 @@ import com.dev.skh.resellium.Game.Tab.Switch.SwitchMainAdapter
 import com.dev.skh.resellium.Game.Tab.Xbox.XboxMainAdapter
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
+import com.dev.skh.resellium.Util.GridSpacingItemDecoration
 import com.dev.skh.resellium.databinding.ActivitySearchMainBinding
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
@@ -62,9 +61,9 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
     private var ps4MainAdapter: Ps4MainAdapter? = null
     private var xboxMainAdapter: XboxMainAdapter? = null
     private var switchMainAdapter: SwitchMainAdapter? = null
-    private lateinit var ps4LayoutManager: LinearLayoutManager
-    private lateinit var xboxLayoutManager: LinearLayoutManager
-    private lateinit var switchLayoutManager: LinearLayoutManager
+    private lateinit var ps4LayoutManager: GridLayoutManager
+    private lateinit var xboxLayoutManager: GridLayoutManager
+    private lateinit var switchLayoutManager: GridLayoutManager
     private var isLoading: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,19 +76,19 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
 
     private fun setAdapter() {
 
-        val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.survey_divder)!!)
+        val result = Math.round(8 * resources.displayMetrics.density)
+        val decor = GridSpacingItemDecoration(2, result, true, 0)
         binding.layoutAppbar?.editSearch?.setOnEditorActionListener(this)
 
-        ps4LayoutManager = LinearLayoutManager(this)
+        ps4LayoutManager = GridLayoutManager(this,2)
         binding.rvPs4.layoutManager = ps4LayoutManager
         binding.rvPs4.isNestedScrollingEnabled = false
 
-        xboxLayoutManager = LinearLayoutManager(this)
+        xboxLayoutManager = GridLayoutManager(this,2)
         binding.rvXbox.layoutManager = xboxLayoutManager
         binding.rvXbox.isNestedScrollingEnabled = false
 
-        switchLayoutManager = LinearLayoutManager(this)
+        switchLayoutManager = GridLayoutManager(this,2)
         binding.rvSwitch.layoutManager = switchLayoutManager
         binding.rvSwitch.isNestedScrollingEnabled = false
 

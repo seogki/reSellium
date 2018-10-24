@@ -51,8 +51,9 @@
                         android:id="@+id/view_img"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
-                        android:background="@color/white"
-                        app:layout_constraintTop_toTopOf="@id/txt_grade"
+                        android:background="@drawable/btn_ripple_colored_grey"
+                        android:onClick="@{onClickListener::onClick}"
+                        app:layout_constraintTop_toTopOf="@+id/txt_grade"
                         />
 
                     <TextView
@@ -77,8 +78,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/btn_ripple_colored_grey"
-                        android:onClick="@{onClickListener::onClick}"
                         android:src="@drawable/ic_action_star_next"
                         app:layout_constraintBottom_toBottomOf="@+id/txt_grade"
                         app:layout_constraintEnd_toEndOf="parent"

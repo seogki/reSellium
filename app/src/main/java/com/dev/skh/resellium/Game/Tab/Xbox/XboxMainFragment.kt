@@ -116,9 +116,9 @@ class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLay
                             Handler().postDelayed({
                                 val id = xboxMainAdapter?.getItem(xboxMainAdapter!!.itemCount - 1)?.id
                                 if (isSpinner)
-                                    weakPresenter?.get()?.checkSpinnerScrollData(first, second, id)
+                                    weakPresenter.get()?.checkSpinnerScrollData(first, second, id)
                                 else
-                                    weakPresenter?.get()?.scrollData(id)
+                                    weakPresenter.get()?.scrollData(id)
                             }, 500)
 
                         }
@@ -181,7 +181,7 @@ class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLay
 
     private fun callSpinnerData() {
         refreshWithoutData()
-        weakPresenter?.get()?.checkSpinnerData(first, second)
+        weakPresenter.get()?.checkSpinnerData(first, second)
     }
 
     override fun onDestroy() {

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Game.Register.GameRegisterActivity"
     >
+
     <data>
 
         <variable
@@ -48,15 +49,14 @@
                     >
 
 
-
                     <RadioGroup
-                        android:layout_marginTop="12dp"
                         android:id="@+id/radiogroup_platform"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -69,10 +69,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:text="PS"
-                            android:textSize="16sp"
                             android:onClick="@{onClickListener::onClick}"
+                            android:text="PS"
                             android:textColor="@color/ps4Color"
+                            android:textSize="16sp"
                             app:buttonTint="@color/ps4Color"
                             />
 
@@ -80,36 +80,48 @@
                             android:id="@+id/radio_xbox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="XBOX"
-                            android:textSize="16sp"
                             android:onClick="@{onClickListener::onClick}"
+                            android:text="XBOX"
                             android:textColor="@color/xboxColor"
+                            android:textSize="16sp"
                             app:buttonTint="@color/xboxColor"
                             />
+
                         <android.support.v7.widget.AppCompatRadioButton
                             android:id="@+id/radio_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="SWITCH"
-                            android:textSize="16sp"
                             android:onClick="@{onClickListener::onClick}"
+                            android:text="SWITCH"
                             android:textColor="@color/switchColor"
+                            android:textSize="16sp"
                             app:buttonTint="@color/switchColor"
                             />
                     </RadioGroup>
 
                     <TextView
+                        android:id="@+id/txt_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="타이틀 및 리뷰만 검색이 가능합니다"
+                        android:textColor="@color/middarkGrey"
+                        app:layout_constraintTop_toBottomOf="@+id/radiogroup_platform"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:id="@+id/txt_search"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:text="검색어: "
+                        android:textColor="@color/lightBlack"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@+id/radiogroup_platform"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:textColor="@color/darkGrey"
-                        android:text="검색어: "
+                        app:layout_constraintTop_toBottomOf="@+id/txt_result"
                         />
 
                     <android.support.v7.widget.RecyclerView
@@ -122,19 +134,19 @@
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_xbox"
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@+id/txt_search"
                         />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_switch"
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@+id/txt_search"
                         />
 
@@ -149,9 +161,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/rv_ps4"
                         />
-
-
-
 
 
                 </android.support.constraint.ConstraintLayout>
