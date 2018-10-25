@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by Seogki on 2018. 6. 26..
  */
-open class ApiCilentRx() {
+open class ApiCilentRx {
 
     //회사용
     companion object {

@@ -1,5 +1,6 @@
 package com.dev.skh.resellium.Util
 
+import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
@@ -16,6 +17,7 @@ class CustomTextWatcher(private val editText: EditText) : TextWatcher {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun afterTextChanged(s: Editable) {
         try {
             editText.removeTextChangedListener(this)

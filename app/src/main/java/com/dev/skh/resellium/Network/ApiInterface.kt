@@ -6,8 +6,6 @@ import com.dev.skh.resellium.Game.Model.Ps4MainModel
 import com.dev.skh.resellium.Game.Model.SwitchMainModel
 import com.dev.skh.resellium.Game.Model.XboxMainModel
 import com.dev.skh.resellium.Main.Model.HoriModel
-import com.dev.skh.resellium.Main.Model.PopularModel
-import com.dev.skh.resellium.Main.Model.RankModel
 import com.google.gson.JsonObject
 import io.reactivex.Flowable
 import retrofit2.http.POST
@@ -24,17 +22,14 @@ interface ApiInterface {
     @POST("main/getMainData")
     fun getMainData(@Query("Platform") platform: String): Flowable<MutableList<HoriModel>>
 
-    @POST("main/getPopularData")
-    fun getPopularData(): Flowable<MutableList<PopularModel>>
-
     @POST("main/getNewMainData")
-    fun getNewMainData(): Flowable<MutableList<RankModel>>
+    fun getNewMainData(): Flowable<MutableList<BoardMainModel>>
 
     @POST("main/getBestMainData")
-    fun getBestMainData(): Flowable<MutableList<RankModel>>
+    fun getBestMainData(): Flowable<MutableList<BoardMainModel>>
 
     @POST("main/getWorstMainData")
-    fun getWorstMainData(): Flowable<MutableList<RankModel>>
+    fun getWorstMainData(): Flowable<MutableList<BoardMainModel>>
 
     /***
      *  보드

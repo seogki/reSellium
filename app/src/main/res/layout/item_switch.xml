@@ -52,9 +52,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:gravity="start"
-            android:text="@{model.date}"
-            android:textColor="@color/middarkGrey"
-            android:textSize="11sp"
+            app:timeAgo="@{model.date}"
+            android:textColor="@color/darkGrey"
+            android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@+id/txt_title"
             tools:text="2018-09-19 23:44:45"
             />

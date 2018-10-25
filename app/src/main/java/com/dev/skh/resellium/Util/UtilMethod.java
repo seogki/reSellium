@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -55,7 +56,7 @@ public class UtilMethod {
 
 
     public static String currencyFormat(String amount) {
-        if(amount != null) {
+        if (amount != null) {
             if (amount.isEmpty()) {
                 return "";
             }
@@ -67,5 +68,32 @@ public class UtilMethod {
         }
 
 
+    }
+
+    public static String formatTimeString(long regTime, String result) {
+        long curTime = System.currentTimeMillis();
+        long diffTime = (curTime - regTime) / 1000;
+        String msg;
+        if (diffTime < Const.Companion.getSEC()) {
+            msg = "방금 전";
+        } else if ((diffTime /= Const.Companion.getSEC()) < Const.Companion.getMIN()) {
+            msg = diffTime + "분 전";
+        } else if ((diffTime /= Const.Companion.getMIN()) < Const.Companion.getHOUR()) {
+            msg = (diffTime) + "시간 전";
+        } else if ((diffTime /= Const.Companion.getHOUR()) < Const.Companion.getDAY()) {
+            msg = (diffTime) + "일 전";
+        } else if ((diffTime /= Const.Companion.getDAY()) < Const.Companion.getMONTH()) {
+            msg = (diffTime) + "달 전";
+        } else {
+            String time = result.replace("-", "").substring(0, 8);
+            String year = time.substring(0,4);
+            String month = time.substring(4,6);
+            String days = time.substring(6,8);
+            Log.d("time",time);
+            return year +"년 " + month +"월 " + days+"일";
+        }
+
+
+        return msg;
     }
 }

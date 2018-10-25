@@ -1,5 +1,6 @@
 package com.dev.skh.resellium.Base;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.BindingAdapter;
@@ -11,6 +12,10 @@ import android.widget.TextView;
 import com.dev.skh.resellium.R;
 import com.dev.skh.resellium.Util.KeyboardUtils;
 import com.dev.skh.resellium.Util.UtilMethod;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by Seogki on 2018. 4. 12..
@@ -135,6 +140,7 @@ public class BaseBindingAdapter {
         textView.setText(result);
     }
 
+    @SuppressLint("SetTextI18n")
     @BindingAdapter("moneyCheck")
     public static void moneycheck(final TextView textView, final String result) {
         Context context = textView.getContext();
@@ -163,17 +169,45 @@ public class BaseBindingAdapter {
                 return;
             }
         }
-        if(result == null)
+        if (result == null)
             return;
 
-        if(result.contains("매입")){
+        if (result.contains("매입")) {
             textView.setText(result);
             textView.setBackground(ContextCompat.getDrawable(context, R.drawable.text_green));
-        } else if(result.contains("매각")){
+        } else if (result.contains("매각")) {
             textView.setText(result);
             textView.setBackground(ContextCompat.getDrawable(context, R.drawable.text_red));
         }
 
 
+    }
+
+    @BindingAdapter("timeAgo")
+    public static void timeAgo(final TextView textView, final String result) {
+        Context context = textView.getContext();
+        if (context == null) {
+            return;
+        } else if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isFinishing() || activity.isDestroyed()) {
+                return;
+            }
+        }
+        if (result == null)
+            return;
+
+        if (!result.isEmpty()) {
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+            try {
+                cal.setTime(sdf.parse(result));
+                String data = UtilMethod.formatTimeString(cal.getTimeInMillis(), result);
+                textView.setText(data);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }

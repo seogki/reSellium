@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 
@@ -101,10 +102,23 @@ open class BaseActivity : AppCompatActivity() {
 
     fun setAdView(adview: AdView) {
         this.adview = adview
-//        val size = AdSize(320, 50)
-//        this.adview?.adSize = size
-        val adRequest = AdRequest.Builder().build()
+        val adRequest = AdRequest
+                .Builder()
+                .addTestDevice("A86E700BF47A5B43A7D1B1882060F2AA")
+                .addTestDevice("945C9CAA6FF2EC9D7AE09BE4244D1081")
+                .build()
         this.adview?.loadAd(adRequest)
+
+        this.adview?.adListener = object : AdListener() {
+            override fun onAdClosed() {
+                val adRequest = AdRequest
+                        .Builder()
+                        .addTestDevice("A86E700BF47A5B43A7D1B1882060F2AA")
+                        .addTestDevice("945C9CAA6FF2EC9D7AE09BE4244D1081")
+                        .build()
+                this@BaseActivity.adview?.loadAd(adRequest)
+            }
+        }
     }
 
     override fun onDestroy() {

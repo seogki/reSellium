@@ -1,5 +1,6 @@
 package com.dev.skh.resellium.Game.Search
 
+import android.annotation.SuppressLint
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
@@ -101,6 +102,7 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun startGetData(search: String?, currentPos: String?) {
         clearAndClose(binding.layoutAppbar!!.editSearch)
         onRefresh()

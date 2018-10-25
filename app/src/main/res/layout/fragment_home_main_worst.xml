@@ -8,14 +8,16 @@
     <data>
 
         <variable
-            name="model"
-            type="com.dev.skh.resellium.Main.Model.RankModel"/>
+            name="onClickListener"
+            type="android.view.View.OnClickListener"
+            />
 
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
+
         >
 
         <android.support.constraint.ConstraintLayout
@@ -23,6 +25,7 @@
             android:layout_width="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{onClickListener::onClick}"
             app:layout_constraintEnd_toStartOf="@+id/const_second"
             android:layout_height="match_parent"
             >
@@ -41,7 +44,6 @@
             <TextView
                 android:textColor="@color/OrangeYellow"
                 tools:text="9.5"
-                android:text="@{model.grade}"
                 android:textStyle="bold"
                 android:textSize="40sp"
                 android:layout_width="wrap_content"
@@ -63,7 +65,6 @@
                 tools:text="타이틀1"
                 android:textStyle="bold"
                 android:textSize="14sp"
-                android:text="@{model.title}"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:maxLines="1"
@@ -82,7 +83,6 @@
                 android:textColor="@color/darkGrey"
                 tools:text="타이틀1"
                 android:textSize="12sp"
-                android:text="@{model.review}"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:maxLines="2"
@@ -110,6 +110,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/const_third"
             android:layout_height="match_parent"
+            android:onClick="@{onClickListener::onClick}"
             >
 
             <ImageView
@@ -126,7 +127,6 @@
             <TextView
                 android:textColor="@color/OrangeYellow"
                 tools:text="9.5"
-                android:text="@{model.grade}"
                 android:textStyle="bold"
                 android:textSize="40sp"
                 android:layout_width="wrap_content"
@@ -148,7 +148,6 @@
                 tools:text="타이틀1"
                 android:textStyle="bold"
                 android:textSize="14sp"
-                android:text="@{model.title}"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:maxLines="1"
@@ -167,7 +166,6 @@
                 android:textColor="@color/darkGrey"
                 tools:text="타이틀1"
                 android:textSize="12sp"
-                android:text="@{model.review}"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:maxLines="2"
@@ -194,6 +192,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_height="match_parent"
+            android:onClick="@{onClickListener::onClick}"
             >
 
             <ImageView
@@ -210,7 +209,6 @@
             <TextView
                 android:textColor="@color/OrangeYellow"
                 tools:text="9.5"
-                android:text="@{model.grade}"
                 android:textStyle="bold"
                 android:textSize="40sp"
                 android:layout_width="wrap_content"
@@ -232,7 +230,6 @@
                 tools:text="타이틀1"
                 android:textStyle="bold"
                 android:textSize="14sp"
-                android:text="@{model.title}"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:maxLines="1"
@@ -251,7 +248,6 @@
                 android:textColor="@color/darkGrey"
                 tools:text="타이틀1"
                 android:textSize="12sp"
-                android:text="@{model.review}"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:maxLines="2"
@@ -262,5 +258,4 @@
         </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
-
 </layout>

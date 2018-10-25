@@ -14,8 +14,7 @@
         android:theme="@style/CustomHomeAppTheme">
         <activity
             android:name=".Main.HomeMainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CustomHomeAppTheme">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -24,13 +23,11 @@
         </activity>
         <activity
             android:name=".Game.GameMainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CustomHomeAppTheme">
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Board.BoardMainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CustomHomeAppTheme">
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".User.UserMainActivity"
@@ -38,8 +35,7 @@
         </activity>
         <activity
             android:name=".Game.Register.GameRegisterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CustomHomeAppTheme">
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Game.Search.SearchMainActivity"
@@ -47,14 +43,14 @@
         </activity>
         <activity
             android:name=".Board.Register.BoardMainRegisterActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CustomHomeAppTheme">
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Board.Search.BoardMainSearchActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Board.Sub.InnerBoardMainActivity">
+        <activity android:name=".Board.Sub.InnerBoardMainActivity"
+                  android:screenOrientation="portrait">
         </activity>
 
         <!--fabric-->

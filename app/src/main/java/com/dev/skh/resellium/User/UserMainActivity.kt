@@ -43,7 +43,7 @@ class UserMainActivity : AppCompatActivity(), View.OnClickListener, UserMainPres
         email.type = "plain/text"
         val address = arrayOf("seogkihongdroid@gmail.com")
         email.putExtra(Intent.EXTRA_EMAIL, address)
-        email.putExtra(Intent.EXTRA_SUBJECT, "문의합니다.")
+        email.putExtra(Intent.EXTRA_SUBJECT, "앱에 관하여 문의합니다.")
 //        email.putExtra(Intent.EXTRA_TEXT, "보낼 email 내용을 미리 적어 놓을 수 있습니다.\n")
         startActivity(email)
     }
