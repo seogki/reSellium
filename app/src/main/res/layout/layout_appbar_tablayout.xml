@@ -101,13 +101,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
             android:layout_centerHorizontal="true"
-            android:background="@color/accentColor"
+            android:background="@color/white"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/accentColor"
+            app:tabIndicatorColor="@color/fabColor"
             app:tabMode="fixed"
             app:tabPaddingEnd="0dp"
             app:tabPaddingStart="0dp"
-            app:tabSelectedTextColor="@color/white"
+            app:tabSelectedTextColor="@color/black"
             app:tabTextColor="@color/middarkGrey"
             >
         </android.support.design.widget.TabLayout>

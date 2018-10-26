@@ -45,18 +45,6 @@ class Ps4MainPresenter(val view: View? = null)  : BasePresenter(){
     }
 
 
-    fun spinnerOne() {
-        Thread {
-            val arr = mutableListOf<String>()
-            arr.add("")
-            arr.add("전체")
-            arr.add("신품")
-            arr.add("중고")
-            view?.spinner1(arr)
-        }.start()
-
-    }
-
     fun spinnerTwo() {
         Thread {
             val arr = mutableListOf<String>()
@@ -75,7 +63,6 @@ class Ps4MainPresenter(val view: View? = null)  : BasePresenter(){
         fun updateData(arr: MutableList<Ps4MainModel>?, disposable: Disposable?, isScroll: Boolean)
         fun updateSpinnerData(result: MutableList<Ps4MainModel>?, disposable: Disposable?, isScroll: Boolean)
         fun errorUpdateData(disposable: Disposable?, message: String?)
-        fun spinner1(arr1: MutableList<String>)
         fun spinner2(arr2: MutableList<String>)
     }
 }

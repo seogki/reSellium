@@ -42,7 +42,7 @@
                 />
 
             <TextView
-                android:textColor="@color/OrangeYellow"
+                android:textColor="@color/fabColor"
                 tools:text="9.5"
                 android:textStyle="bold"
                 android:textSize="40sp"
@@ -125,7 +125,7 @@
                 />
 
             <TextView
-                android:textColor="@color/OrangeYellow"
+                android:textColor="@color/fabColor"
                 tools:text="9.5"
                 android:textStyle="bold"
                 android:textSize="40sp"
@@ -207,7 +207,7 @@
                 />
 
             <TextView
-                android:textColor="@color/OrangeYellow"
+                android:textColor="@color/fabColor"
                 tools:text="9.5"
                 android:textStyle="bold"
                 android:textSize="40sp"

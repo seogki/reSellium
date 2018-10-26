@@ -22,7 +22,11 @@ import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
 
-class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemSelectedListener {
+class Ps4MainFragment : BaseFragment()
+        , Ps4MainPresenter.View
+        , SwipeRefreshLayout.OnRefreshListener
+        , AdapterView.OnItemSelectedListener
+        , View.OnClickListener {
 
 
     companion object {
@@ -34,7 +38,7 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
     private lateinit var binding: FragmentPs4MainBinding
     private var ps4MainAdapter: Ps4MainAdapter? = null
     private val weakPresenter by lazy { weakRef(this) }
-//    private lateinit var layoutManager: LinearLayoutManager
+    //    private lateinit var layoutManager: LinearLayoutManager
     private lateinit var layoutManager: GridLayoutManager
     private var recyclerView: RecyclerView? = null
     private var first: String = ""
@@ -44,6 +48,7 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_ps4_main, container, false)
+        binding.onClickListener = this
         setView()
         setBaseProgressBar(binding.progressBar)
         return binding.root
@@ -62,12 +67,43 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
 //        layoutManager = LinearLayoutManager(context!!)
         layoutManager = GridLayoutManager(context, 2)
         recyclerView = setGridGameRv(binding.rvGame, layoutManager)
-
-
-
         binding.swipeLayout.setDistanceToTriggerSync(350)
         binding.swipeLayout.setOnRefreshListener(this)
 
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_all -> callBtnData("전체")
+            R.id.btn_new -> callBtnData("신품")
+            R.id.btn_old -> callBtnData("중고")
+        }
+    }
+
+    private fun callBtnData(data: String) {
+        when (data) {
+            "전체" -> {
+                setBtnAccent(binding.btnAll)
+                setBtnDefault(binding.btnNew)
+                setBtnDefault(binding.btnOld)
+            }
+            "신품" -> {
+                setBtnAccent(binding.btnNew)
+                setBtnDefault(binding.btnAll)
+                setBtnDefault(binding.btnOld)
+            }
+            "중고" -> {
+                setBtnAccent(binding.btnOld)
+                setBtnDefault(binding.btnAll)
+                setBtnDefault(binding.btnNew)
+            }
+        }
+        first = if (data == "전체")
+            ""
+        else
+            data
+
+        callSpinnerData()
     }
 
     override fun updateData(arr: MutableList<Ps4MainModel>?, disposable: Disposable?, isScroll: Boolean) {
@@ -119,7 +155,6 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
     }
 
     private fun addItemOnSpinner() {
-        weakPresenter.get()?.spinnerOne()
         weakPresenter.get()?.spinnerTwo()
     }
 
@@ -129,17 +164,9 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (parent?.id) {
-            R.id.compare_frag_spinner_spinner_1 -> {
-                first = binding.spinners?.compareFragSpinnerSpinner1?.selectedItem.toString()
-                second = binding.spinners?.compareFragSpinnerSpinner2?.selectedItem.toString()
-                if (first != "" && second != "") {
-                    callSpinnerData()
-                }
-            }
-            R.id.compare_frag_spinner_spinner_2 -> {
-                first = binding.spinners?.compareFragSpinnerSpinner1?.selectedItem.toString()
-                second = binding.spinners?.compareFragSpinnerSpinner2?.selectedItem.toString()
-                if (first != "" && second != "") {
+            R.id.spinner -> {
+                second = binding.spinner.selectedItem.toString()
+                if (second != "") {
                     callSpinnerData()
                 }
             }
@@ -161,21 +188,12 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
             setRecyclerViewScrollbar(true)
     }
 
-    override fun spinner1(arr1: MutableList<String>) {
-        activity!!.runOnUiThread {
-            val spinnerAdapter = ArrayAdapter<String>(context, R.layout.item_spinner, arr1)
-            spinnerAdapter.setDropDownViewResource(R.layout.item_spinner)
-            binding.spinners?.compareFragSpinnerSpinner1?.adapter = spinnerAdapter
-            binding.spinners?.compareFragSpinnerSpinner1?.onItemSelectedListener = this
-        }
-    }
-
     override fun spinner2(arr2: MutableList<String>) {
         activity!!.runOnUiThread {
             val spinnerAdapter = ArrayAdapter<String>(context, R.layout.item_spinner, arr2)
             spinnerAdapter.setDropDownViewResource(R.layout.item_spinner)
-            binding.spinners?.compareFragSpinnerSpinner2?.adapter = spinnerAdapter
-            binding.spinners?.compareFragSpinnerSpinner2?.onItemSelectedListener = this
+            binding.spinner.adapter = spinnerAdapter
+            binding.spinner.onItemSelectedListener = this
         }
     }
 
@@ -198,13 +216,23 @@ class Ps4MainFragment : BaseFragment(), Ps4MainPresenter.View, SwipeRefreshLayou
 
     private fun refresh() {
         ps4MainAdapter?.clearItems()
-        setProgressbarVisible()
+        setViewDefault()
         recyclerView?.removeOnScrollListener(null)
-        binding.spinners?.compareFragSpinnerSpinner1?.setSelection(0, false)
-        binding.spinners?.compareFragSpinnerSpinner2?.setSelection(0, false)
+
+        binding.spinner.setSelection(0, false)
         weakPresenter.get()?.addData()
         isLoading = false
         binding.swipeLayout.isRefreshing = false
+    }
+
+    private fun setViewDefault() {
+        setProgressbarVisible()
+        setBtnAccent(binding.btnAll)
+        setBtnDefault(binding.btnNew)
+        setBtnDefault(binding.btnOld)
+        first = ""
+        second = ""
+
     }
 
     private fun refreshWithoutData() {

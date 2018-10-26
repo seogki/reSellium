@@ -14,6 +14,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.GridSpacingItemDecoration
 
@@ -117,6 +118,17 @@ open class BaseFragment : Fragment() {
 
     fun setHorizontalLinearLayoutManager(): LinearLayoutManager {
         return LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    fun setBtnDefault(btn: TextView) {
+        btn.setTextColor(ContextCompat.getColor(context!!, R.color.black))
+        btn.background = ContextCompat.getDrawable(context!!, R.drawable.text_round_white_border_grey)
+    }
+
+    fun setBtnAccent(btn: TextView) {
+        btn.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+        btn.background = ContextCompat.getDrawable(context!!, R.drawable.text_round_secondary_border_grey)
+
     }
 
 }

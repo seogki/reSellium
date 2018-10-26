@@ -63,6 +63,8 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_main, container, false)
         binding.layoutAppbar?.title = "메인"
         binding.layoutAppbar?.onClickListener = this
+//        binding.imgGrade.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
+//        binding.imgBookmark.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
         invisibleView()
 
         binding.onClickListener = this
@@ -188,7 +190,6 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
 
     private fun invisibleView() {
         binding.constAll.visibility = View.INVISIBLE
-        binding.viewEnd.visibility = View.INVISIBLE
     }
 
     private fun defaultSetting() {
@@ -197,7 +198,6 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
             rfBtn = false
         }
         binding.constAll.visibility = View.VISIBLE
-        binding.viewEnd.visibility = View.VISIBLE
     }
 
     @SuppressLint("SetTextI18n")
@@ -222,8 +222,10 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     private fun setBg(result: String?, textView: TextView) {
         if (result!!.contains("매입")) {
             textView.text = result
+//            textView.setTextColor(ContextCompat.getColor(context!!, R.color.green))
         } else if (result.contains("매각")) {
             textView.text = result
+//            textView.setTextColor(ContextCompat.getColor(context!!, R.color.Red))
         }
     }
 

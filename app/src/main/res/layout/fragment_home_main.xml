@@ -101,7 +101,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="4dp"
-                        android:src="@drawable/ic_action_star"
+                        android:src="@drawable/ic_action_star_black"
                         app:layout_constraintBottom_toBottomOf="@+id/txt_grade"
                         app:layout_constraintStart_toEndOf="@+id/txt_grade"
                         app:layout_constraintTop_toTopOf="@+id/txt_grade"
@@ -342,17 +342,17 @@
                             app:layout_constraintTop_toBottomOf="@+id/layout_xbox"
                             />
 
-
+                        <View
+                            android:id="@+id/view_end"
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            android:background="@color/white"
+                            app:layout_constraintTop_toBottomOf="@+id/layout_switch"
+                            />
 
                     </android.support.constraint.ConstraintLayout>
 
-                    <View
-                        android:id="@+id/view_end"
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp"
-                        android:background="@color/white"
-                        app:layout_constraintTop_toBottomOf="@+id/const_all"
-                        />
+
 
                 </android.support.constraint.ConstraintLayout>
             </android.support.v4.widget.NestedScrollView>

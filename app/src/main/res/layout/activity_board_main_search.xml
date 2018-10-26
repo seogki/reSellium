@@ -150,7 +150,7 @@
                         android:textStyle="bold"
                         app:layout_constraintTop_toBottomOf="@+id/txt_result"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:textColor="@color/lightBlack"
+                        android:textColor="@color/fabColor"
                         android:text="검색어: "
                         />
 

@@ -66,23 +66,9 @@ class BoardMainPresenter(val view: View? = null)  : BasePresenter(){
         }
     }
 
-    fun addSpinnerData() {
-        Thread {
-            val arr = mutableListOf<String>()
-            arr.add("")
-            arr.add("평점")
-            arr.add("이름")
-            arr.add("최근 날짜")
-            arr.add("오래된 날짜")
-            view?.spinner(arr)
-        }.start()
-
-    }
-
     interface View {
         fun registerData(board: MutableList<BoardMainModel>?, disposable: Disposable?, isScroll: Boolean)
         fun errorData(disposable: Disposable?, message: String?)
-        fun spinner(arr: MutableList<String>)
         fun registerSpinnerData(board: MutableList<BoardMainModel>?, disposable: Disposable?, isScroll: Boolean)
     }
 }

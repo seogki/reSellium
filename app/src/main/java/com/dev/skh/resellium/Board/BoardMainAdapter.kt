@@ -48,9 +48,9 @@ class BoardMainAdapter(context: Context, arraylist: MutableList<BoardMainModel>)
 
         override fun onClick(v: View?) {
             when (v?.id) {
-                R.id.img_other -> {
-                    popupMenu(v)
-                }
+//                R.id.img_other -> {
+//                    popupMenu(v)
+//                }
             }
         }
 

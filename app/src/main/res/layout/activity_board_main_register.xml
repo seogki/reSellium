@@ -207,7 +207,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:padding="12dp"
-                        android:background="@color/statusBar"
+                        android:background="@color/fabColor"
                         android:textStyle="bold"
                         android:textSize="18sp"
                         android:gravity="center"
