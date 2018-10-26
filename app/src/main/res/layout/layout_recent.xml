@@ -65,7 +65,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:soldCheck="@{model.which}"
                 tools:text="중고매입"
-                tools:textColor="@color/black"
                 />
 
             <TextView
@@ -76,7 +75,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:letterSpacing="0.05"
-                android:textColor="@color/black"
+                android:textColor="@color/secondaryTextColor"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -135,7 +134,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:soldCheck="@{model.which}"
                 tools:text="중고매입"
-                tools:textColor="@color/black"
                 />
 
             <TextView
@@ -146,7 +144,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:letterSpacing="0.05"
-                android:textColor="@color/black"
+                android:textColor="@color/secondaryTextColor"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -208,7 +206,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:soldCheck="@{model.which}"
                 tools:text="중고매입"
-                tools:textColor="@color/black"
                 />
 
             <TextView
@@ -219,7 +216,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:letterSpacing="0.05"
-                android:textColor="@color/black"
+                android:textColor="@color/secondaryTextColor"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

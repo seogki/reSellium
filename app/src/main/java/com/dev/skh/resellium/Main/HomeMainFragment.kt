@@ -61,7 +61,7 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_main, container, false)
-        binding.layoutAppbar?.title = "메인"
+        binding.layoutAppbar?.title = "겜창고"
         binding.layoutAppbar?.onClickListener = this
 //        binding.imgGrade.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
 //        binding.imgBookmark.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)

@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:paddingEnd="4dp"
             android:paddingStart="4dp"
-            android:drawableTop="@drawable/ic_action_star_white"
+            android:drawableBottom="@drawable/ic_action_star_white"
             android:text="@{model.grade}"
             android:textColor="@color/white"
             android:textSize="16sp"
