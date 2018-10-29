@@ -5,9 +5,9 @@ package com.dev.skh.resellium.Util
  */
 open class Const {
     companion object {
-        val server_url = "http://192.168.1.16:8001/"
-
-//        val server_url = "http://resellium.cafe24app.com:80/"
+//        val server_url = "http://192.168.1.9:8001/"
+//
+        val server_url = "http://resellium.cafe24app.com:80/"
 
         /***
          *  시간

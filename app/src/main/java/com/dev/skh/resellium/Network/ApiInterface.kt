@@ -89,83 +89,33 @@ interface ApiInterface {
     /***PS4
      *
      */
+    @POST("game/getGameData")
+    fun getGameData(@Query("Type") type: String): Flowable<MutableList<GameMainModel>>
 
-    @POST("game/getPs4Data")
-    fun getPs4Data(): Flowable<MutableList<GameMainModel>>
+    @POST("game/getScrollGameData")
+    fun getScrollGameData(@Query("Type") type: String, @Query("Id") id: String): Flowable<MutableList<GameMainModel>>
 
-    @POST("game/getScrollPs4Data")
-    fun getScrollPs4Data(@Query("Id") id: String): Flowable<MutableList<GameMainModel>>
-
-    @POST("game/getSpinnerPs4Data")
-    fun getSpinnerPs4Data(@Query("First") first: String
-                          , @Query("Second") second: String): Flowable<MutableList<GameMainModel>>
-
-    @POST("game/getSpinnerScrollPs4Data")
-    fun getSpinnerScrollPs4Data(@Query("First") first: String
-                                , @Query("Second") second: String
-                                , @Query("Id") id: String): Flowable<MutableList<GameMainModel>>
-
-    @POST("game/getSearchPs4Data")
-    fun getSearchPs4Data(@Query("Search") search: String): Flowable<MutableList<GameMainModel>>
-
-    @POST("game/getSearchScrollPs4Data")
-    fun getSearchScrollPs4Data(@Query("Id") id: String, @Query("Search") search: String): Flowable<MutableList<GameMainModel>>
-
-
-    /***
-     * XBOX
-     */
-
-    @POST("game/getxboxData")
-    fun getxboxData(): Flowable<MutableList<GameMainModel>>
-
-    @POST("game/getScrollxboxData")
-    fun getScrollxboxData(@Query("Id") id: String): Flowable<MutableList<GameMainModel>>
-
-
-    @POST("game/getSpinnerxboxData")
-    fun getSpinnerxboxData(@Query("First") first: String
+    @POST("game/getSpinnerGameData")
+    fun getSpinnerGameData(@Query("Type") type: String
+                           , @Query("First") first: String
                            , @Query("Second") second: String): Flowable<MutableList<GameMainModel>>
 
-    @POST("game/getSpinnerScrollxboxData")
-    fun getSpinnerScrollxboxData(@Query("First") first: String
+    @POST("game/getSpinnerScrollGameData")
+    fun getSpinnerScrollGameData(@Query("Type") type: String
+                                 , @Query("First") first: String
                                  , @Query("Second") second: String
                                  , @Query("Id") id: String): Flowable<MutableList<GameMainModel>>
 
-    @POST("game/getSearchXboxData")
-    fun getSearchXboxData(@Query("Search") search: String): Flowable<MutableList<GameMainModel>>
+    @POST("game/getSearchGameData")
+    fun getSearchGameData(@Query("Type") type: String
+                          , @Query("Search") search: String): Flowable<MutableList<GameMainModel>>
 
-    @POST("game/getSearchScrollXboxData")
-    fun getSearchScrollXboxData(@Query("Id") id: String, @Query("Search") search: String): Flowable<MutableList<GameMainModel>>
-
-
-    /***
-     * SWITCH
-     */
-
-    @POST("game/getswitchData")
-    fun getSwitchData(): Flowable<MutableList<GameMainModel>>
+    @POST("game/getSearchScrollGameData")
+    fun getSearchScrollGameData(@Query("Type") type: String
+                                , @Query("Id") id: String
+                                , @Query("Search") search: String): Flowable<MutableList<GameMainModel>>
 
 
-    @POST("game/getScrollswitchData")
-    fun getScrollswitchData(@Query("Id") id: String): Flowable<MutableList<GameMainModel>>
-
-
-    @POST("game/getSpinnerswitchData")
-    fun getSpinnerswitchData(@Query("First") first: String
-                             , @Query("Second") second: String): Flowable<MutableList<GameMainModel>>
-
-    @POST("game/getSpinnerScrollswitchData")
-    fun getSpinnerScrollswitchData(@Query("First") first: String
-                                   , @Query("Second") second: String
-                                   , @Query("Id") id: String): Flowable<MutableList<GameMainModel>>
-
-
-    @POST("game/getSearchSwitchData")
-    fun getSearchSwitchData(@Query("Search") search: String): Flowable<MutableList<GameMainModel>>
-
-    @POST("game/getSearchScrollSwitchData")
-    fun getSearchScrollSwitchData(@Query("Id") id: String, @Query("Search") search: String): Flowable<MutableList<GameMainModel>>
 
     @POST("game/RegisterData")
     fun RegisterData(@Query("Platform") platform: String

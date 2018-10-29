@@ -20,7 +20,7 @@ class SearchMainPresenter(val view: View? = null) : BasePresenter() {
     }
 
     private fun setSwitchData(search: String) {
-        disposable = client.getSearchSwitchData(search)
+        disposable = client.getSearchGameData("2",search)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -32,7 +32,7 @@ class SearchMainPresenter(val view: View? = null) : BasePresenter() {
     }
 
     private fun setXboxData(search: String) {
-        disposable = client.getSearchXboxData(search)
+        disposable = client.getSearchGameData("1",search)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -44,7 +44,7 @@ class SearchMainPresenter(val view: View? = null) : BasePresenter() {
     }
 
     private fun setPs4Data(search: String) {
-        disposable = client.getSearchPs4Data(search)
+        disposable = client.getSearchGameData("0",search)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -68,7 +68,7 @@ class SearchMainPresenter(val view: View? = null) : BasePresenter() {
 
 
     private fun setScrollSwitchData(id: String, searchString: String) {
-        disposable = client.getSearchScrollSwitchData(id, searchString)
+        disposable = client.getSearchScrollGameData("2",id, searchString)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -80,7 +80,7 @@ class SearchMainPresenter(val view: View? = null) : BasePresenter() {
     }
 
     private fun setScrollXboxData(id: String, searchString: String) {
-        disposable = client.getSearchScrollXboxData(id, searchString)
+        disposable = client.getSearchScrollGameData("1",id, searchString)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -92,7 +92,7 @@ class SearchMainPresenter(val view: View? = null) : BasePresenter() {
     }
 
     private fun setScrollPs4Data(id: String, searchString: String) {
-        disposable = client.getSearchScrollPs4Data(id, searchString)
+        disposable = client.getSearchScrollGameData("0",id, searchString)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

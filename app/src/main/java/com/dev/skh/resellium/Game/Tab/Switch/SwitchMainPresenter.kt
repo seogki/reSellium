@@ -13,7 +13,7 @@ class SwitchMainPresenter(val view: View? = null) : BasePresenter(){
 
 
     fun addData() {
-        disposable = client.getSwitchData()
+        disposable = client.getGameData("2")
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view?.updateData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
@@ -21,7 +21,7 @@ class SwitchMainPresenter(val view: View? = null) : BasePresenter(){
 
     fun scrollData(id: String?) {
         if (id != null) {
-            disposable = client.getScrollswitchData(id)
+            disposable = client.getScrollGameData("2", id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateData(it, disposable, true) }
                             , { view?.errorUpdateData(disposable, it.message) })
@@ -29,8 +29,7 @@ class SwitchMainPresenter(val view: View? = null) : BasePresenter(){
     }
 
     fun checkSpinnerData(a1: String, a2: String) {
-
-        disposable = client.getSpinnerswitchData(a1, a2)
+        disposable = client.getSpinnerGameData("2", a1, a2)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view?.updateSpinnerData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
@@ -38,8 +37,7 @@ class SwitchMainPresenter(val view: View? = null) : BasePresenter(){
 
     fun checkSpinnerScrollData(a1: String, a2: String, id: String?) {
         if (id != null) {
-
-            disposable = client.getSpinnerScrollswitchData(a1, a2, id)
+            disposable = client.getSpinnerScrollGameData("2", a1, a2, id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateSpinnerData(it, disposable, true) }
                             , { view?.errorUpdateData(disposable, it.message) })

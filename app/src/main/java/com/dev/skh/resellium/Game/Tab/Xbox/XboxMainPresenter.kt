@@ -13,7 +13,7 @@ class XboxMainPresenter(val view: View? = null) : BasePresenter() {
 
 
     fun addData() {
-        disposable = client.getxboxData()
+        disposable = client.getGameData("1")
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view?.updateData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
@@ -21,7 +21,7 @@ class XboxMainPresenter(val view: View? = null) : BasePresenter() {
 
     fun scrollData(id: String?) {
         if (id != null) {
-            disposable = client.getScrollxboxData(id)
+            disposable = client.getScrollGameData("1", id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateData(it, disposable, true) }
                             , { view?.errorUpdateData(disposable, it.message) })
@@ -29,7 +29,7 @@ class XboxMainPresenter(val view: View? = null) : BasePresenter() {
     }
 
     fun checkSpinnerData(a1: String, a2: String) {
-        disposable = client.getSpinnerxboxData(a1, a2)
+        disposable = client.getSpinnerGameData("1", a1, a2)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view?.updateSpinnerData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
@@ -37,7 +37,7 @@ class XboxMainPresenter(val view: View? = null) : BasePresenter() {
 
     fun checkSpinnerScrollData(a1: String, a2: String, id: String?) {
         if (id != null) {
-            disposable = client.getSpinnerScrollxboxData(a1, a2, id)
+            disposable = client.getSpinnerScrollGameData("1", a1, a2, id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateSpinnerData(it, disposable, true) }
                             , { view?.errorUpdateData(disposable, it.message) })

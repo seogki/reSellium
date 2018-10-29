@@ -9,11 +9,10 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Seogki on 2018. 9. 28..
  */
-class Ps4MainPresenter(val view: View? = null)  : BasePresenter(){
+class Ps4MainPresenter(val view: View? = null) : BasePresenter() {
 
     fun addData() {
-
-        disposable = client.getPs4Data()
+        disposable = client.getGameData("0")
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view?.updateData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
@@ -21,7 +20,7 @@ class Ps4MainPresenter(val view: View? = null)  : BasePresenter(){
 
     fun scrollData(id: String?) {
         if (id != null) {
-            disposable = client.getScrollPs4Data(id)
+            disposable = client.getScrollGameData("0", id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateData(it, disposable, true) }
                             , { view?.errorUpdateData(disposable, it.message) })
@@ -29,7 +28,7 @@ class Ps4MainPresenter(val view: View? = null)  : BasePresenter(){
     }
 
     fun checkSpinnerData(a1: String, a2: String) {
-        disposable = client.getSpinnerPs4Data(a1, a2)
+        disposable = client.getSpinnerGameData("0", a1, a2)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view?.updateSpinnerData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
@@ -37,7 +36,7 @@ class Ps4MainPresenter(val view: View? = null)  : BasePresenter(){
 
     fun checkSpinnerScrollData(a1: String, a2: String, id: String?) {
         if (id != null) {
-            disposable = client.getSpinnerScrollPs4Data(a1, a2, id)
+            disposable = client.getSpinnerScrollGameData("0", a1, a2, id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateSpinnerData(it, disposable, true) }
                             , { view?.errorUpdateData(disposable, it.message) })
