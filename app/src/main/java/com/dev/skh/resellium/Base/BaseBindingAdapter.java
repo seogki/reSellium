@@ -132,9 +132,9 @@ public class BaseBindingAdapter {
 
 
         if (result.contains("매입")) {
-            textView.setTextColor(ContextCompat.getColor(context, R.color.green));
+            textView.setTextColor(ContextCompat.getColor(context, R.color.accentColor));
         } else {
-            textView.setTextColor(ContextCompat.getColor(context, R.color.Red));
+            textView.setTextColor(ContextCompat.getColor(context, R.color.fabColor));
         }
 
         textView.setText(result);

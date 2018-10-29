@@ -43,7 +43,7 @@ class GameMainFragment : BaseFragment(), View.OnClickListener {
 
     private fun initAds() {
         adView = InterstitialAd(context!!)
-        val test = "ca-app-pub-3940256099942544/1033173712"
+//        val test = "ca-app-pub-3940256099942544/1033173712"
         val mine = "ca-app-pub-2973552036061869/9167567607"
         adView?.adUnitId = mine
         reloadAd()

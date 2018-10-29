@@ -1,9 +1,7 @@
 package com.dev.skh.resellium.Game.Search
 
 import com.dev.skh.resellium.Base.BasePresenter
-import com.dev.skh.resellium.Game.Model.Ps4MainModel
-import com.dev.skh.resellium.Game.Model.SwitchMainModel
-import com.dev.skh.resellium.Game.Model.XboxMainModel
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -106,9 +104,9 @@ class SearchMainPresenter(val view: View? = null) : BasePresenter() {
     }
 
     interface View {
-        fun setPs4Data(result: MutableList<Ps4MainModel>?, disposable: Disposable?, isScroll: Boolean)
-        fun setXboxData(result: MutableList<XboxMainModel>?, disposable: Disposable?, isScroll: Boolean)
-        fun setSwitchData(result: MutableList<SwitchMainModel>?, disposable: Disposable?, isScroll: Boolean)
+        fun setPs4Data(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean)
+        fun setXboxData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean)
+        fun setSwitchData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean)
         fun setError(disposable: Disposable?, message: String?)
     }
 }

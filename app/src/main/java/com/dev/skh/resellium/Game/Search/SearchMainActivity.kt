@@ -12,9 +12,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import com.dev.skh.resellium.Base.InnerBaseActivity
-import com.dev.skh.resellium.Game.Model.Ps4MainModel
-import com.dev.skh.resellium.Game.Model.SwitchMainModel
-import com.dev.skh.resellium.Game.Model.XboxMainModel
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.Game.Tab.Ps4.Ps4MainAdapter
 import com.dev.skh.resellium.Game.Tab.Switch.SwitchMainAdapter
 import com.dev.skh.resellium.Game.Tab.Xbox.XboxMainAdapter
@@ -194,7 +192,7 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
         })
     }
 
-    override fun setPs4Data(result: MutableList<Ps4MainModel>?, disposable: Disposable?, isScroll: Boolean) {
+    override fun setPs4Data(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null) {
             if (ps4MainAdapter == null) {
                 ps4MainAdapter = Ps4MainAdapter(this, result)
@@ -210,7 +208,7 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
             setRecyclerViewScrollbar()
     }
 
-    override fun setXboxData(result: MutableList<XboxMainModel>?, disposable: Disposable?, isScroll: Boolean) {
+    override fun setXboxData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null) {
             if (xboxMainAdapter == null) {
                 xboxMainAdapter = XboxMainAdapter(this, result)
@@ -225,7 +223,7 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
             setRecyclerViewScrollbar()
     }
 
-    override fun setSwitchData(result: MutableList<SwitchMainModel>?, disposable: Disposable?, isScroll: Boolean) {
+    override fun setSwitchData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null) {
             if (switchMainAdapter == null) {
                 switchMainAdapter = SwitchMainAdapter(this, result)

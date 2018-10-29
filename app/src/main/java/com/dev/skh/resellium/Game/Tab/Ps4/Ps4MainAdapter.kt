@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
-import com.dev.skh.resellium.Game.Model.Ps4MainModel
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.Network.ApiCilentRx
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.databinding.ItemPs4Binding
@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Seogki on 2018. 8. 20..
  */
-class Ps4MainAdapter(context: Context, arraylist: MutableList<Ps4MainModel>) : BaseRecyclerViewAdapter<Ps4MainModel, Ps4MainAdapter.EstimateRegisterViewHolder>(context, arraylist) {
+class Ps4MainAdapter(context: Context, arraylist: MutableList<GameMainModel>) : BaseRecyclerViewAdapter<GameMainModel, Ps4MainAdapter.EstimateRegisterViewHolder>(context, arraylist) {
 
     private var arr = arraylist
     override fun onBindView(holder: EstimateRegisterViewHolder, position: Int) {
@@ -38,16 +38,16 @@ class Ps4MainAdapter(context: Context, arraylist: MutableList<Ps4MainModel>) : B
     inner class EstimateRegisterViewHolder(val binding: ItemPs4Binding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
 
-        fun bind(model: Ps4MainModel?) {
+        fun bind(model: GameMainModel?) {
             binding.onClickListener = this
             binding.model = model
         }
 
         override fun onClick(v: View?) {
             when (v?.id) {
-                R.id.img_other -> {
-                    popupMenu(v)
-                }
+//                R.id.img_other -> {
+//                    popupMenu(v)
+//                }
             }
         }
 

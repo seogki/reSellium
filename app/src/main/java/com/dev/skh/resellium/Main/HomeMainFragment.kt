@@ -222,10 +222,10 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     private fun setBg(result: String?, textView: TextView) {
         if (result!!.contains("매입")) {
             textView.text = result
-//            textView.setTextColor(ContextCompat.getColor(context!!, R.color.green))
+            textView.setTextColor(ContextCompat.getColor(context!!, R.color.accentColor))
         } else if (result.contains("매각")) {
             textView.text = result
-//            textView.setTextColor(ContextCompat.getColor(context!!, R.color.Red))
+            textView.setTextColor(ContextCompat.getColor(context!!, R.color.fabColor))
         }
     }
 

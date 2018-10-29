@@ -101,7 +101,6 @@ dependencies {
     //권한 설정용
 //    implementation 'gun0912.ted:tedpermission:2.2.0'
 
-
     //statusbar 투명
 //    implementation 'com.jaeger.statusbarutil:library:1.5.1'
 

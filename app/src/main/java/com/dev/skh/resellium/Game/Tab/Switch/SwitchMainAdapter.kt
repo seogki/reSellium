@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
-import com.dev.skh.resellium.Game.Model.SwitchMainModel
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.Network.ApiCilentRx
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.databinding.ItemSwitchBinding
@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Seogki on 2018. 8. 20..
  */
-class SwitchMainAdapter(context: Context, arraylist: MutableList<SwitchMainModel>) : BaseRecyclerViewAdapter<SwitchMainModel, SwitchMainAdapter.EstimateRegisterViewHolder>(context, arraylist) {
+class SwitchMainAdapter(context: Context, arraylist: MutableList<GameMainModel>) : BaseRecyclerViewAdapter<GameMainModel, SwitchMainAdapter.EstimateRegisterViewHolder>(context, arraylist) {
 
     private var arr = arraylist
     override fun onBindView(holder: EstimateRegisterViewHolder, position: Int) {
@@ -39,7 +39,7 @@ class SwitchMainAdapter(context: Context, arraylist: MutableList<SwitchMainModel
     inner class EstimateRegisterViewHolder(val binding: ItemSwitchBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
 
-        fun bind(model: SwitchMainModel?) {
+        fun bind(model: GameMainModel?) {
             binding.onClickListener = this
             binding.model = model
         }

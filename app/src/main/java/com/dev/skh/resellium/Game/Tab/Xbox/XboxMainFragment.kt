@@ -1,6 +1,7 @@
 package com.dev.skh.resellium.Game.Tab.Xbox
 
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
@@ -14,7 +15,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.dev.skh.resellium.Base.BaseFragment
-import com.dev.skh.resellium.Game.Model.XboxMainModel
+import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
+import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.Game.Tab.Ps4.XboxMainPresenter
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
@@ -23,7 +26,12 @@ import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
 
-class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemSelectedListener,View.OnClickListener {
+class XboxMainFragment : BaseFragment()
+        , XboxMainPresenter.View
+        , SwipeRefreshLayout.OnRefreshListener
+        , AdapterView.OnItemSelectedListener
+        , View.OnClickListener
+        , BaseRecyclerViewAdapter.OnItemClickListener {
 
 
     companion object {
@@ -109,11 +117,19 @@ class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLay
         callSpinnerData()
     }
 
-    override fun updateData(arr: MutableList<XboxMainModel>?, disposable: Disposable?, isScroll: Boolean) {
+    override fun onItemClick(view: View, position: Int) {
+        val data = xboxMainAdapter?.getItem(position)
+        val intent = Intent(view.context, GameMainCommentActivity::class.java)
+        intent.putExtra("data", data)
+        startActivity(intent)
+    }
+
+    override fun updateData(arr: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (arr != null) {
             if (xboxMainAdapter == null) {
                 xboxMainAdapter = XboxMainAdapter(context!!, arr)
                 recyclerView?.adapter = xboxMainAdapter
+                xboxMainAdapter?.setOnItemClickListener(this)
             } else {
                 xboxMainAdapter?.addItems(arr)
             }
@@ -171,7 +187,7 @@ class XboxMainFragment : BaseFragment(), XboxMainPresenter.View, SwipeRefreshLay
         }
     }
 
-    override fun updateSpinnerData(result: MutableList<XboxMainModel>?, disposable: Disposable?, isScroll: Boolean) {
+    override fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null)
             xboxMainAdapter?.addItems(result)
         setProgessbarGone()

@@ -48,10 +48,10 @@
 
     <!--<color name="accentColor">#7875FF</color>-->
     <!--<color name="statusBar">#6965FF</color>-->
-    <color name="accentColor">#607D8B</color>
-    <color name="lightColor">#CFD8DC</color>
-    <color name="statusBar">#455A64</color>
-    <color name="fabColor">#FF5252</color>
+    <color name="accentColor">#3F51B5</color>
+    <color name="lightColor">#C5CAE9</color>
+    <color name="statusBar">#303F9F</color>
+    <color name="fabColor">#FF4081</color>
     <color name="secondaryTextColor">#757575</color>
     <color name="fabDrawableColor">#000000</color>
 

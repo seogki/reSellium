@@ -1,7 +1,7 @@
 package com.dev.skh.resellium.Game.Tab.Ps4
 
 import com.dev.skh.resellium.Base.BasePresenter
-import com.dev.skh.resellium.Game.Model.XboxMainModel
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -59,8 +59,8 @@ class XboxMainPresenter(val view: View? = null) : BasePresenter() {
 
     interface View {
 
-        fun updateData(arr: MutableList<XboxMainModel>?, disposable: Disposable?, isScroll: Boolean)
-        fun updateSpinnerData(result: MutableList<XboxMainModel>?, disposable: Disposable?, isScroll: Boolean)
+        fun updateData(arr: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean)
+        fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean)
         fun errorUpdateData(disposable: Disposable?, message: String?)
         fun spinner2(arr2: MutableList<String>)
     }

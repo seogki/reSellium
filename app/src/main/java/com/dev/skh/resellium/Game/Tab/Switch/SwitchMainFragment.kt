@@ -1,6 +1,7 @@
 package com.dev.skh.resellium.Game.Tab.Switch
 
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
@@ -14,7 +15,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.dev.skh.resellium.Base.BaseFragment
-import com.dev.skh.resellium.Game.Model.SwitchMainModel
+import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
+import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.FragmentSwitchMainBinding
@@ -22,7 +25,13 @@ import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
 
-class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
+class SwitchMainFragment : BaseFragment()
+        , SwitchMainPresenter.View
+        , SwipeRefreshLayout.OnRefreshListener
+        , AdapterView.OnItemSelectedListener
+        , View.OnClickListener
+        , BaseRecyclerViewAdapter.OnItemClickListener {
+
 
     companion object {
         fun weakRef(view: SwitchMainPresenter.View): WeakReference<SwitchMainPresenter> {
@@ -104,11 +113,12 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
         callSpinnerData()
     }
 
-    override fun updateData(arr: MutableList<SwitchMainModel>?, disposable: Disposable?, isScroll: Boolean) {
+    override fun updateData(arr: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (arr != null) {
             if (switchMainAdapter == null) {
                 switchMainAdapter = SwitchMainAdapter(context!!, arr)
                 recyclerView?.adapter = switchMainAdapter
+                switchMainAdapter?.setOnItemClickListener(this)
             } else {
                 switchMainAdapter?.addItems(arr)
             }
@@ -119,6 +129,13 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
         isLoading = false
         if (!isScroll)
             setRecyclerViewScrollbar(false)
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+        val data = switchMainAdapter?.getItem(position)
+        val intent = Intent(view.context, GameMainCommentActivity::class.java)
+        intent.putExtra("data", data)
+        startActivity(intent)
     }
 
     private fun setRecyclerViewScrollbar(isSpinner: Boolean) {
@@ -159,7 +176,7 @@ class SwitchMainFragment : BaseFragment(), SwitchMainPresenter.View, SwipeRefres
         }
     }
 
-    override fun updateSpinnerData(result: MutableList<SwitchMainModel>?, disposable: Disposable?, isScroll: Boolean) {
+    override fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null)
             switchMainAdapter?.addItems(result)
         setProgessbarGone()

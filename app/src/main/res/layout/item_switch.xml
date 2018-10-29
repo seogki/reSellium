@@ -9,7 +9,7 @@
 
         <variable
             name="model"
-            type="com.dev.skh.resellium.Game.Model.SwitchMainModel"
+            type="com.dev.skh.resellium.Game.Model.GameMainModel"
             />
 
         <variable
@@ -37,7 +37,7 @@
             android:maxLength="8"
             android:maxLines="1"
             android:text="@{model.title}"
-            android:textColor="@color/fabColor"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"

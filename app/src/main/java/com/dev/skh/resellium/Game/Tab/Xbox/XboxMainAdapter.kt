@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
-import com.dev.skh.resellium.Game.Model.XboxMainModel
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.Network.ApiCilentRx
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.databinding.ItemXboxBinding
@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Seogki on 2018. 8. 20..
  */
-class XboxMainAdapter(context: Context, arraylist: MutableList<XboxMainModel>) : BaseRecyclerViewAdapter<XboxMainModel, XboxMainAdapter.EstimateRegisterViewHolder>(context, arraylist) {
+class XboxMainAdapter(context: Context, arraylist: MutableList<GameMainModel>) : BaseRecyclerViewAdapter<GameMainModel, XboxMainAdapter.EstimateRegisterViewHolder>(context, arraylist) {
 
     override fun onBindView(holder: EstimateRegisterViewHolder, position: Int) {
         holder.setIsRecyclable(true)
@@ -38,7 +38,7 @@ class XboxMainAdapter(context: Context, arraylist: MutableList<XboxMainModel>) :
 
 
 
-        fun bind(model: XboxMainModel?) {
+        fun bind(model: GameMainModel?) {
             binding.onClickListener = this
             binding.model = model
         }

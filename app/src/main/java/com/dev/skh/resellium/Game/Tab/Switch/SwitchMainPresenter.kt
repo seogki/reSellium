@@ -1,7 +1,7 @@
 package com.dev.skh.resellium.Game.Tab.Switch
 
 import com.dev.skh.resellium.Base.BasePresenter
-import com.dev.skh.resellium.Game.Model.SwitchMainModel
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -61,8 +61,8 @@ class SwitchMainPresenter(val view: View? = null) : BasePresenter(){
 
     interface View {
 
-        fun updateData(arr: MutableList<SwitchMainModel>?, disposable: Disposable?, isScroll: Boolean)
-        fun updateSpinnerData(result: MutableList<SwitchMainModel>?, disposable: Disposable?, isScroll: Boolean)
+        fun updateData(arr: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean)
+        fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean)
         fun errorUpdateData(disposable: Disposable?, message: String?)
         fun spinner2(arr2: MutableList<String>)
     }

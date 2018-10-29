@@ -1,6 +1,7 @@
 package com.dev.skh.resellium.Game.Tab.Ps4
 
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
@@ -14,7 +15,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.dev.skh.resellium.Base.BaseFragment
-import com.dev.skh.resellium.Game.Model.Ps4MainModel
+import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
+import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.FragmentPs4MainBinding
@@ -26,7 +29,7 @@ class Ps4MainFragment : BaseFragment()
         , Ps4MainPresenter.View
         , SwipeRefreshLayout.OnRefreshListener
         , AdapterView.OnItemSelectedListener
-        , View.OnClickListener {
+        , View.OnClickListener, BaseRecyclerViewAdapter.OnItemClickListener {
 
 
     companion object {
@@ -106,10 +109,11 @@ class Ps4MainFragment : BaseFragment()
         callSpinnerData()
     }
 
-    override fun updateData(arr: MutableList<Ps4MainModel>?, disposable: Disposable?, isScroll: Boolean) {
+    override fun updateData(arr: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (arr != null) {
             if (ps4MainAdapter == null) {
                 ps4MainAdapter = Ps4MainAdapter(context!!, arr)
+                ps4MainAdapter?.setOnItemClickListener(this)
                 recyclerView?.adapter = ps4MainAdapter
             } else {
                 ps4MainAdapter?.addItems(arr)
@@ -121,6 +125,13 @@ class Ps4MainFragment : BaseFragment()
         isLoading = false
         if (!isScroll)
             setRecyclerViewScrollbar(false)
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+        val data = ps4MainAdapter?.getItem(position)
+        val intent = Intent(view.context, GameMainCommentActivity::class.java)
+        intent.putExtra("data", data)
+        startActivity(intent)
     }
 
 
@@ -178,7 +189,7 @@ class Ps4MainFragment : BaseFragment()
         weakPresenter.get()?.checkSpinnerData(first, second)
     }
 
-    override fun updateSpinnerData(result: MutableList<Ps4MainModel>?, disposable: Disposable?, isScroll: Boolean) {
+    override fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null)
             ps4MainAdapter?.addItems(result)
         setProgessbarGone()
