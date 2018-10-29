@@ -52,10 +52,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:gravity="start"
-            app:timeAgo="@{model.date}"
             android:textColor="@color/darkGrey"
             android:textSize="12sp"
             app:layout_constraintTop_toBottomOf="@+id/txt_title"
+            app:timeAgo="@{model.date}"
             tools:text="2018-09-19 23:44:45"
             />
 
@@ -85,9 +85,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
             android:gravity="start"
-            android:textSize="12.5sp"
             android:letterSpacing="0.05"
             android:textColor="@color/black"
+            android:textSize="12.5sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_platform"
@@ -95,16 +95,30 @@
             tools:text="42,000원"
             />
 
-        <ImageView
+        <TextView
             android:id="@+id/img_other"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:onClick="@{onClickListener::onClick}"
-            android:src="@drawable/ic_action_other"
+            android:src="@drawable/ic_action_comment"
+            android:text="@{model.comment}"
+            android:textColor="@color/fabColor"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:text="5"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="댓글:"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/img_other"
+            app:layout_constraintTop_toTopOf="@+id/img_other"
             />
 
         <TextView
