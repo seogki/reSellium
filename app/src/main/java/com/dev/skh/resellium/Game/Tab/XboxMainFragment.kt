@@ -65,7 +65,7 @@ class XboxMainFragment : BaseFragment()
 
 
         addItemOnSpinner()
-        weakPresenter.get()?.addData()
+        weakPresenter.get()?.addData("1")
 
     }
 
@@ -166,9 +166,9 @@ class XboxMainFragment : BaseFragment()
                             Handler().postDelayed({
                                 val id = xboxMainAdapter?.getItem(xboxMainAdapter!!.itemCount - 1)?.id
                                 if (isSpinner)
-                                    weakPresenter.get()?.checkSpinnerScrollData(first, second, id)
+                                    weakPresenter.get()?.checkSpinnerScrollData("1",first, second, id)
                                 else
-                                    weakPresenter.get()?.scrollData(id)
+                                    weakPresenter.get()?.scrollData("1",id)
                             }, 500)
 
                         }
@@ -215,7 +215,7 @@ class XboxMainFragment : BaseFragment()
 
     private fun callSpinnerData() {
         refreshWithoutData()
-        weakPresenter.get()?.checkSpinnerData(first, second)
+        weakPresenter.get()?.checkSpinnerData("1",first, second)
     }
 
     override fun onDestroy() {
@@ -232,7 +232,7 @@ class XboxMainFragment : BaseFragment()
         xboxMainAdapter?.clearItems()
         setViewDefault()
         recyclerView?.removeOnScrollListener(null)
-        weakPresenter.get()?.addData()
+        weakPresenter.get()?.addData("1")
         isLoading = false
         binding.swipeLayout.isRefreshing = false
     }

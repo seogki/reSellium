@@ -63,7 +63,7 @@ class SwitchMainFragment : BaseFragment()
         super.onActivityCreated(savedInstanceState)
 
         addItemOnSpinner()
-        weakPresenter.get()?.addData()
+        weakPresenter.get()?.addData("2")
 
     }
 
@@ -155,9 +155,9 @@ class SwitchMainFragment : BaseFragment()
                             Handler().postDelayed({
                                 val id = switchMainAdapter?.getItem(switchMainAdapter!!.itemCount - 1)?.id
                                 if (isSpinner)
-                                    weakPresenter.get()?.checkSpinnerScrollData(first, second, id)
+                                    weakPresenter.get()?.checkSpinnerScrollData("2",first, second, id)
                                 else
-                                    weakPresenter.get()?.scrollData(id)
+                                    weakPresenter.get()?.scrollData("2",id)
                             }, 500)
 
                         }
@@ -204,7 +204,7 @@ class SwitchMainFragment : BaseFragment()
 
     private fun callSpinnerData() {
         refreshWithoutData()
-        weakPresenter.get()?.checkSpinnerData(first, second)
+        weakPresenter.get()?.checkSpinnerData("2",first, second)
     }
 
 
@@ -224,7 +224,7 @@ class SwitchMainFragment : BaseFragment()
         switchMainAdapter?.clearItems()
         setViewDefault()
         recyclerView?.removeOnScrollListener(null)
-        weakPresenter.get()?.addData()
+        weakPresenter.get()?.addData("2")
         isLoading = false
         binding.swipeLayout.isRefreshing = false
     }

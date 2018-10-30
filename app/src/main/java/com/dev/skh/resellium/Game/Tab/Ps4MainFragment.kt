@@ -63,7 +63,7 @@ class Ps4MainFragment : BaseFragment()
         super.onActivityCreated(savedInstanceState)
 
         addItemOnSpinner()
-        weakPresenter.get()?.addData()
+        weakPresenter.get()?.addData("0")
 
     }
 
@@ -154,9 +154,9 @@ class Ps4MainFragment : BaseFragment()
                             Handler().postDelayed({
                                 val id = ps4MainAdapter?.getItem(ps4MainAdapter!!.itemCount - 1)?.id
                                 if (isSpinner)
-                                    weakPresenter.get()?.checkSpinnerScrollData(first, second, id)
+                                    weakPresenter.get()?.checkSpinnerScrollData("0",first, second, id)
                                 else
-                                    weakPresenter.get()?.scrollData(id)
+                                    weakPresenter.get()?.scrollData("0",id)
 
                             }, 500)
 
@@ -188,7 +188,7 @@ class Ps4MainFragment : BaseFragment()
 
     private fun callSpinnerData() {
         refreshWithoutData()
-        weakPresenter.get()?.checkSpinnerData(first, second)
+        weakPresenter.get()?.checkSpinnerData("0",first, second)
     }
 
     override fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
@@ -233,7 +233,7 @@ class Ps4MainFragment : BaseFragment()
         recyclerView?.removeOnScrollListener(null)
 
         binding.spinner.setSelection(0, false)
-        weakPresenter.get()?.addData()
+        weakPresenter.get()?.addData("0")
         isLoading = false
         binding.swipeLayout.isRefreshing = false
     }

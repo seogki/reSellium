@@ -12,32 +12,32 @@ import io.reactivex.schedulers.Schedulers
 class GameMainPresenter(val view: View? = null) : BasePresenter() {
 
 
-    fun addData() {
-        disposable = client.getGameData("1")
+    fun addData(type: String) {
+        disposable = client.getGameData(type)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view?.updateData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
     }
 
-    fun scrollData(id: String?) {
+    fun scrollData(type: String,id: String?) {
         if (id != null) {
-            disposable = client.getScrollGameData("1", id)
+            disposable = client.getScrollGameData(type, id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateData(it, disposable, true) }
                             , { view?.errorUpdateData(disposable, it.message) })
         }
     }
 
-    fun checkSpinnerData(a1: String, a2: String) {
-        disposable = client.getSpinnerGameData("1", a1, a2)
+    fun checkSpinnerData(type: String ,a1: String, a2: String) {
+        disposable = client.getSpinnerGameData(type, a1, a2)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view?.updateSpinnerData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
     }
 
-    fun checkSpinnerScrollData(a1: String, a2: String, id: String?) {
+    fun checkSpinnerScrollData(type: String, a1: String, a2: String, id: String?) {
         if (id != null) {
-            disposable = client.getSpinnerScrollGameData("1", a1, a2, id)
+            disposable = client.getSpinnerScrollGameData(type, a1, a2, id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateSpinnerData(it, disposable, true) }
                             , { view?.errorUpdateData(disposable, it.message) })
