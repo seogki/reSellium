@@ -210,4 +210,52 @@ public class BaseBindingAdapter {
 
         }
     }
+
+    @SuppressLint("SetTextI18n")
+    @BindingAdapter("setComment")
+    public static void setComment(final TextView textView, final String result) {
+        Context context = textView.getContext();
+        if (context == null) {
+            return;
+        } else if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isFinishing() || activity.isDestroyed()) {
+                return;
+            }
+        }
+        if (result == null)
+            return;
+
+
+        if (!result.isEmpty()) {
+            if (result.equals("0"))
+                textView.setText("");
+            else
+                textView.setText("댓글 " + result + "개");
+
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    @BindingAdapter("setGrade")
+    public static void setGrade(final TextView textView, final String result) {
+        Context context = textView.getContext();
+        if (context == null) {
+            return;
+        } else if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isFinishing() || activity.isDestroyed()) {
+                return;
+            }
+        }
+        if (result == null)
+            return;
+
+
+        if (!result.isEmpty())
+            textView.setText(result + "점");
+
+        else
+            textView.setText("");
+    }
 }

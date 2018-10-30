@@ -1,20 +1,20 @@
-package com.dev.skh.resellium.Game.Inner
+package com.dev.skh.resellium.Board.Sub
 
 import com.dev.skh.resellium.Base.BasePresenter
+import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Game.Model.CommentModel
-import com.dev.skh.resellium.Game.Model.GameMainModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Created by Seogki on 2018. 10. 29..
+ * Created by Seogki on 2018. 10. 30..
  */
-class GameMainCommentPresenter(val view: View? = null) : BasePresenter() {
+class InnerBoardMainPresenter(val view: View? = null) : BasePresenter() {
 
-    fun getCommentData(gameid: String?, type: String?) {
+    fun getCommentData(gameid: String?) {
         if (gameid != null) {
-            disposable = client.getCommentData(type!!, gameid)
+            disposable = client.getCommentData("3", gameid)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .unsubscribeOn(Schedulers.io())
@@ -26,9 +26,9 @@ class GameMainCommentPresenter(val view: View? = null) : BasePresenter() {
         }
     }
 
-    fun registerCommentData(type: String, id: String?, data: String) {
+    fun registerCommentData(id: String?, data: String) {
         if (id != null) {
-            disposable = client.registerCommentData(type, id, data)
+            disposable = client.registerCommentData("3", id, data)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .unsubscribeOn(Schedulers.io())
@@ -40,7 +40,7 @@ class GameMainCommentPresenter(val view: View? = null) : BasePresenter() {
         }
     }
 
-    fun setReport(item: GameMainModel?) {
+    fun setReport(item: BoardMainModel?) {
         if (item != null) {
             disposable = client.setReport(item.platform!!, item.id!!, item.title!!, item.date!!)
                     .subscribeOn(Schedulers.io())

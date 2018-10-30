@@ -92,32 +92,27 @@ open class BaseFragment : Fragment() {
         return rvGame
     }
 
-
-    fun setHorizontalRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView? {
-        rvGame.layoutManager = layoutManager
-        rvGame.isNestedScrollingEnabled = false
-        rvGame.animation = null
-
-
-        return rvGame
-    }
+//
+//    fun setHorizontalRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView? {
+//        rvGame.layoutManager = layoutManager
+//        rvGame.isNestedScrollingEnabled = false
+//        rvGame.animation = null
+//
+//
+//        return rvGame
+//    }
 
 
     fun setBaseProgressBar(progressBar: ProgressBar) {
         this.progressBar = progressBar
     }
 
-    fun setProgessbarGone() {
+    fun setProgressbarGone() {
         progressBar?.visibility = View.GONE
     }
 
     fun setProgressbarVisible() {
         progressBar?.visibility = View.VISIBLE
-    }
-
-
-    fun setHorizontalLinearLayoutManager(): LinearLayoutManager {
-        return LinearLayoutManager(context!!, LinearLayoutManager.HORIZONTAL, false)
     }
 
     fun setBtnDefault(btn: TextView) {

@@ -2,7 +2,7 @@ package com.dev.skh.resellium.Network
 
 import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Board.Model.SearchKeyModel
-import com.dev.skh.resellium.Game.Model.GameCommentModel
+import com.dev.skh.resellium.Game.Model.CommentModel
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.Main.Model.HoriModel
 import com.google.gson.JsonObject
@@ -71,7 +71,7 @@ interface ApiInterface {
 
     @POST("game/getCommentData")
     fun getCommentData(@Query("Type") type: String
-                       , @Query("Gameid") gameid: String): Flowable<MutableList<GameCommentModel>>
+                       , @Query("Gameid") gameid: String): Flowable<MutableList<CommentModel>>
 
 
     @POST("game/registerCommentData")

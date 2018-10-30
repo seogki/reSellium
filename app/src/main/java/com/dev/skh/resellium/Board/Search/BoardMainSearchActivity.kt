@@ -124,7 +124,7 @@ class BoardMainSearchActivity : InnerBaseActivity()
             }
         }
 
-        setProgessbarGone()
+        setProgressbarGone()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)

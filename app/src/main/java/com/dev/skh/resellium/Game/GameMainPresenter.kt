@@ -1,4 +1,4 @@
-package com.dev.skh.resellium.Game.Tab.Ps4
+package com.dev.skh.resellium.Game
 
 import com.dev.skh.resellium.Base.BasePresenter
 import com.dev.skh.resellium.Game.Model.GameMainModel
@@ -7,12 +7,13 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Created by Seogki on 2018. 9. 28..
+ * Created by Seogki on 2018. 10. 30..
  */
-class Ps4MainPresenter(val view: View? = null) : BasePresenter() {
+class GameMainPresenter(val view: View? = null) : BasePresenter() {
+
 
     fun addData() {
-        disposable = client.getGameData("0")
+        disposable = client.getGameData("1")
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view?.updateData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
@@ -20,7 +21,7 @@ class Ps4MainPresenter(val view: View? = null) : BasePresenter() {
 
     fun scrollData(id: String?) {
         if (id != null) {
-            disposable = client.getScrollGameData("0", id)
+            disposable = client.getScrollGameData("1", id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateData(it, disposable, true) }
                             , { view?.errorUpdateData(disposable, it.message) })
@@ -28,7 +29,7 @@ class Ps4MainPresenter(val view: View? = null) : BasePresenter() {
     }
 
     fun checkSpinnerData(a1: String, a2: String) {
-        disposable = client.getSpinnerGameData("0", a1, a2)
+        disposable = client.getSpinnerGameData("1", a1, a2)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ view?.updateSpinnerData(it, disposable, false) }
                         , { view?.errorUpdateData(disposable, it.message) })
@@ -36,13 +37,12 @@ class Ps4MainPresenter(val view: View? = null) : BasePresenter() {
 
     fun checkSpinnerScrollData(a1: String, a2: String, id: String?) {
         if (id != null) {
-            disposable = client.getSpinnerScrollGameData("0", a1, a2, id)
+            disposable = client.getSpinnerScrollGameData("1", a1, a2, id)
                     .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ view?.updateSpinnerData(it, disposable, true) }
                             , { view?.errorUpdateData(disposable, it.message) })
         }
     }
-
 
     fun spinnerTwo() {
         Thread {

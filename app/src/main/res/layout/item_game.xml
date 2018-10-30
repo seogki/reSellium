@@ -11,11 +11,14 @@
             name="model"
             type="com.dev.skh.resellium.Game.Model.GameMainModel"
             />
+
         <variable
             name="onClickListener"
             type="android.view.View.OnClickListener"
             />
+
     </data>
+
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/const_all"
@@ -27,10 +30,11 @@
 
         <TextView
             android:id="@+id/txt_title"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             android:ellipsize="end"
             android:gravity="start"
             android:maxLength="8"
@@ -40,6 +44,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txt_sell"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="스파이더맨"
             />
@@ -99,26 +104,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:onClick="@{onClickListener::onClick}"
             android:src="@drawable/ic_action_comment"
-            android:text="@{model.comment}"
+            app:setComment="@{model.comment}"
             android:textColor="@color/fabColor"
-            android:textSize="14sp"
+            android:layout_marginBottom="8dp"
+            android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="5개 댓글"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:text="댓글:"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/img_other"
-            app:layout_constraintTop_toTopOf="@+id/img_other"
-            />
 
         <TextView
             android:id="@+id/txt_sell"
@@ -129,10 +124,10 @@
             android:layout_marginTop="8dp"
             android:letterSpacing="0.05"
             android:textColor="@color/Red"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:sellCheck="@{model.which}"
             tools:text="중고매입"
             />

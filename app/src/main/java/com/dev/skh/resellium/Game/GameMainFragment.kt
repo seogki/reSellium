@@ -11,9 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.dev.skh.resellium.Base.BaseFragment
 import com.dev.skh.resellium.Game.Search.SearchMainActivity
-import com.dev.skh.resellium.Game.Tab.Ps4.Ps4MainFragment
-import com.dev.skh.resellium.Game.Tab.Switch.SwitchMainFragment
-import com.dev.skh.resellium.Game.Tab.Xbox.XboxMainFragment
+import com.dev.skh.resellium.Game.Tab.Ps4MainFragment
+import com.dev.skh.resellium.Game.Tab.SwitchMainFragment
+import com.dev.skh.resellium.Game.Tab.XboxMainFragment
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.User.UserMainActivity
 import com.dev.skh.resellium.Util.TabPagerAdapter

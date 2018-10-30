@@ -23,6 +23,8 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         >
 
         <include
@@ -33,37 +35,36 @@
             />
 
 
-        <android.support.constraint.ConstraintLayout
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedScroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
+            android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
 
-            <android.support.v4.widget.NestedScrollView
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/const_all"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true"
+                android:layout_height="wrap_content"
                 >
 
                 <android.support.constraint.ConstraintLayout
-                    android:id="@+id/const_all"
+                    android:id="@+id/const_first"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:background="@color/white"
-                    app:layout_constraintTop_toTopOf="parent"
                     >
 
                     <TextView
                         android:id="@+id/txt_title"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         android:ellipsize="end"
-                        android:gravity="start"
+                        android:gravity="center"
                         android:maxLength="8"
                         android:maxLines="1"
                         android:text="@{model.title}"
@@ -71,56 +72,9 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="스파이더맨"
-                        />
-
-                    <TextView
-                        android:id="@+id/txt_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="2dp"
-                        android:gravity="start"
-                        android:textColor="@color/darkGrey"
-                        android:textSize="12sp"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_title"
-                        app:timeAgo="@{model.date}"
-                        tools:text="2018-09-19 23:44:45"
-                        />
-
-                    <TextView
-                        android:id="@+id/txt_platform"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="14dp"
-                        android:maxLength="8"
-                        android:maxLines="1"
-                        android:text="@{model.place}"
-                        android:textColor="@color/secondaryTextColor"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_date"
-                        tools:text="PS4"
-                        />
-
-
-                    <TextView
-                        android:id="@+id/txt_money"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="2dp"
-                        android:gravity="start"
-                        android:letterSpacing="0.05"
-                        android:textColor="@color/black"
-                        android:textSize="12.5sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_platform"
-                        app:moneyCheck="@{model.money}"
-                        tools:text="42,000원"
                         />
 
                     <ImageView
@@ -135,82 +89,148 @@
                         app:layout_constraintTop_toTopOf="parent"
                         />
 
+
                     <TextView
-                        android:id="@+id/txt_sell"
-                        android:layout_marginEnd="8dp"
+                        android:id="@+id/txt_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="2dp"
+                        android:text="@{model.date}"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+                        tools:text="2018-09-19 23:44:45"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_platform"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="start"
+                        android:maxLength="8"
+                        android:maxLines="1"
+                        android:text="@{model.place}"
+                        android:textColor="@color/secondaryTextColor"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/txt_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:text="인터넷"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/txt_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:gravity="start"
                         android:letterSpacing="0.05"
                         android:textColor="@color/Red"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="@+id/txt_money"
-                        app:sellCheck="@{model.which}"
-                        tools:text="중고매입"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_date"
+                        app:moneyCheck="@{model.money}"
+                        tools:text="42,000원"
                         />
 
-                    <!--<View-->
-                        <!--android:id="@+id/view_comment"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="0.5dp"-->
-                        <!--android:background="@color/midGrey"-->
-                        <!--android:layout_marginTop="4dp"-->
-                        <!--app:layout_constraintTop_toBottomOf="@+id/txt_sell"-->
-                        <!--/>-->
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_comment"
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_sell"
+                        android:layout_height="0.5dp"
+                        android:background="@color/midGrey"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         />
 
-                    <android.support.constraint.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="@color/grey"
-                        app:layout_constraintTop_toBottomOf="@+id/rv_comment"
-                        >
-
-                        <EditText
-                            android:id="@+id/edit_comment"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:hint="댓글을 입력해주세요"
-                            android:padding="8dp"
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/btn_register"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            />
-
-                        <TextView
-                            android:id="@+id/btn_register"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="8dp"
-                            android:text="등록"
-                            android:onClick="@{onClickListener::onClick}"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            />
-
-
-                    </android.support.constraint.ConstraintLayout>
 
                 </android.support.constraint.ConstraintLayout>
 
 
-            </android.support.v4.widget.NestedScrollView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:id="@+id/txt_comment"
+                    android:text="댓글"
+                    android:gravity="start"
+                    android:background="@color/white"
+                    app:layout_constraintTop_toBottomOf="@+id/const_first"
+                    android:padding="4dp"
+                    android:paddingStart="8dp"
+                    android:layout_marginTop="8dp"
+                    />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_comment"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_comment"
+                    />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_anchor="@id/nestedScroll"
+            app:layout_anchorGravity="bottom"
+            app:layout_insetEdge="bottom"
+            app:layout_behavior="@string/bottom_sheet_behavior"
+            >
+
+            <EditText
+                android:id="@+id/edit_comment"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/text_black_stroke"
+                android:hint="댓글을 입력해주세요"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/middarkGrey"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/btn_register"
+                app:layout_constraintEnd_toStartOf="@+id/btn_register"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn_register"
+                />
+
+            <TextView
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_black_stroke"
+                android:onClick="@{onClickListener::onClick}"
+                android:padding="12dp"
+                android:text="등록"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+
         </android.support.constraint.ConstraintLayout>
+
 
     </android.support.design.widget.CoordinatorLayout>
 

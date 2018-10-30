@@ -1,4 +1,4 @@
-package com.dev.skh.resellium.Game.Tab.Ps4
+package com.dev.skh.resellium.Game.Tab
 
 
 import android.content.Intent
@@ -16,6 +16,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.dev.skh.resellium.Base.BaseFragment
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
+import com.dev.skh.resellium.Game.GameMainAdapter
+import com.dev.skh.resellium.Game.GameMainPresenter
 import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
@@ -26,20 +28,20 @@ import java.lang.ref.WeakReference
 
 
 class Ps4MainFragment : BaseFragment()
-        , Ps4MainPresenter.View
+        , GameMainPresenter.View
         , SwipeRefreshLayout.OnRefreshListener
         , AdapterView.OnItemSelectedListener
         , View.OnClickListener, BaseRecyclerViewAdapter.OnItemClickListener {
 
 
     companion object {
-        fun weakRef(view: Ps4MainPresenter.View): WeakReference<Ps4MainPresenter> {
-            return WeakReference(Ps4MainPresenter(view))
+        fun weakRef(view: GameMainPresenter.View): WeakReference<GameMainPresenter> {
+            return WeakReference(GameMainPresenter(view))
         }
     }
 
     private lateinit var binding: FragmentPs4MainBinding
-    private var ps4MainAdapter: Ps4MainAdapter? = null
+    private var ps4MainAdapter: GameMainAdapter? = null
     private val weakPresenter by lazy { weakRef(this) }
     //    private lateinit var layoutManager: LinearLayoutManager
     private lateinit var layoutManager: GridLayoutManager
@@ -112,7 +114,7 @@ class Ps4MainFragment : BaseFragment()
     override fun updateData(arr: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (arr != null) {
             if (ps4MainAdapter == null) {
-                ps4MainAdapter = Ps4MainAdapter(context!!, arr)
+                ps4MainAdapter = GameMainAdapter(context!!, arr)
                 ps4MainAdapter?.setOnItemClickListener(this)
                 recyclerView?.adapter = ps4MainAdapter
             } else {
@@ -120,7 +122,7 @@ class Ps4MainFragment : BaseFragment()
             }
         }
 
-        setProgessbarGone()
+        setProgressbarGone()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
@@ -192,7 +194,7 @@ class Ps4MainFragment : BaseFragment()
     override fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null)
             ps4MainAdapter?.addItems(result)
-        setProgessbarGone()
+        setProgressbarGone()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
@@ -212,7 +214,7 @@ class Ps4MainFragment : BaseFragment()
     override fun errorUpdateData(disposable: Disposable?, message: String?) {
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
-        setProgessbarGone()
+        setProgressbarGone()
     }
 
     override fun onDestroy() {

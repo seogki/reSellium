@@ -1,4 +1,4 @@
-package com.dev.skh.resellium.Game.Tab.Xbox
+package com.dev.skh.resellium.Game.Tab
 
 
 import android.content.Intent
@@ -16,18 +16,19 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.dev.skh.resellium.Base.BaseFragment
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
+import com.dev.skh.resellium.Game.GameMainAdapter
+import com.dev.skh.resellium.Game.GameMainPresenter
 import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
-import com.dev.skh.resellium.Game.Tab.Ps4.XboxMainPresenter
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
-import com.dev.skh.resellium.databinding.FragmentXboxMainBinding
+import com.dev.skh.resellium.databinding.FragmentSwitchMainBinding
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
 
-class XboxMainFragment : BaseFragment()
-        , XboxMainPresenter.View
+class SwitchMainFragment : BaseFragment()
+        , GameMainPresenter.View
         , SwipeRefreshLayout.OnRefreshListener
         , AdapterView.OnItemSelectedListener
         , View.OnClickListener
@@ -35,14 +36,13 @@ class XboxMainFragment : BaseFragment()
 
 
     companion object {
-        fun weakRef(view: XboxMainPresenter.View): WeakReference<XboxMainPresenter> {
-            return WeakReference(XboxMainPresenter(view))
+        fun weakRef(view: GameMainPresenter.View): WeakReference<GameMainPresenter> {
+            return WeakReference(GameMainPresenter(view))
         }
     }
-
     private val weakPresenter by lazy { weakRef(this) }
-    private lateinit var binding: FragmentXboxMainBinding
-    private var xboxMainAdapter: XboxMainAdapter? = null
+    private lateinit var binding: FragmentSwitchMainBinding
+    private var switchMainAdapter: GameMainAdapter? = null
     //    private lateinit var layoutManager: LinearLayoutManager
     private lateinit var layoutManager: GridLayoutManager
     private var recyclerView: RecyclerView? = null
@@ -52,7 +52,7 @@ class XboxMainFragment : BaseFragment()
     private var disposable: Disposable? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_xbox_main, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_switch_main, container, false)
         binding.onClickListener = this
         setView()
         setBaseProgressBar(binding.progressBar)
@@ -61,7 +61,6 @@ class XboxMainFragment : BaseFragment()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
 
         addItemOnSpinner()
         weakPresenter.get()?.addData()
@@ -77,12 +76,10 @@ class XboxMainFragment : BaseFragment()
 //        layoutManager = LinearLayoutManager(context!!)
         layoutManager = GridLayoutManager(context, 2)
         recyclerView = setGridGameRv(binding.rvGame, layoutManager)
+
         binding.swipeLayout.setDistanceToTriggerSync(350)
         binding.swipeLayout.setOnRefreshListener(this)
-
-
     }
-
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_all -> callBtnData("전체")
@@ -117,36 +114,29 @@ class XboxMainFragment : BaseFragment()
         callSpinnerData()
     }
 
-    override fun onItemClick(view: View, position: Int) {
-        val data = xboxMainAdapter?.getItem(position)
-        val intent = Intent(view.context, GameMainCommentActivity::class.java)
-        intent.putExtra("data", data)
-        startActivity(intent)
-    }
-
     override fun updateData(arr: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (arr != null) {
-            if (xboxMainAdapter == null) {
-                xboxMainAdapter = XboxMainAdapter(context!!, arr)
-                recyclerView?.adapter = xboxMainAdapter
-                xboxMainAdapter?.setOnItemClickListener(this)
+            if (switchMainAdapter == null) {
+                switchMainAdapter = GameMainAdapter(context!!, arr)
+                recyclerView?.adapter = switchMainAdapter
+                switchMainAdapter?.setOnItemClickListener(this)
             } else {
-                xboxMainAdapter?.addItems(arr)
+                switchMainAdapter?.addItems(arr)
             }
         }
 
-        setProgessbarGone()
+        setProgressbarGone()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
             setRecyclerViewScrollbar(false)
     }
 
-
-    override fun errorUpdateData(disposable: Disposable?, message: String?) {
-        this.disposable = disposable
-        DLog.e("error ${message.toString()}")
-        setProgessbarGone()
+    override fun onItemClick(view: View, position: Int) {
+        val data = switchMainAdapter?.getItem(position)
+        val intent = Intent(view.context, GameMainCommentActivity::class.java)
+        intent.putExtra("data", data)
+        startActivity(intent)
     }
 
     private fun setRecyclerViewScrollbar(isSpinner: Boolean) {
@@ -163,7 +153,7 @@ class XboxMainFragment : BaseFragment()
                             isLoading = true
                             setProgressbarVisible()
                             Handler().postDelayed({
-                                val id = xboxMainAdapter?.getItem(xboxMainAdapter!!.itemCount - 1)?.id
+                                val id = switchMainAdapter?.getItem(switchMainAdapter!!.itemCount - 1)?.id
                                 if (isSpinner)
                                     weakPresenter.get()?.checkSpinnerScrollData(first, second, id)
                                 else
@@ -189,8 +179,8 @@ class XboxMainFragment : BaseFragment()
 
     override fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null)
-            xboxMainAdapter?.addItems(result)
-        setProgessbarGone()
+            switchMainAdapter?.addItems(result)
+        setProgressbarGone()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
@@ -217,18 +207,21 @@ class XboxMainFragment : BaseFragment()
         weakPresenter.get()?.checkSpinnerData(first, second)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable?.dispose()
-    }
 
+    override fun errorUpdateData(disposable: Disposable?, message: String?) {
+        this.disposable = disposable
+        DLog.e("error ${message.toString()}")
+        setProgressbarGone()
+
+    }
 
     override fun onRefresh() {
         refresh()
     }
 
+
     private fun refresh() {
-        xboxMainAdapter?.clearItems()
+        switchMainAdapter?.clearItems()
         setViewDefault()
         recyclerView?.removeOnScrollListener(null)
         weakPresenter.get()?.addData()
@@ -247,7 +240,7 @@ class XboxMainFragment : BaseFragment()
     }
 
     private fun refreshWithoutData() {
-        xboxMainAdapter?.clearItems()
+        switchMainAdapter?.clearItems()
         setProgressbarVisible()
         recyclerView?.removeOnScrollListener(null)
         isLoading = false

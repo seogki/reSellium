@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
-import com.dev.skh.resellium.Game.Model.GameCommentModel
+import com.dev.skh.resellium.Game.Model.CommentModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.databinding.ItemCommentBinding
 
 /**
  * Created by Seogki on 2018. 10. 29..
  */
-class GameMainCommentAdapter(context: Context, arraylist: MutableList<GameCommentModel>) : BaseRecyclerViewAdapter<GameCommentModel, GameMainCommentAdapter.EstimateRegisterViewHolder>(context, arraylist) {
+class GameMainCommentAdapter(context: Context, arraylist: MutableList<CommentModel>) : BaseRecyclerViewAdapter<CommentModel, GameMainCommentAdapter.EstimateRegisterViewHolder>(context, arraylist) {
 
     private var arr = arraylist
     override fun onBindView(holder: EstimateRegisterViewHolder, position: Int) {
@@ -35,7 +35,7 @@ class GameMainCommentAdapter(context: Context, arraylist: MutableList<GameCommen
         }
 
 
-        fun bind(model: GameCommentModel?) {
+        fun bind(model: CommentModel?) {
             binding.onClickListener = this
             binding.model = model
         }

@@ -28,7 +28,7 @@ open class InnerBaseActivity : AppCompatActivity() {
         this.progressBar = progressBar
     }
 
-    fun setProgessbarGone() {
+    fun setProgressbarGone() {
         progressBar?.visibility = View.GONE
     }
 
@@ -51,9 +51,26 @@ open class InnerBaseActivity : AppCompatActivity() {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
+    fun setRvWithoutDeco(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
+        rvGame.isNestedScrollingEnabled = false
+        rvGame.layoutManager = layoutManager
+
+        return rvGame
+    }
+
     fun setGameRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
         val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.survey_divder)!!)
+        rvGame.isNestedScrollingEnabled = false
+        rvGame.layoutManager = layoutManager
+        rvGame.addItemDecoration(decor)
+
+        return rvGame
+    }
+
+    fun setCommentRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
+        val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.comment_divder)!!)
         rvGame.isNestedScrollingEnabled = false
         rvGame.layoutManager = layoutManager
         rvGame.addItemDecoration(decor)

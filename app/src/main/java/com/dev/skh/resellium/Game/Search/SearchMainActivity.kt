@@ -1,6 +1,7 @@
 package com.dev.skh.resellium.Game.Search
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
@@ -11,11 +12,11 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Base.InnerBaseActivity
+import com.dev.skh.resellium.Game.GameMainAdapter
+import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
-import com.dev.skh.resellium.Game.Tab.Ps4.Ps4MainAdapter
-import com.dev.skh.resellium.Game.Tab.Switch.SwitchMainAdapter
-import com.dev.skh.resellium.Game.Tab.Xbox.XboxMainAdapter
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.Util.GridSpacingItemDecoration
@@ -23,13 +24,30 @@ import com.dev.skh.resellium.databinding.ActivitySearchMainBinding
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
-class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMainPresenter.View, TextView.OnEditorActionListener {
+class SearchMainActivity : InnerBaseActivity()
+        , View.OnClickListener
+        , SearchMainPresenter.View
+        , TextView.OnEditorActionListener
+        , BaseRecyclerViewAdapter.OnItemClickListener {
+
+    override fun onItemClick(view: View, position: Int) {
+        var data: GameMainModel? = null
+        when (currentPos) {
+            "PS" -> data = ps4MainAdapter?.getItem(position)
+            "XBOX" -> data = xboxMainAdapter?.getItem(position)
+            "SWITCH" -> data = switchMainAdapter?.getItem(position)
+        }
+
+        val intent = Intent(view.context, GameMainCommentActivity::class.java)
+        intent.putExtra("data", data)
+        startActivity(intent)
+    }
 
 
     override fun setError(disposable: Disposable?, message: String?) {
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
-        setProgessbarGone()
+        setProgressbarGone()
     }
 
 
@@ -57,9 +75,9 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
     private var searchString = ""
     lateinit var binding: ActivitySearchMainBinding
     private val presenter by lazy { weakRef(this) }
-    private var ps4MainAdapter: Ps4MainAdapter? = null
-    private var xboxMainAdapter: XboxMainAdapter? = null
-    private var switchMainAdapter: SwitchMainAdapter? = null
+    private var ps4MainAdapter: GameMainAdapter? = null
+    private var xboxMainAdapter: GameMainAdapter? = null
+    private var switchMainAdapter: GameMainAdapter? = null
     private lateinit var ps4LayoutManager: GridLayoutManager
     private lateinit var xboxLayoutManager: GridLayoutManager
     private lateinit var switchLayoutManager: GridLayoutManager
@@ -79,15 +97,15 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
         val decor = GridSpacingItemDecoration(2, result, true, 0)
         binding.layoutAppbar?.editSearch?.setOnEditorActionListener(this)
 
-        ps4LayoutManager = GridLayoutManager(this,2)
+        ps4LayoutManager = GridLayoutManager(this, 2)
         binding.rvPs4.layoutManager = ps4LayoutManager
         binding.rvPs4.isNestedScrollingEnabled = false
 
-        xboxLayoutManager = GridLayoutManager(this,2)
+        xboxLayoutManager = GridLayoutManager(this, 2)
         binding.rvXbox.layoutManager = xboxLayoutManager
         binding.rvXbox.isNestedScrollingEnabled = false
 
-        switchLayoutManager = GridLayoutManager(this,2)
+        switchLayoutManager = GridLayoutManager(this, 2)
         binding.rvSwitch.layoutManager = switchLayoutManager
         binding.rvSwitch.isNestedScrollingEnabled = false
 
@@ -190,18 +208,21 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
                 }
             }
         })
+
+
     }
 
     override fun setPs4Data(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null) {
             if (ps4MainAdapter == null) {
-                ps4MainAdapter = Ps4MainAdapter(this, result)
+                ps4MainAdapter = GameMainAdapter(this, result)
+                ps4MainAdapter?.setOnItemClickListener(this)
                 binding.rvPs4.adapter = ps4MainAdapter
             } else
                 ps4MainAdapter?.addItems(result)
 
         }
-        setProgessbarGone()
+        setProgressbarGone()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
@@ -211,12 +232,13 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
     override fun setXboxData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null) {
             if (xboxMainAdapter == null) {
-                xboxMainAdapter = XboxMainAdapter(this, result)
+                xboxMainAdapter = GameMainAdapter(this, result)
+                xboxMainAdapter?.setOnItemClickListener(this)
                 binding.rvXbox.adapter = xboxMainAdapter
             } else
                 xboxMainAdapter?.addItems(result)
         }
-        setProgessbarGone()
+        setProgressbarGone()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
@@ -226,12 +248,13 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
     override fun setSwitchData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (result != null) {
             if (switchMainAdapter == null) {
-                switchMainAdapter = SwitchMainAdapter(this, result)
+                switchMainAdapter = GameMainAdapter(this, result)
+                switchMainAdapter?.setOnItemClickListener(this)
                 binding.rvSwitch.adapter = switchMainAdapter
             } else
                 switchMainAdapter?.addItems(result)
         }
-        setProgessbarGone()
+        setProgressbarGone()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
@@ -241,7 +264,7 @@ class SearchMainActivity : InnerBaseActivity(), View.OnClickListener, SearchMain
 
     private fun setToolbarColor(text: String) {
         currentPos = text
-        setProgessbarGone()
+        setProgressbarGone()
     }
 
     private fun onRefresh() {

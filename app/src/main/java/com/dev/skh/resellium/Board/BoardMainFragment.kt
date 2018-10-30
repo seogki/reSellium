@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.widget.NestedScrollView
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -52,8 +52,8 @@ class BoardMainFragment : BaseFragment()
 
     private var disposable: Disposable? = null
     private lateinit var binding: FragmentBoardMainBinding
-        private var layoutManager: LinearLayoutManager? = null
-//    private var layoutManager: GridLayoutManager? = null
+//        private var layoutManager: LinearLayoutManager? = null
+    private var layoutManager: GridLayoutManager? = null
     private var adapter: BoardMainAdapter? = null
     private var rv: RecyclerView? = null
     private var isLoading: Boolean = false
@@ -71,8 +71,9 @@ class BoardMainFragment : BaseFragment()
     }
 
     private fun setVIEW() {
-        layoutManager = LinearLayoutManager(context!!)
-        rv = setGameRv(binding.rvBoard, layoutManager!!)
+        layoutManager = GridLayoutManager(context!!, 2)
+//        layoutManager = LinearLayoutManager(context!!)
+        rv = setGridGameRv(binding.rvBoard, layoutManager!!)
         binding.swipeLayout.setDistanceToTriggerSync(350)
         binding.swipeLayout.setOnRefreshListener(this)
     }
@@ -104,7 +105,7 @@ class BoardMainFragment : BaseFragment()
             }
         }
 
-        setProgessbarGone()
+        setProgressbarGone()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
@@ -114,7 +115,7 @@ class BoardMainFragment : BaseFragment()
     override fun registerSpinnerData(board: MutableList<BoardMainModel>?, disposable: Disposable?, isScroll: Boolean) {
         if (board != null)
             adapter?.addItems(board)
-        setProgessbarGone()
+        setProgressbarGone()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
@@ -122,7 +123,6 @@ class BoardMainFragment : BaseFragment()
     }
 
     private fun setRecyclerViewScrollbar(isSpinner: Boolean) {
-        DLog.e("Scroll set")
         binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
             if (v.getChildAt(v.childCount - 1) != null) {
                 if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
