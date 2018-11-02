@@ -60,7 +60,7 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
 
     private fun setView() {
         linearLayoutManager = LinearLayoutManager(this)
-        rv = setCommentRv(binding.rvComment, linearLayoutManager!!)
+        rv = setRvWithoutDeco(binding.rvComment, linearLayoutManager!!)
     }
 
     private fun getType() {

@@ -60,7 +60,7 @@ open class InnerBaseActivity : AppCompatActivity() {
 
     fun setGameRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
         val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.survey_divder)!!)
+        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.survey_divider)!!)
         rvGame.isNestedScrollingEnabled = false
         rvGame.layoutManager = layoutManager
         rvGame.addItemDecoration(decor)
@@ -70,7 +70,7 @@ open class InnerBaseActivity : AppCompatActivity() {
 
     fun setCommentRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
         val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.comment_divder)!!)
+        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.comment_divider)!!)
         rvGame.isNestedScrollingEnabled = false
         rvGame.layoutManager = layoutManager
         rvGame.addItemDecoration(decor)

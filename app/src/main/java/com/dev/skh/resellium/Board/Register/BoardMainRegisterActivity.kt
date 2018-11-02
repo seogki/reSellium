@@ -51,7 +51,7 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
         val decimalProgress = progress.toFloat() / 10
 
-        binding.txtNum.text = decimalProgress.toString()
+        binding.txtNum.text = decimalProgress.toString()+"점"
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar?) {

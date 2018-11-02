@@ -73,7 +73,7 @@ open class BaseFragment : Fragment() {
 
     fun setGameRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
         val decor = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
-        decor.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.survey_divder)!!)
+        decor.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.survey_divider)!!)
         rvGame.isNestedScrollingEnabled = false
         rvGame.layoutManager = layoutManager
         rvGame.addItemDecoration(decor)
