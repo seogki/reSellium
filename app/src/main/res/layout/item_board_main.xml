@@ -23,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_ripple_colored_grey_whitebg"
-        android:elevation="3dp"
         >
 
 

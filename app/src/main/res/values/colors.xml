@@ -41,19 +41,22 @@
     <color name="brown">#6D4C41</color>
     <color name="darkerGrey">#3F3F3F</color>
 
-    <!--<color name="statusBar">#CC863C</color>-->
 
-    <!--<color name="accentColor">#3D5AFE</color>-->
-    <!--<color name="accentColor">#FFA84B</color>-->
+    <!--<color name="accentColor">#3F51B5</color>-->
+    <!--<color name="lightColor">#C5CAE9</color>-->
+    <!--<color name="statusBar">#303F9F</color>-->
+    <!--<color name="fabColor">#FF4081</color>-->
+    <!--<color name="secondaryTextColor">#757575</color>-->
+    <!--<color name="fabDrawableColor">#000000</color>-->
 
-    <!--<color name="accentColor">#7875FF</color>-->
-    <!--<color name="statusBar">#6965FF</color>-->
-    <color name="accentColor">#3F51B5</color>
+    <color name="accentColor">#16354C</color>
     <color name="lightColor">#C5CAE9</color>
-    <color name="statusBar">#303F9F</color>
-    <color name="fabColor">#FF4081</color>
+    <color name="statusBar">#112a3c</color>
+    <color name="fabColor">#E56C4E</color>
     <color name="secondaryTextColor">#757575</color>
     <color name="fabDrawableColor">#000000</color>
+
+    <color name="thirdColor">#0C9690</color>
 
     <color name="darkestColor">#4BA2FF</color>
 
