@@ -1,7 +1,6 @@
 package com.dev.skh.resellium.Game.Tab
 
 
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
@@ -18,7 +17,6 @@ import com.dev.skh.resellium.Base.BaseFragment
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Game.GameMainAdapter
 import com.dev.skh.resellium.Game.GameMainPresenter
-import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
@@ -44,7 +42,7 @@ class Ps4MainFragment : BaseFragment()
     private var ps4MainAdapter: GameMainAdapter? = null
     private val weakPresenter by lazy { weakRef(this) }
     private lateinit var layoutManager: LinearLayoutManager
-//    private lateinit var layoutManager: GridLayoutManager
+    //    private lateinit var layoutManager: GridLayoutManager
     private var recyclerView: RecyclerView? = null
     private var first: String = ""
     private var second: String = ""
@@ -68,7 +66,6 @@ class Ps4MainFragment : BaseFragment()
     }
 
     private fun setView() {
-
         layoutManager = LinearLayoutManager(context!!)
 //        layoutManager = GridLayoutManager(context, 2)
         recyclerView = setGameRv(binding.rvGame, layoutManager)
@@ -131,16 +128,16 @@ class Ps4MainFragment : BaseFragment()
 
     override fun onItemClick(view: View, position: Int) {
         val data = ps4MainAdapter?.getItem(position)
-        val intent = Intent(view.context, GameMainCommentActivity::class.java)
-        intent.putExtra("data", data)
-        startActivity(intent)
+        setInnerIntent(data, view)
     }
 
 
     private fun setRecyclerViewScrollbar(isSpinner: Boolean) {
-
         binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
+
             if (v.getChildAt(v.childCount - 1) != null) {
+
+
                 if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
 
                     val visibleItemCount = layoutManager.childCount
@@ -154,9 +151,9 @@ class Ps4MainFragment : BaseFragment()
                             Handler().postDelayed({
                                 val id = ps4MainAdapter?.getItem(ps4MainAdapter!!.itemCount - 1)?.id
                                 if (isSpinner)
-                                    weakPresenter.get()?.checkSpinnerScrollData("0",first, second, id)
+                                    weakPresenter.get()?.checkSpinnerScrollData("0", first, second, id)
                                 else
-                                    weakPresenter.get()?.scrollData("0",id)
+                                    weakPresenter.get()?.scrollData("0", id)
 
                             }, 500)
 
@@ -188,7 +185,7 @@ class Ps4MainFragment : BaseFragment()
 
     private fun callSpinnerData() {
         refreshWithoutData()
-        weakPresenter.get()?.checkSpinnerData("0",first, second)
+        weakPresenter.get()?.checkSpinnerData("0", first, second)
     }
 
     override fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {

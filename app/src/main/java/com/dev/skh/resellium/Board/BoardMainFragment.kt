@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.widget.NestedScrollView
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,6 @@ import com.dev.skh.resellium.Base.BaseFragment
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Board.Search.BoardMainSearchActivity
-import com.dev.skh.resellium.Board.Sub.InnerBoardMainActivity
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.User.UserMainActivity
 import com.dev.skh.resellium.Util.DLog
@@ -32,9 +31,8 @@ class BoardMainFragment : BaseFragment()
 
     override fun onItemClick(view: View, position: Int) {
         val data = adapter?.getItem(position)
-        val intent = Intent(view.context, InnerBoardMainActivity::class.java)
-        intent.putExtra("data", data)
-        startActivity(intent)
+        setInnerIntent(data, view)
+
     }
 
 
@@ -52,8 +50,8 @@ class BoardMainFragment : BaseFragment()
 
     private var disposable: Disposable? = null
     private lateinit var binding: FragmentBoardMainBinding
-//        private var layoutManager: LinearLayoutManager? = null
-    private var layoutManager: GridLayoutManager? = null
+        private var layoutManager: LinearLayoutManager? = null
+//    private var layoutManager: GridLayoutManager? = null
     private var adapter: BoardMainAdapter? = null
     private var rv: RecyclerView? = null
     private var isLoading: Boolean = false
@@ -71,9 +69,9 @@ class BoardMainFragment : BaseFragment()
     }
 
     private fun setVIEW() {
-        layoutManager = GridLayoutManager(context!!, 2)
-//        layoutManager = LinearLayoutManager(context!!)
-        rv = setGridGameRv(binding.rvBoard, layoutManager!!)
+//        layoutManager = GridLayoutManager(context!!, 2)
+        layoutManager = LinearLayoutManager(context!!)
+        rv = setGameRv(binding.rvBoard, layoutManager!!)
         binding.swipeLayout.setDistanceToTriggerSync(350)
         binding.swipeLayout.setOnRefreshListener(this)
     }

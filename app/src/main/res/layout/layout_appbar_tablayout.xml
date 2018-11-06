@@ -107,7 +107,7 @@
             app:tabMode="fixed"
             app:tabPaddingEnd="0dp"
             app:tabPaddingStart="0dp"
-            app:tabSelectedTextColor="@color/black"
+            app:tabSelectedTextColor="@color/fabColor"
             app:tabTextColor="@color/middarkGrey"
             >
         </android.support.design.widget.TabLayout>

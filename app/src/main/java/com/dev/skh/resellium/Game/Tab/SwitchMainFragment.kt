@@ -1,13 +1,12 @@
 package com.dev.skh.resellium.Game.Tab
 
 
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.widget.NestedScrollView
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,6 @@ import com.dev.skh.resellium.Base.BaseFragment
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Game.GameMainAdapter
 import com.dev.skh.resellium.Game.GameMainPresenter
-import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
@@ -43,8 +41,8 @@ class SwitchMainFragment : BaseFragment()
     private val weakPresenter by lazy { weakRef(this) }
     private lateinit var binding: FragmentSwitchMainBinding
     private var switchMainAdapter: GameMainAdapter? = null
-    //    private lateinit var layoutManager: LinearLayoutManager
-    private lateinit var layoutManager: GridLayoutManager
+        private lateinit var layoutManager: LinearLayoutManager
+//    private lateinit var layoutManager: GridLayoutManager
     private var recyclerView: RecyclerView? = null
     private var first: String = ""
     private var second: String = ""
@@ -72,10 +70,9 @@ class SwitchMainFragment : BaseFragment()
     }
 
     private fun setView() {
-
-//        layoutManager = LinearLayoutManager(context!!)
-        layoutManager = GridLayoutManager(context, 2)
-        recyclerView = setGridGameRv(binding.rvGame, layoutManager)
+        layoutManager = LinearLayoutManager(context!!)
+//        layoutManager = GridLayoutManager(context, 2)
+        recyclerView = setGameRv(binding.rvGame, layoutManager)
 
         binding.swipeLayout.setDistanceToTriggerSync(350)
         binding.swipeLayout.setOnRefreshListener(this)
@@ -134,9 +131,7 @@ class SwitchMainFragment : BaseFragment()
 
     override fun onItemClick(view: View, position: Int) {
         val data = switchMainAdapter?.getItem(position)
-        val intent = Intent(view.context, GameMainCommentActivity::class.java)
-        intent.putExtra("data", data)
-        startActivity(intent)
+        setInnerIntent(data, view)
     }
 
     private fun setRecyclerViewScrollbar(isSpinner: Boolean) {

@@ -1,7 +1,10 @@
 package com.dev.skh.resellium.Game.Inner
 
+import android.animation.LayoutTransition
+import android.annotation.SuppressLint
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
@@ -15,10 +18,11 @@ import com.dev.skh.resellium.databinding.ActivityGameMainCommentBinding
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
+
 class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.View, View.OnClickListener {
 
 
-       companion object {
+    companion object {
         fun weakRef(view: GameMainCommentPresenter.View): WeakReference<GameMainCommentPresenter> {
             return WeakReference(GameMainCommentPresenter(view))
         }
@@ -42,6 +46,7 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setIntent() {
         val model = intent.getSerializableExtra("data")
 
@@ -60,7 +65,7 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
 
     private fun setView() {
         linearLayoutManager = LinearLayoutManager(this)
-        rv = setRvWithoutDeco(binding.rvComment, linearLayoutManager!!)
+        rv = setCommentRv(binding.rvComment, linearLayoutManager!!)
     }
 
     private fun getType() {
@@ -70,6 +75,27 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
             "SWITCH" -> type = "2"
         }
         gameid = binding.model?.id
+    }
+
+
+    private fun setScrollListener() {
+        binding.constComment.layoutTransition.enableTransitionType(LayoutTransition.DISAPPEARING)
+        binding.constComment.layoutTransition.enableTransitionType(LayoutTransition.APPEARING)
+        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (scrollY > oldScrollY) {
+                //내리는곳
+                slideDown(binding.constComment)
+//                binding.constComment.visibility = View.INVISIBLE
+            }
+            if (scrollY < oldScrollY) {
+                //올리기
+                slideUp(binding.constComment)
+//                binding.constComment.visibility = View.VISIBLE
+            }
+            if (scrollY == 0) {
+                //최상단
+            }
+        })
     }
 
     override fun setError(disposable: Disposable?, message: String?) {
@@ -103,8 +129,12 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
         if (binding.editComment.text.toString().isNotEmpty()) {
             presenter.get()?.registerCommentData(type!!, binding.model?.id, binding.editComment.text.toString())
         } else {
-            shortToast("댓글을 입력부탁드립니다.")
+            shortToast("댓글을 입력해주세요")
         }
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 
     private fun popupMenu(v: View) {
@@ -130,11 +160,21 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
             if (gameMainCommentAdapter == null) {
                 gameMainCommentAdapter = GameMainCommentAdapter(this, result)
                 rv?.adapter = gameMainCommentAdapter
+                setScrollListener()
             } else {
                 gameMainCommentAdapter?.addItems(result)
             }
+
         }
+
+        if (this.gameMainCommentAdapter?.itemCount == 0) {
+            binding.txtNoComment.visibility = View.VISIBLE
+        } else {
+            binding.txtNoComment.visibility = View.GONE
+        }
+
         this.disposable = disposable
+
     }
 
     override fun onRegisterData(disposable: Disposable?) {

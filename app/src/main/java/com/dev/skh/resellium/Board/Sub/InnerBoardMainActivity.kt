@@ -1,7 +1,9 @@
 package com.dev.skh.resellium.Board.Sub
 
+import android.animation.LayoutTransition
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
@@ -58,6 +60,7 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
         binding.model = model as? BoardMainModel
         binding.executePendingBindings()
         id = binding.model?.id
+
     }
 
     private fun setView() {
@@ -73,11 +76,15 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
         }
     }
 
+    override fun onBackPressed() {
+        finish()
+    }
+
     private fun setComment() {
         if (binding.editComment.text.toString().isNotEmpty()) {
             presenter.get()?.registerCommentData(binding.model?.id, binding.editComment.text.toString())
         } else {
-            shortToast("댓글을 입력부탁드립니다.")
+            shortToast("댓글을 입력해주세요")
         }
     }
 
@@ -101,17 +108,46 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
     }
 
 
-
     override fun setCommentData(result: MutableList<CommentModel>?, disposable: Disposable?, isScroll: Boolean) {
         this.disposable = disposable
         if (result != null) {
             if (gameMainCommentAdapter == null) {
                 gameMainCommentAdapter = GameMainCommentAdapter(this, result)
                 rv?.adapter = gameMainCommentAdapter
+                setScrollListener()
+
+
             } else {
+
                 gameMainCommentAdapter?.addItems(result)
             }
+
         }
+
+        if (this.gameMainCommentAdapter?.itemCount == 0) {
+            binding.txtNoComment.visibility = View.VISIBLE
+        } else {
+            binding.txtNoComment.visibility = View.GONE
+        }
+
+    }
+
+    private fun setScrollListener() {
+        binding.constComment.layoutTransition.enableTransitionType(LayoutTransition.DISAPPEARING)
+        binding.constComment.layoutTransition.enableTransitionType(LayoutTransition.APPEARING)
+        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (scrollY > oldScrollY) {
+                //내리는곳
+                slideDown(binding.constComment)
+            }
+            if (scrollY < oldScrollY) {
+                //올리기
+                slideUp(binding.constComment)
+            }
+            if (scrollY == 0) {
+                //최상단
+            }
+        })
     }
 
     override fun onRegisterData(disposable: Disposable?) {

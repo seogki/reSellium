@@ -33,6 +33,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:ellipsize="end"
+                android:transitionName="board_title"
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="@{model.title}"
@@ -112,6 +113,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/txt_which2"
+                android:transitionName="board_title"
                 tools:text="스파이더맨"
                 />
 
@@ -179,6 +181,7 @@
                 android:text="@{model.title}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                android:transitionName="board_title"
                 android:textStyle="bold"
                 android:layout_marginBottom="4dp"
                 app:layout_constraintEnd_toEndOf="parent"

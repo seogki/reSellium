@@ -64,6 +64,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:gravity="start"
+                        android:transitionName="board_title"
                         android:text="@{model.title}"
                         android:textColor="@color/black"
                         android:textSize="16sp"
@@ -142,6 +143,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:transitionName="board_grade"
                         android:background="@drawable/text_circle_secondary"
                         android:gravity="center"
                         android:padding="6dp"
@@ -159,39 +161,37 @@
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/txt_no_comment"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/fabColor"
-                    android:id="@+id/txt_comment"
-                    android:text="댓글"
-                    android:gravity="start"
-                    android:textSize="16sp"
-                    android:background="@color/white"
-                    app:layout_constraintTop_toBottomOf="@+id/const_first"
-                    android:padding="4dp"
-                    android:paddingStart="8dp"
+                    android:text="아직 댓글이 없습니다"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="8dp"
+                    android:textColor="@color/darkGrey"
+                    app:layout_constraintTop_toBottomOf="@id/const_first"
                     />
-
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_comment"
-                    android:background="@color/white"
+                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_comment"
+                    app:layout_constraintTop_toBottomOf="@+id/const_first"
                     />
 
             </android.support.constraint.ConstraintLayout>
         </android.support.v4.widget.NestedScrollView>
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/const_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_anchor="@id/nestedScroll"
             app:layout_anchorGravity="bottom"
             app:layout_insetEdge="bottom"
+            android:animateLayoutChanges="true"
             app:layout_behavior="@string/bottom_sheet_behavior"
             >
 

@@ -172,15 +172,13 @@ public class BaseBindingAdapter {
         if (result == null)
             return;
 
-        if (result.contains("매입")) {
-            textView.setText(result);
-            textView.setBackground(ContextCompat.getDrawable(context, R.drawable.text_green));
-        } else if (result.contains("매각")) {
-            textView.setText(result);
-            textView.setBackground(ContextCompat.getDrawable(context, R.drawable.text_red));
-        }
+        if (result.contains("매입"))
+            textView.setTextColor(ContextCompat.getColor(context, R.color.fabColor));
+        else
+            textView.setTextColor(ContextCompat.getColor(context, R.color.accentColor));
 
 
+        textView.setText(result);
     }
 
     @BindingAdapter("timeAgo")
@@ -231,7 +229,7 @@ public class BaseBindingAdapter {
             if (result.equals("0"))
                 textView.setText("");
             else
-                textView.setText("댓글 " + result + "개");
+                textView.setText("(" + result + ")");
 
         }
     }

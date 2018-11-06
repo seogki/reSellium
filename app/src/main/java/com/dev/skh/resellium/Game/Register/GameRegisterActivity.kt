@@ -74,7 +74,7 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
 
     private fun setRegisterDialog() {
         AlertDialog.Builder(this@GameRegisterActivity, R.style.MyDialogTheme)
-                .setTitle("등록")
+                .setTitle("매물")
                 .setMessage("정말로 등록하시겠습니까?")
                 .setPositiveButton("확인") { dialog, _ ->
                     dialog.dismiss()
@@ -89,7 +89,7 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
         this.disposable = disposable
 
         AlertDialog.Builder(this@GameRegisterActivity, R.style.MyDialogTheme)
-                .setTitle("등록")
+                .setTitle("매물")
                 .setMessage("등록되었습니다.")
                 .setPositiveButton("확인") { dialog, _ ->
                     dialog.dismiss()

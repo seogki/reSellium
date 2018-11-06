@@ -1,12 +1,11 @@
 package com.dev.skh.resellium.Board.Search
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.widget.NestedScrollView
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.KeyEvent
@@ -18,7 +17,6 @@ import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.Board.BoardMainAdapter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Board.Model.SearchKeyModel
-import com.dev.skh.resellium.Board.Sub.InnerBoardMainActivity
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.ActivityBoardMainSearchBinding
@@ -41,7 +39,7 @@ class BoardMainSearchActivity : InnerBaseActivity()
     private lateinit var binding: ActivityBoardMainSearchBinding
     private val weakReference by lazy { weakRef(this) }
     private var boardMainAdapter: BoardMainAdapter? = null
-    private var layoutManager: GridLayoutManager? = null
+    private var layoutManager: LinearLayoutManager? = null
     private var rv: RecyclerView? = null
     private var isLoading: Boolean = false
     private var data: String? = null
@@ -61,8 +59,9 @@ class BoardMainSearchActivity : InnerBaseActivity()
     }
 
     private fun setView() {
-        layoutManager = GridLayoutManager(this, 2)
-        rv = setGridGameRv(binding.rvBoard, layoutManager!!)
+        layoutManager = LinearLayoutManager(this)
+//        layoutManager = GridLayoutManager(this, 2)
+        rv = setGameRv(binding.rvBoard, layoutManager!!)
         binding.editSearch.setOnEditorActionListener(this)
     }
 
@@ -90,9 +89,12 @@ class BoardMainSearchActivity : InnerBaseActivity()
 
     override fun onItemClick(view: View, position: Int) {
         val data = boardMainAdapter?.getItem(position)
-        val intent = Intent(view.context, InnerBoardMainActivity::class.java)
-        intent.putExtra("data", data)
-        startActivity(intent)
+        setInnerIntent(data, view)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        overridePendingTransition(0, 0);
     }
 
     override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {

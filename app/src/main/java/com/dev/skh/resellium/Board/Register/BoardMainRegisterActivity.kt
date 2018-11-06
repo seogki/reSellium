@@ -1,5 +1,6 @@
 package com.dev.skh.resellium.Board.Register
 
+import android.annotation.SuppressLint
 import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -48,10 +49,11 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
         val decimalProgress = progress.toFloat() / 10
 
-        binding.txtNum.text = decimalProgress.toString()+"점"
+        binding.txtNum.text = decimalProgress.toString() + "점"
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -75,21 +77,47 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
     }
 
     private fun setData() {
-        binding.layoutAppbar?.layoutAdd?.isEnabled = false
+        disableAdd()
         val title = binding.editTitle.text.toString()
         val review = binding.editReview.text.toString().trim()
-        val grade = binding.txtNum.text.toString()
+        val grade = checkGrade(binding.txtNum.text.toString())
+        if (grade == "") {
+            shortToast("평점을 제대로 설정해주세요")
+            enableAdd()
+            return
+        }
         val platform = binding.radiogroupPlatform.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim()
         if (title.isNotEmpty() && review.isNotEmpty() && grade.isNotEmpty()) {
             weakReference.get()?.setData(title, review, grade, platform)
         } else {
             shortToast("모두 입력해주세요")
-            binding.layoutAppbar?.layoutAdd?.isEnabled = true
+            enableAdd()
         }
     }
+
+    private fun enableAdd(){
+        binding.layoutAppbar?.layoutAdd?.isEnabled = true
+    }
+
+    private fun disableAdd(){
+        binding.layoutAppbar?.layoutAdd?.isEnabled = false
+    }
+
+
+    private fun checkGrade(grade: String?): String {
+        return if (grade != null) {
+            if (grade.contains("0.0")) {
+                ""
+            } else {
+                grade.replace("점", "")
+            }
+        } else
+            ""
+    }
+
     private fun setRegisterDialog() {
         AlertDialog.Builder(this@BoardMainRegisterActivity, R.style.MyDialogTheme)
-                .setTitle("등록")
+                .setTitle("리뷰")
                 .setMessage("정말로 등록하시겠습니까?")
                 .setPositiveButton("확인") { dialog, _ ->
                     dialog.dismiss()
@@ -103,7 +131,7 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
     override fun successData(disposable: Disposable?) {
         this.disposable = disposable
         AlertDialog.Builder(this@BoardMainRegisterActivity, R.style.MyDialogTheme)
-                .setTitle("등록")
+                .setTitle("리뷰")
                 .setMessage("등록되었습니다.")
                 .setPositiveButton("확인") { dialog, _ ->
                     dialog.dismiss()
@@ -111,7 +139,7 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
                 }.setNegativeButton(null, null)
                 .show()
 
-        binding.layoutAppbar?.layoutAdd?.isEnabled = true
+        enableAdd()
     }
 
     override fun onDestroy() {

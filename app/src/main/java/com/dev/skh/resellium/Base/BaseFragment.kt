@@ -3,6 +3,7 @@ package com.dev.skh.resellium.Base
 import android.content.Context
 import android.content.Intent
 import android.support.annotation.IdRes
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
@@ -15,6 +16,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.dev.skh.resellium.Board.Model.BoardMainModel
+import com.dev.skh.resellium.Board.Sub.InnerBoardMainActivity
+import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.GridSpacingItemDecoration
 
@@ -58,6 +63,7 @@ open class BaseFragment : Fragment() {
         inputManager.hideSoftInputFromWindow(activity!!.currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
 
     }
+
     fun clearAndClose(edit: EditText) {
         edit.text.clear()
         val inputManager = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -70,7 +76,6 @@ open class BaseFragment : Fragment() {
     }
 
 
-
     fun setGameRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
         val decor = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         decor.setDrawable(ContextCompat.getDrawable(context!!, R.drawable.survey_divider)!!)
@@ -81,7 +86,7 @@ open class BaseFragment : Fragment() {
         return rvGame
     }
 
-    fun setGridGameRv(rvGame: RecyclerView, layoutManager: GridLayoutManager) : RecyclerView {
+    fun setGridGameRv(rvGame: RecyclerView, layoutManager: GridLayoutManager): RecyclerView {
         rvGame.isNestedScrollingEnabled = false
         rvGame.layoutManager = layoutManager
 
@@ -124,6 +129,43 @@ open class BaseFragment : Fragment() {
         btn.setTextColor(ContextCompat.getColor(context!!, R.color.white))
         btn.background = ContextCompat.getDrawable(context!!, R.drawable.text_round_secondary_border_grey)
 
+    }
+
+    fun setInnerIntent(model: Any?, view: View?) {
+        if (model != null) {
+            if (model is GameMainModel) {
+                gameMainCommentIntent(model, view)
+            } else if (model is BoardMainModel) {
+                innerBoardMainIntent(model, view)
+            }
+        }
+    }
+
+    private fun gameMainCommentIntent(model: GameMainModel, view: View?) {
+        val intent = Intent(view?.context, GameMainCommentActivity::class.java)
+        intent.putExtra("data", model)
+        startActivity(intent, ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity!!
+                        , view?.findViewById(R.id.txt_title) as TextView
+                        , "game_title").toBundle())
+    }
+
+    private fun innerBoardMainIntent(model: BoardMainModel, view: View?) {
+        val intent = Intent(view?.context, InnerBoardMainActivity::class.java)
+        intent.putExtra("data", model)
+        val p1 = android.support.v4.util.Pair.create(view?.findViewById(R.id.txt_title) as View, "board_title")
+//                val p2 = android.support.v4.util.Pair.create(view.findViewById(R.id.txt_grade) as View, "board_grade")
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p1)
+        startActivity(intent, options.toBundle())
+    }
+
+    fun setTabInnerIntent(model: BoardMainModel, view: View?) {
+        val intent = Intent(view?.context, InnerBoardMainActivity::class.java)
+        intent.putExtra("data", model)
+        startActivity(intent, ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity!!
+                        , view!!
+                        , "board_title").toBundle())
     }
 
 }

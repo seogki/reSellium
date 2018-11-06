@@ -61,24 +61,27 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_main, container, false)
-        binding.layoutAppbar?.title = "겜창고"
-        binding.layoutAppbar?.onClickListener = this
-//        binding.imgGrade.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
-//        binding.imgBookmark.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
         invisibleView()
-
-        binding.onClickListener = this
+        setView()
         setTabLayout()
         setRv()
         return binding.root
     }
 
+    private fun setView() {
+        binding.layoutAppbar?.title = "겜창고"
+        binding.layoutAppbar?.onClickListener = this
+        binding.onClickListener = this
+//        binding.imgGrade.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
+//        binding.imgBookmark.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
+//        binding.imgRefresh.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
+//        binding.imgNextBoard.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Handler().postDelayed({
+        getData()
 
-            getData()
-        }, 10)
     }
 
     override fun onClick(v: View?) {
@@ -144,8 +147,6 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     }
 
     private fun setRv() {
-
-
         binding.txtPs4.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.txtSwitch.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.txtXbox.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
@@ -220,10 +221,10 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     }
 
     private fun setBg(result: String?, textView: TextView) {
-        if (result!!.contains("매입")) {
+        if (result!!.contains("매각")) {
             textView.text = result
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.accentColor))
-        } else if (result.contains("매각")) {
+        } else if (result.contains("매입")) {
             textView.text = result
             textView.setTextColor(ContextCompat.getColor(context!!, R.color.fabColor))
         }

@@ -8,8 +8,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 /**
  * Created by Seogki on 2018. 6. 18..
@@ -51,8 +49,7 @@ public class UtilMethod {
                 + "\n" + nObjects;
     }
 
-    //SDF to generate a unique name for the compressed file.
-    private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyymmddhhmmss", Locale.getDefault());
+//    private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyymmddhhmmss", Locale.getDefault());
 
 
     public static String currencyFormat(String amount) {
@@ -60,14 +57,11 @@ public class UtilMethod {
             if (amount.isEmpty()) {
                 return "";
             }
-
             DecimalFormat formatter = new DecimalFormat("###,###,###");
             return formatter.format(Double.parseDouble(amount));
         } else {
             return "";
         }
-
-
     }
 
     public static String formatTimeString(long regTime, String result) {
@@ -86,11 +80,11 @@ public class UtilMethod {
             msg = (diffTime) + "달 전";
         } else {
             String time = result.replace("-", "").substring(0, 8);
-            String year = time.substring(0,4);
-            String month = time.substring(4,6);
-            String days = time.substring(6,8);
-            Log.d("time",time);
-            return year +"년 " + month +"월 " + days+"일";
+            String year = time.substring(2, 4);
+            String month = time.substring(4, 6);
+//            String days = time.substring(6,8);
+            Log.d("time", time);
+            return year + "-" + month;
         }
 
 

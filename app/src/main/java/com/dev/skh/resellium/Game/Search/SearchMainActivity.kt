@@ -1,12 +1,13 @@
 package com.dev.skh.resellium.Game.Search
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.content.ContextCompat
 import android.support.v4.widget.NestedScrollView
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -15,11 +16,9 @@ import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.Game.GameMainAdapter
-import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
-import com.dev.skh.resellium.Util.GridSpacingItemDecoration
 import com.dev.skh.resellium.databinding.ActivitySearchMainBinding
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
@@ -38,9 +37,7 @@ class SearchMainActivity : InnerBaseActivity()
             "SWITCH" -> data = switchMainAdapter?.getItem(position)
         }
 
-        val intent = Intent(view.context, GameMainCommentActivity::class.java)
-        intent.putExtra("data", data)
-        startActivity(intent)
+        setInnerIntent(data, view)
     }
 
 
@@ -48,6 +45,10 @@ class SearchMainActivity : InnerBaseActivity()
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
         setProgressbarGone()
+    }
+    override fun onResume() {
+        super.onResume()
+        overridePendingTransition(0, 0);
     }
 
 
@@ -78,9 +79,9 @@ class SearchMainActivity : InnerBaseActivity()
     private var ps4MainAdapter: GameMainAdapter? = null
     private var xboxMainAdapter: GameMainAdapter? = null
     private var switchMainAdapter: GameMainAdapter? = null
-    private lateinit var ps4LayoutManager: GridLayoutManager
-    private lateinit var xboxLayoutManager: GridLayoutManager
-    private lateinit var switchLayoutManager: GridLayoutManager
+    private lateinit var ps4LayoutManager: LinearLayoutManager
+    private lateinit var xboxLayoutManager: LinearLayoutManager
+    private lateinit var switchLayoutManager: LinearLayoutManager
     private var isLoading: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,19 +94,22 @@ class SearchMainActivity : InnerBaseActivity()
 
     private fun setAdapter() {
 
-        val result = Math.round(8 * resources.displayMetrics.density)
-        val decor = GridSpacingItemDecoration(2, result, true, 0)
+        val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.survey_divider)!!)
+
+//        val result = Math.round(8 * resources.displayMetrics.density)
+//        val decor = GridSpacingItemDecoration(2, result, true, 0)
         binding.layoutAppbar?.editSearch?.setOnEditorActionListener(this)
 
-        ps4LayoutManager = GridLayoutManager(this, 2)
+        ps4LayoutManager = LinearLayoutManager(this)
         binding.rvPs4.layoutManager = ps4LayoutManager
         binding.rvPs4.isNestedScrollingEnabled = false
 
-        xboxLayoutManager = GridLayoutManager(this, 2)
+        xboxLayoutManager = LinearLayoutManager(this)
         binding.rvXbox.layoutManager = xboxLayoutManager
         binding.rvXbox.isNestedScrollingEnabled = false
 
-        switchLayoutManager = GridLayoutManager(this, 2)
+        switchLayoutManager = LinearLayoutManager(this)
         binding.rvSwitch.layoutManager = switchLayoutManager
         binding.rvSwitch.isNestedScrollingEnabled = false
 

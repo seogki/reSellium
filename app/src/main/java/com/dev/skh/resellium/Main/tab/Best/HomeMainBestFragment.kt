@@ -1,7 +1,6 @@
 package com.dev.skh.resellium.Main.tab.Best
 
 
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -9,10 +8,10 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.dev.skh.resellium.Base.BaseFragment
 import com.dev.skh.resellium.Board.Model.BoardMainModel
-import com.dev.skh.resellium.Board.Sub.InnerBoardMainActivity
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.FragmentHomeMainBestBinding
@@ -61,15 +60,24 @@ class HomeMainBestFragment : BaseFragment(), HomeMainBestPresenter.View, View.On
 
     private fun setCheckType(type: String) {
         var data: BoardMainModel? = null
+        var view: TextView? = null
         when (type) {
-            "1" -> data = model?.get(0)
-            "2" -> data = model?.get(1)
-            "3" -> data = model?.get(2)
+            "1" -> {
+                data = model?.get(0)
+                view = binding.txtTitle1
+            }
+            "2" -> {
+                data = model?.get(1)
+                view = binding.txtTitle2
+            }
+            "3" -> {
+                data = model?.get(2)
+                view = binding.txtTitle3
+            }
         }
         if (data != null) {
-            val intent = Intent(context!!, InnerBoardMainActivity::class.java)
-            intent.putExtra("data", data)
-            startActivity(intent)
+
+            setTabInnerIntent(data, view)
         } else {
             Toast.makeText(context!!, "오류가 발생하였습니다. 나중에 다시 시도해주세요", Toast.LENGTH_SHORT).show()
         }

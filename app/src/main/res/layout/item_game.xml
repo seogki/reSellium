@@ -21,73 +21,49 @@
 
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/const_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_ripple_colored_grey"
         >
 
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/txt_sell"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="12dp"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+
+            android:layout_marginTop="12dp"
+            android:letterSpacing="0.05"
+            android:textColor="@color/fabColor"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:soldCheck="@{model.which}"
+            tools:text="중고매입"
+            />
+
 
         <TextView
             android:id="@+id/txt_title"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
             android:ellipsize="end"
             android:gravity="start"
             android:maxLength="8"
             android:maxLines="1"
+            android:transitionName="game_title"
             android:text="@{model.title}"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="스파이더맨"
-            />
-
-        <TextView
-            android:id="@+id/txt_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:gravity="start"
-            android:textColor="@color/darkGrey"
-            android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@+id/txt_title"
-            app:timeAgo="@{model.date}"
-            tools:text="2018-09-19 23:44:45"
-            />
-
-        <TextView
-            android:id="@+id/txt_platform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="14dp"
-            android:maxLength="8"
-            android:maxLines="1"
-            android:text="@{model.place}"
-            android:textColor="@color/secondaryTextColor"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_date"
-            tools:text="PS4"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_sell"
+            app:layout_constraintStart_toEndOf="@+id/txt_sell"
+            app:layout_constraintTop_toTopOf="@+id/txt_sell"
+            tools:text="스파이더맨"
             />
 
 
@@ -95,16 +71,14 @@
             android:id="@+id/txt_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
             android:gravity="start"
             android:letterSpacing="0.05"
-            android:textColor="@color/black"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="12.5sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_platform"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_sell"
+            app:layout_constraintStart_toEndOf="@+id/txt_title"
+            app:layout_constraintTop_toTopOf="@+id/txt_sell"
             app:moneyCheck="@{model.money}"
             tools:text="42,000원"
             />
@@ -113,47 +87,32 @@
             android:id="@+id/img_other"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            app:setComment="@{model.comment}"
+            android:layout_marginEnd="4dp"
             android:textColor="@color/fabColor"
-            android:layout_marginBottom="8dp"
             android:textSize="11sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_sell"
+            app:layout_constraintEnd_toStartOf="@+id/txt_date"
+            app:layout_constraintTop_toTopOf="@+id/txt_sell"
+            app:setComment="@{model.comment}"
             tools:text="5개 댓글"
             />
 
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/const_mid"
-            android:layout_marginStart="8dp"
-            android:background="@color/fabColor"
-            android:layout_width="wrap_content"
-            android:elevation="8dp"
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            >
-
-            <TextView
-                android:id="@+id/txt_sell"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:letterSpacing="0.05"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:padding="8dp"
-                android:text="@{model.which}"
-                tools:text="중고매입"
-                />
-
-        </android.support.constraint.ConstraintLayout>
-
+            android:layout_marginEnd="8dp"
+            android:gravity="start"
+            android:textColor="@color/darkGrey"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_sell"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txt_sell"
+            app:timeAgo="@{model.date}"
+            tools:text="3일전"
+            />
 
     </android.support.constraint.ConstraintLayout>
+
 
 </layout>
