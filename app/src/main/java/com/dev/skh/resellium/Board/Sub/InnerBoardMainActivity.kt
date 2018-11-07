@@ -3,6 +3,7 @@ package com.dev.skh.resellium.Board.Sub
 import android.animation.LayoutTransition
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PopupMenu
@@ -23,6 +24,7 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
     override fun setError(disposable: Disposable?, message: String?) {
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
+        setProgressbarGone()
     }
 
     companion object {
@@ -44,7 +46,11 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
         binding = DataBindingUtil.setContentView(this, R.layout.activity_inner_board_main)
         setIntent()
         setView()
-        presenter.get()?.getCommentData(id)
+        setBaseProgressBar(binding.progressBar)
+        Handler().postDelayed({
+            presenter.get()?.getCommentData(id)
+        }, 500)
+
     }
 
     private fun setIntent() {
@@ -99,7 +105,6 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
                     true
                 }
                 else -> {
-
                     false
                 }
             }
@@ -115,27 +120,24 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
                 gameMainCommentAdapter = GameMainCommentAdapter(this, result)
                 rv?.adapter = gameMainCommentAdapter
                 setScrollListener()
-
-
-            } else {
-
+            } else
                 gameMainCommentAdapter?.addItems(result)
+        }
+        setProgressbarGone()
+        Handler().postDelayed({
+            if (gameMainCommentAdapter?.itemCount == 0) {
+                binding.txtNoComment.visibility = View.VISIBLE
+            } else {
+                binding.txtNoComment.visibility = View.GONE
             }
-
-        }
-
-        if (this.gameMainCommentAdapter?.itemCount == 0) {
-            binding.txtNoComment.visibility = View.VISIBLE
-        } else {
-            binding.txtNoComment.visibility = View.GONE
-        }
+        }, 100)
 
     }
 
     private fun setScrollListener() {
         binding.constComment.layoutTransition.enableTransitionType(LayoutTransition.DISAPPEARING)
         binding.constComment.layoutTransition.enableTransitionType(LayoutTransition.APPEARING)
-        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
             if (scrollY > oldScrollY) {
                 //내리는곳
                 slideDown(binding.constComment)
@@ -165,9 +167,9 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
         shortToast("오류가 발생하였습니다.")
     }
 
-
     private fun refreshItem() {
         gameMainCommentAdapter?.clearItems()
+        setProgressbarVisible()
         clearAndClose(binding.editComment)
         if (id!!.isEmpty())
             id = binding.model?.id

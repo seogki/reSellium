@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 >
 
+
                 <View
                     android:id="@+id/view_img"
                     android:layout_width="0dp"
@@ -113,7 +114,9 @@
                     android:id="@+id/const_first"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:elevation="4dp"
                     android:background="@drawable/bg_white_round_secondary_border"
                     app:layout_constraintTop_toBottomOf="@+id/txt_grade"
                     >
@@ -126,7 +129,7 @@
                         android:layout_centerHorizontal="true"
                         app:layout_constraintTop_toTopOf="parent"
                         app:tabGravity="fill"
-                        app:tabIndicatorColor="@color/white"
+                        app:tabIndicatorColor="@android:color/transparent"
                         app:tabMode="fixed"
                         app:tabPaddingEnd="0dp"
                         app:tabPaddingStart="0dp"
@@ -138,8 +141,6 @@
                     <View
                         android:layout_width="0dp"
                         android:layout_height="0.5dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginStart="4dp"
                         android:background="@color/midGrey"
                         app:layout_constraintTop_toBottomOf="@+id/tablayout"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -199,7 +200,7 @@
                     android:id="@+id/img_refresh"
                     android:layout_width="40dp"
                     android:layout_height="0dp"
-                    android:layout_marginEnd="8dp"
+
                     android:onClick="@{onClickListener::onClick}"
                     android:padding="8dp"
                     android:src="@drawable/ic_action_refresh"
@@ -212,17 +213,41 @@
                     android:id="@+id/const_second"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:elevation="4dp"
                     android:background="@drawable/bg_white_round_secondary_border"
                     app:layout_constraintTop_toBottomOf="@+id/txt_recent"
                     >
+
+                    <TextView
+                        android:id="@+id/txt_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="매물"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/midGrey"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_header"
+                        />
 
                     <android.support.constraint.ConstraintLayout
                         android:id="@+id/const_all"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_header"
                         >
+
+
 
 
                         <View
@@ -361,13 +386,15 @@
 
                     </android.support.constraint.ConstraintLayout>
 
-                    <View
-                        android:id="@+id/view_done"
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/const_second"
-                        />
+
                 </android.support.constraint.ConstraintLayout>
+                <View
+                    android:id="@+id/view_done"
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/const_second"
+                    />
+
 
 
             </android.support.constraint.ConstraintLayout>

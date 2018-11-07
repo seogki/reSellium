@@ -46,6 +46,7 @@ class SearchMainActivity : InnerBaseActivity()
         DLog.e("error ${message.toString()}")
         setProgressbarGone()
     }
+
     override fun onResume() {
         super.onResume()
         overridePendingTransition(0, 0);
@@ -226,6 +227,15 @@ class SearchMainActivity : InnerBaseActivity()
                 ps4MainAdapter?.addItems(result)
 
         }
+
+        Handler().postDelayed({
+            if (ps4MainAdapter?.itemCount == 0) {
+                binding.txtNoComment.visibility = View.VISIBLE
+            } else {
+                binding.txtNoComment.visibility = View.GONE
+            }
+        }, 100)
+
         setProgressbarGone()
         this.disposable = disposable
         isLoading = false
@@ -242,6 +252,15 @@ class SearchMainActivity : InnerBaseActivity()
             } else
                 xboxMainAdapter?.addItems(result)
         }
+
+        Handler().postDelayed({
+            if (xboxMainAdapter?.itemCount == 0) {
+                binding.txtNoComment.visibility = View.VISIBLE
+            } else {
+                binding.txtNoComment.visibility = View.GONE
+            }
+        }, 100)
+
         setProgressbarGone()
         this.disposable = disposable
         isLoading = false
@@ -258,6 +277,15 @@ class SearchMainActivity : InnerBaseActivity()
             } else
                 switchMainAdapter?.addItems(result)
         }
+
+        Handler().postDelayed({
+            if (switchMainAdapter?.itemCount == 0) {
+                binding.txtNoComment.visibility = View.VISIBLE
+            } else {
+                binding.txtNoComment.visibility = View.GONE
+            }
+        }, 100)
+
         setProgressbarGone()
         this.disposable = disposable
         isLoading = false
@@ -267,6 +295,7 @@ class SearchMainActivity : InnerBaseActivity()
 
 
     private fun setToolbarColor(text: String) {
+        binding.txtNoComment.visibility = View.GONE
         currentPos = text
         setProgressbarGone()
     }

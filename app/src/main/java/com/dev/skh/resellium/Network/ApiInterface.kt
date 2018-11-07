@@ -4,7 +4,6 @@ import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Board.Model.SearchKeyModel
 import com.dev.skh.resellium.Game.Model.CommentModel
 import com.dev.skh.resellium.Game.Model.GameMainModel
-import com.dev.skh.resellium.Main.Model.HoriModel
 import com.google.gson.JsonObject
 import io.reactivex.Flowable
 import retrofit2.http.POST
@@ -19,7 +18,7 @@ interface ApiInterface {
      *  메인
      */
     @POST("main/getMainData")
-    fun getMainData(@Query("Platform") platform: String): Flowable<MutableList<HoriModel>>
+    fun getMainData(@Query("Platform") platform: String): Flowable<MutableList<GameMainModel>>
 
     @POST("main/getNewMainData")
     fun getNewMainData(): Flowable<MutableList<BoardMainModel>>

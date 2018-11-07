@@ -1,7 +1,7 @@
 package com.dev.skh.resellium.Main
 
 import com.dev.skh.resellium.Base.BasePresenter
-import com.dev.skh.resellium.Main.Model.HoriModel
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +26,7 @@ class HomeMainPresenter(val view: HomeMainPresenter.View? = null)  : BasePresent
 
     interface View {
 
-        fun updateData(result: MutableList<HoriModel>?, disposable: Disposable?, currentPos: String)
+        fun updateData(result: MutableList<GameMainModel>?, disposable: Disposable?, currentPos: String)
         fun errorUpdateData(disposable: Disposable?, message: String?)
 
     }

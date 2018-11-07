@@ -146,14 +146,14 @@ open class BaseFragment : Fragment() {
         intent.putExtra("data", model)
         startActivity(intent, ActivityOptionsCompat
                 .makeSceneTransitionAnimation(activity!!
-                        , view?.findViewById(R.id.txt_title) as TextView
+                        , view!!
                         , "game_title").toBundle())
     }
 
     private fun innerBoardMainIntent(model: BoardMainModel, view: View?) {
         val intent = Intent(view?.context, InnerBoardMainActivity::class.java)
         intent.putExtra("data", model)
-        val p1 = android.support.v4.util.Pair.create(view?.findViewById(R.id.txt_title) as View, "board_title")
+        val p1 = android.support.v4.util.Pair.create(view!!, "board_title")
 //                val p2 = android.support.v4.util.Pair.create(view.findViewById(R.id.txt_grade) as View, "board_grade")
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!, p1)
         startActivity(intent, options.toBundle())

@@ -45,7 +45,7 @@
 
                 <EditText
                     android:layout_margin="6dp"
-                    android:background="@drawable/text_round_white"
+                    android:background="@drawable/search_round_white"
                     android:id="@+id/edit_search"
                     android:hint="검색어를 입력해주세요"
                     android:textColor="@color/black"

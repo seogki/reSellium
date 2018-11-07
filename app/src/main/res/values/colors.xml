@@ -50,7 +50,7 @@
     <!--<color name="fabDrawableColor">#000000</color>-->
 
     <color name="accentColor">#16354C</color>
-    <color name="lightColor">#C5CAE9</color>
+    <color name="lightColor">#285f89</color>
     <color name="statusBar">#112a3c</color>
     <color name="fabColor">#E56C4E</color>
     <color name="secondaryTextColor">#757575</color>

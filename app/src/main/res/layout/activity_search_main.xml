@@ -124,6 +124,19 @@
                         app:layout_constraintTop_toBottomOf="@+id/txt_result"
                         />
 
+                    <TextView
+                        android:id="@+id/txt_no_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="항목이 존재하지 않습니다"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/darkGrey"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_search"
+                        />
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_ps4"
                         android:layout_width="match_parent"

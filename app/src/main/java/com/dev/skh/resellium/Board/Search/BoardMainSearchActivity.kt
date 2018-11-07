@@ -126,6 +126,14 @@ class BoardMainSearchActivity : InnerBaseActivity()
             }
         }
 
+        Handler().postDelayed({
+            if (boardMainAdapter?.itemCount == 0) {
+                binding.txtNoComment.visibility = View.VISIBLE
+            } else {
+                binding.txtNoComment.visibility = View.GONE
+            }
+        },100)
+
         setProgressbarGone()
         this.disposable = disposable
         isLoading = false

@@ -4,5 +4,7 @@
 
     <solid android:color="@color/fabColor"/>
 
-    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp"/>
+    <!--<stroke android:width="4dp" android:color="@color/accentColor"/>-->
+
+    <corners android:radius="8dp"/>
 </shape>

@@ -4,6 +4,7 @@ import android.animation.LayoutTransition
 import android.annotation.SuppressLint
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PopupMenu
@@ -42,8 +43,10 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game_main_comment)
         setIntent()
         setView()
-        presenter.get()?.getCommentData(gameid, type)
-
+        setBaseProgressBar(binding.progressBar)
+        Handler().postDelayed({
+            presenter.get()?.getCommentData(gameid, type)
+        },500)
     }
 
     @SuppressLint("SetTextI18n")
@@ -60,7 +63,6 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
         binding.executePendingBindings()
         binding.layoutAppbar?.title = binding.model?.which
         getType()
-
     }
 
     private fun setView() {
@@ -81,16 +83,14 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
     private fun setScrollListener() {
         binding.constComment.layoutTransition.enableTransitionType(LayoutTransition.DISAPPEARING)
         binding.constComment.layoutTransition.enableTransitionType(LayoutTransition.APPEARING)
-        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
             if (scrollY > oldScrollY) {
                 //내리는곳
                 slideDown(binding.constComment)
-//                binding.constComment.visibility = View.INVISIBLE
             }
             if (scrollY < oldScrollY) {
                 //올리기
                 slideUp(binding.constComment)
-//                binding.constComment.visibility = View.VISIBLE
             }
             if (scrollY == 0) {
                 //최상단
@@ -101,6 +101,7 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
     override fun setError(disposable: Disposable?, message: String?) {
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
+        setProgressbarGone()
     }
 
     override fun setReport(disposable: Disposable?) {
@@ -166,15 +167,16 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
             }
 
         }
-
-        if (this.gameMainCommentAdapter?.itemCount == 0) {
-            binding.txtNoComment.visibility = View.VISIBLE
-        } else {
-            binding.txtNoComment.visibility = View.GONE
-        }
+        setProgressbarGone()
+        Handler().postDelayed({
+            if (gameMainCommentAdapter?.itemCount == 0) {
+                binding.txtNoComment.visibility = View.VISIBLE
+            } else {
+                binding.txtNoComment.visibility = View.GONE
+            }
+        },100)
 
         this.disposable = disposable
-
     }
 
     override fun onRegisterData(disposable: Disposable?) {
@@ -189,6 +191,7 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
 
     private fun refreshItem() {
         gameMainCommentAdapter?.clearItems()
+        setProgressbarVisible()
         clearAndClose(binding.editComment)
         if (gameid!!.isEmpty() || type!!.isEmpty())
             getType()

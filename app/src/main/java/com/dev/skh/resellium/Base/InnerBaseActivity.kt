@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.util.Pair
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.GridLayoutManager
@@ -138,7 +139,7 @@ open class InnerBaseActivity : AppCompatActivity() {
     private fun innerBoardMainIntent(model: BoardMainModel, view: View?) {
         val intent = Intent(view?.context, InnerBoardMainActivity::class.java)
         intent.putExtra("data", model)
-        val p1 = android.support.v4.util.Pair.create(view?.findViewById(R.id.txt_title) as View, "board_title")
+        val p1 = Pair.create(view?.findViewById(R.id.txt_title) as View, "board_title")
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1)
         startActivity(intent, options.toBundle())
     }

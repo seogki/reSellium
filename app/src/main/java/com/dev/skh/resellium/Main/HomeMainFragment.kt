@@ -20,7 +20,7 @@ import android.widget.TextView
 import com.dev.skh.resellium.Base.BaseFragment
 import com.dev.skh.resellium.Board.BoardMainActivity
 import com.dev.skh.resellium.Game.GameMainActivity
-import com.dev.skh.resellium.Main.Model.HoriModel
+import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.Main.tab.Best.HomeMainBestFragment
 import com.dev.skh.resellium.Main.tab.New.HomeMainNewFragment
 import com.dev.skh.resellium.Main.tab.Worst.HomeMainWorstFragment
@@ -57,6 +57,9 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     private lateinit var adapter: TabPagerAdapter
     private lateinit var viewPager: ViewPager
     private lateinit var tabLayout: TabLayout
+    private var psModels: MutableList<GameMainModel>? = null
+    private var xboxModels: MutableList<GameMainModel>? = null
+    private var switchModels: MutableList<GameMainModel>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -72,10 +75,14 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
         binding.layoutAppbar?.title = "겜창고"
         binding.layoutAppbar?.onClickListener = this
         binding.onClickListener = this
-//        binding.imgGrade.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
-//        binding.imgBookmark.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
-//        binding.imgRefresh.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
-//        binding.imgNextBoard.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
+
+        binding.layoutPs?.fragment = this
+        binding.layoutXbox?.fragment = this
+        binding.layoutSwitch?.fragment = this
+
+        binding.layoutPs?.text = "PS"
+        binding.layoutXbox?.text = "XBOX"
+        binding.layoutSwitch?.text = "SWITCH"
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -86,17 +93,49 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.view_img -> {
-                beginActivity(Intent(context!!, BoardMainActivity::class.java))
-            }
+            R.id.view_img -> beginActivity(Intent(context!!, BoardMainActivity::class.java))
+
             R.id.img_refresh -> {
                 invisibleView()
                 onRefresh()
             }
-            R.id.img_recent_xbox -> {
-                beginActivity(Intent(context!!, GameMainActivity::class.java))
-            }
+
+            R.id.img_recent_xbox -> beginActivity(Intent(context!!, GameMainActivity::class.java))
+
             R.id.img_setting -> startActivity(Intent(context!!, UserMainActivity::class.java))
+
+        }
+    }
+    private fun setRv() {
+        binding.txtPs4.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
+        binding.txtSwitch.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
+        binding.txtXbox.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
+
+    }
+
+    fun onClickLayout(view: View?, text: String) {
+        when (text) {
+            "PS" -> {
+                when (view?.id) {
+                    R.id.const_first -> setInnerIntent(psModels?.let { it[0] }, view)
+                    R.id.const_second -> setInnerIntent(psModels?.let { it[1] }, view)
+                    R.id.const_third -> setInnerIntent(psModels?.let { it[2] }, view)
+                }
+            }
+            "XBOX" -> {
+                when (view?.id) {
+                    R.id.const_first -> setInnerIntent(xboxModels?.let { it[0] }, view)
+                    R.id.const_second -> setInnerIntent(xboxModels?.let { it[1] }, view)
+                    R.id.const_third -> setInnerIntent(xboxModels?.let { it[2] }, view)
+                }
+            }
+            "SWITCH" -> {
+                when (view?.id) {
+                    R.id.const_first -> setInnerIntent(switchModels?.let { it[0] }, view)
+                    R.id.const_second -> setInnerIntent(switchModels?.let { it[1] }, view)
+                    R.id.const_third -> setInnerIntent(switchModels?.let { it[2] }, view)
+                }
+            }
         }
     }
 
@@ -146,38 +185,41 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
         weakPresenter.get()?.getHoriData("SWITCH")
     }
 
-    private fun setRv() {
-        binding.txtPs4.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
-        binding.txtSwitch.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
-        binding.txtXbox.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
 
-    }
-
-    override fun updateData(result: MutableList<HoriModel>?, disposable: Disposable?, currentPos: String) {
+    override fun updateData(result: MutableList<GameMainModel>?, disposable: Disposable?, currentPos: String) {
         if (result != null) {
             when (currentPos) {
-                "PS" -> setPs4Data(result)
-                "XBOX" -> setXboxData(result)
-                "SWITCH" -> setSwitchData(result)
+                "PS" -> {
+                    this.psModels = result
+                    setPs4Data(result)
+                }
+                "XBOX" -> {
+                    this.xboxModels = result
+                    setXboxData(result)
+                }
+                "SWITCH" -> {
+                    this.switchModels = result
+                    setSwitchData(result)
+                }
             }
         }
         defaultSetting()
         this.disposable = disposable
     }
 
-    private fun setPs4Data(horiModel: MutableList<HoriModel>?) {
+    private fun setPs4Data(horiModel: MutableList<GameMainModel>?) {
         if (horiModel != null) {
             setRecentData(binding.layoutPs, horiModel)
         }
     }
 
-    private fun setXboxData(horiModel: MutableList<HoriModel>?) {
+    private fun setXboxData(horiModel: MutableList<GameMainModel>?) {
         if (horiModel != null) {
             setRecentData(binding.layoutXbox, horiModel)
         }
     }
 
-    private fun setSwitchData(horiModel: MutableList<HoriModel>?) {
+    private fun setSwitchData(horiModel: MutableList<GameMainModel>?) {
         if (horiModel != null) {
             setRecentData(binding.layoutSwitch, horiModel)
         }
@@ -202,7 +244,7 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setRecentData(layout: LayoutRecentBinding?, horiModel: MutableList<HoriModel>) {
+    private fun setRecentData(layout: LayoutRecentBinding?, horiModel: MutableList<GameMainModel>) {
         layout?.txtMoney1?.text = UtilMethod.currencyFormat(horiModel[0].money) + "원"
         layout?.txtMoney2?.text = UtilMethod.currencyFormat(horiModel[1].money) + "원"
         layout?.txtMoney3?.text = UtilMethod.currencyFormat(horiModel[2].money) + "원"
