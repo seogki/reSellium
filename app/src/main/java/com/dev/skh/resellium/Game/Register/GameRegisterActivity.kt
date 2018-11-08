@@ -1,16 +1,14 @@
 package com.dev.skh.resellium.Game.Register
 
-import android.content.Context
 import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.RadioButton
 import android.widget.Toast
+import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.CustomTextWatcher
 import com.dev.skh.resellium.Util.DLog
@@ -18,7 +16,7 @@ import com.dev.skh.resellium.databinding.ActivityGameRegisterBinding
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
-class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegisterPresenter.View {
+class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegisterPresenter.View {
 
 
     companion object {
@@ -105,11 +103,7 @@ class GameRegisterActivity : AppCompatActivity(), View.OnClickListener, GameRegi
         this.disposable = disposable
         binding.layoutAppbar?.layoutAdd?.isEnabled = true
         DLog.e("error : $error")
-    }
-
-    private fun closeKeyboard() {
-        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        showErrorToast()
     }
 
     override fun onDestroy() {

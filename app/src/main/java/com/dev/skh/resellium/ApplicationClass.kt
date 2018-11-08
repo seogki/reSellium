@@ -13,6 +13,7 @@ import io.fabric.sdk.android.Fabric
 class ApplicationClass : MultiDexApplication() {
 
 
+
     override fun onCreate() {
         super.onCreate()
         Fabric.with(this, Crashlytics())
@@ -24,6 +25,10 @@ class ApplicationClass : MultiDexApplication() {
             return
         }
         LeakCanary.install(this)
-        // Normal app init code...
+
     }
+
+
+
+
 }

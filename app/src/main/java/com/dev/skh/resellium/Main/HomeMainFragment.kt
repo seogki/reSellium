@@ -41,6 +41,7 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
         defaultSetting()
+        showErrorToast()
     }
 
     companion object {

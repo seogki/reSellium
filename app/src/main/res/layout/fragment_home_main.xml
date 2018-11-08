@@ -114,10 +114,7 @@
                     android:id="@+id/const_first"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:elevation="4dp"
-                    android:background="@drawable/bg_white_round_secondary_border"
+                    android:background="@color/white"
                     app:layout_constraintTop_toBottomOf="@+id/txt_grade"
                     >
 
@@ -213,10 +210,7 @@
                     android:id="@+id/const_second"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:elevation="4dp"
-                    android:background="@drawable/bg_white_round_secondary_border"
+                    android:background="@color/white"
                     app:layout_constraintTop_toBottomOf="@+id/txt_recent"
                     >
 
@@ -224,7 +218,7 @@
                         android:id="@+id/txt_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="매물"
+                        android:text="게임"
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:gravity="center"
@@ -246,9 +240,6 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/txt_header"
                         >
-
-
-
 
                         <View
                             android:id="@+id/view_all"

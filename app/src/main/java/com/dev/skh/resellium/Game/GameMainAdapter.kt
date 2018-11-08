@@ -29,23 +29,8 @@ class GameMainAdapter(context: Context, arraylist: MutableList<GameMainModel>) :
 
     inner class GameMainViewHolder(val binding: ItemGameBinding) : RecyclerView.ViewHolder(binding.root) {
 
-
-
         fun bind(model: GameMainModel?) {
-//            binding.onClickListener = this
             binding.model = model
         }
-
-//        override fun onClick(v: View?) {
-//            when (v?.id) {
-//                R.id.img_other -> {
-//                    popupMenu(v)
-//                }
-//            }
-//        }
-
-
-
-
     }
 }

@@ -46,13 +46,17 @@ class BoardMainFragment : BaseFragment()
     override fun errorData(disposable: Disposable?, message: String?) {
         this.disposable = disposable
         DLog.e("error : $message")
+        setProgressbarGone()
+        showErrorToast()
     }
 
     private var disposable: Disposable? = null
     private lateinit var binding: FragmentBoardMainBinding
-        private var layoutManager: LinearLayoutManager? = null
-//    private var layoutManager: GridLayoutManager? = null
+    private var layoutManager: LinearLayoutManager? = null
+    //    private var layoutManager: GridLayoutManager? = null
     private var adapter: BoardMainAdapter? = null
+
+
     private var rv: RecyclerView? = null
     private var isLoading: Boolean = false
     private var data: String? = ""

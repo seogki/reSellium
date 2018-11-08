@@ -131,4 +131,8 @@ open class BaseActivity : AppCompatActivity() {
         adview?.pause()
     }
 
+    fun showErrorToast() {
+        Toast.makeText(this, getString(R.string.error_toast), Toast.LENGTH_SHORT).show()
+    }
+
 }

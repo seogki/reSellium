@@ -45,6 +45,7 @@ class SearchMainActivity : InnerBaseActivity()
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
         setProgressbarGone()
+        showErrorToast()
     }
 
     override fun onResume() {

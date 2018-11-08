@@ -25,6 +25,7 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
         setProgressbarGone()
+        showErrorToast()
     }
 
     companion object {
@@ -97,7 +98,7 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
 
     private fun popupMenu(v: View) {
         val popupMenu = PopupMenu(this, v)
-        popupMenu.inflate(R.menu.game_menu)
+        popupMenu.inflate(R.menu.board_menu)
         popupMenu.setOnMenuItemClickListener { item ->
             when (item?.itemId) {
                 R.id.menu_report -> {

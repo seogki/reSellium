@@ -2,6 +2,7 @@ package com.dev.skh.resellium.Game.Inner
 
 import android.animation.LayoutTransition
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +14,7 @@ import android.view.View
 import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.Game.Model.CommentModel
 import com.dev.skh.resellium.Game.Model.GameMainModel
+import com.dev.skh.resellium.Game.WebView.GameMainWebViewActivity
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.ActivityGameMainCommentBinding
@@ -37,6 +39,7 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
     private var type: String? = ""
     private var gameid: String? = ""
     private var disposable: Disposable? = null
+    private var isWeb = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +47,10 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
         setIntent()
         setView()
         setBaseProgressBar(binding.progressBar)
+        setProgressbarVisible()
         Handler().postDelayed({
             presenter.get()?.getCommentData(gameid, type)
-        },500)
+        }, 500)
     }
 
     @SuppressLint("SetTextI18n")
@@ -102,6 +106,7 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
         setProgressbarGone()
+        showErrorToast()
     }
 
     override fun setReport(disposable: Disposable?) {
@@ -111,7 +116,8 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
 
     override fun setReportError(disposable: Disposable?) {
         this.disposable = disposable
-        shortToast("오류가 발생하였습니다.")
+        showErrorToast()
+
     }
 
 
@@ -147,6 +153,10 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
                     presenter.get()?.setReport(binding.model)
                     true
                 }
+                R.id.menu_search -> {
+                    setSearch()
+                    true
+                }
                 else -> {
 
                     false
@@ -154,6 +164,15 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
             }
         }
         popupMenu.show()
+    }
+
+    private fun setSearch() {
+
+        val url = "https://www.google.co.kr/search?q=" + binding.model?.title
+        val i = Intent(this, GameMainWebViewActivity::class.java)
+        i.putExtra("URI", url)
+        startActivity(i)
+        isWeb = true
     }
 
     override fun setCommentData(result: MutableList<CommentModel>?, disposable: Disposable?, isScroll: Boolean) {
@@ -174,7 +193,7 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
             } else {
                 binding.txtNoComment.visibility = View.GONE
             }
-        },100)
+        }, 100)
 
         this.disposable = disposable
     }
@@ -187,6 +206,16 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
     override fun onDestroy() {
         super.onDestroy()
         disposable?.dispose()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isWeb) {
+            setProgressbarGone()
+            isWeb = false
+        }
+
+
     }
 
     private fun refreshItem() {

@@ -2,7 +2,6 @@ package com.dev.skh.resellium.Util;
 
 import android.app.Activity;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,17 @@ import java.util.HashMap;
  * http://stackoverflow.com/questions/2150078/how-to-check-visibility-of-software-keyboard-in-android
  */
 public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener {
+
+
+    private KeyboardUtils(Activity act, @Nullable SoftKeyboardToggleListener listener) {
+        mCallback = listener;
+
+        mRootView = ((ViewGroup) act.findViewById(android.R.id.content)).getChildAt(0);
+        mRootView.getViewTreeObserver().addOnGlobalLayoutListener(this);
+
+        mScreenDensity = act.getResources().getDisplayMetrics().density;
+    }
+
     @Override
     public void onGlobalLayout() {
         Rect r = new Rect();
@@ -35,12 +45,11 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener {
     @Nullable
     private SoftKeyboardToggleListener mCallback;
     private View mRootView;
-    private float mScreenDensity = 1;
-    @NonNull
+    private float mScreenDensity;
     private static HashMap<SoftKeyboardToggleListener, KeyboardUtils> sListenerMap = new HashMap<>();
 
 
-    public static void addKeyboardToggleListener(@NonNull Activity act, SoftKeyboardToggleListener listener) {
+    public static void addKeyboardToggleListener(Activity act, SoftKeyboardToggleListener listener) {
         removeKeyboardToggleListener(listener);
 
         sListenerMap.put(listener, new KeyboardUtils(act, listener));
@@ -50,7 +59,6 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener {
         if (sListenerMap.containsKey(listener)) {
             KeyboardUtils k = sListenerMap.get(listener);
             k.removeListener();
-
             sListenerMap.remove(listener);
         }
     }
@@ -68,14 +76,7 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener {
         mRootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
     }
 
-    private KeyboardUtils(@NonNull Activity act, SoftKeyboardToggleListener listener) {
-        mCallback = listener;
 
-        mRootView = ((ViewGroup) act.findViewById(android.R.id.content)).getChildAt(0);
-        mRootView.getViewTreeObserver().addOnGlobalLayoutListener(this);
-
-        mScreenDensity = act.getResources().getDisplayMetrics().density;
-    }
 
 
 }

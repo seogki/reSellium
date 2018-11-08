@@ -144,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:transitionName="board_grade"
-                        android:background="@drawable/text_circle_secondary"
+                        android:background="@drawable/bg_secondary_round"
                         android:gravity="center"
                         android:padding="6dp"
                         android:text="@{model.grade}"

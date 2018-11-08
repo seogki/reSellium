@@ -212,6 +212,7 @@ class Ps4MainFragment : BaseFragment()
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
         setProgressbarGone()
+        showErrorToast()
     }
 
     override fun onDestroy() {

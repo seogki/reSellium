@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.BindingAdapter;
-import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
@@ -59,7 +58,7 @@ public class BaseBindingAdapter {
 //    }
 
     @BindingAdapter("keyboardDetect")
-    public static void keyboardDetect(@NonNull final View view, final String data) {
+    public static void keyboardDetect(final View view, final String data) {
 
         Context context = view.getContext();
         if (context == null) {
@@ -71,51 +70,17 @@ public class BaseBindingAdapter {
             }
         }
 
-
-        if (UtilMethod.getActivity(view.getContext()) != null)
-            KeyboardUtils.addKeyboardToggleListener(UtilMethod.getActivity(view.getContext()), new KeyboardUtils.SoftKeyboardToggleListener() {
+        Activity activity = UtilMethod.getActivity(context);
+        if (activity != null) {
+            KeyboardUtils.addKeyboardToggleListener(activity, new KeyboardUtils.SoftKeyboardToggleListener() {
                 @Override
                 public void onToggleSoftKeyboard(boolean isVisible) {
                     view.setVisibility(isVisible ? View.GONE : View.VISIBLE);
                 }
             });
+        }
 
     }
-
-//    @BindingAdapter("popularImage")
-//    public static void popularImage(final ImageView view, final String result) {
-//        Context context = view.getContext();
-//        if (context == null) {
-//            return;
-//        } else if (context instanceof Activity) {
-//            final Activity activity = (Activity) context;
-//            if (activity.isFinishing() || activity.isDestroyed()) {
-//                return;
-//            }
-//        }
-//        if (result == null) {
-//            Glide.with(context).clear(view);
-//            view.setImageDrawable(null);
-//        } else {
-//            String end = result.replace("/","");
-//            String murl = Const.Companion.getServer_url() + end;
-//            Uri uri = Uri.parse(murl);
-//
-//            Glide.with(context)
-//                    .asBitmap()
-//                    .load(uri)
-//                    .apply(new RequestOptions()
-//                            .dontTransform()
-//                            .format(DecodeFormat.PREFER_ARGB_8888)
-//                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE))
-//                    .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL) {
-//                        @Override
-//                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-//                            view.setImageBitmap(resource);
-//                        }
-//                    });
-//        }
-//    }
 
 
     @BindingAdapter("sellCheck")

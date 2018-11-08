@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">겜창고</string>
+    <string name="error_toast">네트워크 통신 도중에 에러가 발생했습니다</string>
 </resources>

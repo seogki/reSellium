@@ -23,6 +23,7 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
         this.disposable = disposable
         binding.layoutAppbar?.layoutAdd?.isEnabled = true
         DLog.e("error : $message")
+        showErrorToast()
     }
 
     companion object {

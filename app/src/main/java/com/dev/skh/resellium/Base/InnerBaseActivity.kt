@@ -56,7 +56,7 @@ open class InnerBaseActivity : AppCompatActivity() {
         inputManager.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
 
-    fun shortToast(text: String){
+    fun shortToast(text: String) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
@@ -87,7 +87,7 @@ open class InnerBaseActivity : AppCompatActivity() {
         return rvGame
     }
 
-    fun setGridGameRv(rvGame: RecyclerView, layoutManager: GridLayoutManager) : RecyclerView {
+    fun setGridGameRv(rvGame: RecyclerView, layoutManager: GridLayoutManager): RecyclerView {
         rvGame.isNestedScrollingEnabled = false
         rvGame.layoutManager = layoutManager
         val result = Math.round(8 * resources.displayMetrics.density)
@@ -142,5 +142,9 @@ open class InnerBaseActivity : AppCompatActivity() {
         val p1 = Pair.create(view?.findViewById(R.id.txt_title) as View, "board_title")
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, p1)
         startActivity(intent, options.toBundle())
+    }
+
+    fun showErrorToast() {
+        Toast.makeText(this, getString(R.string.error_toast), Toast.LENGTH_SHORT).show()
     }
 }

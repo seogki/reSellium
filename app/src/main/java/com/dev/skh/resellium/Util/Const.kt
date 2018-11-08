@@ -7,7 +7,7 @@ open class Const {
     companion object {
 //        val server_url = "http://192.168.1.9:8001/"
 //
-        val server_url = "http://resellium.cafe24app.com:80/"
+        const val server_url = "http://resellium.cafe24app.com:80/"
 
         /***
          *  시간

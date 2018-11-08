@@ -109,8 +109,6 @@
                     </RadioGroup>
 
 
-
-
                     <TextView
                         android:id="@+id/txt_title"
                         android:layout_width="90dp"
@@ -349,6 +347,69 @@
                         app:layout_constraintTop_toTopOf="@id/txt_platform"
                         />
 
+
+                    <!--<RadioGroup-->
+                        <!--android:id="@+id/radiogroup_platform1"-->
+
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--app:layout_constraintTop_toBottomOf="@+id/txt_newOld"-->
+                        <!--&gt;-->
+
+
+                        <!--<android.support.v7.widget.AppCompatRadioButton-->
+                            <!--android:id="@+id/radio_ps41"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:checked="true"-->
+                            <!--android:onClick="@{onClickListener::onClick}"-->
+                            <!--android:text="PS"-->
+                            <!--android:textColor="@color/fabColor"-->
+                            <!--app:buttonTint="@color/fabColor"-->
+                            <!--/>-->
+
+                        <!--<android.support.v7.widget.AppCompatRadioButton-->
+                            <!--android:id="@+id/radio_xbox1"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:onClick="@{onClickListener::onClick}"-->
+                            <!--android:text="XBOX"-->
+                            <!--android:textColor="@color/fabColor"-->
+                            <!--app:buttonTint="@color/fabColor"-->
+                            <!--/>-->
+
+                        <!--<android.support.v7.widget.AppCompatRadioButton-->
+                            <!--android:id="@+id/radio_switch1"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:onClick="@{onClickListener::onClick}"-->
+                            <!--android:text="SWITCH"-->
+                            <!--android:textColor="@color/fabColor"-->
+                            <!--app:buttonTint="@color/fabColor"-->
+                            <!--/>-->
+                    <!--</RadioGroup>-->
+
+                    <!--<android.support.design.widget.TextInputLayout-->
+                        <!--android:id="@+id/input_title"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="8dp"-->
+                        <!--app:hintTextAppearance="@style/HintText"-->
+                        <!--app:layout_constraintTop_toBottomOf="@+id/radiogroup_platform1"-->
+                        <!--&gt;-->
+
+                        <!--<android.support.design.widget.TextInputEditText-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="40dp"-->
+                            <!--android:textSize="14sp"-->
+                            <!--android:background="@drawable/bg_white_round_secondary_border2"-->
+                            <!--android:hint="타이틀: 갓오브워, 스파이더맨, 피파..."-->
+                            <!--android:textColorHint="@color/middarkGrey"-->
+                            <!--/>-->
+                    <!--</android.support.design.widget.TextInputLayout>-->
                 </android.support.constraint.ConstraintLayout>
             </android.support.v4.widget.NestedScrollView>
         </android.support.constraint.ConstraintLayout>

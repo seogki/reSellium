@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Board.Sub.InnerBoardMainActivity
 import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
@@ -168,4 +169,7 @@ open class BaseFragment : Fragment() {
                         , "board_title").toBundle())
     }
 
+    fun showErrorToast() {
+        Toast.makeText(context, getString(R.string.error_toast), Toast.LENGTH_SHORT).show()
+    }
 }

@@ -143,6 +143,7 @@ class XboxMainFragment : BaseFragment()
         this.disposable = disposable
         DLog.e("error ${message.toString()}")
         setProgressbarGone()
+        showErrorToast()
     }
 
     private fun setRecyclerViewScrollbar(isSpinner: Boolean) {

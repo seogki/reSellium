@@ -9,8 +9,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by Seogki on 2018. 10. 11..
  */
-class BoardMainPresenter(val view: View? = null)  : BasePresenter(){
-
+class BoardMainPresenter(val view: View? = null) : BasePresenter() {
 
     fun getBoardData() {
         disposable = client.getBoardData()
@@ -39,7 +38,7 @@ class BoardMainPresenter(val view: View? = null)  : BasePresenter(){
     }
 
     fun getSpinnerData(spinner: String?) {
-        if(spinner != null) {
+        if (spinner != null) {
             disposable = client.getSpinnerBoardData(spinner)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

@@ -144,6 +144,8 @@ class BoardMainSearchActivity : InnerBaseActivity()
     override fun errorData(disposable: Disposable?, message: String?) {
         this.disposable = disposable
         DLog.e("error : $message")
+        setProgressbarGone()
+        showErrorToast()
     }
 
     private fun setRecyclerViewScrollbar() {
