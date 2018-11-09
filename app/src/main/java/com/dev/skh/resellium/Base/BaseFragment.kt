@@ -2,6 +2,7 @@ package com.dev.skh.resellium.Base
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.support.annotation.IdRes
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
@@ -122,12 +123,14 @@ open class BaseFragment : Fragment() {
     }
 
     fun setBtnDefault(btn: TextView) {
-        btn.setTextColor(ContextCompat.getColor(context!!, R.color.black))
+        btn.setTextColor(ContextCompat.getColor(context!!, R.color.middarkGrey))
+        btn.typeface = Typeface.DEFAULT
         btn.background = ContextCompat.getDrawable(context!!, R.drawable.text_round_white_border_grey)
     }
 
     fun setBtnAccent(btn: TextView) {
         btn.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+        btn.typeface = Typeface.DEFAULT_BOLD
         btn.background = ContextCompat.getDrawable(context!!, R.drawable.text_round_secondary_border_grey)
 
     }

@@ -116,8 +116,8 @@ interface ApiInterface {
 
 
 
-    @POST("game/RegisterData")
-    fun RegisterData(@Query("Platform") platform: String
+    @POST("game/registerData")
+    fun registerData(@Query("Platform") platform: String
                      , @Query("Title") title: String
                      , @Query("Place") place: String
                      , @Query("Money") money: String

@@ -100,7 +100,6 @@ class GameMainFragment : BaseFragment(), View.OnClickListener {
 
     }
 
-
     private fun setView() {
         viewPager = binding.registerFragViewpager
         adapter = TabPagerAdapter(childFragmentManager)

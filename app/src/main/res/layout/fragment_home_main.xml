@@ -266,6 +266,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/view_all"
                             app:layout_constraintStart_toStartOf="@+id/view_all"
                             app:layout_constraintTop_toTopOf="@+id/layout_ps"
+                            tools:targetApi="lollipop"
                             />
 
                         <include
@@ -304,6 +305,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/view_all"
                             app:layout_constraintStart_toStartOf="@+id/view_all"
                             app:layout_constraintTop_toTopOf="parent"
+                            tools:targetApi="lollipop"
                             />
 
                         <include
@@ -355,6 +357,7 @@
                             app:layout_constraintEnd_toEndOf="@+id/view_all"
                             app:layout_constraintStart_toStartOf="@+id/view_all"
                             app:layout_constraintTop_toTopOf="@+id/layout_switch"
+                            tools:targetApi="lollipop"
                             />
 
                         <include

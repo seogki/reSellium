@@ -4,7 +4,6 @@ package com.dev.skh.resellium.Game.Tab
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.widget.NestedScrollView
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -19,6 +18,7 @@ import com.dev.skh.resellium.Game.GameMainAdapter
 import com.dev.skh.resellium.Game.GameMainPresenter
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
+import com.dev.skh.resellium.Util.CustomNestedScrollListener
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.FragmentPs4MainBinding
 import io.reactivex.disposables.Disposable
@@ -29,7 +29,9 @@ class Ps4MainFragment : BaseFragment()
         , GameMainPresenter.View
         , SwipeRefreshLayout.OnRefreshListener
         , AdapterView.OnItemSelectedListener
-        , View.OnClickListener, BaseRecyclerViewAdapter.OnItemClickListener {
+        , View.OnClickListener
+        , BaseRecyclerViewAdapter.OnItemClickListener
+        , CustomNestedScrollListener.OnScrollListener {
 
 
     companion object {
@@ -46,6 +48,7 @@ class Ps4MainFragment : BaseFragment()
     private var recyclerView: RecyclerView? = null
     private var first: String = ""
     private var second: String = ""
+    private var isSpinner = false
     private var isLoading: Boolean = false
     private var disposable: Disposable? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -131,38 +134,31 @@ class Ps4MainFragment : BaseFragment()
         setInnerIntent(data, view)
     }
 
-
     private fun setRecyclerViewScrollbar(isSpinner: Boolean) {
-        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
-
-            if (v.getChildAt(v.childCount - 1) != null) {
-
-
-                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
-
-                    val visibleItemCount = layoutManager.childCount
-                    val totalItemCount = layoutManager.itemCount
-                    val pastVisiblesItems = layoutManager.findFirstVisibleItemPosition()
-
-                    if (!isLoading) {
-                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                            isLoading = true
-                            setProgressbarVisible()
-                            Handler().postDelayed({
-                                val id = ps4MainAdapter?.getItem(ps4MainAdapter!!.itemCount - 1)?.id
-                                if (isSpinner)
-                                    weakPresenter.get()?.checkSpinnerScrollData("0", first, second, id)
-                                else
-                                    weakPresenter.get()?.scrollData("0", id)
-
-                            }, 500)
-
-                        }
-                    }
-                }
-            }
-        })
+        this.isSpinner = isSpinner
+        binding.nestedScroll.setOnScrollChangeListener(CustomNestedScrollListener(layoutManager, this))
     }
+
+    override fun onScrollEnd() {
+        if (!isLoading) {
+            isLoading = true
+            setProgressbarVisible()
+            val id = ps4MainAdapter?.getItem(ps4MainAdapter!!.itemCount - 1)?.id
+            setData(id)
+        }
+    }
+
+    private fun setData(id: String?) {
+        Handler().postDelayed({
+            binding.nestedScroll.fling(0)
+            if (isSpinner)
+                weakPresenter.get()?.checkSpinnerScrollData("0", first, second, id)
+            else
+                weakPresenter.get()?.scrollData("0", id)
+
+        }, 500)
+    }
+
 
     private fun addItemOnSpinner() {
         weakPresenter.get()?.spinnerTwo()

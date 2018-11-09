@@ -41,17 +41,19 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/accentColor"
+                android:background="@color/white"
                 >
 
                 <TextView
                     android:id="@+id/chart_frag_txt_titlebar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:text="@{title}"
-                    android:textColor="@color/white"
+                    android:textColor="@color/fabColor"
                     android:textSize="18sp"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +63,7 @@
 
                 <ImageView
                     android:id="@+id/img_search"
-                    android:src="@drawable/ic_action_searchv2_white"
+                    android:src="@drawable/ic_action_search_secondary"
                     android:layout_width="wrap_content"
                     android:padding="8dp"
                     android:layout_height="0dp"
@@ -75,13 +77,15 @@
                     android:id="@+id/img_setting"
                     android:layout_width="wrap_content"
                     android:paddingEnd="8dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:paddingStart="8dp"
                     android:layout_height="0dp"
                     android:onClick="@{onClickListener::onClick}"
-                    android:src="@drawable/ic_action_setting"
+                    android:src="@drawable/ic_action_setting_secondary"
                     />
 
                 <View

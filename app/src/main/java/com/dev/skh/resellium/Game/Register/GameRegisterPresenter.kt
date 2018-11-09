@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
 class GameRegisterPresenter(val view: View? = null) : BasePresenter(){
 
     fun sendData(platform: String, title: String, place: String, money: String, which: String) {
-        disposable = client.RegisterData(platform, title, place, money, which)
+        disposable = client.registerData(platform, title, place, money, which)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

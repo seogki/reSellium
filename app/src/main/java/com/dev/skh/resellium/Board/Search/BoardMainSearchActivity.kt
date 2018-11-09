@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
@@ -18,6 +17,7 @@ import com.dev.skh.resellium.Board.BoardMainAdapter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Board.Model.SearchKeyModel
 import com.dev.skh.resellium.R
+import com.dev.skh.resellium.Util.CustomNestedScrollListener
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.ActivityBoardMainSearchBinding
 import io.reactivex.disposables.Disposable
@@ -27,7 +27,9 @@ import java.lang.ref.WeakReference
 class BoardMainSearchActivity : InnerBaseActivity()
         , BoardMainSearchPresenter.View
         , View.OnClickListener
-        , TextView.OnEditorActionListener, BaseRecyclerViewAdapter.OnItemClickListener {
+        , TextView.OnEditorActionListener
+        , BaseRecyclerViewAdapter.OnItemClickListener
+        , CustomNestedScrollListener.OnScrollListener {
 
 
     companion object {
@@ -94,7 +96,7 @@ class BoardMainSearchActivity : InnerBaseActivity()
 
     override fun onResume() {
         super.onResume()
-        overridePendingTransition(0, 0);
+        overridePendingTransition(0, 0)
     }
 
     override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
@@ -132,7 +134,7 @@ class BoardMainSearchActivity : InnerBaseActivity()
             } else {
                 binding.txtNoComment.visibility = View.GONE
             }
-        },100)
+        }, 100)
 
         setProgressbarGone()
         this.disposable = disposable
@@ -149,29 +151,22 @@ class BoardMainSearchActivity : InnerBaseActivity()
     }
 
     private fun setRecyclerViewScrollbar() {
-        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
-            if (v.getChildAt(v.childCount - 1) != null) {
-                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
+        binding.nestedScroll.setOnScrollChangeListener(CustomNestedScrollListener(layoutManager, this))
+    }
 
-                    val visibleItemCount = layoutManager!!.childCount
-                    val totalItemCount = layoutManager!!.itemCount
-                    val pastVisiblesItems = layoutManager!!.findFirstVisibleItemPosition()
+    override fun onScrollEnd() {
+        if (!isLoading) {
+            isLoading = true
+            setProgressbarVisible()
+            val id = boardMainAdapter?.getItem(boardMainAdapter!!.itemCount - 1)?.id
+            setSearchData(id)
+        }
+    }
 
-                    if (!isLoading) {
-                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                            isLoading = true
-                            setProgressbarVisible()
-                            val id = boardMainAdapter?.getItem(boardMainAdapter!!.itemCount - 1)?.id
-
-                            Handler().postDelayed({
-                                weakReference.get()?.getScrollData(data, id)
-                            }, 500)
-
-                        }
-                    }
-                }
-            }
-        })
+    private fun setSearchData(id: String?) {
+        Handler().postDelayed({
+            weakReference.get()?.getScrollData(data, id)
+        }, 500)
     }
 
     private fun onRefresh() {

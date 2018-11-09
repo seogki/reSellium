@@ -76,6 +76,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="스파이더맨"
+                        tools:targetApi="lollipop"
                         />
 
                     <ImageView
@@ -146,6 +147,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/txt_date"
                         app:moneyCheck="@{model.money}"
                         tools:text="42,000원"
+                        tools:targetApi="lollipop"
                         />
 
                 </android.support.constraint.ConstraintLayout>
@@ -217,6 +219,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/btn_register"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/btn_register"
+                android:inputType="textMultiLine"
                 />
 
             <TextView

@@ -43,6 +43,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:soldCheck="@{model.which}"
             tools:text="중고매입"
+            tools:targetApi="lollipop"
             />
 
 
@@ -64,6 +65,7 @@
             app:layout_constraintStart_toEndOf="@+id/txt_sell"
             app:layout_constraintTop_toTopOf="@+id/txt_sell"
             tools:text="스파이더맨"
+            tools:targetApi="lollipop"
             />
 
 
@@ -81,6 +83,7 @@
             app:layout_constraintTop_toTopOf="@+id/txt_sell"
             app:moneyCheck="@{model.money}"
             tools:text="42,000원"
+            tools:targetApi="lollipop"
             />
 
         <TextView

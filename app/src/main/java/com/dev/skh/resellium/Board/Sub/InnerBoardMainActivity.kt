@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.widget.NestedScrollView
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
@@ -102,7 +103,7 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
         popupMenu.setOnMenuItemClickListener { item ->
             when (item?.itemId) {
                 R.id.menu_report -> {
-                    presenter.get()?.setReport(binding.model)
+                    setConfirmDialog()
                     true
                 }
                 else -> {
@@ -113,6 +114,19 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
         popupMenu.show()
     }
 
+    private fun setConfirmDialog() {
+        AlertDialog.Builder(this@InnerBoardMainActivity, R.style.MyDialogTheme)
+                .setTitle("신고")
+                .setMessage("정말로 신고 하시겠습니까?")
+                .setPositiveButton("확인") { dialog, _ ->
+                    dialog.dismiss()
+                    presenter.get()?.setReport(binding.model)
+
+                }.setNegativeButton("취소") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+    }
 
     override fun setCommentData(result: MutableList<CommentModel>?, disposable: Disposable?, isScroll: Boolean) {
         this.disposable = disposable

@@ -73,6 +73,7 @@
                         app:layout_constraintStart_toEndOf="@+id/txt_grade"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="타이트으르르르을"
+                        tools:targetApi="lollipop"
                         />
 
                     <TextView
@@ -154,6 +155,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@id/txt_title"
                         tools:text="9.6"
+                        tools:targetApi="lollipop"
                         />
 
 
@@ -214,6 +216,7 @@
                 android:background="@drawable/text_black_stroke"
                 android:hint="댓글을 입력해주세요"
                 android:padding="12dp"
+                android:inputType="textMultiLine"
                 android:textColor="@color/black"
                 android:textColorHint="@color/middarkGrey"
                 android:textSize="16sp"

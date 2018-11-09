@@ -6,7 +6,5 @@ package com.dev.skh.resellium.User
 class UserMainPresenter(val view : View? = null){
 
 
-    interface View{
-
-    }
+    interface View
 }

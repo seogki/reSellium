@@ -42,13 +42,6 @@
     <color name="darkerGrey">#3F3F3F</color>
 
 
-    <!--<color name="accentColor">#3F51B5</color>-->
-    <!--<color name="lightColor">#C5CAE9</color>-->
-    <!--<color name="statusBar">#303F9F</color>-->
-    <!--<color name="fabColor">#FF4081</color>-->
-    <!--<color name="secondaryTextColor">#757575</color>-->
-    <!--<color name="fabDrawableColor">#000000</color>-->
-
     <color name="accentColor">#16354C</color>
     <color name="lightColor">#285f89</color>
     <color name="statusBar">#112a3c</color>

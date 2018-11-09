@@ -3,6 +3,8 @@ package com.dev.skh.resellium.Base
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.util.Pair
@@ -24,6 +26,7 @@ import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.GridSpacingItemDecoration
+
 
 /**
  * Created by Seogki on 2018. 10. 17..
@@ -146,5 +149,27 @@ open class InnerBaseActivity : AppCompatActivity() {
 
     fun showErrorToast() {
         Toast.makeText(this, getString(R.string.error_toast), Toast.LENGTH_SHORT).show()
+    }
+
+    fun setBtnDefault(btn: TextView) {
+        btn.typeface = Typeface.DEFAULT
+        btn.setTextColor(ContextCompat.getColor(this, R.color.middarkGrey))
+        btn.background = ContextCompat.getDrawable(this, R.drawable.text_round_white_border_grey)
+    }
+
+    fun setBtnAccent(btn: TextView) {
+        btn.typeface = Typeface.DEFAULT_BOLD
+        btn.setTextColor(ContextCompat.getColor(this, R.color.white))
+        btn.background = ContextCompat.getDrawable(this, R.drawable.text_round_secondary_border_grey)
+
+    }
+
+    fun setSnackBar(view: View, text: String) {
+        val snackbar = Snackbar
+                .make(view, text, Snackbar.LENGTH_SHORT)
+        snackbar.view.setBackgroundColor(ContextCompat.getColor(this, R.color.fabColor))
+        val textview = snackbar.view.findViewById(android.support.design.R.id.snackbar_text) as? TextView
+        textview?.setTextColor(ContextCompat.getColor(this, R.color.white))
+        snackbar.show()
     }
 }

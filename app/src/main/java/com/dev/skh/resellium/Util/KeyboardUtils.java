@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
 /**
@@ -49,10 +50,10 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener {
     private static HashMap<SoftKeyboardToggleListener, KeyboardUtils> sListenerMap = new HashMap<>();
 
 
-    public static void addKeyboardToggleListener(Activity act, SoftKeyboardToggleListener listener) {
+    public static void addKeyboardToggleListener(WeakReference<Activity> act, SoftKeyboardToggleListener listener) {
         removeKeyboardToggleListener(listener);
 
-        sListenerMap.put(listener, new KeyboardUtils(act, listener));
+        sListenerMap.put(listener, new KeyboardUtils(act.get(), listener));
     }
 
     private static void removeKeyboardToggleListener(SoftKeyboardToggleListener listener) {
@@ -75,8 +76,6 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener {
 
         mRootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
     }
-
-
 
 
 }

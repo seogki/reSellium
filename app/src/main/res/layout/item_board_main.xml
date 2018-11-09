@@ -43,6 +43,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="12dp"
             tools:text="9.6"
+            tools:targetApi="lollipop"
             />
 
 
@@ -68,6 +69,7 @@
             app:layout_constraintTop_toTopOf="@+id/txt_grade"
             app:layout_constraintBottom_toBottomOf="@+id/txt_grade"
             tools:text="타이트으르르르을"
+            tools:targetApi="lollipop"
             />
 
         <TextView

@@ -12,7 +12,7 @@ import com.dev.skh.resellium.Util.DLog
  * Created by TedPark on 15. 9. 10..
  */
 abstract class BaseRecyclerViewAdapter<T, H : RecyclerView.ViewHolder> : RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    var arrayList: MutableList<T>? = null
+    private var arrayList: MutableList<T>? = null
     private var onItemClickListener: OnItemClickListener? = null
     private var onItemLongClickListener: OnItemLongClickListener? = null
     private var onItemTouchLister: OnItemTouchLister? = null

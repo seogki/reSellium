@@ -5,7 +5,6 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.widget.NestedScrollView
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -18,6 +17,7 @@ import com.dev.skh.resellium.Board.Model.BoardMainModel
 import com.dev.skh.resellium.Board.Search.BoardMainSearchActivity
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.User.UserMainActivity
+import com.dev.skh.resellium.Util.CustomNestedScrollListener
 import com.dev.skh.resellium.Util.DLog
 import com.dev.skh.resellium.databinding.FragmentBoardMainBinding
 import io.reactivex.disposables.Disposable
@@ -27,7 +27,10 @@ import java.lang.ref.WeakReference
 class BoardMainFragment : BaseFragment()
         , BoardMainPresenter.View
         , SwipeRefreshLayout.OnRefreshListener
-        , View.OnClickListener, BaseRecyclerViewAdapter.OnItemClickListener {
+        , View.OnClickListener
+        , BaseRecyclerViewAdapter.OnItemClickListener
+        , CustomNestedScrollListener.OnScrollListener {
+
 
     override fun onItemClick(view: View, position: Int) {
         val data = adapter?.getItem(position)
@@ -60,6 +63,7 @@ class BoardMainFragment : BaseFragment()
     private var rv: RecyclerView? = null
     private var isLoading: Boolean = false
     private var data: String? = ""
+    private var isSpinner = false
     private val weakReference by lazy { weakRef(this) }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -125,32 +129,31 @@ class BoardMainFragment : BaseFragment()
     }
 
     private fun setRecyclerViewScrollbar(isSpinner: Boolean) {
-        binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, oldScrollY ->
-            if (v.getChildAt(v.childCount - 1) != null) {
-                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
-
-                    val visibleItemCount = layoutManager!!.childCount
-                    val totalItemCount = layoutManager!!.itemCount
-                    val pastVisiblesItems = layoutManager!!.findFirstVisibleItemPosition()
-
-                    if (!isLoading) {
-                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                            isLoading = true
-                            setProgressbarVisible()
-                            val id = checkId()
-                            Handler().postDelayed({
-                                if (isSpinner)
-                                    weakReference.get()?.getSpinnerScrollData(data, id)
-                                else
-                                    weakReference.get()?.getScrollData(id)
-                            }, 500)
-
-                        }
-                    }
-                }
-            }
-        })
+        this.isSpinner = isSpinner
+        binding.nestedScroll.setOnScrollChangeListener(CustomNestedScrollListener(layoutManager, this))
     }
+
+    override fun onScrollEnd() {
+        if (!isLoading) {
+            isLoading = true
+            activity!!.runOnUiThread { setProgressbarVisible() }
+            val id = checkId()
+            setData(id)
+
+        }
+    }
+
+    private fun setData(id: String?) {
+        Handler().postDelayed({
+            binding.nestedScroll.fling(0)
+            if (isSpinner)
+                weakReference.get()?.getSpinnerScrollData(data, id)
+            else
+                weakReference.get()?.getScrollData(id)
+        }, 500)
+
+    }
+
 
     private fun checkId(): String? {
         var id: String? = null

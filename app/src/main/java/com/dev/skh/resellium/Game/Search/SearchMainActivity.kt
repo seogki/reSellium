@@ -50,7 +50,7 @@ class SearchMainActivity : InnerBaseActivity()
 
     override fun onResume() {
         super.onResume()
-        overridePendingTransition(0, 0);
+        overridePendingTransition(0, 0)
     }
 
 
@@ -66,14 +66,14 @@ class SearchMainActivity : InnerBaseActivity()
                 closeKeyboard()
                 finish()
             }
-            R.id.radio_ps4 -> setToolbarColor("PS")
-            R.id.radio_xbox -> setToolbarColor("XBOX")
-            R.id.radio_switch -> setToolbarColor("SWITCH")
+            R.id.btn_ps -> setToolbarColor("PS")
+            R.id.btn_xbox -> setToolbarColor("XBOX")
+            R.id.btn_switch -> setToolbarColor("SWITCH")
             R.id.img_search -> startGetData(binding.layoutAppbar?.editSearch?.text.toString(), currentPos)
         }
     }
 
-    private var currentPos: String? = "PS"
+    private var currentPos = "PS"
     private var disposable: Disposable? = null
     private var searchString = ""
     lateinit var binding: ActivitySearchMainBinding
@@ -298,6 +298,24 @@ class SearchMainActivity : InnerBaseActivity()
     private fun setToolbarColor(text: String) {
         binding.txtNoComment.visibility = View.GONE
         currentPos = text
+        when (currentPos) {
+            "PS" -> {
+                setBtnAccent(binding.btnPs)
+                setBtnDefault(binding.btnXbox)
+                setBtnDefault(binding.btnSwitch)
+            }
+            "XBOX" -> {
+                setBtnAccent(binding.btnXbox)
+                setBtnDefault(binding.btnPs)
+                setBtnDefault(binding.btnSwitch)
+            }
+            "SWITCH" -> {
+                setBtnAccent(binding.btnSwitch)
+                setBtnDefault(binding.btnXbox)
+                setBtnDefault(binding.btnPs)
+            }
+        }
+        setSnackBar(binding.coordinator, "$currentPos 설정되었습니다")
         setProgressbarGone()
     }
 
