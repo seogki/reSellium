@@ -84,159 +84,113 @@
                     app:layout_constraintTop_toTopOf="parent"
                     />
 
-                <TextView
-                    android:id="@+id/txt_title"
-                    android:layout_width="90dp"
-                    android:layout_height="60dp"
+
+                <ImageView
+                    android:id="@+id/img_platform"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginTop="16dp"
-                    android:background="@color/accentColor"
-                    android:gravity="center"
-                    android:text="타이틀"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:src="@drawable/icons8_playstation_24"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btn_ps"
+                    />
+
+                <ImageView
+                    android:id="@+id/txt_title"
+                    style="@style/registerTextTheme"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_action_title_black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_platform"
                     />
 
 
                 <EditText
                     android:id="@+id/edit_title"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:background="@color/white"
-                    android:gravity="center"
+                    style="@style/registerEditTheme"
                     android:hint="예) 갓오브워, 스파이더맨, 피파19"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/middarkGrey"
-                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/txt_title"
                     app:layout_constraintTop_toTopOf="@+id/txt_title"
                     />
 
-                <TextView
+                <View
+                    style="@style/horizontalViewMidGreyTheme"
+                    app:layout_constraintEnd_toEndOf="@+id/edit_title"
+                    app:layout_constraintStart_toStartOf="@+id/txt_title"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_title"
+                    />
+
+                <ImageView
                     android:id="@+id/txt_place"
-                    android:layout_width="90dp"
-                    android:layout_height="60dp"
-                    android:background="@color/accentColor"
-                    android:gravity="center"
-                    android:text="위치"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
+                    style="@style/registerTextTheme"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_action_place_black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_title"
                     />
 
                 <EditText
                     android:id="@+id/edit_place"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:background="@color/white"
-                    android:gravity="center"
+                    style="@style/registerEditTheme"
                     android:hint="예) ㅎㅇㄹ, 인터넷, 기타"
                     android:inputType="text"
-                    android:maxLines="1"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/middarkGrey"
-                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_place"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/txt_place"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_title"
+                    app:layout_constraintTop_toTopOf="@id/txt_place"
                     />
 
-                <TextView
+                <View
+                    style="@style/horizontalViewMidGreyTheme"
+                    app:layout_constraintEnd_toEndOf="@+id/edit_place"
+                    app:layout_constraintStart_toStartOf="@+id/txt_place"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_place"
+                    />
+
+
+                <ImageView
                     android:id="@+id/txt_money"
-                    android:layout_width="90dp"
-                    android:layout_height="60dp"
-                    android:background="@color/accentColor"
-                    android:gravity="center"
-                    android:text="가격"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
+                    style="@style/registerTextTheme"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_action_money_black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_place"
                     />
 
                 <EditText
                     android:id="@+id/edit_money"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:background="@color/white"
-                    android:gravity="center"
+                    style="@style/registerEditTheme"
                     android:hint="예) 60,000원"
                     android:inputType="number"
-                    android:maxLines="1"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/middarkGrey"
-                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_money"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/txt_money"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_place"
+                    app:layout_constraintTop_toTopOf="@+id/txt_money"
                     />
 
-
-
-
-
-                <RadioGroup
-                    android:id="@+id/radiogroup_newOld"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_marginEnd="48dp"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline"
-                    app:layout_constraintStart_toStartOf="parent"
+                <View
+                    style="@style/horizontalViewMidGreyTheme"
+                    app:layout_constraintEnd_toEndOf="@+id/edit_money"
+                    app:layout_constraintStart_toStartOf="@+id/txt_money"
                     app:layout_constraintTop_toBottomOf="@+id/txt_money"
-                    >
-
-
-                    <RadioButton
-                        android:id="@+id/radio_new"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/radio_background"
-                        android:button="@null"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:text="신품"
-                        android:textColor="@color/black"
-                        />
-
-                    <RadioButton
-                        android:id="@+id/radio_old"
-                        android:layout_width="wrap_content"
-
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/radio_background"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="중고"
-                        android:textColor="@color/black"
-
-
-                        />
-                </RadioGroup>
+                    />
 
                 <RadioGroup
                     android:id="@+id/radiogroup_resell"
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:layout_marginEnd="48dp"
                     android:layout_marginStart="48dp"
-                    android:background="@color/white"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/secondary_outline"
                     android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/guideline"
-                    app:layout_constraintTop_toTopOf="@+id/radiogroup_newOld"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_money"
                     >
 
 
@@ -249,8 +203,10 @@
                         android:button="@null"
                         android:checked="true"
                         android:gravity="center"
+                        android:onClick="@{onClickListener::onClick}"
                         android:text="매입"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
                         />
 
                     <RadioButton
@@ -261,34 +217,74 @@
                         android:background="@drawable/radio_background"
                         android:button="@null"
                         android:gravity="center"
+                        android:onClick="@{onClickListener::onClick}"
                         android:text="매각"
                         android:textColor="@color/black"
 
                         />
                 </RadioGroup>
 
+                <RadioGroup
+                    android:id="@+id/radiogroup_newOld"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="48dp"
+                    android:layout_marginStart="48dp"
+                    android:background="@drawable/secondary_outline"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline"
+                    app:layout_constraintStart_toEndOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/radiogroup_resell"
+                    >
 
-                <View
+
+                    <RadioButton
+                        android:id="@+id/radio_new"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_background"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:onClick="@{onClickListener::onClick}"
+                        android:text="신품"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/radio_old"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_background"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:onClick="@{onClickListener::onClick}"
+                        android:text="중고"
+                        android:textColor="@color/black"
+                        />
+                </RadioGroup>
+
+
+                <ImageView
+                    android:id="@+id/img_mark"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/midGrey"
-                    app:layout_constraintBottom_toBottomOf="@+id/txt_place"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/secondary_mark"
+                    android:elevation="4dp"
+                    android:onClick="@{onClickListener::onClick}"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_action_mark_white"
+                    app:layout_constraintTop_toBottomOf="@+id/radiogroup_resell"
                     />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/midGrey"
-                    app:layout_constraintBottom_toBottomOf="@+id/txt_money"
-                    />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/midGrey"
-                    app:layout_constraintBottom_toBottomOf="@+id/txt_title"
-                    />
-
 
             </android.support.constraint.ConstraintLayout>
         </android.support.v4.widget.NestedScrollView>

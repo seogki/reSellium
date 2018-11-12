@@ -2,12 +2,10 @@ package com.dev.skh.resellium.Board.Register
 
 import android.annotation.SuppressLint
 import android.databinding.DataBindingUtil
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.view.View
-import android.widget.RadioButton
 import android.widget.SeekBar
 import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.R
@@ -35,6 +33,7 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
     private lateinit var binding: ActivityBoardMainRegisterBinding
     private val weakReference by lazy { weakRef(this) }
     private var disposable: Disposable? = null
+    private var platform = "PS"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_main_register)
@@ -42,13 +41,8 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
         binding.layoutAppbar?.title = "등록"
         binding.layoutAppbar?.onClickListener = this
         binding.seekbar.setOnSeekBarChangeListener(this)
-        setView()
-    }
 
-    private fun setView() {
-        binding.layoutAppbar?.layoutAdd?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
     }
-
 
     @SuppressLint("SetTextI18n")
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -71,10 +65,38 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
                 closeKeyboard()
                 finish()
             }
-            R.id.layout_add -> {
-                setRegisterDialog()
-            }
+            R.id.layout_add -> setRegisterDialog()
+            R.id.img_mark -> setRegisterDialog()
+            R.id.btn_ps -> setPlatform("PS")
+            R.id.btn_xbox -> setPlatform("XBOX")
+            R.id.btn_switch -> setPlatform("SWITCH")
         }
+    }
+
+    private fun setPlatform(text: String) {
+        this.platform = text
+        when (text) {
+            "PS" -> {
+                setBtnAccent(binding.btnPs)
+                setBtnDefault(binding.btnXbox)
+                setBtnDefault(binding.btnSwitch)
+                binding.imgPlatform.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_playstation_24))
+            }
+            "XBOX" -> {
+                setBtnAccent(binding.btnXbox)
+                setBtnDefault(binding.btnPs)
+                setBtnDefault(binding.btnSwitch)
+                binding.imgPlatform.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_xbox_24))
+            }
+            "SWITCH" -> {
+                setBtnAccent(binding.btnSwitch)
+                setBtnDefault(binding.btnXbox)
+                setBtnDefault(binding.btnPs)
+                binding.imgPlatform.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.nintendo_switch_logo))
+            }
+
+        }
+
     }
 
     private fun setData() {
@@ -87,7 +109,6 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
             enableAdd()
             return
         }
-        val platform = binding.radiogroupPlatform.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim()
         if (title.isNotEmpty() && review.isNotEmpty() && grade.isNotEmpty()) {
             weakReference.get()?.setData(title, review, grade, platform)
         } else {
@@ -96,12 +117,14 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
         }
     }
 
-    private fun enableAdd(){
+    private fun enableAdd() {
         binding.layoutAppbar?.layoutAdd?.isEnabled = true
+        binding.imgMark.isEnabled = true
     }
 
-    private fun disableAdd(){
+    private fun disableAdd() {
         binding.layoutAppbar?.layoutAdd?.isEnabled = false
+        binding.imgMark.isEnabled = false
     }
 
 
@@ -125,6 +148,7 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
                     setData()
                 }.setNegativeButton("취소") { dialog, _ ->
                     dialog.dismiss()
+                    enableAdd()
                 }
                 .show()
     }

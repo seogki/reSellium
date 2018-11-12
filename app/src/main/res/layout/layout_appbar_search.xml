@@ -40,7 +40,7 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/accentColor"
+                android:background="@color/white"
                 >
 
                 <EditText
@@ -65,7 +65,7 @@
 
                 <ImageView
                     android:id="@+id/img_search"
-                    android:src="@drawable/ic_action_searchv2_black"
+                    android:src="@drawable/ic_action_search_secondary"
                     android:layout_width="wrap_content"
                     android:paddingEnd="8dp"
                     android:paddingStart="4dp"
@@ -88,7 +88,7 @@
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:onClick="@{onClickListener::onClick}"
-                    android:src="@drawable/ic_action_arrow_back"
+                    android:src="@drawable/ic_action_back_secondary"
                     />
 
                 <View

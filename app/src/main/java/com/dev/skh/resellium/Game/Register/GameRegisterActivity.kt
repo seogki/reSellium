@@ -1,7 +1,6 @@
 package com.dev.skh.resellium.Game.Register
 
 import android.databinding.DataBindingUtil
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
@@ -40,7 +39,6 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
     }
 
     private fun setView() {
-        binding.layoutAppbar?.layoutAdd?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.editMoney.addTextChangedListener(CustomTextWatcher(binding.editMoney))
     }
 
@@ -54,8 +52,24 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
             R.id.btn_ps -> setPlatform("PS")
             R.id.btn_xbox -> setPlatform("XBOX")
             R.id.btn_switch -> setPlatform("SWITCH")
+            R.id.radio_buy -> {
+                setBold(binding.radioBuy)
+                setDefault(binding.radioSold)
+            }
+            R.id.radio_sold -> {
+                setBold(binding.radioSold)
+                setDefault(binding.radioBuy)
+            }
+            R.id.radio_new -> {
+                setBold(binding.radioNew)
+                setDefault(binding.radioOld)
+            }
+            R.id.radio_old -> {
+                setBold(binding.radioOld)
+                setDefault(binding.radioNew)
+            }
 
-
+            R.id.img_mark -> setRegisterDialog()
         }
     }
 
@@ -66,16 +80,19 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
                 setBtnAccent(binding.btnPs)
                 setBtnDefault(binding.btnXbox)
                 setBtnDefault(binding.btnSwitch)
+                binding.imgPlatform.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_playstation_24))
             }
             "XBOX" -> {
                 setBtnAccent(binding.btnXbox)
                 setBtnDefault(binding.btnPs)
                 setBtnDefault(binding.btnSwitch)
+                binding.imgPlatform.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_xbox_24))
             }
             "SWITCH" -> {
                 setBtnAccent(binding.btnSwitch)
                 setBtnDefault(binding.btnXbox)
                 setBtnDefault(binding.btnPs)
+                binding.imgPlatform.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.nintendo_switch_logo))
             }
 
         }
@@ -84,16 +101,27 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
 
     private fun setData() {
         closeKeyboard()
-        binding.layoutAppbar?.layoutAdd?.isEnabled = false
+        setRegisterFalse()
         val title = binding.editTitle.text.toString()
         val place = binding.editPlace.text.toString()
         val money = binding.editMoney.text.toString().replace(",".toRegex(), "").replace("원", "")
-        val which = binding.radiogroupNewOld.checkedRadioButtonId.let{ findViewById<RadioButton>(it).text.toString() }.trim() + binding.radiogroupResell.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim()
+        val which = binding.radiogroupNewOld.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim() + binding.radiogroupResell.checkedRadioButtonId.let { findViewById<RadioButton>(it).text.toString() }.trim()
         if (place.isNotEmpty() && money.isNotEmpty()) {
             weakReference.get()?.sendData(platform, title, place, money, which)
         } else {
+            setRegisterTrue()
             Toast.makeText(this, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun setRegisterFalse() {
+        binding.layoutAppbar?.layoutAdd?.isEnabled = false
+        binding.imgMark.isEnabled = false
+    }
+
+    private fun setRegisterTrue() {
+        binding.layoutAppbar?.layoutAdd?.isEnabled = true
+        binding.imgMark.isEnabled = true
     }
 
     private fun setRegisterDialog() {
@@ -105,6 +133,7 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
                     setData()
                 }.setNegativeButton("취소") { dialog, _ ->
                     dialog.dismiss()
+                    setRegisterTrue()
                 }
                 .show()
     }
@@ -130,6 +159,7 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
         binding.layoutAppbar?.layoutAdd?.isEnabled = true
         DLog.e("error : $error")
         showErrorToast()
+        setRegisterTrue()
     }
 
     override fun onDestroy() {

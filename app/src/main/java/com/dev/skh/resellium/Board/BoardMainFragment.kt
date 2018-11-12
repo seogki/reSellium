@@ -1,6 +1,8 @@
 package com.dev.skh.resellium.Board
 
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -64,6 +66,8 @@ class BoardMainFragment : BaseFragment()
     private var isLoading: Boolean = false
     private var data: String? = ""
     private var isSpinner = false
+
+
     private val weakReference by lazy { weakRef(this) }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -87,6 +91,17 @@ class BoardMainFragment : BaseFragment()
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         weakReference.get()?.getBoardData()
+
+        val viewModel = ViewModelProviders.of(this).get(BoardMainViewModel::class.java)
+
+        getObservedResult(viewModel)
+    }
+
+    private fun getObservedResult(viewModel: BoardMainViewModel) {
+        viewModel.getBoardListObservable().observe(this, Observer<MutableList<BoardMainModel>> {
+            if (it != null)
+                DLog.e("data : ${it.toList()}")
+        })
     }
 
     override fun onClick(v: View?) {

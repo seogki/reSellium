@@ -96,8 +96,8 @@ open class BaseActivity : AppCompatActivity() {
     fun setImageColor(imageView: ImageView?, textView: TextView?, imageValue: Int) {
 
         imageView?.setImageDrawable(ContextCompat.getDrawable(this, imageValue))
-        imageView?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.accentColor), PorterDuff.Mode.SRC_ATOP)
-        textView?.setTextColor(ContextCompat.getColor(this, R.color.accentColor))
+        imageView?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
+        textView?.setTextColor(ContextCompat.getColor(this, R.color.fabColor))
     }
 
     fun setAdView(adview: AdView) {
@@ -130,6 +130,8 @@ open class BaseActivity : AppCompatActivity() {
         super.onPause()
         adview?.pause()
     }
+
+
 
     fun showErrorToast() {
         Toast.makeText(this, getString(R.string.error_toast), Toast.LENGTH_SHORT).show()

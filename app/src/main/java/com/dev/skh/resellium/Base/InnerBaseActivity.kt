@@ -49,14 +49,14 @@ open class InnerBaseActivity : AppCompatActivity() {
     }
 
     fun closeKeyboard() {
-        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        inputManager?.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
 
     fun clearAndClose(edit: EditText) {
         edit.text.clear()
-        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        inputManager?.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
 
     fun shortToast(text: String) {
@@ -172,4 +172,16 @@ open class InnerBaseActivity : AppCompatActivity() {
         textview?.setTextColor(ContextCompat.getColor(this, R.color.white))
         snackbar.show()
     }
+
+    fun setBold(view: TextView) {
+        view.setTextColor(ContextCompat.getColor(this, R.color.white))
+        view.typeface = Typeface.DEFAULT_BOLD
+    }
+
+    fun setDefault(view: TextView) {
+
+        view.setTextColor(ContextCompat.getColor(this, R.color.black))
+        view.typeface = Typeface.DEFAULT
+    }
+
 }

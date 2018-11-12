@@ -29,10 +29,8 @@
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
 
-
-        <item name="android:windowBackground">@color/accentColor</item>
-        <item name="colorPrimaryDark">@color/statusBar</item>
-
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
 
     </style>
 
@@ -130,5 +128,45 @@
         <item name="android:textColor">@color/fabColor</item>
     </style>
 
+    <style name="MyEditTextTheme" parent="Widget.AppCompat.EditText">
 
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlActivated">@color/fabColor</item>
+        <item name="colorControlHighlight">@color/fabColor</item>
+    </style>
+
+    <style name="registerTextTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/left_round_white</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+    </style>
+
+    <style name="registerEditTheme">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:background">@drawable/right_round_white</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/middarkGrey</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="horizontalViewSecondaryTheme">
+        <item name="android:background">@color/fabColor</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="horizontalViewMidGreyTheme">
+        <item name="android:background">@color/midGrey</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
 </resources>

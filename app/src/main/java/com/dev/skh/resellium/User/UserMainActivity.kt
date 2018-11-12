@@ -1,7 +1,9 @@
 package com.dev.skh.resellium.User
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -34,6 +36,16 @@ class UserMainActivity : AppCompatActivity(), View.OnClickListener, UserMainPres
         when (v?.id) {
             R.id.layout_undo -> finish()
             R.id.txt_mail -> setEmail()
+            R.id.txt_review -> setReview()
+        }
+    }
+
+    private fun setReview() {
+        val appPackageName = packageName // getPackageName() from Context or Activity object
+        try {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
+        } catch (anfe: ActivityNotFoundException) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")))
         }
     }
 

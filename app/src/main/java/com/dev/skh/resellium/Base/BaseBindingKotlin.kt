@@ -27,21 +27,31 @@ object BaseBindingKotlin {
 
         val activity = UtilMethod.getActivity(context)
         val weakReference = WeakReference(activity)
-        if (activity != null) {
-            if (!activity.isFinishing || !activity.isDestroyed)
-                KeyboardUtils
-                        .addKeyboardToggleListener(weakReference)
-                        { isVisible ->
-                            visibility = if (isVisible) View.GONE else View.VISIBLE
-                        }
-        }
+
+        if (activity == null)
+            return
+
+
+
+
+        if (!activity.isFinishing || !activity.isDestroyed)
+            KeyboardUtils
+                    .addKeyboardToggleListener(weakReference)
+                    { isVisible ->
+                        visibility = if (isVisible) View.GONE else View.VISIBLE
+                    }
+        else
+            KeyboardUtils.removeAllKeyboardToggleListeners()
 
     }
 
     @BindingAdapter("sellCheck")
     @JvmStatic
-    fun TextView.sellcheck(result: String) {
+    fun TextView.sellcheck(result: String?) {
         val context = setContext(context) ?: return
+
+        if (result == null)
+            return
 
         if (result.contains("매입")) {
             setTextColor(ContextCompat.getColor(context, R.color.accentColor))
@@ -55,8 +65,11 @@ object BaseBindingKotlin {
     @SuppressLint("SetTextI18n")
     @BindingAdapter("moneyCheck")
     @JvmStatic
-    fun TextView.moneycheck(result: String) {
+    fun TextView.moneycheck(result: String?) {
         val context = setContext(context) ?: return
+
+        if (result == null)
+            return
 
         val money = UtilMethod.currencyFormat(result)
         text = money + "원"
@@ -105,14 +118,15 @@ object BaseBindingKotlin {
     fun TextView.setComment(result: String?) {
         val context = setContext(context) ?: return
 
-        if (result != null) {
-            if (result.isEmpty()) {
-                text = if (result == "0")
-                    ""
-                else
-                    "($result)"
+        if (result == null)
+            return
 
-            }
+        if (!result.isEmpty()) {
+            text = if (result == "0")
+                ""
+            else
+                "($result)"
+
         }
     }
 
