@@ -8,13 +8,13 @@
     <data>
 
         <variable
-            name="onClickListener"
-            type="android.view.View.OnClickListener"
-            />
-        <variable
             name="empty"
             type="String"
             />
+
+        <variable
+            name="activity"
+            type="com.dev.skh.resellium.Board.BoardMainActivity"/>
     </data>
 
 
@@ -62,7 +62,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:clipToPadding="false"
-            android:onClick="@{onClickListener::onClick}"
+            android:onClick="@{() -> activity.registerIntent()}"
             app:backgroundTint="@color/fabColor"
             app:borderWidth="0dp"
             app:keyboardDetect="@{empty}"

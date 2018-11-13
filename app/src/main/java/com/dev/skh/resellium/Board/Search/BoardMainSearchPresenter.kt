@@ -2,7 +2,6 @@ package com.dev.skh.resellium.Board.Search
 
 import com.dev.skh.resellium.Base.BasePresenter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
-import com.dev.skh.resellium.Board.Model.SearchKeyModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -42,23 +41,22 @@ class BoardMainSearchPresenter(val view: View? = null) : BasePresenter() {
 
     }
 
-    fun getKeyWordData(){
-
-            disposable = client.getKeywordBoardData()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .unsubscribeOn(Schedulers.io())
-                    .subscribe({
-                        view?.keyData(it, disposable)
-                    }, { error ->
-                        view?.errorData(disposable, error.message)
-                    })
-
-    }
+//    fun getKeyWordData(){
+//
+//            disposable = client.getKeywordBoardData()
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .unsubscribeOn(Schedulers.io())
+//                    .subscribe({
+//                        view?.keyData(it, disposable)
+//                    }, { error ->
+//                        view?.errorData(disposable, error.message)
+//                    })
+//
+//    }
 
     interface View {
         fun registerData(board: MutableList<BoardMainModel>?, disposable: Disposable?, isScroll: Boolean)
         fun errorData(disposable: Disposable?, message: String?)
-        fun keyData(key: MutableList<SearchKeyModel>?, disposable: Disposable?)
     }
 }

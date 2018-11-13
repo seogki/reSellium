@@ -1,7 +1,5 @@
 package com.dev.skh.resellium.Dagger;
 
-import com.dev.skh.resellium.Board.BoardMainPresenter;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -13,6 +11,6 @@ import dagger.Component;
 @Singleton
 @Component(modules = {AppModule.class, RetrofitModule.class})
 public interface ApiComponent {
-    void inject(BoardMainPresenter boardMainPresenter);
+//    void inject(BoardMainPresenter boardMainPresenter);
 
 }

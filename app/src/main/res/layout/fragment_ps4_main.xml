@@ -12,6 +12,10 @@
             type="android.view.View.OnClickListener"
             />
 
+        <variable
+            name="fragment"
+            type="com.dev.skh.resellium.Game.Tab.Ps4MainFragment"/>
+
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -54,7 +58,7 @@
                             android:id="@+id/btn_all"
                             style="@style/TextButtonSecondaryStyle"
                             android:text="전체"
-                            android:onClick="@{onClickListener::onClick}"
+                            android:onClick="@{(v) -> fragment.callBtnData(v)}"
                             android:layout_marginStart="8dp"
                             app:layout_constraintEnd_toStartOf="@+id/btn_new"
                             app:layout_constraintTop_toTopOf="parent"
@@ -64,7 +68,7 @@
                             android:id="@+id/btn_new"
                             style="@style/TextButtonStyle"
                             android:layout_marginStart="8dp"
-                            android:onClick="@{onClickListener::onClick}"
+                            android:onClick="@{(v) -> fragment.callBtnData(v)}"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/btn_all"
                             app:layout_constraintEnd_toStartOf="@+id/btn_old"
@@ -75,7 +79,7 @@
                             style="@style/TextButtonStyle"
                             android:text="중고"
                             android:layout_marginStart="8dp"
-                            android:onClick="@{onClickListener::onClick}"
+                            android:onClick="@{(v) -> fragment.callBtnData(v)}"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/btn_new"
                             app:layout_constraintEnd_toStartOf="@+id/btn_spinner"

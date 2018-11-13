@@ -15,7 +15,9 @@ import com.dev.skh.resellium.databinding.ActivityGameRegisterBinding
 import io.reactivex.disposables.Disposable
 import java.lang.ref.WeakReference
 
-class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegisterPresenter.View {
+class GameRegisterActivity : InnerBaseActivity()
+        , View.OnClickListener
+        , GameRegisterPresenter.View {
 
 
     companion object {
@@ -33,7 +35,7 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game_register)
         binding.layoutAppbar?.title = "등록"
-        binding.onClickListener = this
+        binding.activity = this
         binding.layoutAppbar?.onClickListener = this
         setView()
     }
@@ -42,6 +44,7 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
         binding.editMoney.addTextChangedListener(CustomTextWatcher(binding.editMoney))
     }
 
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.layout_add -> setRegisterDialog()
@@ -49,9 +52,11 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
                 closeKeyboard()
                 finish()
             }
-            R.id.btn_ps -> setPlatform("PS")
-            R.id.btn_xbox -> setPlatform("XBOX")
-            R.id.btn_switch -> setPlatform("SWITCH")
+        }
+    }
+
+    fun setRadio(view: View?) {
+        when (view?.id) {
             R.id.radio_buy -> {
                 setBold(binding.radioBuy)
                 setDefault(binding.radioSold)
@@ -68,27 +73,28 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
                 setBold(binding.radioOld)
                 setDefault(binding.radioNew)
             }
-
-            R.id.img_mark -> setRegisterDialog()
         }
     }
 
-    private fun setPlatform(text: String) {
-        this.platform = text
-        when (text) {
-            "PS" -> {
+    fun setPlatform(view: View?) {
+
+        when (view?.id) {
+            R.id.btn_ps -> {
+                this.platform = "PS"
                 setBtnAccent(binding.btnPs)
                 setBtnDefault(binding.btnXbox)
                 setBtnDefault(binding.btnSwitch)
                 binding.imgPlatform.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_playstation_24))
             }
-            "XBOX" -> {
+            R.id.btn_xbox -> {
+                this.platform = "XBOX"
                 setBtnAccent(binding.btnXbox)
                 setBtnDefault(binding.btnPs)
                 setBtnDefault(binding.btnSwitch)
                 binding.imgPlatform.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_xbox_24))
             }
-            "SWITCH" -> {
+            R.id.btn_switch -> {
+                this.platform = "SWITCH"
                 setBtnAccent(binding.btnSwitch)
                 setBtnDefault(binding.btnXbox)
                 setBtnDefault(binding.btnPs)
@@ -97,6 +103,31 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
 
         }
 
+    }
+
+
+    private fun setRegisterFalse() {
+        binding.layoutAppbar?.layoutAdd?.isEnabled = false
+        binding.imgMark.isEnabled = false
+    }
+
+    private fun setRegisterTrue() {
+        binding.layoutAppbar?.layoutAdd?.isEnabled = true
+        binding.imgMark.isEnabled = true
+    }
+
+    fun setRegisterDialog() {
+        AlertDialog.Builder(this@GameRegisterActivity, R.style.MyDialogTheme)
+                .setTitle("게임")
+                .setMessage("정말로 등록하시겠습니까?")
+                .setPositiveButton("확인") { dialog, _ ->
+                    dialog.dismiss()
+                    setData()
+                }.setNegativeButton("취소") { dialog, _ ->
+                    dialog.dismiss()
+                    setRegisterTrue()
+                }
+                .show()
     }
 
     private fun setData() {
@@ -114,30 +145,6 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
         }
     }
 
-    private fun setRegisterFalse() {
-        binding.layoutAppbar?.layoutAdd?.isEnabled = false
-        binding.imgMark.isEnabled = false
-    }
-
-    private fun setRegisterTrue() {
-        binding.layoutAppbar?.layoutAdd?.isEnabled = true
-        binding.imgMark.isEnabled = true
-    }
-
-    private fun setRegisterDialog() {
-        AlertDialog.Builder(this@GameRegisterActivity, R.style.MyDialogTheme)
-                .setTitle("게임")
-                .setMessage("정말로 등록하시겠습니까?")
-                .setPositiveButton("확인") { dialog, _ ->
-                    dialog.dismiss()
-                    setData()
-                }.setNegativeButton("취소") { dialog, _ ->
-                    dialog.dismiss()
-                    setRegisterTrue()
-                }
-                .show()
-    }
-
     override fun registerData(disposable: Disposable?) {
         this.disposable = disposable
 
@@ -150,13 +157,11 @@ class GameRegisterActivity : InnerBaseActivity(), View.OnClickListener, GameRegi
                 }.setNegativeButton(null, null)
                 .show()
 
-
-        binding.layoutAppbar?.layoutAdd?.isEnabled = true
+        setRegisterTrue()
     }
 
     override fun errorData(disposable: Disposable?, error: String?) {
         this.disposable = disposable
-        binding.layoutAppbar?.layoutAdd?.isEnabled = true
         DLog.e("error : $error")
         showErrorToast()
         setRegisterTrue()

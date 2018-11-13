@@ -192,12 +192,12 @@ class SearchMainActivity : InnerBaseActivity()
                             pastVisiblesItems = switchLayoutManager.findFirstVisibleItemPosition()
                         }
                     }
-
-                    if (!isLoading) {
-                        if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
+                        if (!isLoading) {
                             isLoading = true
                             setProgressbarVisible()
                             Handler().postDelayed({
+                                binding.nestedScroll.fling(0)
                                 var id: String? = null
                                 when (currentPos) {
                                     "PS" -> id = ps4MainAdapter?.getItem(ps4MainAdapter!!.itemCount - 1)?.id

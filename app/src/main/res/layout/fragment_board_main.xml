@@ -12,6 +12,11 @@
             type="android.view.View.OnClickListener"
             />
 
+        <variable
+            name="fragment"
+            type="com.dev.skh.resellium.Board.BoardMainFragment"
+            />
+
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -58,42 +63,45 @@
                         <TextView
                             android:id="@+id/btn_all"
                             style="@style/TextButtonSecondaryStyle"
-                            android:text="전체"
-                            android:onClick="@{onClickListener::onClick}"
                             android:layout_marginStart="8dp"
+                            android:onClick="@{() -> fragment.refresh()}"
+                            android:text="전체"
                             app:layout_constraintEnd_toStartOf="@+id/btn_grade"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             />
+
                         <TextView
                             android:id="@+id/btn_grade"
                             style="@style/TextButtonStyle"
                             android:layout_marginStart="8dp"
-                            android:onClick="@{onClickListener::onClick}"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/btn_all"
-                            app:layout_constraintEnd_toStartOf="@+id/btn_name"
+                            android:onClick="@{(v) -> fragment.callSpinnerData(v)}"
                             android:text="평점"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_name"
+                            app:layout_constraintStart_toEndOf="@+id/btn_all"
+                            app:layout_constraintTop_toTopOf="parent"
                             />
+
                         <TextView
                             android:id="@+id/btn_name"
                             style="@style/TextButtonStyle"
-                            android:text="이름"
                             android:layout_marginStart="8dp"
-                            android:onClick="@{onClickListener::onClick}"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/btn_grade"
+                            android:onClick="@{(v) -> fragment.callSpinnerData(v)}"
+                            android:text="이름"
                             app:layout_constraintEnd_toStartOf="@+id/btn_old"
+                            app:layout_constraintStart_toEndOf="@+id/btn_grade"
+                            app:layout_constraintTop_toTopOf="parent"
                             />
+
                         <TextView
                             android:id="@+id/btn_old"
                             style="@style/TextButtonStyle"
                             android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
+                            android:onClick="@{(v) -> fragment.callSpinnerData(v)}"
                             android:text="예전"
-                            android:onClick="@{onClickListener::onClick}"
-                            app:layout_constraintStart_toEndOf="@+id/btn_name"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/btn_name"
                             app:layout_constraintTop_toTopOf="parent"
                             />
 

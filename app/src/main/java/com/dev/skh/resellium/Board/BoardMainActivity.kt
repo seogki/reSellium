@@ -18,8 +18,7 @@ class BoardMainActivity : BaseActivity(), View.OnClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_main)
         setAdView(binding.adView)
         binding.layoutBottomTab?.onClickListener = this
-        binding.onClickListener = this
-
+        binding.activity = this
         addFragment(R.id.frame_layout, BoardMainFragment(), false, false, "BoardMainFragment")
         setImageColor(binding.layoutBottomTab?.bottomLayoutBtn2Txt, binding.layoutBottomTab?.bottomLayoutText2, R.drawable.icons8_clipboard_24)
     }
@@ -32,12 +31,11 @@ class BoardMainActivity : BaseActivity(), View.OnClickListener {
             R.id.bottom_layout_btn1 -> {
                 beginActivity(Intent(this, GameMainActivity::class.java))
             }
-//            R.id.bottom_layout_btn3 -> {
-//                beginActivity(Intent(this, UserMainActivity::class.java))
-//            }
-            R.id.fab_btn -> {
-                startActivity(Intent(this, BoardMainRegisterActivity::class.java))
-            }
+
         }
+    }
+
+    fun registerIntent() {
+        startActivity(Intent(this, BoardMainRegisterActivity::class.java))
     }
 }

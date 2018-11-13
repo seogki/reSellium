@@ -15,7 +15,6 @@ import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Base.InnerBaseActivity
 import com.dev.skh.resellium.Board.BoardMainAdapter
 import com.dev.skh.resellium.Board.Model.BoardMainModel
-import com.dev.skh.resellium.Board.Model.SearchKeyModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.Util.CustomNestedScrollListener
 import com.dev.skh.resellium.Util.DLog
@@ -56,13 +55,9 @@ class BoardMainSearchActivity : InnerBaseActivity()
 
     }
 
-    override fun keyData(key: MutableList<SearchKeyModel>?, disposable: Disposable?) {
-
-    }
 
     private fun setView() {
         layoutManager = LinearLayoutManager(this)
-//        layoutManager = GridLayoutManager(this, 2)
         rv = setGameRv(binding.rvBoard, layoutManager!!)
         binding.editSearch.setOnEditorActionListener(this)
     }

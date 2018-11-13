@@ -18,8 +18,6 @@ import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.TextView
 import com.dev.skh.resellium.Base.BaseFragment
-import com.dev.skh.resellium.Board.BoardMainActivity
-import com.dev.skh.resellium.Game.GameMainActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.Main.tab.Best.HomeMainBestFragment
 import com.dev.skh.resellium.Main.tab.New.HomeMainNewFragment
@@ -65,6 +63,7 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home_main, container, false)
+        binding.fragment = this
         invisibleView()
         setView()
         setTabLayout()
@@ -75,12 +74,9 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     private fun setView() {
         binding.layoutAppbar?.title = "겜창고"
         binding.layoutAppbar?.onClickListener = this
-        binding.onClickListener = this
-
         binding.layoutPs?.fragment = this
         binding.layoutXbox?.fragment = this
         binding.layoutSwitch?.fragment = this
-
         binding.layoutPs?.text = "PS"
         binding.layoutXbox?.text = "XBOX"
         binding.layoutSwitch?.text = "SWITCH"
@@ -94,19 +90,15 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.view_img -> beginActivity(Intent(context!!, BoardMainActivity::class.java))
-
-            R.id.img_refresh -> {
-                invisibleView()
-                onRefresh()
-            }
-
-            R.id.img_recent_xbox -> beginActivity(Intent(context!!, GameMainActivity::class.java))
-
             R.id.img_setting -> startActivity(Intent(context!!, UserMainActivity::class.java))
-
         }
     }
+
+    fun refreshGames() {
+        invisibleView()
+        onRefresh()
+    }
+
     private fun setRv() {
         binding.txtPs4.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.txtSwitch.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)

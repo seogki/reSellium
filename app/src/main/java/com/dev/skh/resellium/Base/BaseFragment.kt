@@ -18,11 +18,15 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import com.dev.skh.resellium.Board.BoardMainActivity
 import com.dev.skh.resellium.Board.Model.BoardMainModel
+import com.dev.skh.resellium.Board.Search.BoardMainSearchActivity
 import com.dev.skh.resellium.Board.Sub.InnerBoardMainActivity
+import com.dev.skh.resellium.Game.GameMainActivity
 import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
+import com.dev.skh.resellium.User.UserMainActivity
 import com.dev.skh.resellium.Util.GridSpacingItemDecoration
 
 
@@ -174,5 +178,21 @@ open class BaseFragment : Fragment() {
 
     fun showErrorToast() {
         Toast.makeText(context, getString(R.string.error_toast), Toast.LENGTH_SHORT).show()
+    }
+
+    fun searchBoardIntent() {
+        startActivity(Intent(context!!, BoardMainSearchActivity::class.java))
+    }
+
+    fun settingIntent() {
+        startActivity(Intent(context!!, UserMainActivity::class.java))
+    }
+
+    fun boardMainIntent(){
+        beginActivity(Intent(context!!, BoardMainActivity::class.java))
+    }
+
+    fun gameMainIntent(){
+        beginActivity(Intent(context!!, GameMainActivity::class.java))
     }
 }

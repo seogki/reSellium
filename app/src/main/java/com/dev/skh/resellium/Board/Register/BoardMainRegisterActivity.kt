@@ -19,7 +19,7 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
 
     override fun errorData(disposable: Disposable?, message: String?) {
         this.disposable = disposable
-        binding.layoutAppbar?.layoutAdd?.isEnabled = true
+        enableAdd()
         DLog.e("error : $message")
         showErrorToast()
     }
@@ -37,8 +37,8 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_board_main_register)
-        binding.onClickListener = this
         binding.layoutAppbar?.title = "등록"
+        binding.activity = this
         binding.layoutAppbar?.onClickListener = this
         binding.seekbar.setOnSeekBarChangeListener(this)
 
@@ -66,29 +66,28 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
                 finish()
             }
             R.id.layout_add -> setRegisterDialog()
-            R.id.img_mark -> setRegisterDialog()
-            R.id.btn_ps -> setPlatform("PS")
-            R.id.btn_xbox -> setPlatform("XBOX")
-            R.id.btn_switch -> setPlatform("SWITCH")
+
         }
     }
 
-    private fun setPlatform(text: String) {
-        this.platform = text
-        when (text) {
-            "PS" -> {
+    fun setPlatform(view: View?) {
+        when (view?.id) {
+            R.id.btn_ps -> {
+                this.platform = "PS"
                 setBtnAccent(binding.btnPs)
                 setBtnDefault(binding.btnXbox)
                 setBtnDefault(binding.btnSwitch)
                 binding.imgPlatform.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_playstation_24))
             }
-            "XBOX" -> {
+            R.id.btn_xbox -> {
+                this.platform = "XBOX"
                 setBtnAccent(binding.btnXbox)
                 setBtnDefault(binding.btnPs)
                 setBtnDefault(binding.btnSwitch)
                 binding.imgPlatform.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.icons8_xbox_24))
             }
-            "SWITCH" -> {
+            R.id.btn_switch -> {
+                this.platform = "SWITCH"
                 setBtnAccent(binding.btnSwitch)
                 setBtnDefault(binding.btnXbox)
                 setBtnDefault(binding.btnPs)
@@ -139,7 +138,7 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
             ""
     }
 
-    private fun setRegisterDialog() {
+    fun setRegisterDialog() {
         AlertDialog.Builder(this@BoardMainRegisterActivity, R.style.MyDialogTheme)
                 .setTitle("리뷰")
                 .setMessage("정말로 등록하시겠습니까?")

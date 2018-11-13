@@ -29,7 +29,6 @@ class Ps4MainFragment : BaseFragment()
         , GameMainPresenter.View
         , SwipeRefreshLayout.OnRefreshListener
         , AdapterView.OnItemSelectedListener
-        , View.OnClickListener
         , BaseRecyclerViewAdapter.OnItemClickListener
         , CustomNestedScrollListener.OnScrollListener {
 
@@ -44,7 +43,6 @@ class Ps4MainFragment : BaseFragment()
     private var ps4MainAdapter: GameMainAdapter? = null
     private val weakPresenter by lazy { weakRef(this) }
     private lateinit var layoutManager: LinearLayoutManager
-    //    private lateinit var layoutManager: GridLayoutManager
     private var recyclerView: RecyclerView? = null
     private var first: String = ""
     private var second: String = ""
@@ -54,7 +52,7 @@ class Ps4MainFragment : BaseFragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_ps4_main, container, false)
-        binding.onClickListener = this
+        binding.fragment = this
         setView()
         setBaseProgressBar(binding.progressBar)
         return binding.root
@@ -62,7 +60,6 @@ class Ps4MainFragment : BaseFragment()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         addItemOnSpinner()
         weakPresenter.get()?.addData("0")
 
@@ -70,34 +67,29 @@ class Ps4MainFragment : BaseFragment()
 
     private fun setView() {
         layoutManager = LinearLayoutManager(context!!)
-//        layoutManager = GridLayoutManager(context, 2)
         recyclerView = setGameRv(binding.rvGame, layoutManager)
         binding.swipeLayout.setDistanceToTriggerSync(350)
         binding.swipeLayout.setOnRefreshListener(this)
 
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btn_all -> callBtnData("전체")
-            R.id.btn_new -> callBtnData("신품")
-            R.id.btn_old -> callBtnData("중고")
-        }
-    }
-
-    private fun callBtnData(data: String) {
-        when (data) {
-            "전체" -> {
+    fun callBtnData(view: View?) {
+        var data = ""
+        when (view?.id) {
+            R.id.btn_all -> {
+                data = "전체"
                 setBtnAccent(binding.btnAll)
                 setBtnDefault(binding.btnNew)
                 setBtnDefault(binding.btnOld)
             }
-            "신품" -> {
+            R.id.btn_new -> {
+                data = "신품"
                 setBtnAccent(binding.btnNew)
                 setBtnDefault(binding.btnAll)
                 setBtnDefault(binding.btnOld)
             }
-            "중고" -> {
+            R.id.btn_old -> {
+                data = "중고"
                 setBtnAccent(binding.btnOld)
                 setBtnDefault(binding.btnAll)
                 setBtnDefault(binding.btnNew)
@@ -107,7 +99,7 @@ class Ps4MainFragment : BaseFragment()
             ""
         else
             data
-
+        isSpinner = true
         callSpinnerData()
     }
 
@@ -126,7 +118,7 @@ class Ps4MainFragment : BaseFragment()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
-            setRecyclerViewScrollbar(false)
+            setRecyclerViewScrollbar()
     }
 
     override fun onItemClick(view: View, position: Int) {
@@ -134,8 +126,8 @@ class Ps4MainFragment : BaseFragment()
         setInnerIntent(data, view)
     }
 
-    private fun setRecyclerViewScrollbar(isSpinner: Boolean) {
-        this.isSpinner = isSpinner
+    private fun setRecyclerViewScrollbar() {
+
         binding.nestedScroll.setOnScrollChangeListener(CustomNestedScrollListener(layoutManager, this))
     }
 
@@ -191,7 +183,7 @@ class Ps4MainFragment : BaseFragment()
         this.disposable = disposable
         isLoading = false
         if (!isScroll)
-            setRecyclerViewScrollbar(true)
+            setRecyclerViewScrollbar()
     }
 
     override fun spinner2(arr2: MutableList<String>) {
@@ -225,7 +217,7 @@ class Ps4MainFragment : BaseFragment()
         ps4MainAdapter?.clearItems()
         setViewDefault()
         recyclerView?.removeOnScrollListener(null)
-
+        isSpinner = false
         binding.spinner.setSelection(0, false)
         weakPresenter.get()?.addData("0")
         isLoading = false

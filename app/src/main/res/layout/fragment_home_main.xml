@@ -8,9 +8,8 @@
     <data>
 
         <variable
-            name="onClickListener"
-            type="android.view.View.OnClickListener"
-            />
+            name="fragment"
+            type="com.dev.skh.resellium.Main.HomeMainFragment"/>
 
     </data>
 
@@ -51,7 +50,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/btn_ripple_nobg_grey"
-                    android:onClick="@{onClickListener::onClick}"
+                    android:onClick="@{() -> fragment.boardMainIntent()}"
                     app:layout_constraintBottom_toBottomOf="@+id/txt_grade"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -198,7 +197,7 @@
                     android:layout_width="40dp"
                     android:layout_height="0dp"
 
-                    android:onClick="@{onClickListener::onClick}"
+                    android:onClick="@{() -> fragment.refreshGames()}"
                     android:padding="8dp"
                     android:src="@drawable/ic_action_refresh"
                     app:layout_constraintBottom_toBottomOf="@+id/txt_recent"
@@ -325,7 +324,7 @@
                             android:layout_height="0dp"
                             android:layout_marginEnd="8dp"
                             android:background="@drawable/btn_ripple_colored_grey"
-                            android:onClick="@{onClickListener::onClick}"
+                            android:onClick="@{() -> fragment.gameMainIntent()}"
                             android:src="@drawable/ic_action_star_next"
                             app:layout_constraintBottom_toBottomOf="@+id/layout_switch"
                             app:layout_constraintEnd_toEndOf="parent"
