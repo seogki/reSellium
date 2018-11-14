@@ -27,8 +27,7 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/main_search_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            style="@style/CustomToolbarTheme"
             app:contentInsetEnd="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetRight="0dp"
@@ -42,18 +41,14 @@
                 android:id="@+id/const_plus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+
                 >
 
                 <TextView
                     android:id="@+id/chart_frag_txt_titlebar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
-                    android:gravity="center"
+                    style="@style/titleTextTheme"
                     android:text="@{title}"
-                    android:textColor="@color/fabColor"
-                    android:textSize="18sp"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -63,12 +58,8 @@
 
                 <ImageView
                     android:id="@+id/layout_add"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    style="@style/addImageTheme"
                     android:onClick="@{onClickListener::onClick}"
-                    android:paddingEnd="8dp"
-                    android:paddingStart="8dp"
-                    android:src="@drawable/ic_action_add_secondary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -76,13 +67,9 @@
 
                 <ImageView
                     android:id="@+id/layout_undo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    style="@style/undoImageTheme"
                     android:onClick="@{onClickListener::onClick}"
-                    android:padding="8dp"
-                    android:paddingEnd="12dp"
-                    android:paddingStart="12dp"
-                    android:src="@drawable/ic_action_back_secondary"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

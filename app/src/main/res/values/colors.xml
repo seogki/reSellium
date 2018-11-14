@@ -42,12 +42,18 @@
     <color name="darkerGrey">#3F3F3F</color>
 
 
-    <color name="accentColor">#16354C</color>
+    <color name="accentColor">#6999e9</color>
     <color name="lightColor">#285f89</color>
-    <color name="statusBar">#112a3c</color>
-    <color name="fabColor">#E56C4E</color>
+    <color name="statusBar">#6999e9</color>
+    <!--<color name="fabColor">#E56C4E</color>-->
+
+    <!--test-->
+    <color name="fabColor">#e96999</color>
+
     <color name="secondaryTextColor">#757575</color>
     <color name="fabDrawableColor">#000000</color>
+
+    <color name="toolbarColor">#6999e9</color>
 
     <color name="thirdColor">#0C9690</color>
 

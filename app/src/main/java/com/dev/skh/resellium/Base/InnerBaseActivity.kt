@@ -180,7 +180,7 @@ open class InnerBaseActivity : AppCompatActivity() {
 
     fun setDefault(view: TextView) {
 
-        view.setTextColor(ContextCompat.getColor(this, R.color.black))
+        view.setTextColor(ContextCompat.getColor(this, R.color.middarkGrey))
         view.typeface = Typeface.DEFAULT
     }
 

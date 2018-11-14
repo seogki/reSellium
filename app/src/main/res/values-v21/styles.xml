@@ -20,15 +20,15 @@
 
     <!--</style>-->
 
-    <style name="CustomHomeAppTheme" parent="Theme.AppCompat.NoActionBar">
+    <!--<style name="CustomHomeAppTheme" parent="Theme.AppCompat.NoActionBar">-->
 
-        <item name="android:windowBackground">@color/grey</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowContentTransitions">true</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:itemBackground">@color/white</item>
+        <!--<item name="android:windowBackground">@color/grey</item>-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!--<item name="android:windowContentTransitions">true</item>-->
+        <!--<item name="android:textColor">@color/black</item>-->
+        <!--<item name="android:itemBackground">@color/white</item>-->
 
-    </style>
+    <!--</style>-->
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
 
