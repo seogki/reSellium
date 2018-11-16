@@ -6,16 +6,12 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.os.Handler
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.LinearInterpolator
-import android.view.animation.RotateAnimation
 import android.widget.TextView
 import com.dev.skh.resellium.Base.BaseFragment
 import com.dev.skh.resellium.Game.Model.GameMainModel
@@ -80,6 +76,7 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
         binding.layoutPs?.text = "PS"
         binding.layoutXbox?.text = "XBOX"
         binding.layoutSwitch?.text = "SWITCH"
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -94,10 +91,10 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
         }
     }
 
-    fun refreshGames() {
-        invisibleView()
-        onRefresh()
-    }
+//    fun refreshGames() {
+//        invisibleView()
+//        onRefresh()
+//    }
 
     private fun setRv() {
         binding.txtPs4.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
@@ -132,31 +129,31 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
         }
     }
 
-    private fun onRefresh() {
-        rfBtn = true
-        startAnimation()
+//    private fun onRefresh() {
+//        rfBtn = true
+//        startAnimation()
+//
+//        Handler().postDelayed({
+//            getData()
+//        }, 400)
+//
+//    }
 
-        Handler().postDelayed({
-            getData()
-        }, 400)
-
-    }
-
-    private fun startAnimation() {
-        val rotate = RotateAnimation(
-                0f, 360f,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f
-        )
-        rotate.interpolator = LinearInterpolator()
-        rotate.duration = 500
-        rotate.repeatCount = Animation.INFINITE
-        binding.imgRefresh.startAnimation(rotate)
-    }
-
-    private fun stopAnimation() {
-        binding.imgRefresh.clearAnimation()
-    }
+//    private fun startAnimation() {
+//        val rotate = RotateAnimation(
+//                0f, 360f,
+//                Animation.RELATIVE_TO_SELF, 0.5f,
+//                Animation.RELATIVE_TO_SELF, 0.5f
+//        )
+//        rotate.interpolator = LinearInterpolator()
+//        rotate.duration = 500
+//        rotate.repeatCount = Animation.INFINITE
+//        binding.imgRefresh.startAnimation(rotate)
+//    }
+//
+//    private fun stopAnimation() {
+//        binding.imgRefresh.clearAnimation()
+//    }
 
     private fun setTabLayout() {
         viewPager = binding.viewpager
@@ -230,7 +227,7 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
 
     private fun defaultSetting() {
         if (rfBtn) {
-            stopAnimation()
+//            stopAnimation()
             rfBtn = false
         }
         binding.constAll.visibility = View.VISIBLE

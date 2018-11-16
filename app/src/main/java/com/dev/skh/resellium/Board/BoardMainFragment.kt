@@ -132,6 +132,9 @@ class BoardMainFragment : BaseFragment()
         if (!isLoading) {
             isLoading = true
             activity!!.runOnUiThread { setProgressbarVisible() }
+
+
+
             setData(checkId())
         }
     }
