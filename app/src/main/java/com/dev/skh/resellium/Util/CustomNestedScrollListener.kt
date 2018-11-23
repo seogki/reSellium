@@ -14,10 +14,10 @@ class CustomNestedScrollListener(layoutManager: RecyclerView.LayoutManager?, val
     private var gridLayoutManager: GridLayoutManager? = null
 
     init {
-        if (layoutManager is LinearLayoutManager)
-            this.linearLayoutManager = layoutManager
-        else if (layoutManager is GridLayoutManager)
-            this.gridLayoutManager
+        when (layoutManager) {
+            is LinearLayoutManager -> this.linearLayoutManager = layoutManager
+            is GridLayoutManager -> this.gridLayoutManager = layoutManager
+        }
     }
 
     override fun onScrollChange(v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {

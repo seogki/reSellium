@@ -104,14 +104,14 @@ class Ps4MainFragment : BaseFragment()
     }
 
     override fun updateData(arr: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if (arr != null) {
+
+        arr?.let {
             if (ps4MainAdapter == null) {
-                ps4MainAdapter = GameMainAdapter(context!!, arr)
-                ps4MainAdapter?.setOnItemClickListener(this)
-                recyclerView?.adapter = ps4MainAdapter
+                setAdapter(it)
             } else {
-                ps4MainAdapter?.addItems(arr)
+                ps4MainAdapter?.addItems(it)
             }
+
         }
 
         setProgressbarGone()
@@ -121,13 +121,17 @@ class Ps4MainFragment : BaseFragment()
             setRecyclerViewScrollbar()
     }
 
+    private fun setAdapter(it: MutableList<GameMainModel>) {
+        ps4MainAdapter = GameMainAdapter(context!!, it)
+        ps4MainAdapter?.setOnItemClickListener(this)
+        recyclerView?.adapter = ps4MainAdapter
+    }
+
     override fun onItemClick(view: View, position: Int) {
-        val data = ps4MainAdapter?.getItem(position)
-        setInnerIntent(data, view)
+        ps4MainAdapter?.let { setInnerIntent(it.getItem(position), view) }
     }
 
     private fun setRecyclerViewScrollbar() {
-
         binding.nestedScroll.setOnScrollChangeListener(CustomNestedScrollListener(layoutManager, this))
     }
 
@@ -177,8 +181,9 @@ class Ps4MainFragment : BaseFragment()
     }
 
     override fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if (result != null)
-            ps4MainAdapter?.addItems(result)
+
+        result?.let { ps4MainAdapter?.addItems(it) }
+
         setProgressbarGone()
         this.disposable = disposable
         isLoading = false
@@ -216,7 +221,7 @@ class Ps4MainFragment : BaseFragment()
     private fun refresh() {
         ps4MainAdapter?.clearItems()
         setViewDefault()
-        recyclerView?.removeOnScrollListener(null)
+        recyclerView?.clearOnScrollListeners()
         isSpinner = false
         binding.spinner.setSelection(0, false)
         weakPresenter.get()?.addData("0")
@@ -237,7 +242,7 @@ class Ps4MainFragment : BaseFragment()
     private fun refreshWithoutData() {
         ps4MainAdapter?.clearItems()
         setProgressbarVisible()
-        recyclerView?.removeOnScrollListener(null)
+        recyclerView?.clearOnScrollListeners()
         isLoading = false
         binding.swipeLayout.isRefreshing = false
     }

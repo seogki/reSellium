@@ -15,7 +15,7 @@ abstract class BaseRecyclerViewAdapter<T, H : RecyclerView.ViewHolder> : Recycle
     private var arrayList: MutableList<T>? = null
     private var onItemClickListener: OnItemClickListener? = null
     private var onItemLongClickListener: OnItemLongClickListener? = null
-    private var onItemTouchLister: OnItemTouchLister? = null
+    private var onItemTouchListener: OnItemTouchListener? = null
     var context: Context? = null
 
     constructor(context: Context) {
@@ -134,22 +134,16 @@ abstract class BaseRecyclerViewAdapter<T, H : RecyclerView.ViewHolder> : Recycle
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.setOnTouchListener { v, event ->
-            if (onItemTouchLister != null) {
-                onItemTouchLister!!.onItemTouch(v, holder.adapterPosition, event)
-            }
+            onItemTouchListener?.onItemTouch(v, holder.adapterPosition, event)
             false
         }
 
         holder.itemView.setOnClickListener {
-            if (onItemClickListener != null) {
-                DLog.e("onItemClickedafter")
-                onItemClickListener!!.onItemClick(holder.itemView, holder.adapterPosition)
-            }
+            onItemClickListener?.onItemClick(holder.itemView, holder.adapterPosition)
         }
+
         holder.itemView.setOnLongClickListener {
-            if (onItemLongClickListener != null) {
-                onItemLongClickListener!!.onItemLongClick(holder.itemView, holder.adapterPosition)
-            }
+            onItemLongClickListener?.onItemLongClick(holder.itemView, holder.adapterPosition)
             false
         }
 
@@ -172,8 +166,8 @@ abstract class BaseRecyclerViewAdapter<T, H : RecyclerView.ViewHolder> : Recycle
         this.onItemClickListener = onItemClickListener
     }
 
-    fun setOnItemTouchLister(itemTouchLister: OnItemTouchLister) {
-        this.onItemTouchLister = itemTouchLister
+    fun setOnItemTouchLister(itemTouchListener: OnItemTouchListener) {
+        this.onItemTouchListener = itemTouchListener
     }
 
     fun setOnItemLongClickListener(
@@ -186,7 +180,7 @@ abstract class BaseRecyclerViewAdapter<T, H : RecyclerView.ViewHolder> : Recycle
         fun onItemClick(view: View, position: Int)
     }
 
-    interface OnItemTouchLister {
+    interface OnItemTouchListener {
         fun onItemTouch(view: View, position: Int, event: MotionEvent)
     }
 

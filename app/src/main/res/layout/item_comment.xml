@@ -12,10 +12,7 @@
             type="com.dev.skh.resellium.Game.Model.CommentModel"
             />
 
-        <variable
-            name="onClickListener"
-            type="android.view.View.OnClickListener"
-            />
+
 
     </data>
 

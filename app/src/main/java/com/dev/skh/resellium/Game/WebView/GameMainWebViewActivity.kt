@@ -21,11 +21,12 @@ class GameMainWebViewActivity : InnerBaseActivity(), View.OnClickListener {
     lateinit var binding: ActivityGameMainWebViewBinding
     private var uri: String? = null
     private var webview: WebView? = null
+
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setBinding()
-        getIntentFromActivity()
+        uri = intent.getStringExtra("URI")
         setWebView()
     }
 
@@ -37,32 +38,30 @@ class GameMainWebViewActivity : InnerBaseActivity(), View.OnClickListener {
         binding.layoutAppbar?.title = "인터넷"
     }
 
-    private fun getIntentFromActivity() {
-        val i = intent
-
-        uri = i.getStringExtra("URI")
-    }
-
     @SuppressLint("SetJavaScriptEnabled")
     private fun setWebView() {
-        webview?.settings?.javaScriptEnabled = true
-        if (uri != null)
-            webview?.loadUrl(uri)
 
-        webview?.webViewClient = object : WebViewClient() {
-            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
-                super.onReceivedError(view, request, error)
-                shortToast("나중에 다시 시도해주세요")
-            }
+        uri?.let {
+            webview?.apply {
+                loadUrl(it)
+                settings?.javaScriptEnabled = true
+                webViewClient = object : WebViewClient() {
 
-            override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
-                super.onReceivedSslError(view, handler, error)
-                shortToast("나중에 다시 시도해주세요")
-            }
+                    override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+                        super.onReceivedError(view, request, error)
+                        shortToast("나중에 다시 시도해주세요")
+                    }
 
-            override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?, errorResponse: WebResourceResponse?) {
-                super.onReceivedHttpError(view, request, errorResponse)
-                shortToast("나중에 다시 시도해주세요")
+                    override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
+                        super.onReceivedSslError(view, handler, error)
+                        shortToast("나중에 다시 시도해주세요")
+                    }
+
+                    override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?, errorResponse: WebResourceResponse?) {
+                        super.onReceivedHttpError(view, request, errorResponse)
+                        shortToast("나중에 다시 시도해주세요")
+                    }
+                }
             }
         }
     }

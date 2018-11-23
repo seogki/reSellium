@@ -92,25 +92,36 @@ class GameMainFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun letsSeeAds() {
-        if (noAds) {
-            onSearchMainIntent()
-        } else {
-            adView?.show()
-        }
 
+        when (noAds) {
+            true -> onSearchMainIntent()
+            else -> adView?.show()
+        }
     }
 
     private fun setView() {
         viewPager = binding.registerFragViewpager
+        tabLayout = binding.layoutAppbar!!.registerFragTablayout
         adapter = TabPagerAdapter(childFragmentManager)
         viewPager.offscreenPageLimit = 3
         adapter.addFragment(Ps4MainFragment(), "PS")
         adapter.addFragment(XboxMainFragment(), "XBOX")
         adapter.addFragment(SwitchMainFragment(), "SWITCH")
-        tabLayout = binding.layoutAppbar!!.registerFragTablayout
+
 
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        adView?.adListener = null
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
     }
 
 }

@@ -30,14 +30,11 @@ class SearchMainActivity : InnerBaseActivity()
         , BaseRecyclerViewAdapter.OnItemClickListener {
 
     override fun onItemClick(view: View, position: Int) {
-        var data: GameMainModel? = null
         when (currentPos) {
-            "PS" -> data = ps4MainAdapter?.getItem(position)
-            "XBOX" -> data = xboxMainAdapter?.getItem(position)
-            "SWITCH" -> data = switchMainAdapter?.getItem(position)
+            "PS" -> setInnerIntent(ps4MainAdapter?.getItem(position), view)
+            "XBOX" -> setInnerIntent(xboxMainAdapter?.getItem(position), view)
+            "SWITCH" -> setInnerIntent(switchMainAdapter?.getItem(position), view)
         }
-
-        setInnerIntent(data, view)
     }
 
 
@@ -76,7 +73,7 @@ class SearchMainActivity : InnerBaseActivity()
     private var currentPos = "PS"
     private var disposable: Disposable? = null
     private var searchString = ""
-    lateinit var binding: ActivitySearchMainBinding
+    private lateinit var binding: ActivitySearchMainBinding
     private val presenter by lazy { weakRef(this) }
     private var ps4MainAdapter: GameMainAdapter? = null
     private var xboxMainAdapter: GameMainAdapter? = null
@@ -99,8 +96,6 @@ class SearchMainActivity : InnerBaseActivity()
         val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.survey_divider)!!)
 
-//        val result = Math.round(8 * resources.displayMetrics.density)
-//        val decor = GridSpacingItemDecoration(2, result, true, 0)
         binding.layoutAppbar?.editSearch?.setOnEditorActionListener(this)
 
         ps4LayoutManager = LinearLayoutManager(this)
@@ -198,14 +193,8 @@ class SearchMainActivity : InnerBaseActivity()
                             setProgressbarVisible()
                             Handler().postDelayed({
                                 binding.nestedScroll.fling(0)
-                                var id: String? = null
-                                when (currentPos) {
-                                    "PS" -> id = ps4MainAdapter?.getItem(ps4MainAdapter!!.itemCount - 1)?.id
-                                    "XBOX" -> id = xboxMainAdapter?.getItem(xboxMainAdapter!!.itemCount - 1)?.id
-                                    "SWITCH" -> id = switchMainAdapter?.getItem(switchMainAdapter!!.itemCount - 1)?.id
-                                }
 
-                                presenter.get()?.getScrollData(id, currentPos, searchString)
+                                presenter.get()?.getScrollData(getId(), currentPos, searchString)
 
                             }, 500)
 
@@ -218,48 +207,49 @@ class SearchMainActivity : InnerBaseActivity()
 
     }
 
-    override fun setPs4Data(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if (result != null) {
-            if (ps4MainAdapter == null) {
-                ps4MainAdapter = GameMainAdapter(this, result)
-                ps4MainAdapter?.setOnItemClickListener(this)
-                binding.rvPs4.adapter = ps4MainAdapter
-            } else
-                ps4MainAdapter?.addItems(result)
+    private fun getId(): String? =
+            when (currentPos) {
+                "PS" -> ps4MainAdapter?.getItem(ps4MainAdapter!!.itemCount - 1)?.id
+                "XBOX" -> xboxMainAdapter?.getItem(xboxMainAdapter!!.itemCount - 1)?.id
+                "SWITCH" -> switchMainAdapter?.getItem(switchMainAdapter!!.itemCount - 1)?.id
+                else -> ""
+            }
 
+
+    override fun setPs4Data(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
+        result?.let {
+            when (ps4MainAdapter) {
+                null -> {
+                    ps4MainAdapter = GameMainAdapter(this, it).apply { setOnItemClickListener(this@SearchMainActivity) }
+                    binding.rvPs4.adapter = ps4MainAdapter
+                }
+                else -> ps4MainAdapter?.addItems(it)
+            }
         }
 
         Handler().postDelayed({
-            if (ps4MainAdapter?.itemCount == 0) {
-                binding.txtNoComment.visibility = View.VISIBLE
-            } else {
-                binding.txtNoComment.visibility = View.GONE
-            }
+            ps4MainAdapter?.itemCount?.let { setviewGone(it) }
         }, 100)
 
         setProgressbarGone()
         this.disposable = disposable
         isLoading = false
-        if (!isScroll)
-            setRecyclerViewScrollbar()
+        if (!isScroll) setRecyclerViewScrollbar()
     }
 
     override fun setXboxData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if (result != null) {
-            if (xboxMainAdapter == null) {
-                xboxMainAdapter = GameMainAdapter(this, result)
-                xboxMainAdapter?.setOnItemClickListener(this)
-                binding.rvXbox.adapter = xboxMainAdapter
-            } else
-                xboxMainAdapter?.addItems(result)
+        result?.let {
+            when (xboxMainAdapter) {
+                null -> {
+                    xboxMainAdapter = GameMainAdapter(this, it).apply { setOnItemClickListener(this@SearchMainActivity) }
+                    binding.rvXbox.adapter = xboxMainAdapter
+                }
+                else -> xboxMainAdapter?.addItems(it)
+            }
         }
 
         Handler().postDelayed({
-            if (xboxMainAdapter?.itemCount == 0) {
-                binding.txtNoComment.visibility = View.VISIBLE
-            } else {
-                binding.txtNoComment.visibility = View.GONE
-            }
+            xboxMainAdapter?.itemCount?.let { setviewGone(it) }
         }, 100)
 
         setProgressbarGone()
@@ -269,22 +259,20 @@ class SearchMainActivity : InnerBaseActivity()
             setRecyclerViewScrollbar()
     }
 
+
     override fun setSwitchData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if (result != null) {
-            if (switchMainAdapter == null) {
-                switchMainAdapter = GameMainAdapter(this, result)
-                switchMainAdapter?.setOnItemClickListener(this)
-                binding.rvSwitch.adapter = switchMainAdapter
-            } else
-                switchMainAdapter?.addItems(result)
+        result?.let {
+            when (switchMainAdapter) {
+                null -> {
+                    switchMainAdapter = GameMainAdapter(this, it).apply { setOnItemClickListener(this@SearchMainActivity) }
+                    binding.rvSwitch.adapter = switchMainAdapter
+                }
+                else -> switchMainAdapter?.addItems(it)
+            }
         }
 
         Handler().postDelayed({
-            if (switchMainAdapter?.itemCount == 0) {
-                binding.txtNoComment.visibility = View.VISIBLE
-            } else {
-                binding.txtNoComment.visibility = View.GONE
-            }
+            switchMainAdapter?.itemCount?.let { setviewGone(it) }
         }, 100)
 
         setProgressbarGone()
@@ -292,6 +280,13 @@ class SearchMainActivity : InnerBaseActivity()
         isLoading = false
         if (!isScroll)
             setRecyclerViewScrollbar()
+    }
+
+    private fun setviewGone(item_size: Int) {
+        when (item_size) {
+            0 -> binding.txtNoComment.visibility = View.VISIBLE
+            else -> binding.txtNoComment.visibility = View.GONE
+        }
     }
 
 

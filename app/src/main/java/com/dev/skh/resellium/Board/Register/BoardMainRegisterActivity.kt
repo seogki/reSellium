@@ -66,7 +66,6 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
                 finish()
             }
             R.id.layout_add -> setRegisterDialog()
-
         }
     }
 
@@ -103,17 +102,22 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
         val title = binding.editTitle.text.toString()
         val review = binding.editReview.text.toString().trim()
         val grade = checkGrade(binding.txtNum.text.toString())
-        if (grade == "") {
-            shortToast("평점을 제대로 설정해주세요")
-            enableAdd()
-            return
+
+        when {
+            (grade == "") -> {
+                shortToast("평점을 제대로 설정해주세요")
+                enableAdd()
+                return
+            }
+            (title.isNotEmpty() && review.isNotEmpty() && grade.isNotEmpty()) -> {
+                weakReference.get()?.setData(title, review, grade, platform)
+            }
+            else -> {
+                shortToast("모두 입력해주세요")
+                enableAdd()
+            }
         }
-        if (title.isNotEmpty() && review.isNotEmpty() && grade.isNotEmpty()) {
-            weakReference.get()?.setData(title, review, grade, platform)
-        } else {
-            shortToast("모두 입력해주세요")
-            enableAdd()
-        }
+
     }
 
     private fun enableAdd() {
@@ -127,16 +131,18 @@ class BoardMainRegisterActivity : InnerBaseActivity(), BoardMainRegisterPresente
     }
 
 
-    private fun checkGrade(grade: String?): String {
-        return if (grade != null) {
-            if (grade.contains("0.0")) {
-                ""
-            } else {
-                grade.replace("점", "")
+    private fun checkGrade(grade: String?): String =
+            when {
+                grade != null -> {
+                    if (grade.contains("0.0")) {
+                        ""
+                    } else {
+                        grade.replace("점", "")
+                    }
+                }
+                else -> ""
             }
-        } else
-            ""
-    }
+
 
     fun setRegisterDialog() {
         AlertDialog.Builder(this@BoardMainRegisterActivity, R.style.MyDialogTheme)

@@ -63,18 +63,14 @@ class SwitchMainFragment : BaseFragment()
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        addItemOnSpinner()
+        weakPresenter.get()?.spinnerTwo()
         weakPresenter.get()?.addData("2")
 
     }
 
-    private fun addItemOnSpinner() {
-        weakPresenter.get()?.spinnerTwo()
-    }
 
     private fun setView() {
         layoutManager = LinearLayoutManager(context!!)
-//        layoutManager = GridLayoutManager(context, 2)
         recyclerView = setGameRv(binding.rvGame, layoutManager)
 
         binding.swipeLayout.setDistanceToTriggerSync(350)
@@ -116,13 +112,10 @@ class SwitchMainFragment : BaseFragment()
     }
 
     override fun updateData(arr: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if (arr != null) {
-            if (switchMainAdapter == null) {
-                switchMainAdapter = GameMainAdapter(context!!, arr)
-                recyclerView?.adapter = switchMainAdapter
-                switchMainAdapter?.setOnItemClickListener(this)
-            } else {
-                switchMainAdapter?.addItems(arr)
+        arr?.let {
+            when (switchMainAdapter) {
+                null -> setAdapter(it)
+                else -> switchMainAdapter?.addItems(it)
             }
         }
 
@@ -133,9 +126,14 @@ class SwitchMainFragment : BaseFragment()
             setRecyclerViewScrollbar(false)
     }
 
+    private fun setAdapter(it: MutableList<GameMainModel>) {
+        switchMainAdapter = GameMainAdapter(context!!, it)
+        recyclerView?.adapter = switchMainAdapter
+        switchMainAdapter?.setOnItemClickListener(this)
+    }
+
     override fun onItemClick(view: View, position: Int) {
-        val data = switchMainAdapter?.getItem(position)
-        setInnerIntent(data, view)
+        switchMainAdapter?.let { setInnerIntent(it.getItem(position), view) }
     }
 
     private fun setRecyclerViewScrollbar(isSpinner: Boolean) {
@@ -145,23 +143,20 @@ class SwitchMainFragment : BaseFragment()
 
     override fun onScrollEnd() {
         if (!isLoading) {
-
             isLoading = true
             setProgressbarVisible()
             val id = switchMainAdapter?.getItem(switchMainAdapter!!.itemCount - 1)?.id
             setData(id)
-
-
         }
     }
 
     private fun setData(id: String?) {
         Handler().postDelayed({
             binding.nestedScroll.fling(0)
-            if (isSpinner)
-                weakPresenter.get()?.checkSpinnerScrollData("2", first, second, id)
-            else
-                weakPresenter.get()?.scrollData("2", id)
+            when (isSpinner) {
+                true -> weakPresenter.get()?.checkSpinnerScrollData("2", first, second, id)
+                else -> weakPresenter.get()?.scrollData("2", id)
+            }
         }, 500)
     }
 
@@ -175,8 +170,10 @@ class SwitchMainFragment : BaseFragment()
     }
 
     override fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if (result != null)
-            switchMainAdapter?.addItems(result)
+
+        result?.let { switchMainAdapter?.addItems(it) }
+
+
         setProgressbarGone()
         this.disposable = disposable
         isLoading = false
@@ -221,7 +218,7 @@ class SwitchMainFragment : BaseFragment()
     private fun refresh() {
         switchMainAdapter?.clearItems()
         setViewDefault()
-        recyclerView?.removeOnScrollListener(null)
+        recyclerView?.clearOnScrollListeners()
         weakPresenter.get()?.addData("2")
         isLoading = false
         binding.swipeLayout.isRefreshing = false
@@ -240,7 +237,7 @@ class SwitchMainFragment : BaseFragment()
     private fun refreshWithoutData() {
         switchMainAdapter?.clearItems()
         setProgressbarVisible()
-        recyclerView?.removeOnScrollListener(null)
+        recyclerView?.clearOnScrollListeners()
         isLoading = false
         binding.swipeLayout.isRefreshing = false
     }

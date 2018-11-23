@@ -1,31 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="CustomAppTheme" parent="Theme.AppCompat.NoActionBar">
-
-        <item name="colorPrimaryDark">@color/statusBar</item>
-        <item name="android:windowBackground">@color/white</item>
-
-
-        <item name="android:textColor">@color/black</item>
-        <item name="android:itemBackground">@color/white</item>
-
-    </style>
-
-    <style name="fontTextView" parent="android:Widget.TextView">
-        <item name="android:fontFamily">monospace</item>
-    </style>
-
-    <style name="fontButton" parent="android:Widget.Holo.Button">
-        <item name="android:fontFamily">monospace</item>
-    </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
 
@@ -71,14 +46,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="MyPopupMenu"
-           parent="@android:style/Widget.Holo.ListPopupWindow">
-        <item name="android:popupBackground">@color/white</item>
-    </style>
     <!-- Popup Menu Text Color styles -->
-    <style name="TextAppearance">
-        <item name="android:textColor">@color/black</item>
-    </style>
 
     <style name="TextButtonStyle">
         <item name="android:layout_width">0dp</item>
@@ -88,15 +56,6 @@
         <item name="android:background">@drawable/text_round_white_border_grey</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:textColor">@color/middarkGrey</item>
-    </style>
-
-    <style name="TextButtonAccentStyle">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">40dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/text_round_accent_border_grey</item>
-        <item name="android:layout_marginTop">16dp</item>
-        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="TextButtonSecondaryStyle">
@@ -109,24 +68,6 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-
-    <style name="HomeMainTabGrade">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:padding">8dp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:background">@drawable/bg_secondary_round</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/white</item>
-
-
-    </style>
-
-    <style name="HintText" parent="TextAppearance.Design.Hint">
-        <!--<item name="android:textSize">12sp</item>-->
-        <item name="android:textColor">@color/fabColor</item>
-    </style>
 
     <style name="MyEditTextTheme" parent="Widget.AppCompat.EditText">
 
@@ -156,12 +97,6 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/middarkGrey</item>
         <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="horizontalViewSecondaryTheme">
-        <item name="android:background">@color/fabColor</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">1dp</item>
     </style>
 
     <style name="horizontalViewMidGreyTheme">
@@ -197,12 +132,6 @@
         <item name="android:src">@drawable/ic_action_setting</item>
     </style>
 
-
-
-    <style name ="searchImageTheme">
-
-
-    </style>
 
     <style name="undoImageTheme">
         <item name="android:layout_width">wrap_content</item>

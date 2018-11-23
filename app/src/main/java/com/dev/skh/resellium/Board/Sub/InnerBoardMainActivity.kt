@@ -106,9 +106,8 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
                     setConfirmDialog()
                     true
                 }
-                else -> {
-                    false
-                }
+                else -> false
+
             }
         }
         popupMenu.show()
@@ -140,13 +139,16 @@ class InnerBoardMainActivity : InnerBaseActivity(), View.OnClickListener, InnerB
         }
         setProgressbarGone()
         Handler().postDelayed({
-            if (gameMainCommentAdapter?.itemCount == 0) {
-                binding.txtNoComment.visibility = View.VISIBLE
-            } else {
-                binding.txtNoComment.visibility = View.GONE
-            }
+            gameMainCommentAdapter?.itemCount?.let { setViewGone(it) }
         }, 100)
 
+    }
+
+    private fun setViewGone(size: Int) {
+        when (size) {
+            0 -> binding.txtNoComment.visibility = View.VISIBLE
+            else -> binding.txtNoComment.visibility = View.GONE
+        }
     }
 
     private fun setScrollListener() {

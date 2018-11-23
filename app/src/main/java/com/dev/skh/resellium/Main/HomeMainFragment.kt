@@ -91,11 +91,6 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
         }
     }
 
-//    fun refreshGames() {
-//        invisibleView()
-//        onRefresh()
-//    }
-
     private fun setRv() {
         binding.txtPs4.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
         binding.txtSwitch.drawable?.setColorFilter(ContextCompat.getColor(context!!, R.color.white), PorterDuff.Mode.SRC_ATOP)
@@ -129,15 +124,6 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
         }
     }
 
-//    private fun onRefresh() {
-//        rfBtn = true
-//        startAnimation()
-//
-//        Handler().postDelayed({
-//            getData()
-//        }, 400)
-//
-//    }
 
 //    private fun startAnimation() {
 //        val rotate = RotateAnimation(
@@ -157,12 +143,14 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
 
     private fun setTabLayout() {
         viewPager = binding.viewpager
+        tabLayout = binding.tablayout
+
         adapter = TabPagerAdapter(childFragmentManager)
         viewPager.offscreenPageLimit = 3
         adapter.addFragment(HomeMainNewFragment(), "최신")
         adapter.addFragment(HomeMainBestFragment(), "최고")
         adapter.addFragment(HomeMainWorstFragment(), "최저")
-        tabLayout = binding.tablayout
+
 
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
@@ -198,21 +186,15 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
     }
 
     private fun setPs4Data(horiModel: MutableList<GameMainModel>?) {
-        if (horiModel != null) {
-            setRecentData(binding.layoutPs, horiModel)
-        }
+        horiModel?.let { it -> setRecentData(binding.layoutPs, it) }
     }
 
     private fun setXboxData(horiModel: MutableList<GameMainModel>?) {
-        if (horiModel != null) {
-            setRecentData(binding.layoutXbox, horiModel)
-        }
+        horiModel?.let { it -> setRecentData(binding.layoutXbox, it) }
     }
 
     private fun setSwitchData(horiModel: MutableList<GameMainModel>?) {
-        if (horiModel != null) {
-            setRecentData(binding.layoutSwitch, horiModel)
-        }
+        horiModel?.let { it -> setRecentData(binding.layoutSwitch, it) }
     }
 
 
@@ -227,7 +209,6 @@ class HomeMainFragment : BaseFragment(), HomeMainPresenter.View, View.OnClickLis
 
     private fun defaultSetting() {
         if (rfBtn) {
-//            stopAnimation()
             rfBtn = false
         }
         binding.constAll.visibility = View.VISIBLE

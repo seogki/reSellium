@@ -62,25 +62,16 @@ class XboxMainFragment : BaseFragment()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-
-        addItemOnSpinner()
+        weakPresenter.get()?.spinnerTwo()
         weakPresenter.get()?.addData("1")
 
     }
 
-    private fun addItemOnSpinner() {
-        weakPresenter.get()?.spinnerTwo()
-    }
-
     private fun setView() {
         layoutManager = LinearLayoutManager(context!!)
-//        layoutManager = GridLayoutManager(context, 2)
         recyclerView = setGameRv(binding.rvGame, layoutManager)
         binding.swipeLayout.setDistanceToTriggerSync(350)
         binding.swipeLayout.setOnRefreshListener(this)
-
-
     }
 
     override fun onClick(v: View?) {
@@ -118,18 +109,14 @@ class XboxMainFragment : BaseFragment()
     }
 
     override fun onItemClick(view: View, position: Int) {
-        val data = xboxMainAdapter?.getItem(position)
-        setInnerIntent(data, view)
+        xboxMainAdapter?.let { setInnerIntent(it.getItem(position), view) }
     }
 
     override fun updateData(arr: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if (arr != null) {
-            if (xboxMainAdapter == null) {
-                xboxMainAdapter = GameMainAdapter(context!!, arr)
-                recyclerView?.adapter = xboxMainAdapter
-                xboxMainAdapter?.setOnItemClickListener(this)
-            } else {
-                xboxMainAdapter?.addItems(arr)
+        arr?.let {
+            when (xboxMainAdapter) {
+                null -> setAdapter(it)
+                else -> xboxMainAdapter?.addItems(it)
             }
         }
 
@@ -138,6 +125,12 @@ class XboxMainFragment : BaseFragment()
         isLoading = false
         if (!isScroll)
             setRecyclerViewScrollbar(false)
+    }
+
+    private fun setAdapter(it: MutableList<GameMainModel>) {
+        xboxMainAdapter = GameMainAdapter(context!!, it)
+        recyclerView?.adapter = xboxMainAdapter
+        xboxMainAdapter?.setOnItemClickListener(this)
     }
 
 
@@ -165,25 +158,24 @@ class XboxMainFragment : BaseFragment()
     private fun setData(id: String?) {
         Handler().postDelayed({
             binding.nestedScroll.fling(0)
-            if (isSpinner)
-                weakPresenter.get()?.checkSpinnerScrollData("1", first, second, id)
-            else
-                weakPresenter.get()?.scrollData("1", id)
+            when (isSpinner) {
+                true -> weakPresenter.get()?.checkSpinnerScrollData("1", first, second, id)
+                else -> weakPresenter.get()?.scrollData("1", id)
+            }
         }, 500)
     }
 
     override fun spinner2(arr2: MutableList<String>) {
         activity!!.runOnUiThread {
-            val spinnerAdapter = ArrayAdapter<String>(context, R.layout.item_spinner, arr2)
-            spinnerAdapter.setDropDownViewResource(R.layout.item_spinner)
-            binding.spinner.adapter = spinnerAdapter
+            binding.spinner.adapter = ArrayAdapter<String>(context, R.layout.item_spinner, arr2).apply { setDropDownViewResource(R.layout.item_spinner) }
             binding.spinner.onItemSelectedListener = this
         }
     }
 
     override fun updateSpinnerData(result: MutableList<GameMainModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if (result != null)
-            xboxMainAdapter?.addItems(result)
+
+        result?.let { xboxMainAdapter?.addItems(it) }
+
         setProgressbarGone()
         this.disposable = disposable
         isLoading = false

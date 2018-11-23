@@ -26,16 +26,14 @@ class GameMainActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.bottom_layout_btn0 -> {
-                beginActivity(Intent(this, HomeMainActivity::class.java))
-            }
-            R.id.bottom_layout_btn2 -> {
-                beginActivity(Intent(this, BoardMainActivity::class.java))
-            }
-
+            R.id.bottom_layout_btn0 -> beginActivity(Intent(this, HomeMainActivity::class.java))
+            R.id.bottom_layout_btn2 -> beginActivity(Intent(this, BoardMainActivity::class.java))
         }
     }
-    fun registerIntent(){
+
+    fun registerIntent() {
         startActivity(Intent(this, GameRegisterActivity::class.java))
     }
+
+
 }

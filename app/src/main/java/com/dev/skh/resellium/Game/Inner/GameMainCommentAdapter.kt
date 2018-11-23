@@ -4,7 +4,6 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.dev.skh.resellium.Base.BaseRecyclerViewAdapter
 import com.dev.skh.resellium.Game.Model.CommentModel
@@ -29,14 +28,9 @@ class GameMainCommentAdapter(context: Context, arraylist: MutableList<CommentMod
         return EstimateRegisterViewHolder(binding)
     }
 
-    inner class EstimateRegisterViewHolder(val binding: ItemCommentBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        override fun onClick(v: View?) {
-
-        }
-
+    inner class EstimateRegisterViewHolder(val binding: ItemCommentBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(model: CommentModel?) {
-            binding.onClickListener = this
             binding.model = model
         }
 

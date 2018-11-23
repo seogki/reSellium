@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -27,7 +26,6 @@ import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.User.UserMainActivity
-import com.dev.skh.resellium.Util.GridSpacingItemDecoration
 
 
 /**
@@ -92,23 +90,13 @@ open class BaseFragment : Fragment() {
         return rvGame
     }
 
-    fun setGridGameRv(rvGame: RecyclerView, layoutManager: GridLayoutManager): RecyclerView {
-        rvGame.isNestedScrollingEnabled = false
-        rvGame.layoutManager = layoutManager
-
-        val result = Math.round(8 * resources.displayMetrics.density)
-
-        rvGame.addItemDecoration(GridSpacingItemDecoration(2, result, true, 0))
-
-        return rvGame
-    }
-
-//
-//    fun setHorizontalRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView? {
-//        rvGame.layoutManager = layoutManager
+//    fun setGridGameRv(rvGame: RecyclerView, layoutManager: GridLayoutManager): RecyclerView {
 //        rvGame.isNestedScrollingEnabled = false
-//        rvGame.animation = null
+//        rvGame.layoutManager = layoutManager
 //
+//        val result = Math.round(8 * resources.displayMetrics.density)
+//
+//        rvGame.addItemDecoration(GridSpacingItemDecoration(2, result, true, 0))
 //
 //        return rvGame
 //    }
@@ -140,13 +128,15 @@ open class BaseFragment : Fragment() {
     }
 
     fun setInnerIntent(model: Any?, view: View?) {
-        if (model != null) {
-            if (model is GameMainModel) {
-                gameMainCommentIntent(model, view)
-            } else if (model is BoardMainModel) {
-                innerBoardMainIntent(model, view)
+
+        model?.let {
+            when (it) {
+                is GameMainModel -> gameMainCommentIntent(it, view)
+                is BoardMainModel -> innerBoardMainIntent(it, view)
+                else -> return
             }
         }
+
     }
 
     private fun gameMainCommentIntent(model: GameMainModel, view: View?) {
@@ -188,11 +178,11 @@ open class BaseFragment : Fragment() {
         startActivity(Intent(context!!, UserMainActivity::class.java))
     }
 
-    fun boardMainIntent(){
+    fun boardMainIntent() {
         beginActivity(Intent(context!!, BoardMainActivity::class.java))
     }
 
-    fun gameMainIntent(){
+    fun gameMainIntent() {
         beginActivity(Intent(context!!, GameMainActivity::class.java))
     }
 }

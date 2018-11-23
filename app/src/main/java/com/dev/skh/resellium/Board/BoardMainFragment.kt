@@ -50,17 +50,20 @@ class BoardMainFragment : BaseFragment()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_board_main, container, false)
-        binding.layoutAppbar?.title = "추천"
-        binding.onClickListener = this
-        binding.fragment = this
-        binding.layoutAppbar?.onClickListener = this
+
+        setListener()
         setVIEW()
         setBaseProgressBar(binding.progressBar)
         return binding.root
     }
 
-    private fun setVIEW() {
+    private fun setListener() {
+        binding.fragment = this
+        binding.layoutAppbar?.onClickListener = this
+    }
 
+    private fun setVIEW() {
+        binding.layoutAppbar?.title = "추천"
         layoutManager = LinearLayoutManager(context!!)
         rv = setGameRv(binding.rvBoard, layoutManager!!)
         binding.swipeLayout.setDistanceToTriggerSync(350)
@@ -74,27 +77,23 @@ class BoardMainFragment : BaseFragment()
         getObservedResult(viewModel)
     }
 
-    private fun setError() {
+    private fun setError(it: String) {
         setProgressbarGone()
         showErrorToast()
+        DLog.e("it $it")
     }
 
     private fun getObservedResult(viewModel: BoardMainViewModel?) {
-        viewModel?.boardListObservable?.observe(this, Observer {
-            if (it != null)
-                regiData(it)
+        viewModel?.boardListObservable?.observe(this, Observer { s ->
+            s?.let { it -> regiData(it) }
         })
 
-        viewModel?.boardErrorObservable?.observe(this, Observer {
-            if (it != null) {
-                DLog.e("it $it")
-                setError()
-            }
+        viewModel?.boardErrorObservable?.observe(this, Observer { s ->
+            s?.let { it -> setError(it) }
         })
 
-        viewModel?.boardDisposableObservable?.observe(this, Observer {
-            if (it != null)
-                this.disposable = it
+        viewModel?.boardDisposableObservable?.observe(this, Observer { s ->
+            s.let { this.disposable = it }
         })
     }
 
@@ -132,9 +131,6 @@ class BoardMainFragment : BaseFragment()
         if (!isLoading) {
             isLoading = true
             activity!!.runOnUiThread { setProgressbarVisible() }
-
-
-
             setData(checkId())
         }
     }
@@ -143,27 +139,22 @@ class BoardMainFragment : BaseFragment()
         Handler().postDelayed({
             isScroll = true
             binding.nestedScroll.fling(0)
-            if (isSpinner)
-                viewModel?.setId(data, id)
-            else
-                viewModel?.setId(null, id)
-
+            when (isSpinner) {
+                true -> viewModel?.setId(data, id)
+                else -> viewModel?.setId(null, id)
+            }
         }, 500)
-
     }
 
-
     private fun checkId(): String? {
-        var id: String? = null
-        when (data) {
-            "" -> id = adapter?.getItem(adapter!!.itemCount - 1)?.id
-            "평점" -> id = adapter?.getItem(adapter!!.itemCount - 1)?.grade
-            "이름" -> id = adapter?.getItem(adapter!!.itemCount - 1)?.title
-            "최근 날짜" -> id = adapter?.getItem(adapter!!.itemCount - 1)?.date
-            "오래된 날짜" -> id = adapter?.getItem(adapter!!.itemCount - 1)?.date
-        }
 
-        return id
+        return when (data) {
+            "" -> adapter?.getItem(adapter!!.itemCount - 1)?.id
+            "평점" -> adapter?.getItem(adapter!!.itemCount - 1)?.grade
+            "이름" -> adapter?.getItem(adapter!!.itemCount - 1)?.title
+            "오래된 날짜" -> adapter?.getItem(adapter!!.itemCount - 1)?.date
+            else -> ""
+        }
     }
 
     fun callSpinnerData(view: View?) {

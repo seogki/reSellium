@@ -25,21 +25,14 @@ object BaseBindingKotlin {
 
         val context = setContext(context) ?: return
 
-        val activity = UtilMethod.getActivity(context)
+        val activity = UtilMethod.getActivity(context) ?: return
         val weakReference = WeakReference(activity)
-
-        if (activity == null)
-            return
-
-
 
 
         if (!activity.isFinishing || !activity.isDestroyed)
-            KeyboardUtils
-                    .addKeyboardToggleListener(weakReference)
-                    { isVisible ->
-                        visibility = if (isVisible) View.GONE else View.VISIBLE
-                    }
+            KeyboardUtils.addKeyboardToggleListener(weakReference) { isVisible ->
+                visibility = if (isVisible) View.GONE else View.VISIBLE
+            }
         else
             KeyboardUtils.removeAllKeyboardToggleListeners()
 
@@ -53,10 +46,9 @@ object BaseBindingKotlin {
         if (result == null)
             return
 
-        if (result.contains("매입")) {
-            setTextColor(ContextCompat.getColor(context, R.color.accentColor))
-        } else {
-            setTextColor(ContextCompat.getColor(context, R.color.fabColor))
+        when {
+            result.contains("매입") -> setTextColor(ContextCompat.getColor(context, R.color.accentColor))
+            else -> setTextColor(ContextCompat.getColor(context, R.color.fabColor))
         }
 
         text = result
@@ -71,8 +63,7 @@ object BaseBindingKotlin {
         if (result == null)
             return
 
-        val money = UtilMethod.currencyFormat(result)
-        text = money + "원"
+        UtilMethod.currencyFormat(result).let { text = it+"원" }
     }
 
     @BindingAdapter("soldCheck")
@@ -82,10 +73,10 @@ object BaseBindingKotlin {
         if (result == null)
             return
 
-        if (result.contains("매입"))
-            setTextColor(ContextCompat.getColor(context, R.color.fabColor))
-        else
-            setTextColor(ContextCompat.getColor(context, R.color.accentColor))
+        when {
+            result.contains("매입") -> setTextColor(ContextCompat.getColor(context, R.color.fabColor))
+            else -> setTextColor(ContextCompat.getColor(context, R.color.accentColor))
+        }
 
         text = result
     }
@@ -121,13 +112,14 @@ object BaseBindingKotlin {
         if (result == null)
             return
 
-        if (!result.isEmpty()) {
-            text = if (result == "0")
-                ""
-            else
-                "($result)"
 
+        text = when {
+            result.isEmpty() -> ""
+            result == "0" -> ""
+            else -> "($result)"
         }
+
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -138,10 +130,11 @@ object BaseBindingKotlin {
         if (result == null)
             return
 
-        text = if (!result.isEmpty())
-            result + "점"
-        else
-            ""
+        text = when {
+            !result.isEmpty() -> result + "점"
+            else -> ""
+        }
+
     }
 
     private fun setContext(context: Context?): Context? {

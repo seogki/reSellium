@@ -77,6 +77,7 @@ class BoardMainSearchActivity : InnerBaseActivity()
 
     private fun onClickSearch() {
         data = binding.editSearch.text.toString()
+
         if (binding.editSearch.text.toString().isNotEmpty()) {
             setData()
         } else {
@@ -85,8 +86,7 @@ class BoardMainSearchActivity : InnerBaseActivity()
     }
 
     override fun onItemClick(view: View, position: Int) {
-        val data = boardMainAdapter?.getItem(position)
-        setInnerIntent(data, view)
+        boardMainAdapter?.let { setInnerIntent(it.getItem(position), view) }
     }
 
     override fun onResume() {
@@ -95,12 +95,14 @@ class BoardMainSearchActivity : InnerBaseActivity()
     }
 
     override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-        var handle = false
-        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+        return if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             onClickSearch()
-            handle = true
+            true
+        } else {
+            false
         }
-        return handle
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -124,11 +126,7 @@ class BoardMainSearchActivity : InnerBaseActivity()
         }
 
         Handler().postDelayed({
-            if (boardMainAdapter?.itemCount == 0) {
-                binding.txtNoComment.visibility = View.VISIBLE
-            } else {
-                binding.txtNoComment.visibility = View.GONE
-            }
+            boardMainAdapter?.itemCount?.let { setViewGone(it) }
         }, 100)
 
         setProgressbarGone()
@@ -137,6 +135,14 @@ class BoardMainSearchActivity : InnerBaseActivity()
         if (!isScroll)
             setRecyclerViewScrollbar()
     }
+
+    private fun setViewGone(size: Int) {
+        when (size) {
+            0 -> binding.txtNoComment.visibility = View.VISIBLE
+            else -> binding.txtNoComment.visibility = View.GONE
+        }
+    }
+
 
     override fun errorData(disposable: Disposable?, message: String?) {
         this.disposable = disposable

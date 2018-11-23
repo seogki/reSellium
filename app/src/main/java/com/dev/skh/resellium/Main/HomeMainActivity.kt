@@ -11,8 +11,6 @@ import com.dev.skh.resellium.R
 import com.dev.skh.resellium.databinding.ActivityHomeMainBinding
 
 
-
-
 class HomeMainActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityHomeMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,15 +22,10 @@ class HomeMainActivity : BaseActivity(), View.OnClickListener {
         setImageColor(binding.layoutBottomTab?.bottomLayoutBtn0Txt, binding.layoutBottomTab?.bottomLayoutText0, R.drawable.icons8_home_24)
     }
 
-
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.bottom_layout_btn1 -> {
-                beginActivity(Intent(this, GameMainActivity::class.java))
-            }
-            R.id.bottom_layout_btn2 -> {
-                beginActivity(Intent(this, BoardMainActivity::class.java))
-            }
+            R.id.bottom_layout_btn1 -> beginActivity(Intent(this, GameMainActivity::class.java))
+            R.id.bottom_layout_btn2 -> beginActivity(Intent(this, BoardMainActivity::class.java))
         }
     }
 }

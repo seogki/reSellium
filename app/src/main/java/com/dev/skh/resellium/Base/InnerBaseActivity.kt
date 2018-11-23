@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.util.Pair
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -25,7 +24,6 @@ import com.dev.skh.resellium.Board.Sub.InnerBoardMainActivity
 import com.dev.skh.resellium.Game.Inner.GameMainCommentActivity
 import com.dev.skh.resellium.Game.Model.GameMainModel
 import com.dev.skh.resellium.R
-import com.dev.skh.resellium.Util.GridSpacingItemDecoration
 
 
 /**
@@ -63,40 +61,19 @@ open class InnerBaseActivity : AppCompatActivity() {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
-    fun setRvWithoutDeco(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
-        rvGame.isNestedScrollingEnabled = false
-        rvGame.layoutManager = layoutManager
-
-        return rvGame
+    fun setGameRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView = rvGame.apply {
+        val decor = DividerItemDecoration(this@InnerBaseActivity, DividerItemDecoration.VERTICAL)
+        decor.setDrawable(ContextCompat.getDrawable(this@InnerBaseActivity, R.drawable.survey_divider)!!)
+        isNestedScrollingEnabled = false
+        this.layoutManager = layoutManager
+        addItemDecoration(decor)
     }
 
-    fun setGameRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
-        val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.survey_divider)!!)
-        rvGame.isNestedScrollingEnabled = false
-        rvGame.layoutManager = layoutManager
-        rvGame.addItemDecoration(decor)
-
-        return rvGame
+    fun setCommentRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView = rvGame.apply {
+        isNestedScrollingEnabled = false
+        this.layoutManager = layoutManager
     }
 
-    fun setCommentRv(rvGame: RecyclerView, layoutManager: LinearLayoutManager): RecyclerView {
-//        val decor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-//        decor.setDrawable(ContextCompat.getDrawable(this, R.drawable.comment_divider)!!)
-        rvGame.isNestedScrollingEnabled = false
-        rvGame.layoutManager = layoutManager
-//        rvGame.addItemDecoration(decor)
-
-        return rvGame
-    }
-
-    fun setGridGameRv(rvGame: RecyclerView, layoutManager: GridLayoutManager): RecyclerView {
-        rvGame.isNestedScrollingEnabled = false
-        rvGame.layoutManager = layoutManager
-        val result = Math.round(8 * resources.displayMetrics.density)
-        rvGame.addItemDecoration(GridSpacingItemDecoration(2, result, true, 0))
-        return rvGame
-    }
 
     fun slideUp(view: View) {
         val animate = TranslateAnimation(
@@ -121,13 +98,15 @@ open class InnerBaseActivity : AppCompatActivity() {
     }
 
     fun setInnerIntent(model: Any?, view: View?) {
-        if (model != null) {
-            if (model is GameMainModel) {
-                gameMainCommentIntent(model, view)
-            } else if (model is BoardMainModel) {
-                innerBoardMainIntent(model, view)
+
+        model?.let {
+            when (it) {
+                is GameMainModel -> gameMainCommentIntent(it, view)
+                is BoardMainModel -> innerBoardMainIntent(it, view)
             }
         }
+
+
     }
 
     private fun gameMainCommentIntent(model: GameMainModel, view: View?) {
@@ -152,36 +131,44 @@ open class InnerBaseActivity : AppCompatActivity() {
     }
 
     fun setBtnDefault(btn: TextView) {
-        btn.typeface = Typeface.DEFAULT
-        btn.setTextColor(ContextCompat.getColor(this, R.color.middarkGrey))
-        btn.background = ContextCompat.getDrawable(this, R.drawable.text_round_white_border_grey)
+        btn.apply {
+            typeface = Typeface.DEFAULT
+            setTextColor(ContextCompat.getColor(this@InnerBaseActivity, R.color.middarkGrey))
+            background = ContextCompat.getDrawable(this@InnerBaseActivity, R.drawable.text_round_white_border_grey)
+        }
     }
 
     fun setBtnAccent(btn: TextView) {
-        btn.typeface = Typeface.DEFAULT_BOLD
-        btn.setTextColor(ContextCompat.getColor(this, R.color.white))
-        btn.background = ContextCompat.getDrawable(this, R.drawable.text_round_secondary_border_grey)
-
+        btn.apply {
+            typeface = Typeface.DEFAULT_BOLD
+            setTextColor(ContextCompat.getColor(this@InnerBaseActivity, R.color.white))
+            background = ContextCompat.getDrawable(this@InnerBaseActivity, R.drawable.text_round_secondary_border_grey)
+        }
     }
 
     fun setSnackBar(view: View, text: String) {
         val snackbar = Snackbar
                 .make(view, text, Snackbar.LENGTH_SHORT)
-        snackbar.view.setBackgroundColor(ContextCompat.getColor(this, R.color.fabColor))
-        val textview = snackbar.view.findViewById(android.support.design.R.id.snackbar_text) as? TextView
-        textview?.setTextColor(ContextCompat.getColor(this, R.color.white))
+                .apply {
+                    view.setBackgroundColor(ContextCompat.getColor(this@InnerBaseActivity, R.color.fabColor))
+                    val textview = view.findViewById(android.support.design.R.id.snackbar_text) as? TextView
+                    textview?.setTextColor(ContextCompat.getColor(this@InnerBaseActivity, R.color.white))
+                }
         snackbar.show()
     }
 
     fun setBold(view: TextView) {
-        view.setTextColor(ContextCompat.getColor(this, R.color.white))
-        view.typeface = Typeface.DEFAULT_BOLD
+        view.apply {
+            setTextColor(ContextCompat.getColor(this@InnerBaseActivity, R.color.white))
+            typeface = Typeface.DEFAULT_BOLD
+        }
     }
 
     fun setDefault(view: TextView) {
-
-        view.setTextColor(ContextCompat.getColor(this, R.color.middarkGrey))
-        view.typeface = Typeface.DEFAULT
+        view.apply {
+            setTextColor(ContextCompat.getColor(this@InnerBaseActivity, R.color.middarkGrey))
+            typeface = Typeface.DEFAULT
+        }
     }
 
 }

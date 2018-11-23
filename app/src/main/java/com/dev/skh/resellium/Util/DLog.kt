@@ -8,7 +8,7 @@ import com.dev.skh.resellium.BuildConfig
  */
 
 object DLog {
-    private const val TAG = "CheeseCounter"
+    private const val TAG = "resellium"
 
     /**
      * Log Level Error

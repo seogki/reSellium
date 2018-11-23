@@ -8,11 +8,6 @@
     <data>
 
         <variable
-            name="onClickListener"
-            type="android.view.View.OnClickListener"
-            />
-
-        <variable
             name="fragment"
             type="com.dev.skh.resellium.Board.BoardMainFragment"
             />

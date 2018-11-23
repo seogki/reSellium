@@ -89,17 +89,15 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
         binding.constComment.layoutTransition.enableTransitionType(LayoutTransition.DISAPPEARING)
         binding.constComment.layoutTransition.enableTransitionType(LayoutTransition.APPEARING)
         binding.nestedScroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
-            if (scrollY > oldScrollY) {
-                //내리는곳
-                slideDown(binding.constComment)
-            }
-            if (scrollY < oldScrollY) {
-                //올리기
-                slideUp(binding.constComment)
-            }
-            if (scrollY == 0) {
-                //최상단
-            }
+
+            //내리는곳
+            if (scrollY > oldScrollY) slideDown(binding.constComment)
+
+            //올리기
+            if (scrollY < oldScrollY) slideUp(binding.constComment)
+
+            //최상단
+            if (scrollY == 0){}
         })
     }
 
@@ -144,13 +142,11 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
     }
 
     private fun setComment() {
-        if (type!!.isEmpty())
-            getType()
 
-        if (binding.editComment.text.toString().isNotEmpty()) {
-            presenter.get()?.registerCommentData(type!!, binding.model?.id, binding.editComment.text.toString())
-        } else {
-            shortToast("댓글을 입력해주세요")
+        when {
+            type!!.isEmpty() -> getType()
+            binding.editComment.text.toString().isNotEmpty() -> presenter.get()?.registerCommentData(type!!, binding.model?.id, binding.editComment.text.toString())
+            else -> shortToast("댓글을 입력해주세요")
         }
     }
 
@@ -161,21 +157,18 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
     private fun popupMenu(v: View) {
         val popupMenu = PopupMenu(this, v)
         popupMenu.inflate(R.menu.game_menu)
-        popupMenu.setOnMenuItemClickListener { item ->
-            when (item?.itemId) {
+        popupMenu.setOnMenuItemClickListener {
+            when (it?.itemId) {
                 R.id.menu_report -> {
                     setConfirmDialog()
-
                     true
                 }
                 R.id.menu_search -> {
                     setSearch()
                     true
                 }
-                else -> {
+                else -> false
 
-                    false
-                }
             }
         }
         popupMenu.show()
@@ -191,26 +184,32 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
     }
 
     override fun setCommentData(result: MutableList<CommentModel>?, disposable: Disposable?, isScroll: Boolean) {
-        if (result != null) {
-            if (gameMainCommentAdapter == null) {
-                gameMainCommentAdapter = GameMainCommentAdapter(this, result)
-                rv?.adapter = gameMainCommentAdapter
-                setScrollListener()
-            } else {
-                gameMainCommentAdapter?.addItems(result)
-            }
 
+        result?.let {
+            when (gameMainCommentAdapter) {
+                null -> setAdapter(it)
+                else -> gameMainCommentAdapter?.addItems(it)
+            }
         }
         setProgressbarGone()
         Handler().postDelayed({
-            if (gameMainCommentAdapter?.itemCount == 0) {
-                binding.txtNoComment.visibility = View.VISIBLE
-            } else {
-                binding.txtNoComment.visibility = View.GONE
-            }
+            gameMainCommentAdapter?.itemCount?.let { setViewGone(it) }
         }, 100)
 
         this.disposable = disposable
+    }
+
+    private fun setAdapter(it: MutableList<CommentModel>) {
+        gameMainCommentAdapter = GameMainCommentAdapter(this, it)
+        rv?.adapter = gameMainCommentAdapter
+        setScrollListener()
+    }
+
+    private fun setViewGone(size: Int) {
+        when (size) {
+            0 -> binding.txtNoComment.visibility = View.VISIBLE
+            else -> binding.txtNoComment.visibility = View.GONE
+        }
     }
 
     override fun onRegisterData(disposable: Disposable?) {
@@ -229,8 +228,6 @@ class GameMainCommentActivity : InnerBaseActivity(), GameMainCommentPresenter.Vi
             setProgressbarGone()
             isWeb = false
         }
-
-
     }
 
     private fun refreshItem() {

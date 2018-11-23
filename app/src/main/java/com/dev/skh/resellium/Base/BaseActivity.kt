@@ -40,9 +40,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun AppCompatActivity.beginActivity(intent: Intent) {
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        startActivity(intent)
+        startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION))
     }
 
 
@@ -65,27 +63,28 @@ open class BaseActivity : AppCompatActivity() {
     override fun onBackPressed() {
         DLog.e("onBack Pressed" + isFirstFragment())
 
-        if (isFirstFragment()) {
 
-            if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
-                backKeyPressedTime = System.currentTimeMillis()
-                showGuide()
-                return
-            }
-            if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
-                this.finishAffinity()
-                finishToast()
+        when {
+            isFirstFragment() -> {
+                if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+                    backKeyPressedTime = System.currentTimeMillis()
+                    showGuide()
+                    return
+                }
+                if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+                    this.finishAffinity()
+                    finishToast()
+                }
             }
 
-        } else {
-            super.onBackPressed()
+            else -> super.onBackPressed()
         }
 
     }
 
     private fun isFirstFragment(): Boolean {
         val curFragment = supportFragmentManager.findFragmentById(R.id.frame_layout)
-        DLog.e("current Fragment ${curFragment.tag}")
+        DLog.e("current Fragment ${curFragment?.tag}")
         return curFragment.tag == "HomeMainFragment"
                 || curFragment.tag == "GameMainFragment"
                 || curFragment.tag == "BoardMainFragment"
@@ -95,42 +94,54 @@ open class BaseActivity : AppCompatActivity() {
 
     fun setImageColor(imageView: ImageView?, textView: TextView?, imageValue: Int) {
 
-        imageView?.setImageDrawable(ContextCompat.getDrawable(this, imageValue))
-        imageView?.drawable?.setColorFilter(ContextCompat.getColor(this, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
-        textView?.setTextColor(ContextCompat.getColor(this, R.color.fabColor))
+        imageView?.apply {
+            setImageDrawable(ContextCompat.getDrawable(this@BaseActivity, imageValue))
+            drawable?.setColorFilter(ContextCompat.getColor(this@BaseActivity, R.color.fabColor), PorterDuff.Mode.SRC_ATOP)
+        }
+
+        textView?.apply { setTextColor(ContextCompat.getColor(this@BaseActivity, R.color.fabColor)) }
     }
 
     fun setAdView(adview: AdView) {
-        this.adview = adview
-        val adRequest = AdRequest
-                .Builder()
-                .addTestDevice("A86E700BF47A5B43A7D1B1882060F2AA")
-                .addTestDevice("945C9CAA6FF2EC9D7AE09BE4244D1081")
-                .build()
-        this.adview?.loadAd(adRequest)
 
-        this.adview?.adListener = object : AdListener() {
-            override fun onAdClosed() {
-                val adRequest = AdRequest
-                        .Builder()
-                        .addTestDevice("A86E700BF47A5B43A7D1B1882060F2AA")
-                        .addTestDevice("945C9CAA6FF2EC9D7AE09BE4244D1081")
-                        .build()
-                this@BaseActivity.adview?.loadAd(adRequest)
+        when {
+            !isFinishing || !isDestroyed -> {
+                this.adview = adview.apply {
+                    loadAd(getRequest())
+                    adListener = object : AdListener() {
+                        override fun onAdClosed() {
+                            if (!isFinishing || !isDestroyed)
+                                this@BaseActivity.adview?.apply { loadAd(getRequest()) }
+                        }
+                    }
+                }
+            }
+            else -> {
+                return
             }
         }
     }
 
+    private fun getRequest() = AdRequest
+            .Builder()
+            .addTestDevice("A86E700BF47A5B43A7D1B1882060F2AA")
+            .addTestDevice("945C9CAA6FF2EC9D7AE09BE4244D1081")
+            .build()
+
+
     override fun onDestroy() {
         super.onDestroy()
+        adview?.adListener = null
+        adview?.removeAllViews()
         adview?.destroy()
+
+
     }
 
     override fun onPause() {
         super.onPause()
         adview?.pause()
     }
-
 
 
     fun showErrorToast() {

@@ -9,7 +9,7 @@ import android.view.View;
 
 public class RecyclerViewPositionHelper {
 
-    final RecyclerView recyclerView;
+    private final RecyclerView recyclerView;
     final RecyclerView.LayoutManager layoutManager;
 
     RecyclerViewPositionHelper(RecyclerView recyclerView) {
