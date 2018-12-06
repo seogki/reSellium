@@ -9,9 +9,16 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.dev.skh.resellium.R
 import com.dev.skh.resellium.databinding.ActivityUserMainBinding
+import com.mikepenz.aboutlibraries.Libs
+import com.mikepenz.aboutlibraries.LibsBuilder
 
 
-class UserMainActivity : AppCompatActivity() {
+class UserMainActivity : AppCompatActivity(), View.OnClickListener {
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.layout_undo -> finish()
+        }
+    }
 
     private lateinit var binding: ActivityUserMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +27,7 @@ class UserMainActivity : AppCompatActivity() {
         binding.activity = this
         binding.layoutAppbar?.title = "설정"
         binding.layoutAppbar?.layoutAdd?.visibility = View.GONE
-        binding.layoutAppbar?.layoutUndo?.setOnClickListener { finish() }
+        binding.layoutAppbar?.onClickListener = this
     }
 
     fun setReview() {
@@ -42,6 +49,14 @@ class UserMainActivity : AppCompatActivity() {
                     putExtra(Intent.EXTRA_TEXT, "최소한의 정보가 필요함으로 모델명을 입력부탁드립니다.\n핸드폰 모델명: \n문의내용: ")
                 }
         startActivity(email)
+    }
+
+    fun setLibrary() {
+        LibsBuilder()
+                //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
+                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                //start the activity
+                .start(this)
     }
 
 }

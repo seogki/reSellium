@@ -124,8 +124,11 @@ dependencies {
     //snap
 //    implementation 'com.github.rubensousa:gravitysnaphelper:1.5'
 
+    //aboutLibraries
+    implementation "com.mikepenz:aboutlibraries:6.1.1"
+
     //광고
-    implementation 'com.google.android.gms:play-services-ads:17.1.0'
+    implementation 'com.google.android.gms:play-services-ads:17.1.1'
 
     //dagger
     implementation 'com.google.dagger:dagger:2.16'

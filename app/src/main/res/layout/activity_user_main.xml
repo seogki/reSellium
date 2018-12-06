@@ -17,8 +17,8 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true"
         android:background="@color/grey"
+        android:focusable="true"
         android:focusableInTouchMode="true"
         >
 
@@ -80,11 +80,29 @@
                     />
 
                 <TextView
+                    android:id="@+id/txt_library"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/text_useractv"
+                    android:drawableBottom="@drawable/ic_action_library_black"
+                    android:gravity="center"
+                    android:onClick="@{() -> activity.setLibrary()}"
+                    android:padding="32dp"
+                    android:text="라이브러리"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/txt_version"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_review"
+                    />
+
+                <TextView
                     android:id="@+id/txt_version"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/text_useractv"
                     android:drawableBottom="@drawable/ic_action_done"
@@ -92,8 +110,8 @@
                     android:padding="32dp"
                     android:text="Version 1.0.0"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/txt_review"
+                    app:layout_constraintStart_toEndOf="@+id/txt_library"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_review"
                     />
 
             </android.support.constraint.ConstraintLayout>
